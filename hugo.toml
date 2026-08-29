@@ -1,0 +1,48 @@
+baseURL = "https://linroex.github.io/"
+locale = "zh-tw"
+title = "Lin's Blog"
+theme = "PaperMod"
+
+[pagination]
+pagerSize = 10
+
+[params]
+  description = "我的技術部落格"
+  disableThemeToggle = true
+
+  disableSpecial1stPost = true
+  imageBase = "https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  enableRobotsTXT = true
+
+[params.profileMode]
+  enabled = false
+
+[params.homeInfoMode]
+  Disabled = true
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    identifier = "about"
+    name = "關於"
+    url = "/about/"
+    weight = 2
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    style = "github-dark"
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
