@@ -1,0 +1,82 @@
+.post-categories {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.categories-label {
+    color: var(--secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.post-categories .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.post-categories .post-tags li {
+    display: inline-block;
+}
+
+.post-categories .post-tags a {
+    display: inline-block;
+    padding: 4px 12px;
+    color: var(--secondary);
+    font-size: 13px;
+    line-height: 28px;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.post-categories .post-tags a:hover {
+    background: var(--border);
+    color: var(--primary);
+}
+
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: var(--code-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.category-filter a {
+    display: inline-block;
+    padding: 4px 14px;
+    font-size: 14px;
+    color: var(--secondary);
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.category-filter a:hover {
+    background: var(--border);
+    color: var(--primary);
+}
+
+.category-filter a.active {
+    background: var(--primary);
+    color: var(--entry);
+    border-color: var(--primary);
+}
+
+.category-filter .all-link {
+    font-weight: 500;
+}

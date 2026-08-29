@@ -25,6 +25,10 @@ pagerSize = 10
 [params.homeInfoMode]
   Disabled = true
 
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
 [menu]
   [[menu.main]]
     identifier = "posts"
@@ -32,10 +36,15 @@ pagerSize = 10
     url = "/posts/"
     weight = 1
   [[menu.main]]
+    identifier = "categories"
+    name = "分類"
+    url = "/categories/"
+    weight = 2
+  [[menu.main]]
     identifier = "about"
     name = "關於"
     url = "/about/"
-    weight = 2
+    weight = 3
 
 [markup]
   [markup.goldmark.renderer]
