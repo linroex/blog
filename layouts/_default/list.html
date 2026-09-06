@@ -45,33 +45,28 @@
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
 {{- end }}
 
-{{- if or .IsHome (eq .RelPermalink "/posts/") }}
 {{- $categories := slice }}
+{{- $currentCategory := "" }}
+{{- if or .IsHome (eq .RelPermalink "/posts/") }}
 {{- range $pages }}
   {{- range .Params.categories }}
     {{- $categories = $categories | append . }}
   {{- end }}
 {{- end }}
 {{- $categories = uniq $categories }}
-{{- $currentCategory := .Data.Term }}
-
-{{- if gt (len $categories) 0 }}
-<div class="category-filter">
-  <a href="{{ "/posts/" | absLangURL }}" class="all-link {{ if eq $currentCategory "" }}active{{ end }}">全部</a>
-  {{- range $categories }}
-    {{- $url := printf "/categories/%s" (urlize .) }}
-    {{- with site.GetPage $url }}
-    <a href="{{ .Permalink }}" class="{{ if eq $currentCategory .LinkTitle }}active{{ end }}">{{ .LinkTitle }}</a>
-    {{- end }}
-  {{- end }}
-</div>
-{{- end }}
+{{- $currentCategory = .Data.Term }}
 
 {{- if and $currentCategory (not .IsHome) }}
 {{- $pages = where $pages "Params.categories" "intersect" (slice $currentCategory) }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
 {{- end }}
 {{- end }}
+{{- $showSidebar := gt (len $categories) 0 }}
+
+{{- if $showSidebar }}
+<div class="sidebar-layout list-layout">
+{{- end }}
+<div class="list-content">
 
 {{- $paginator := .Paginate $pages }}
 
@@ -142,6 +137,24 @@
     {{- end }}
   </nav>
 </footer>
+{{- end }}
+
+</div>{{/* end list-content */}}
+{{- if $showSidebar }}
+<aside class="sidebar">
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">分類</h3>
+    <nav class="sidebar-nav">
+      <a href="{{ "/posts/" | absLangURL }}" class="all-link {{ if eq $currentCategory "" }}active{{ end }}">全部</a>
+      {{- range $categories }}
+      {{- with site.GetPage (printf "/categories/%s" (urlize .)) }}
+      <a href="{{ .Permalink }}" class="{{ if eq $currentCategory .LinkTitle }}active{{ end }}">{{ .LinkTitle }}</a>
+      {{- end }}
+      {{- end }}
+    </nav>
+  </div>
+</aside>
+</div>
 {{- end }}
 
 {{- end }}{{/* end profileMode */}}

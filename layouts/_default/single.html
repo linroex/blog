@@ -1,5 +1,6 @@
 {{- define "main" }}
 
+<div class="sidebar-layout post-layout">
 <article class="post-single">
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
@@ -45,25 +46,6 @@
   {{- partial "extend_post_content.html" . }}
 
   <footer class="post-footer">
-    {{- $taxonomies := .Site.Taxonomies.categories }}
-    {{- if gt (len $taxonomies) 0 }}
-    <div class="post-categories">
-      <span class="categories-label">分類：</span>
-      <ul class="post-tags">
-        {{- range .Params.categories }}
-        {{- with $.Site.GetPage (printf "/categories/%s" (urlize .)) }}
-        <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
-        {{- end }}
-        {{- end }}
-      </ul>
-    </div>
-    {{- end }}
-    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
-    <ul class="post-tags">
-      {{- range ($.GetTerms $tags) }}
-      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
-      {{- end }}
-    </ul>
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
@@ -76,5 +58,35 @@
   {{- partial "comments.html" . }}
   {{- end }}
 </article>
+
+{{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+{{- $tagPages := $.GetTerms $tags }}
+{{- if or .Params.categories $tagPages }}
+<aside class="sidebar">
+  {{- with .Params.categories }}
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">分類</h3>
+    <ul class="sidebar-tags">
+      {{- range . }}
+      {{- with $.Site.GetPage (printf "/categories/%s" (urlize .)) }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+  {{- with $tagPages }}
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">標籤</h3>
+    <ul class="sidebar-tags">
+      {{- range . }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+</aside>
+{{- end }}
+</div>
 
 {{- end}}{{/* end main */}}
