@@ -109,11 +109,19 @@
   {{- end }}
   {{- if or $page.Params.categories $page.Params.tags }}
   <div class="entry-terms">
-    {{- range $page.GetTerms "categories" }}
-    <a class="entry-term entry-category" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+    {{- with $page.GetTerms "categories" }}
+    <div class="entry-terms-row">
+      {{- range . }}
+      <a class="entry-term entry-category" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      {{- end }}
+    </div>
     {{- end }}
-    {{- range $page.GetTerms "tags" }}
-    <a class="entry-term entry-tag" href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+    {{- with $page.GetTerms "tags" }}
+    <div class="entry-terms-row">
+      {{- range . }}
+      <a class="entry-term entry-tag" href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+      {{- end }}
+    </div>
     {{- end }}
   </div>
   {{- end }}

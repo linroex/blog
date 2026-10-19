@@ -3,9 +3,15 @@
     position: relative;
     z-index: 1;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 6px;
     margin: 8px 0;
+}
+
+.entry-terms-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
 .entry-term {
