@@ -1,0 +1,5 @@
+/* 長程式碼區塊：限制高度，在區塊內捲動 */
+.md-content pre code {
+    max-height: 30rem;
+    overflow: auto;
+}

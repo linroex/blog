@@ -1,0 +1,30 @@
+/* 文章列表：每篇顯示分類與標籤（需疊在整張卡片的 .entry-link 之上才能點擊） */
+.entry-terms {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+.entry-term {
+    padding: 0 8px;
+    font-size: 12px;
+    line-height: 22px;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.entry-term:hover {
+    background: var(--code-bg);
+    color: var(--primary);
+}
+
+.entry-category {
+    color: var(--primary);
+    background: var(--code-bg);
+}

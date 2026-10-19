@@ -107,6 +107,16 @@
     <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
   </div>
   {{- end }}
+  {{- if or $page.Params.categories $page.Params.tags }}
+  <div class="entry-terms">
+    {{- range $page.GetTerms "categories" }}
+    <a class="entry-term entry-category" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+    {{- end }}
+    {{- range $page.GetTerms "tags" }}
+    <a class="entry-term entry-tag" href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
   {{- if not (.Param "hideMeta") }}
   <footer class="entry-footer">
     {{- partial "post_meta.html" . -}}

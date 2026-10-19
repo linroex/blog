@@ -1,0 +1,4 @@
+/* 文章列表預覽：顯示 4 列（主題預設 2 列） */
+.entry-content {
+    -webkit-line-clamp: 4;
+}
