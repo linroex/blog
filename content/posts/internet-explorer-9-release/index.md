@@ -3,8 +3,8 @@ title: "Internet Explorer 9 - 支援硬體加速、HTML5、防追蹤功能的新
 date: 2011-03-19T19:26:41
 slug: "internet-explorer-9-release"
 aliases: ["/posts/internet-explorer-9-%e6%94%af%e6%8f%b4%e7%a1%ac%e9%ab%94%e5%8a%a0%e9%80%9f%e3%80%81html5%e3%80%81%e9%98%b2%e8%bf%bd%e8%b9%a4%e5%8a%9f%e8%83%bd%e7%9a%84%e6%96%b0%e7%89%88ie%e7%80%8f%e8%a6%bd%e5%99%a8/"]
-tags: ["IE", "硬體加速", "瀏覽器", "HTML5", "IE9", "Micros"]
-categories: ["瀏覽器"]
+tags: ["IE"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-19_185413.jpg"><img class="size-large wp-image-4918 aligncenter" title="2011-03-19_185413" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-19_185413-520x375.jpg" alt="" width="520" height="375" /></a>

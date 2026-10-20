@@ -3,8 +3,8 @@ title: "用RVS 2011 影子系統模擬出網咖與學校的還原卡功能"
 date: 2010-09-19T14:25:58
 slug: "rvs-2011-shadow-system-restore-card"
 aliases: ["/posts/%e7%94%a8rvs-2011-%e5%bd%b1%e5%ad%90%e7%b3%bb%e7%b5%b1%e6%a8%a1%e6%93%ac%e5%87%ba%e7%b6%b2%e5%92%96%e8%88%87%e5%ad%b8%e6%a0%a1%e7%9a%84%e9%82%84%e5%8e%9f%e5%8d%a1%e5%8a%9f%e8%83%bd/"]
-tags: ["RVS", "影子系統", "還原卡"]
-categories: ["軟體分享", "資訊安全"]
+tags: ["Windows", "Restore Card"]
+categories: ["Software"]
 ---
 
 <h2 style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/09/2010-09-19_141217.jpg"><img class="alignnone size-large wp-image-3803" title="2010-09-19_141217" src="{{< param imageBase >}}/wp-content/uploads/2010/09/2010-09-19_141217-506x400.jpg" alt="" width="506" height="400" /></a></h2>

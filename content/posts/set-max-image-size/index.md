@@ -4,7 +4,7 @@ date: 2009-05-15T21:00:17
 slug: "set-max-image-size"
 aliases: ["/posts/%e8%a8%ad%e5%ae%9a%e5%9c%96%e7%89%87%e6%9c%80%e5%a4%a7%e5%b0%ba%e5%90%8b/"]
 tags: ["CSS"]
-categories: []
+categories: ["Programming"]
 ---
 
 利用一個css的語法可以達到設定圖片最大寬度跟高度的效果

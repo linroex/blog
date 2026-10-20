@@ -3,8 +3,8 @@ title: "最高指揮官 - 與眾不同的真正戰略遊戲"
 date: 2010-07-21T19:41:09
 slug: "supreme-commander-strategy-game"
 aliases: ["/posts/%e6%9c%80%e9%ab%98%e6%8c%87%e6%8f%ae%e5%ae%98-%e8%88%87%e7%9c%be%e4%b8%8d%e5%90%8c%e7%9a%84%e7%9c%9f%e6%ad%a3%e6%88%b0%e7%95%a5%e9%81%8a%e6%88%b2/"]
-tags: ["戰略遊戲", "最高指揮官", "遊戲介紹"]
-categories: ["單機遊戲"]
+tags: ["Supreme Commander"]
+categories: ["Games"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/07/SupremeCommander-2010-07-21-18-43-42-31.bmp"><img class="size-full wp-image-3494 aligncenter" title="SupremeCommander 2010-07-21 18-43-42-31" src="{{< param imageBase >}}/wp-content/uploads/2010/07/SupremeCommander-2010-07-21-18-43-42-31.bmp" alt="" width="430" height="323" /></a></p>

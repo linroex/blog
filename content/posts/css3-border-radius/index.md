@@ -3,8 +3,8 @@ title: "【CSS 3】純粹使用CSS就可以讓你的網站擁有圓角效果！"
 date: 2011-04-16T11:32:53
 slug: "css3-border-radius"
 aliases: ["/posts/%e3%80%90css-3%e3%80%91%e7%b4%94%e7%b2%b9%e4%bd%bf%e7%94%a8css%e5%b0%b1%e5%8f%af%e4%bb%a5%e8%ae%93%e4%bd%a0%e7%9a%84%e7%b6%b2%e7%ab%99%e6%93%81%e6%9c%89%e5%9c%93%e8%a7%92%e6%95%88%e6%9e%9c%ef%bc%81/"]
-tags: ["CSS", "jQuery", "CSS 3", "圓角"]
-categories: ["CSS"]
+tags: ["CSS"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-16_111212.jpg"><img class="size-large wp-image-395 aligncenter" title="2011-04-16_111212" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-16_111212-540x314.jpg" alt="" width="540" height="314" /></a>

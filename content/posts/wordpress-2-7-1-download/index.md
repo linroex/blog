@@ -4,7 +4,7 @@ date: 2009-05-13T18:37:53
 slug: "wordpress-2-7-1-download"
 aliases: ["/posts/wordpress271%e4%bb%8b%e7%b4%b9%e4%b8%8b%e8%bc%89/"]
 tags: ["WordPress"]
-categories: ["WordPress"]
+categories: ["Blog"]
 ---
 
 今天要跟各位介紹一套架部落格用的套件-WordPress

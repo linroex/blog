@@ -3,8 +3,8 @@ title: "幫助你進行多國語系（GNU Gettext）製作的好幫手：Poedit"
 date: 2011-07-21T20:00:50
 slug: "poedit-gnu-gettext-helper"
 aliases: ["/posts/%e5%b9%ab%e5%8a%a9%e4%bd%a0%e9%80%b2%e8%a1%8c%e5%a4%9a%e5%9c%8b%e8%aa%9e%e7%b3%bb%ef%bc%88gnu-gettext%ef%bc%89%e8%a3%bd%e4%bd%9c%e7%9a%84%e5%a5%bd%e5%b9%ab%e6%89%8b%ef%bc%9apoedit/"]
-tags: ["Gettext", "mo", "po", "Poedit", "語系檔"]
-categories: ["軟體分享"]
+tags: ["Gettext"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-21_195920.jpg"><img class="alignnone size-large wp-image-577" title="2011-07-21_195920" src="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-21_195920-540x461.jpg" alt="" width="540" height="461" /></a>

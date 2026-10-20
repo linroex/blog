@@ -3,8 +3,8 @@ title: "Imgburn - 免費的燒錄軟體,支援ISO製作.燒錄"
 date: 2010-01-25T20:53:04
 slug: "imgburn-free-burning-software"
 aliases: ["/posts/imgburn-%e5%85%8d%e8%b2%bb%e7%9a%84%e7%87%92%e9%8c%84%e8%bb%9f%e9%ab%94%e6%94%af%e6%8f%b4iso%e8%a3%bd%e4%bd%9c-%e7%87%92%e9%8c%84%e4%bb%a5%e5%8f%8a%e6%ad%a3%e9%ab%94%e4%b8%ad%e6%96%87/"]
-tags: ["Imgburn", "ISO"]
-categories: ["燒錄程式"]
+tags: ["Disc Burning", "ISO"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/01/2010-01-22_194419.png"><img class="alignnone size-large wp-image-2524" title="2010-01-22_194419" src="{{< param imageBase >}}/wp-content/uploads/2010/01/2010-01-22_194419-500x344.png" alt="" width="500" height="344" /></a>

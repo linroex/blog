@@ -3,8 +3,8 @@ title: "Google桌面 - 不只可以搜尋硬碟裡的檔案,還可以搜尋Gmail
 date: 2011-02-19T19:05:08
 slug: "google-desktop-search"
 aliases: ["/posts/google%e6%a1%8c%e9%9d%a2-%e4%b8%8d%e5%8f%aa%e5%8f%af%e4%bb%a5%e6%90%9c%e5%b0%8b%e7%a1%ac%e7%a2%9f%e8%a3%a1%e7%9a%84%e6%aa%94%e6%a1%88%e9%82%84%e5%8f%af%e4%bb%a5%e6%90%9c%e5%b0%8bgmail%e4%bf%a1/"]
-tags: ["Google", "Gmail", "檔案管理"]
-categories: ["軟體分享", "Google"]
+tags: ["Google"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-19_182907.jpg"><img title="2011-02-19_182907" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-19_182907.jpg" alt="" width="279" height="180" /></a></p>

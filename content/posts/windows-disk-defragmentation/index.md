@@ -3,8 +3,8 @@ title: "Windows硬碟重組教學"
 date: 2009-05-15T18:05:25
 slug: "windows-disk-defragmentation"
 aliases: ["/posts/windows%e7%a1%ac%e7%a2%9f%e9%87%8d%e7%b5%84%e6%95%99%e5%ad%b8/"]
-tags: ["硬碟相關"]
-categories: ["Windows系列"]
+tags: ["Windows", "Hard Drives"]
+categories: ["Hardware"]
 ---
 
 我想各位電腦用很久的人都會發現電腦越用越慢吧

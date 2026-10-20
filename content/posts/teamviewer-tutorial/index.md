@@ -4,7 +4,7 @@ date: 2009-10-04T13:22:36
 slug: "teamviewer-tutorial"
 aliases: ["/posts/teamviewer%e4%bd%bf%e7%94%a8%e6%95%99%e5%ad%b8/"]
 tags: ["TeamViewer"]
-categories: ["軟體分享"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/10/20091004_123750.jpg"><img style="display: inline; border-width: 0px;" title="2009-10-04_123750" src="{{< param imageBase >}}/wp-content/uploads/2009/10/20091004_123750_thumb.jpg" border="0" alt="2009-10-04_123750" width="326" height="113" /></a>

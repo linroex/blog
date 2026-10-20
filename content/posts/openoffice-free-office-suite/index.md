@@ -3,8 +3,8 @@ title: "OpenOffice 免費開源的辦公室應用軟體,文書處理、簡報、
 date: 2010-12-23T09:00:52
 slug: "openoffice-free-office-suite"
 aliases: ["/posts/openoffice-%e5%85%8d%e8%b2%bb%e9%96%8b%e6%ba%90%e7%9a%84%e8%be%a6%e5%85%ac%e5%ae%a4%e6%87%89%e7%94%a8%e8%bb%9f%e9%ab%94%e6%96%87%e6%9b%b8%e8%99%95%e7%90%86%e3%80%81%e7%b0%a1%e5%a0%b1%e3%80%81/"]
-tags: ["OpenOffice", "Linux", "opensource", "Oracle", "Writer"]
-categories: ["軟體分享"]
+tags: ["OpenOffice"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-22_213203.jpg"><img class="size-large wp-image-4290 aligncenter" title="2010-12-22_213203" src="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-22_213203-520x304.jpg" alt="" width="520" height="304" /></a></p>

@@ -3,8 +3,8 @@ title: "PHP Documentation for Chrome - 讓你快速查閱PHP文件"
 date: 2011-05-29T11:26:01
 slug: "php-documentation-for-chrome"
 aliases: ["/posts/php-documentation-for-chrome-%e8%ae%93%e4%bd%a0%e5%bf%ab%e9%80%9f%e6%9f%a5%e9%96%b1php%e6%96%87%e4%bb%b6/"]
-tags: ["PHP", "Chrome", "MSDN"]
-categories: ["PHP"]
+tags: ["Chrome Extensions", "PHP"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-29_111813.jpg"><img class="size-large wp-image-527 aligncenter" title="2011-05-29_111813" src="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-29_111813-540x406.jpg" alt="" width="540" height="406" /></a>

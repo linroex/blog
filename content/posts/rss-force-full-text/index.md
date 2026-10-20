@@ -3,8 +3,8 @@ title: "dokoda - RSS強制全文閱讀"
 date: 2009-07-03T16:25:39
 slug: "rss-force-full-text"
 aliases: ["/posts/rss%e5%bc%b7%e5%88%b6%e5%85%a8%e6%96%87%e9%96%b1%e8%ae%80/"]
-tags: ["RSS"]
-categories: ["部落格"]
+tags: ["RSS", "Blogging"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-03_162035.jpg"><img class="alignnone size-full wp-image-1508" title="2009-07-03_162035" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-03_162035.jpg" alt="2009-07-03_162035" width="289" height="101" /></a>

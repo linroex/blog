@@ -3,8 +3,8 @@ title: "Bing  微軟推出新的\"繽紛\"搜尋功能"
 date: 2009-06-07T09:53:16
 slug: "bing-new-search-experience"
 aliases: ["/posts/bing-%e5%be%ae%e8%bb%9f%e6%8e%a8%e5%87%ba%e6%96%b0%e7%9a%84%e7%b9%bd%e7%b4%9b%e6%90%9c%e5%b0%8b%e5%8a%9f%e8%83%bd/"]
-tags: ["搜尋引擎"]
-categories: ["實用網站"]
+tags: ["Search Engines"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-07_093843.gif"><img class="size-full wp-image-1229 alignnone" title="2009-06-07_093843" src="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-07_093843.gif" alt="2009-06-07_093843" width="176" height="112" /></a>

@@ -3,8 +3,8 @@ title: "【C++】如何進行次方與根號運算?(sqrt、pow)"
 date: 2011-03-18T15:05:05
 slug: "c-power-and-square-root-sqrt-pow"
 aliases: ["/posts/%e3%80%90c%e3%80%91%e5%a6%82%e4%bd%95%e9%80%b2%e8%a1%8c%e6%ac%a1%e6%96%b9%e8%88%87%e6%9b%b4%e8%99%9f%e9%81%8b%e7%ae%97sqrt%e3%80%81pow/"]
-tags: ["C++", "Math.h", "pow", "sqrt"]
-categories: ["C++"]
+tags: ["C++", "Math"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-18_151805.jpg"><img class="alignnone size-large wp-image-367" title="2011-03-18_151805" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-18_151805-540x380.jpg" alt="" width="540" height="380" /></a>

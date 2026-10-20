@@ -3,8 +3,8 @@ title: "Google也可以查電影場次?"
 date: 2009-07-19T14:26:09
 slug: "google-movie-showtimes"
 aliases: ["/posts/google%e4%b9%9f%e5%8f%af%e4%bb%a5%e6%9f%a5%e9%9b%bb%e5%bd%b1%e5%a0%b4%e6%ac%a1/"]
-tags: []
-categories: ["Google"]
+tags: ["Google"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-19_134743.jpg"><img class="alignnone size-full wp-image-1653" title="2009-07-19_134743" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-19_134743.jpg" alt="2009-07-19_134743" width="159" height="85" /></a>

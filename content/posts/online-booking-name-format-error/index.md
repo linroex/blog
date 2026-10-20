@@ -3,8 +3,8 @@ title: "線上訂房訂機票時，為什麼姓名欄位始終格式錯誤？"
 date: 2017-02-24T23:58:49
 slug: "online-booking-name-format-error"
 aliases: ["/posts/%e7%b7%9a%e4%b8%8a%e8%a8%82%e6%88%bf%e8%a8%82%e6%a9%9f%e7%a5%a8%e6%99%82%ef%bc%8c%e7%82%ba%e4%bb%80%e9%ba%bc%e5%a7%93%e5%90%8d%e6%ac%84%e4%bd%8d%e5%a7%8b%e7%b5%82%e6%a0%bc%e5%bc%8f%e9%8c%af%e8%aa%a4/"]
-tags: []
-categories: []
+tags: ["Hotel Booking"]
+categories: ["Travel"]
 ---
 
 還記得有次 Peach 有超便宜的機票，我跟著大夥一窩蜂併肩向前衝，到了結帳頁面系統卻一直提示「姓名格式錯誤」，檢查再三卻始終找不出問題何在，你也有過類似經驗嗎？在線上訂房、買機票時，明明護照姓名輸入是正確的，系統卻一直跟你說錯誤不讓你通過？

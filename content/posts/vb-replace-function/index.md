@@ -4,7 +4,7 @@ date: 2009-04-17T12:19:00
 slug: "vb-replace-function"
 aliases: ["/posts/vb%e5%8f%96%e4%bb%a3%e5%87%bd%e5%bc%8f/"]
 tags: ["VB"]
-categories: ["VB.NET"]
+categories: ["Programming"]
 ---
 
 在VB裡面如果想要將字串裡的一部分內容去待成另一份的話

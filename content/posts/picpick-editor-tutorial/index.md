@@ -3,8 +3,8 @@ title: "Picpick編輯器使用教學(畫線.調整大小.馬賽克)"
 date: 2009-10-31T11:29:26
 slug: "picpick-editor-tutorial"
 aliases: ["/posts/picpick%e7%b7%a8%e8%bc%af%e5%99%a8%e4%bd%bf%e7%94%a8%e6%95%99%e5%ad%b8%e7%95%ab%e7%b7%9a-%e8%aa%bf%e6%95%b4%e5%a4%a7%e5%b0%8f-%e9%a6%ac%e8%b3%bd%e5%85%8b/"]
-tags: ["Picpick"]
-categories: ["截圖程式"]
+tags: ["Screenshots"]
+categories: ["Software"]
 ---
 
 在這篇文章中,我要針對<strong>Picpick的編輯器</strong>撰寫一篇教學,因為Picpick的編輯器真的很優秀,旋轉.劃線.調整大小這類基本功能和一些比較進階的功能都有,簡直可以和GIMP相比了!而且在新版本的Picpick中,編輯器的介面整個大改版,變的很有Windows7風格,現在就讓我帶大家來學習Picpick的編輯器吧

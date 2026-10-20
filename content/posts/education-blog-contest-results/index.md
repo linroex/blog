@@ -3,8 +3,8 @@ title: "教育部落格比賽結果今天要出來了!"
 date: 2009-06-05T18:25:21
 slug: "education-blog-contest-results"
 aliases: ["/posts/%e6%95%99%e8%82%b2%e9%83%a8%e8%90%bd%e6%a0%bc%e6%af%94%e8%b3%bd%e7%b5%90%e6%9e%9c%e4%bb%8a%e5%a4%a9%e8%a6%81%e5%87%ba%e4%be%86%e4%ba%86/"]
-tags: []
-categories: ["生活札記"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 今天..................

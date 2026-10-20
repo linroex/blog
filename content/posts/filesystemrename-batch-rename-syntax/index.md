@@ -4,7 +4,7 @@ date: 2009-04-23T10:12:00
 slug: "filesystemrename-batch-rename-syntax"
 aliases: ["/posts/filesystemrename-%e6%94%b9%e6%aa%94%e5%90%8d%e7%9a%84%e8%aa%9e%e6%b3%95/"]
 tags: ["VB"]
-categories: ["VB.NET"]
+categories: ["Programming"]
 ---
 
 今天要教各位的是使用VB本身提供的一個方法來修改檔名

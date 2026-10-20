@@ -3,8 +3,8 @@ title: "善用 Google 行事曆讓你輕鬆和朋友客戶約時間！"
 date: 2017-04-07T11:30:39
 slug: "google-calendar-scheduling-friends"
 aliases: ["/posts/%e5%96%84%e7%94%a8-google-%e8%a1%8c%e4%ba%8b%e6%9b%86%e8%ae%93%e4%bd%a0%e8%bc%95%e9%ac%86%e5%92%8c%e6%9c%8b%e5%8f%8b%e5%ae%a2%e6%88%b6%e7%b4%84%e6%99%82%e9%96%93%ef%bc%81/"]
-tags: ["Google", "行事曆", "約時間", "生產力"]
-categories: []
+tags: ["Google"]
+categories: ["Web Apps"]
 ---
 
 約時間，是一門學問！每次信件往返喬開會時間時，總會希望能夠把行事曆直接寄給對方，讓對方直接選擇它可以的時間，乾淨利落！想著想著總覺得強大的 Google 應該有這類功能才對呀！ 研究後果不其然，Google 日曆可以讓你以網址形式分享行事曆給任何人，並將所有的行程都匿名成「忙碌」，對方只能看到你該時段有事情，但無法得知該行識背後的任何資訊（內容、時間、參與者等等）。

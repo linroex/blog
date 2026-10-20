@@ -3,8 +3,8 @@ title: "9/9 資研社靜態展心得～"
 date: 2011-09-09T23:01:13
 slug: "99-cs-club-static-exhibition"
 aliases: ["/posts/99-%e8%b3%87%e7%a0%94%e7%a4%be%e9%9d%9c%e6%85%8b%e5%b1%95%e5%bf%83%e5%be%97%ef%bd%9e/"]
-tags: ["松山家商", "資研社", "靜態展"]
-categories: ["生活札記"]
+tags: ["Songshan Vocational School", "Clubs"]
+categories: ["Life"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/09/CIMG0355.jpg"><img class="size-large wp-image-5759 aligncenter" title="CIMG0355" src="{{< param imageBase >}}/wp-content/uploads/2011/09/CIMG0355-520x390.jpg" alt="" width="520" height="390" /></a>

@@ -3,8 +3,8 @@ title: "iPod Touch 8G+保護背蓋開箱文+鏡面與霧面的差別"
 date: 2010-02-27T15:55:15
 slug: "ipod-touch-8g-case-unboxing"
 aliases: ["/posts/ipod-touch-8g%e4%bf%9d%e8%ad%b7%e8%83%8c%e8%93%8b%e9%96%8b%e7%ae%b1%e6%96%87/"]
-tags: ["Apple", "iPod Touch"]
-categories: ["iPod Touch"]
+tags: ["iPod Touch"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/02/2010-03-02_192323.png"><img class="size-full wp-image-2850 aligncenter" title="2010-03-02_192323" src="{{< param imageBase >}}/wp-content/uploads/2010/02/2010-03-02_192323.png" alt="" width="238" height="264" /></a></p>

@@ -3,8 +3,8 @@ title: "Google網站管理員中心 - 幫助你分析網站中哪裡SEO做的不
 date: 2009-12-27T21:25:32
 slug: "google-webmaster-tools-seo-analysis"
 aliases: ["/posts/google%e7%b6%b2%e7%ab%99%e7%ae%a1%e7%90%86%e5%93%a1%e4%b8%ad%e5%bf%83-%e5%b9%ab%e5%8a%a9%e4%bd%a0%e5%88%86%e6%9e%90%e7%b6%b2%e7%ab%99%e4%b8%ad%e5%93%aa%e8%a3%a1seo%e5%81%9a%e7%9a%84%e4%b8%8d/"]
-tags: ["Google", "SEO"]
-categories: ["網站架設"]
+tags: ["SEO", "Google"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-27_131212.jpg"><img class="size-full wp-image-2398 alignleft" title="2009-12-27_131212" src="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-27_131212.jpg" alt="" width="371" height="113" /></a>

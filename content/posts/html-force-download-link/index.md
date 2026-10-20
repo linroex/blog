@@ -4,7 +4,7 @@ date: 2017-04-26T09:56:50
 slug: "html-force-download-link"
 aliases: ["/posts/html-%e5%bc%b7%e5%88%b6%e8%b6%85%e9%80%a3%e7%b5%90%e4%b8%8b%e8%bc%89%e6%aa%94%e6%a1%88/"]
 tags: ["HTML"]
-categories: []
+categories: ["Programming"]
 ---
 
 現在的瀏覽器都很聰明，當網頁超連結的內容是純文字檔、PDF、CSS File 時，瀏覽器會很聰明的在瀏覽器預覽而不是下載，但有時候我們希望使用者直接下載而不是在瀏覽器檢視，例如之前到 jQuery 的官網下載 jquery.js 時，都會變成預覽，需要按右鍵另存新檔，但其實我的目的很明確是要下載檔案而不是檢視呀！

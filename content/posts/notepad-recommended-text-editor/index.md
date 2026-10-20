@@ -3,8 +3,8 @@ title: "Notepad++ 個人最推薦的記事本程式，支援語法高亮以及�
 date: 2011-09-01T08:00:33
 slug: "notepad-recommended-text-editor"
 aliases: ["/posts/notepad-%e5%80%8b%e4%ba%ba%e6%9c%80%e6%8e%a8%e8%96%a6%e7%9a%84%e8%a8%98%e4%ba%8b%e6%9c%ac%e7%a8%8b%e5%bc%8f%ef%bc%8c%e6%94%af%e6%8f%b4%e8%aa%9e%e6%b3%95%e9%ab%98%e4%ba%ae%e4%bb%a5%e5%8f%8a%e5%a4%9a/"]
-tags: ["Notepad", "Vim", "記事本", "語法高亮"]
-categories: ["文字編輯器"]
+tags: ["Notepad++"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-26_183743.jpg"><img class="size-full wp-image-739 aligncenter" title="2011-08-26_183743" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-26_183743.jpg" alt="" width="228" height="175" /></a>

@@ -3,8 +3,8 @@ title: "修改鍵盤對應"
 date: 2009-07-13T20:26:41
 slug: "keyboard-output-weird-fix"
 aliases: ["/posts/%e9%8d%b5%e7%9b%a4%e6%8c%89%e5%87%ba%e4%be%86%e7%9a%84%e6%9d%b1%e8%a5%bf%e6%80%aa%e6%80%aa%e7%9a%84/"]
-tags: ["鍵盤對應"]
-categories: ["Windows系列"]
+tags: ["Windows", "Keyboards"]
+categories: ["Hardware"]
 ---
 
 有的時候大家再用電腦時會發現輸入法變怪怪的,明明是按下A鍵卻出現B鍵的怪情況,這到底是怎麼回事?其實這可能是因為你電腦輸入法的"對應"功能被人亂改了!!會是誰?可能是跟你用同一台電腦的人,也可能是被一些惡搞電腦的病毒用的,不管是怎樣這葛問題其實很容易解決

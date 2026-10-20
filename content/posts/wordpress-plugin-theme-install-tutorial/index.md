@@ -3,8 +3,8 @@ title: "WordPress外掛&佈景主題安裝教學(此教學適用於WP2.9以下�
 date: 2010-06-01T13:36:01
 slug: "wordpress-plugin-theme-install-tutorial"
 aliases: ["/posts/wordpress%e5%a4%96%e6%8e%9b%e4%bd%88%e6%99%af%e4%b8%bb%e9%a1%8c%e5%ae%89%e8%a3%9d%e6%95%99%e5%ad%b8/"]
-tags: ["WordPress", "WordPress外掛", "theme", "Plugins", "WordPress佈景"]
-categories: ["WordPress"]
+tags: ["WordPress", "WordPress Plugins"]
+categories: ["Blog"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/06/2010-06-01_112430.jpg"><img class="size-large wp-image-3230 aligncenter" title="2010-06-01_112430" src="{{< param imageBase >}}/wp-content/uploads/2010/06/2010-06-01_112430-500x303.jpg" alt="" width="350" height="212" /></a></p>

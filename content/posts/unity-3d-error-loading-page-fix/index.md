@@ -3,8 +3,8 @@ title: "Unity 3D開啟時出現Eorror loading page  couldn&#039;t read a file :/
 date: 2014-01-26T17:53:14
 slug: "unity-3d-error-loading-page-fix"
 aliases: ["/posts/unity-3d%e9%96%8b%e5%95%9f%e6%99%82%e5%87%ba%e7%8f%beeorror-loading-page-couldnt-read-a-file-file/"]
-tags: ["Unity", "遊戲開發"]
-categories: ["Unity"]
+tags: ["Unity", "Game Development"]
+categories: ["Programming"]
 ---
 
 有些朋友在安裝Unity時一切正常，但打開時卻遇到「Eorror loading page couldn't read a file ://file」這項錯誤訊息，會遇到此錯誤我猜測是因為用戶名稱有中文字，導致Unity在第一次執行時要載入認證金鑰卻遇到問題，此問題其實很好解決，只要手動將驗證金鑰傳入Unity即可，大家可以參考下面的教學來操作

@@ -3,7 +3,7 @@ title: "How to Use Web Inspector on iOS Safari"
 date: 2017-02-03T11:58:14
 slug: "how-to-use-web-inspector-on-ios-safari"
 tags: ["iOS", "Safari"]
-categories: []
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2017/02/螢幕快照-2017-02-04-上午12.53.17.jpg"]
 ---
 

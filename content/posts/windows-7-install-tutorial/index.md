@@ -3,8 +3,8 @@ title: "Windows 7(Win7)介紹與安裝教學"
 date: 2009-11-29T09:50:19
 slug: "windows-7-install-tutorial"
 aliases: ["/posts/windows-7%e4%bb%8b%e7%b4%b9%e8%88%87%e5%ae%89%e8%a3%9d%e6%95%99%e5%ad%b8/"]
-tags: ["Microsoft", "Windows 7"]
-categories: ["Windows系列", "作業系統"]
+tags: ["Windows"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/11/3895179589_29716ea91b.jpg"><img class="aligncenter size-full wp-image-2334" title="3895179589_29716ea91b" src="{{< param imageBase >}}/wp-content/uploads/2009/11/3895179589_29716ea91b.jpg" alt="3895179589_29716ea91b" width="439" height="369" /></a></p>

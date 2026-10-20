@@ -4,7 +4,7 @@ date: 2017-01-12T20:35:34
 slug: "python-dont-delete-list-in-loop"
 aliases: ["/posts/python-%e4%b8%8d%e8%a6%81%e5%9c%a8%e8%bf%b4%e5%9c%88%e8%a3%a1%e9%9d%a2%e5%88%aa%e9%99%a4%e9%99%a3%e5%88%97%e5%85%83%e7%b4%a0/"]
 tags: ["Python"]
-categories: []
+categories: ["Programming"]
 ---
 
 「踩你千萬遍也不厭倦的愚蠢行為」，我一直以為錯誤的寫法只要遇過一次就會長記性，但今天在公司又踩地雷三小時，始終搞不懂問題在哪裡，最後很認真把程式碼重看過一次後發現... 原來又是一樣的問題。 一句話：「不要擅迴圈裡面刪除任何陣列元素」

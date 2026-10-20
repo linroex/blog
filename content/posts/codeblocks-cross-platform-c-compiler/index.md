@@ -2,9 +2,9 @@
 title: "Code::Blocks 10.05 - 能夠媲美Dev C++的C/C++編譯器,跨平台(Ubuntu、Windows、Mac)"
 date: 2011-02-11T10:42:29
 slug: "codeblocks-cross-platform-c-compiler"
-aliases: ["/posts/codeblocks-10-05-%e8%83%bd%e5%a4%a0%e5%aa%b2%e7%be%8edev-c%e7%9a%84cc%e7%b7%a8%e8%ad%af%e5%99%a8%e8%b7%a8%e5%b9%b3%e5%8f%b0ubuntu%e3%80%81windows%e3%80%81mac/"]
-tags: ["編譯", "Windows", "C++", "IDE", "Code::Blocks", "Ubuntu"]
-categories: ["C++", "IDE"]
+aliases: ["/posts/codeblocks-10-05-%e8%83%bd%e5%a4%a0%e5%aa%b2%e7%be%8edev-c%e7%9a%84cc%e7%b7%a8%e8%ad%af%e5%99%a8%e8%b7%a8%e5%b9%b3%e5%8f%b0ubuntu%e3%80%81windows%e3%80%81mac/", "/posts/codeblocks-cross-platform-c-compiler-2/", "/posts/codeblocks-10-05-%e8%83%bd%e5%a4%a0%e5%aa%b2%e7%be%8edev-c%e7%9a%84cc%e7%b7%a8%e8%ad%af%e5%99%a8%e8%b7%a8%e5%b9%b3%e5%8f%b0ubuntu%e3%80%81windows%e3%80%81mac-2/"]
+tags: ["C++", "IDE"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2010-10-28_182355.jpg"><img class="alignnone size-full wp-image-191" title="2010-10-28_182355" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2010-10-28_182355.jpg" alt="" width="440" height="217" /></a></p>

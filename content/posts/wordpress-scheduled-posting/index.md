@@ -4,7 +4,7 @@ date: 2009-05-31T10:55:32
 slug: "wordpress-scheduled-posting"
 aliases: ["/posts/wordpress%e9%a0%90%e7%b4%84%e7%99%bc%e6%96%87/"]
 tags: ["WordPress"]
-categories: ["WordPress"]
+categories: ["Blog"]
 summary: "要如何在WordPress中預約發文呢?需要用到外掛程式嗎?其實不用的,因為WordPress本身就有內建預約發文的功能,不過隱藏的很巧妙,很少人會發現,我也是在別人部落格看到才會的。"
 ---
 

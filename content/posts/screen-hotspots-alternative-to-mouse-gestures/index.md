@@ -3,8 +3,8 @@ title: "還在用滑鼠手勢嗎?來試試更酷更炫的螢幕熱點吧"
 date: 2009-12-12T15:28:22
 slug: "screen-hotspots-alternative-to-mouse-gestures"
 aliases: ["/posts/%e9%82%84%e5%9c%a8%e7%94%a8%e6%bb%91%e9%bc%a0%e6%89%8b%e5%8b%a2%e5%97%8e%e4%be%86%e8%a9%a6%e8%a9%a6%e6%9b%b4%e9%85%b7%e6%9b%b4%e7%82%ab%e7%9a%84%e8%9e%a2%e5%b9%95%e7%86%b1%e9%bb%9e%e5%90%a7/"]
-tags: ["Mac"]
-categories: ["軟體分享"]
+tags: ["macOS"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-12_150818.jpg"><img class="size-large wp-image-2365  aligncenter" title="2009-12-12_150818" src="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-12_150818-304x400.jpg" alt="2009-12-12_150818" width="304" height="400" /></a></p>

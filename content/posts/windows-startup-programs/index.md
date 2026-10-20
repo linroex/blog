@@ -4,7 +4,7 @@ date: 2009-06-09T19:01:39
 slug: "windows-startup-programs"
 aliases: ["/posts/windows%e9%96%8b%e6%a9%9f%e8%87%aa%e5%8b%95%e5%95%9f%e5%8b%95%e7%a8%8b%e5%bc%8f/"]
 tags: ["Windows"]
-categories: ["Windows系列"]
+categories: ["Hardware"]
 summary: "或許會有很多電腦高手跟你講說電腦開機時不要設定太多的啟動程式,因為那會讓電腦變的很慢,其實這句話在以前或許是對的,但在現代這種電腦硬體已經很強的時代,開機時多開啟一些程式反而比較方便,不過還是不能太多啦!!要看你電腦的硬體來判斷XD\n\n今天這篇文章站長我要?各位如何在Windows XP中增加開機時自動啟動的程式,其實這是十分簡單的,只要按照下圖教學保證你能學會:)"
 ---
 

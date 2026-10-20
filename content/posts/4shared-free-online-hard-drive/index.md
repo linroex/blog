@@ -3,8 +3,8 @@ title: "4Shared 總容量10GB,單檔200MB的免費網路硬碟(支援繁體中�
 date: 2010-05-15T11:13:41
 slug: "4shared-free-online-hard-drive"
 aliases: ["/posts/4shared-%e7%b8%bd%e5%ae%b9%e9%87%8f10gb%e5%96%ae%e6%aa%94200mb%e7%9a%84%e5%85%8d%e8%b2%bb%e7%b6%b2%e8%b7%af%e7%a1%ac%e7%a2%9f%e6%94%af%e6%8f%b4%e7%b9%81%e9%ab%94%e4%b8%ad%e6%96%87/"]
-tags: ["4Shared", "網路硬碟"]
-categories: ["網路硬碟"]
+tags: ["Cloud Storage"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/05/2010-05-15_100020.jpg"><img class="alignnone size-full wp-image-3121" title="2010-05-15_100020" src="{{< param imageBase >}}/wp-content/uploads/2010/05/2010-05-15_100020.jpg" alt="" width="400" height="117" /></a>

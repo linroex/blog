@@ -3,8 +3,8 @@ title: "Siege - HTTP 網站壓力測試好幫手"
 date: 2017-01-06T22:54:59
 slug: "siege-http-load-testing"
 aliases: ["/posts/siege-http-%e7%b6%b2%e7%ab%99%e5%a3%93%e5%8a%9b%e6%b8%ac%e8%a9%a6%e5%a5%bd%e5%b9%ab%e6%89%8b/"]
-tags: ["Siege", "壓力測試"]
-categories: []
+tags: ["Siege", "Load Testing"]
+categories: ["SRE"]
 images: ["%%IMG%%/wp-content/uploads/2017/01/螢幕快照-2017-01-06-下午10.57.02.jpg"]
 ---
 

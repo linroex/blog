@@ -3,8 +3,8 @@ title: "【Ubuntu】XVidCap Screen Capture - 免費且支援多種格式（avi�
 date: 2011-03-06T12:56:06
 slug: "ubuntu-xvidcap-screen-capture"
 aliases: ["/posts/%e3%80%90ubuntu%e3%80%91xvidcap-screen-capture-%e5%85%8d%e8%b2%bb%e4%b8%94%e6%94%af%e6%8f%b4%e5%a4%9a%e7%a8%ae%e6%a0%bc%e5%bc%8f%ef%bc%88avi%e3%80%81mpeg%e3%80%81swf-%ef%bc%89%e7%9a%84%e8%9e%a2/"]
-tags: ["Ubuntu", "錄影程式", "XVidCap"]
-categories: ["錄影程式", "Ubuntu"]
+tags: ["Ubuntu", "Screen Recording"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-06_125454.jpg"><img class="size-large wp-image-4875 aligncenter" title="2011-03-06_125454" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-06_125454-520x63.jpg" alt="" width="520" height="63" /></a>

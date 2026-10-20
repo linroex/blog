@@ -3,8 +3,8 @@ title: "在日本，我看到的新奇事物"
 date: 2017-02-09T21:33:30
 slug: "strange-things-i-saw-in-japan"
 aliases: ["/posts/%e5%9c%a8%e6%97%a5%e6%9c%ac%ef%bc%8c%e6%88%91%e7%9c%8b%e5%88%b0%e7%9a%84%e6%96%b0%e5%a5%87%e4%ba%8b%e7%89%a9/"]
-tags: ["日本"]
-categories: []
+tags: ["Japan"]
+categories: ["Travel"]
 images: ["%%IMG%%/wp-content/uploads/2017/02/P1100143.jpg"]
 ---
 

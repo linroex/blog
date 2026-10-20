@@ -3,8 +3,8 @@ title: "【Firefox 4】讓Firefox可以直接進行SSH連線的附加元件 - Fi
 date: 2011-04-08T08:00:40
 slug: "firefox-extension-firessh-ssh"
 aliases: ["/posts/%e3%80%90firefox-4%e3%80%91%e8%ae%93firefox%e5%8f%af%e4%bb%a5%e7%9b%b4%e6%8e%a5%e9%80%b2%e8%a1%8cssh%e9%80%a3%e7%b7%9a%e7%9a%84%e9%99%84%e5%8a%a0%e5%85%83%e4%bb%b6-firessh/"]
-tags: ["Firefox", "瀏覽器", "ssh", "FireSSH", "附加元件"]
-categories: ["Firefox"]
+tags: ["Firefox", "SSH"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-05_003704.jpg"><img class="size-large wp-image-4992 aligncenter" style="border: 1px solid black;" title="2011-04-05_003704" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-05_003704-520x254.jpg" alt="" width="520" height="254" /></a></p>

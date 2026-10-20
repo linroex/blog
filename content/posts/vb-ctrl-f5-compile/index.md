@@ -4,7 +4,7 @@ date: 2009-07-04T12:58:47
 slug: "vb-ctrl-f5-compile"
 aliases: ["/posts/vb-ctrlf5%e7%b7%a8%e8%ad%af/"]
 tags: ["VB"]
-categories: ["VB.NET"]
+categories: ["Programming"]
 ---
 
 跟大家分享一個好東西喔

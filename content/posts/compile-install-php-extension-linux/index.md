@@ -3,8 +3,8 @@ title: "手動編譯、安裝PHP Extension （Linux）"
 date: 2012-01-26T16:53:57
 slug: "compile-install-php-extension-linux"
 aliases: ["/posts/%e6%89%8b%e5%8b%95%e7%b7%a8%e8%ad%af%e3%80%81%e5%ae%89%e8%a3%9dphp-extension-%ef%bc%88linux%ef%bc%89/"]
-tags: ["PHP", "Linux", "Extension"]
-categories: ["PHP"]
+tags: ["PHP", "Linux"]
+categories: ["SRE"]
 ---
 
 如果要幫PHP安裝Extension的話要怎麼做呢？很多人都會回答Pecl，這的確是一個很方便的安裝Extension的方式，不過如果你的Server上面沒有Pecl怎麼辦呢？ 然後又因為某些原因不能安裝Pecl，這時候你就只好手動去編譯、安裝囉～ 而這篇文章也就是要教大家如何手動編譯PHP Extension在Linux上面

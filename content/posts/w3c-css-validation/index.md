@@ -3,8 +3,8 @@ title: "W3C驗證 - 了解你網站的CSS是否符合標準"
 date: 2009-09-06T13:36:56
 slug: "w3c-css-validation"
 aliases: ["/posts/w3c%e9%a9%97%e8%ad%89-%e4%ba%86%e8%a7%a3%e4%bd%a0%e7%b6%b2%e7%ab%99%e7%9a%84css%e6%98%af%e5%90%a6%e7%ac%a6%e5%90%88%e6%a8%99%e6%ba%96/"]
-tags: ["CSS", "SEO", "W3C"]
-categories: ["CSS"]
+tags: ["CSS", "HTML"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/09/2009-09-06-000.jpg"><img class="alignnone size-full wp-image-1873" title="2009-09-06 000" src="{{< param imageBase >}}/wp-content/uploads/2009/09/2009-09-06-000.jpg" alt="2009-09-06 000" width="405" height="84" /></a>

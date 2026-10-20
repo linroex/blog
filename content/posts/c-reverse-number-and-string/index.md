@@ -3,8 +3,8 @@ title: "【C++】數字翻轉、字串翻轉(應用：轉型別、字串處理�
 date: 2011-03-06T11:18:22
 slug: "c-reverse-number-and-string"
 aliases: ["/posts/%e3%80%90c%e3%80%91%e6%95%b8%e5%ad%97%e7%bf%bb%e8%bd%89%e3%80%81%e5%ad%97%e4%b8%b2%e7%bf%bb%e8%bd%89%e6%87%89%e7%94%a8%ef%bc%9a%e8%bd%89%e5%9e%8b%e5%88%a5%e3%80%81%e5%ad%97%e4%b8%b2%e8%99%95/"]
-tags: ["C++", "ACM", "翻轉"]
-categories: ["C++"]
+tags: ["C++", "Algorithms"]
+categories: ["Programming"]
 ---
 
 <p><a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-06_111510.jpg"><img class="size-large wp-image-342 aligncenter" title="2011-03-06_111510" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-06_111510-540x382.jpg" alt="" width="540" height="382" /></a></p>

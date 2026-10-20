@@ -3,8 +3,8 @@ title: "別再用昂貴的WinRAR了,7-zip讓你享受免費的壓縮(附完整�
 date: 2009-10-24T09:56:34
 slug: "7zip-free-winrar-alternative-tutorial"
 aliases: ["/posts/%e5%88%a5%e5%86%8d%e7%94%a8%e6%98%82%e8%b2%b4%e7%9a%84winrar%e4%ba%867-zip%e8%ae%93%e4%bd%a0%e4%ba%ab%e5%8f%97%e5%85%8d%e8%b2%bb%e7%9a%84%e5%a3%93%e7%b8%ae%e9%99%84%e5%ae%8c%e6%95%b4%e6%95%99/"]
-tags: ["壓縮軟體"]
-categories: ["軟體分享"]
+tags: ["Compression Software"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/10/2009-10-18_223051.jpg"><img class="size-full wp-image-2072 aligncenter" title="2009-10-18_223051" src="{{< param imageBase >}}/wp-content/uploads/2009/10/2009-10-18_223051.jpg" alt="2009-10-18_223051" width="132" height="82" /></a></p>

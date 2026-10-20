@@ -3,8 +3,8 @@ title: "如何得知有多少網站含有本站網址?"
 date: 2009-06-27T12:16:52
 slug: "how-many-sites-link-to-your-site"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%be%97%e7%9f%a5%e6%9c%89%e5%a4%9a%e5%b0%91%e7%b6%b2%e7%ab%99%e5%90%ab%e6%9c%89%e6%9c%ac%e7%ab%99%e7%b6%b2%e5%9d%80/"]
-tags: ["Google", "SEO"]
-categories: ["Google"]
+tags: ["SEO", "Google"]
+categories: ["Blog"]
 ---
 
 <span style="color: #ffffff;">我想大家一定都會很好奇說到底有哪些網站裡面含有自己網站的連結吧!這裡要交各位使用link這個語法來搜尋,link是由google所提共的語法,它可以列出有哪些網站裡面有你網站的連結,</span><span style="color: #0000ff;"><span style="color: #ffffff;">請注意這裡的單位是網站而非頁面,</span><span style="color: #ffffff;">現在就由聽風來帶各位了解這個語法吧!</span></span><span style="color: #ffffff;"> </span>

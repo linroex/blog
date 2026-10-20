@@ -3,8 +3,8 @@ title: "IE8繁體中文版出來囉! 六大新功能等你來嘗試"
 date: 2009-09-13T11:33:44
 slug: "ie8-traditional-chinese-release"
 aliases: ["/posts/ie8%e7%b9%81%e9%ab%94%e4%b8%ad%e6%96%87%e7%89%88%e5%87%ba%e4%be%86%e5%9b%89-%e5%85%ad%e5%a4%a7%e6%96%b0%e5%8a%9f%e8%83%bd%e7%ad%89%e4%bd%a0%e4%be%86%e5%98%97%e8%a9%a6/"]
-tags: ["IE8", "Microsoft"]
-categories: ["瀏覽器"]
+tags: ["IE"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/09/2009-09-13-02.jpg"><img class="alignnone size-full wp-image-1904" title="2009-09-13-02" src="{{< param imageBase >}}/wp-content/uploads/2009/09/2009-09-13-02.jpg" alt="2009-09-13-02" width="710" height="194" /></a>

@@ -3,8 +3,8 @@ title: "【VB】【C++】計算n!(階層)"
 date: 2011-01-05T05:58:10
 slug: "vb-c-factorial-n-2"
 aliases: ["/posts/%e3%80%90vb%e3%80%91%e3%80%90c%e3%80%91%e8%a8%88%e7%ae%97n%e9%9a%8e%e5%b1%a4-2/"]
-tags: ["n!", "C++", "function", "數學", "等差級數"]
-categories: ["VB.NET", "C/C++"]
+tags: ["VB", "C++", "Algorithms"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-05_054100.jpg"><img class="alignnone size-large wp-image-4369" title="2011-01-05_054100" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-05_054100-520x253.jpg" alt="" width="520" height="253" /></a>

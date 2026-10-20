@@ -3,7 +3,7 @@ title: "JavaScript String Replace All"
 date: 2017-01-16T01:20:29
 slug: "javascript-string-replace-all"
 tags: ["JavaScript"]
-categories: []
+categories: ["Programming"]
 ---
 
 在 JavaScript 使用 String.replace 時要注意它可能和你預期的行為不同，當你想取代某個字串時，你會發現 replace 只取代了第一個字串，例如 "AAA".replace("A", "B")，你預期會得到 "BBB" 但實際上你會得到的是 "BAA"，這是因為 JS replace 的第一個參數其實是 Regex 而非字串，如果你輸入字串，就只會取代第一個遇到的字串，導致和預期不同的問題。

@@ -3,8 +3,8 @@ title: "【FileZilla】將常用的FTP站台資訊儲存在站台管理員方便
 date: 2011-05-22T08:00:22
 slug: "filezilla-site-manager"
 aliases: ["/posts/%e3%80%90filezilla%e3%80%91%e5%b0%87%e5%b8%b8%e7%94%a8%e7%9a%84ftp%e7%ab%99%e5%8f%b0%e8%b3%87%e8%a8%8a%e5%84%b2%e5%ad%98%e5%9c%a8%e7%ab%99%e5%8f%b0%e7%ae%a1%e7%90%86%e5%93%a1%e6%96%b9%e4%be%bf/"]
-tags: ["FileZilla", "FTP"]
-categories: ["軟體分享", "FTP"]
+tags: ["FTP", "FileZilla"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-21_014654.jpg"><img class="size-large wp-image-5116 aligncenter" title="2011-05-21_014654" src="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-21_014654-520x416.jpg" alt="" width="520" height="416" /></a>

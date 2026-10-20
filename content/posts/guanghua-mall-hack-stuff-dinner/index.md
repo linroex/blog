@@ -3,8 +3,8 @@ title: "7/3光華商場,7/4 Hack-Stuff聚餐"
 date: 2010-07-05T01:15:42
 slug: "guanghua-mall-hack-stuff-dinner"
 aliases: ["/posts/73%e5%85%89%e8%8f%af%e5%95%86%e5%a0%b4-74-hack-stuff%e8%81%9a%e9%a4%90/"]
-tags: ["iPod Touch", "仁愛國中", "光華商場", "女僕餐廳", "數位相機", "西門町"]
-categories: ["生活札記"]
+tags: ["Taipei"]
+categories: ["Life"]
 ---
 
 因為文章中的一些人名氣過大,或是天性低調? 所以用化名帶過

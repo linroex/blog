@@ -3,8 +3,8 @@ title: "【Python】Python直譯器安裝教學"
 date: 2011-02-18T22:01:26
 slug: "python-interpreter-install-tutorial"
 aliases: ["/posts/%e3%80%90python%e3%80%91python%e7%9b%b4%e8%ad%af%e5%99%a8%e5%ae%89%e8%a3%9d%e6%95%99%e5%ad%b8/"]
-tags: ["IDLE", "Python"]
-categories: ["IDE", "Python"]
+tags: ["Python", "IDE"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-15_214318.jpg"><img class="size-full wp-image-274 aligncenter" title="2011-02-15_214318" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-15_214318.jpg" alt="" width="511" height="297" /></a></p>

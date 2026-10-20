@@ -3,8 +3,8 @@ title: "超簡易,只要在iPhone上開啟網頁就可以把iOS 4給JB掉!（據
 date: 2010-08-05T01:25:49
 slug: "jailbreak-ios4-on-iphone-browser"
 aliases: ["/posts/%e8%b6%85%e7%b0%a1%e6%98%93%e5%8f%aa%e8%a6%81%e5%9c%a8iphone%e4%b8%8a%e9%96%8b%e5%95%9f%e7%b6%b2%e9%a0%81%e5%b0%b1%e5%8f%af%e4%bb%a5%e6%8a%8aios4%e7%b5%a6jb%e6%8e%89/"]
-tags: ["iPod Touch", "iPhone", "Cydia", "iOS4", "JB", "OpenSSH", "WinterBoard"]
-categories: ["iPod Touch"]
+tags: ["iOS", "Jailbreak"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/08/jb.png"><img class="size-full wp-image-3657 aligncenter" title="jb" src="{{< param imageBase >}}/wp-content/uploads/2010/08/jb.png" alt="" width="224" height="336" /></a></p>

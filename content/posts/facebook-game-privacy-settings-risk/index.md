@@ -3,8 +3,8 @@ title: "你以為設定好隱私權限就安全了？ 談Facebook 小遊戲、�
 date: 2011-03-21T01:51:42
 slug: "facebook-game-privacy-settings-risk"
 aliases: ["/posts/%e4%bd%a0%e4%bb%a5%e7%82%ba%e8%a8%ad%e5%ae%9a%e5%a5%bd%e9%9a%b1%e7%a7%81%e6%ac%8a%e9%99%90%e5%b0%b1%e5%ae%89%e5%85%a8%e4%ba%86%ef%bc%9f-%e8%ab%87facebook-%e5%b0%8f%e9%81%8a%e6%88%b2%e3%80%81%e5%bf%83/"]
-tags: ["Facebook", "心理測驗", "臉書", "小遊戲"]
-categories: ["Facebook"]
+tags: ["Privacy", "Facebook"]
+categories: ["Security"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-21_014949.jpg"><img class="size-large wp-image-4966 aligncenter" title="2011-03-21_014949" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-21_014949-520x378.jpg" alt="" width="520" height="378" /></a>做好隱私設定就真的不會讓個人資料外洩嘛？↑↑</p>

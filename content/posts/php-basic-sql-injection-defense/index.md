@@ -3,8 +3,8 @@ title: "在PHP裡面如何做到基本的SQL injection防禦？"
 date: 2011-08-02T07:00:27
 slug: "php-basic-sql-injection-defense"
 aliases: ["/posts/%e5%9c%a8php%e8%a3%a1%e9%9d%a2%e5%a6%82%e4%bd%95%e5%81%9a%e5%88%b0%e5%9f%ba%e6%9c%ac%e7%9a%84sql-injection%e9%98%b2%e7%a6%a6%ef%bc%9f/"]
-tags: ["PHP", "SQL", "php.ini", "magic_quotes_gpc", "mysql_real_escape_string", "SQL injection"]
-categories: ["PHP"]
+tags: ["PHP", "SQL", "Hardening"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-01_222010.jpg"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: block; margin-left: auto; margin-right: auto; padding-top: 0px; border-width: 0px; border-color: initial; border-style: initial;" title="2011-08-01_222010" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-01_222010_thumb.jpg" alt="2011-08-01_222010" width="524" height="401" border="0" /></a>

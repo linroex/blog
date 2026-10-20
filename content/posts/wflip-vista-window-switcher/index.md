@@ -3,8 +3,8 @@ title: "WFlip - 模擬Vista視窗切換特效"
 date: 2009-06-07T12:40:17
 slug: "wflip-vista-window-switcher"
 aliases: ["/posts/wflip-%e6%a8%a1%e6%93%acvista%e8%a6%96%e7%aa%97%e5%88%87%e6%8f%9b%e7%89%b9%e6%95%88/"]
-tags: ["特效系列"]
-categories: ["軟體分享"]
+tags: ["Windows"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-07_121711.jpg"><img class="alignnone size-full wp-image-1236" style="border: 0px initial initial;" title="2009-06-07_121711" src="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-07_121711.jpg" alt="2009-06-07_121711" width="392" height="294" /></a>

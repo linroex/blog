@@ -3,8 +3,8 @@ title: "【VB】分割字串成字元(mid+for迴圈)"
 date: 2010-12-28T20:01:36
 slug: "vb-split-string-mid-for-loop-2"
 aliases: ["/posts/%e3%80%90vb%e3%80%91%e5%88%86%e5%89%b2%e5%ad%97%e4%b8%b2%e6%88%90%e5%ad%97%e5%85%83midfor%e8%bf%b4%e5%9c%88-2/"]
-tags: ["VB", "mid", "ACM"]
-categories: ["VB.NET"]
+tags: ["VB"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-28_201330.jpg"><img class="size-full wp-image-4332 aligncenter" title="2010-12-28_201330" src="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-28_201330.jpg" alt="" width="312" height="344" /></a></p>

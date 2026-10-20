@@ -4,7 +4,7 @@ date: 2009-07-02T10:19:14
 slug: "firefox-35-release"
 aliases: ["/posts/firefox35-%e6%ad%a3%e5%bc%8f%e7%89%88-%e6%94%af%e6%8f%b4%e6%9b%b4%e5%a4%9a%e6%8a%80%e8%a1%93/"]
 tags: ["Firefox"]
-categories: ["瀏覽器"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-02_101818.jpg"><img class="alignnone size-full wp-image-1492" title="2009-07-02_101818" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-02_101818.jpg" alt="2009-07-02_101818" width="640" height="174" /></a>

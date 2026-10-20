@@ -3,8 +3,8 @@ title: "透過GDocBackup備份Google Docs中的所有文件"
 date: 2012-01-24T17:30:16
 slug: "backup-google-docs-with-gdocbackup"
 aliases: ["/posts/%e9%80%8f%e9%81%8egdocbackup%e5%82%99%e4%bb%bdgoogle-docs%e4%b8%ad%e7%9a%84%e6%89%80%e6%9c%89%e6%96%87%e4%bb%b6/"]
-tags: ["Google", "Google Docs", "Backup", "GDocBackup"]
-categories: ["Google", "office"]
+tags: ["Google Docs", "Backup"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-24_122906.jpg"><img class="alignnone size-large wp-image-5961" title="2012-01-24_122906" src="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-24_122906-520x271.jpg" alt="" width="520" height="271" /></a>

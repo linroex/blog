@@ -3,8 +3,8 @@ title: "Windows手寫輸入法 - 不知道注音也能打字"
 date: 2009-06-09T19:50:01
 slug: "handwriting-input-method"
 aliases: ["/posts/%e6%89%8b%e5%af%ab%e8%bc%b8%e5%85%a5%e6%b3%95-%e4%b8%8d%e7%9f%a5%e9%81%93%e6%b3%a8%e9%9f%b3%e4%b9%9f%e8%83%bd%e6%89%93%e5%ad%97/"]
-tags: ["輸入法"]
-categories: ["Windows系列"]
+tags: ["Windows", "Input Methods"]
+categories: ["Hardware"]
 ---
 
 其實說實在的我很少使用XP內建的手寫輸入法了,因為我都會打字XD,會想起這個手寫輸入法其實是因為我們理化老師上次有一個字的拼音不知道,還跑去問國文老師,我才想道手寫輸入法這個好玩的東西

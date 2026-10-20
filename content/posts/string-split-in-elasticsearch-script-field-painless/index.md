@@ -2,8 +2,8 @@
 title: "String Split in Elasticsearch Script Field (Painless)"
 date: 2016-12-14T01:29:14
 slug: "string-split-in-elasticsearch-script-field-painless"
-tags: ["Java", "Elasticsearch", "Kibana", "Painless"]
-categories: []
+tags: ["Elasticsearch"]
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/Artboard-1.png"]
 ---
 

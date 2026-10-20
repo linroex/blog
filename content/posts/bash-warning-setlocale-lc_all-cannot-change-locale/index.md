@@ -2,8 +2,8 @@
 title: "bash: warning: setlocale: LC_ALL: cannot change locale"
 date: 2017-02-22T10:01:41
 slug: "bash-warning-setlocale-lc_all-cannot-change-locale"
-tags: ["Ubuntu", "Linux", "Mac", "ssh"]
-categories: []
+tags: ["Linux", "SSH"]
+categories: ["SRE"]
 ---
 
 用 SSH 登入遠端伺服器時，看到「-bash: warning: setlocale: LC_ALL: cannot change locale」的錯誤訊息嗎？ 會遇到它是因為 SSH 連線上遠端主機時，會自動將本機的 LC_* 變數（locale）傳送一份到遠端主機，如果伺服器上不支援你指定的語系，就會出現「-bash: warning: setlocale: LC_ALL: cannot change locale」錯誤啦！

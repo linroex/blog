@@ -2,8 +2,8 @@
 title: "BigQuery SQL Get First or Last Day of Month From Specify Date"
 date: 2017-07-29T18:38:56
 slug: "bigquery-sql-get-first-or-last-day-of-month-from-specify-date"
-tags: ["SQL", "Google Cloud Platform", "BigQuery"]
-categories: []
+tags: ["BigQuery", "SQL"]
+categories: ["Programming"]
 ---
 
 In BigQuery, If you want get first day from a Date (or timestamp, datetime type) , for example, type "2017-05-24" and get "2017-05-01", you can call UTC_USEC_TO_MONTH function in Legacy SQL, or DATE_TRUNC() in Standard SQL, In fact, BigQuery have a series function do these thing, Get First day, hour, week.....etc from a Date.

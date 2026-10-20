@@ -3,8 +3,8 @@ title: "JS 前端處理檔案上傳之預覽、大小、尺寸、格式"
 date: 2017-02-09T13:44:33
 slug: "js-file-upload-preview-validation"
 aliases: ["/posts/js-%e5%89%8d%e7%ab%af%e8%99%95%e7%90%86%e6%aa%94%e6%a1%88%e4%b8%8a%e5%82%b3%e4%b9%8b%e9%a0%90%e8%a6%bd%e3%80%81%e5%a4%a7%e5%b0%8f%e3%80%81%e5%b0%ba%e5%af%b8%e3%80%81%e6%a0%bc%e5%bc%8f/"]
-tags: ["JavaScript", "HTML5"]
-categories: []
+tags: ["JavaScript", "HTML"]
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2017/02/Facebook.png"]
 ---
 

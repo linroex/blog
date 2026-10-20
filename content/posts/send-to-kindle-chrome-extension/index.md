@@ -3,8 +3,8 @@ title: "Send to Kindle 把你瀏覽的網頁內容傳送到Kindle的Chrome外掛
 date: 2012-01-25T16:00:09
 slug: "send-to-kindle-chrome-extension"
 aliases: ["/posts/send-to-kindle-%e6%8a%8a%e4%bd%a0%e7%80%8f%e8%a6%bd%e7%9a%84%e7%b6%b2%e9%a0%81%e5%85%a7%e5%ae%b9%e5%82%b3%e9%80%81%e5%88%b0kindle%e7%9a%84chrome%e5%a4%96%e6%8e%9b/"]
-tags: ["Chrome", "Amazon", "Chrome Plugin", "Email", "Kindle"]
-categories: ["Chrome", "Kindle"]
+tags: ["Chrome Extensions", "Kindle"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-24_123607.jpg"><img class="alignnone size-large wp-image-5963" title="2012-01-24_123607" src="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-24_123607-520x371.jpg" alt="" width="520" height="371" /></a>

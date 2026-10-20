@@ -3,8 +3,8 @@ title: "6/22 花蓮行第一日"
 date: 2010-06-22T23:41:26
 slug: "622-hualien-trip-day-1"
 aliases: ["/posts/622-%e8%8a%b1%e8%93%ae%e8%a1%8c%e7%ac%ac%e4%b8%80%e6%97%a5/"]
-tags: ["遊記", "花蓮", "飯店"]
-categories: ["生活札記"]
+tags: ["Hualien"]
+categories: ["Travel"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/06/DSCN0044.jpg"><img class="alignnone size-large wp-image-3328" title="DSCN0044" src="{{< param imageBase >}}/wp-content/uploads/2010/06/DSCN0044-533x400.jpg" alt="" width="533" height="400" /></a>

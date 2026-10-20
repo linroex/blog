@@ -3,8 +3,8 @@ title: "我該選擇一個怎樣的開發環境？Notepad？Visual Studio？"
 date: 2011-05-23T09:57:32
 slug: "my-development-environment-notepad-vs-visual-studio"
 aliases: ["/posts/%e6%88%91%e5%89%9b%e9%81%b8%e6%93%87%e4%b8%80%e5%80%8b%e6%80%8e%e6%a8%a3%e7%9a%84%e9%96%8b%e7%99%bc%e7%92%b0%e5%a2%83%ef%bc%9fnotepad%ef%bc%9fvisual-studio%ef%bc%9f/"]
-tags: ["IDE", "Visual Studio", "Notepad"]
-categories: ["IDE", "文字編輯器"]
+tags: ["IDE", "Visual Studio"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-23_095426.jpg"><img class="size-full wp-image-491 aligncenter" title="2011-05-23_095426" src="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-23_095426.jpg" alt="" width="300" height="257" /></a>

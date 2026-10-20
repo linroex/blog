@@ -3,8 +3,8 @@ title: "本站換用新主機DirectSpace，並且7/11~7/15可能沒辦法寫文�
 date: 2011-07-08T17:03:03
 slug: "new-host-directspace-711-715-outage"
 aliases: ["/posts/%e6%9c%ac%e7%ab%99%e6%8f%9b%e7%94%a8%e6%96%b0%e4%b8%bb%e6%a9%9fdirectspace%ef%bc%8c%e4%b8%a6%e4%b8%94711715%e5%8f%af%e8%83%bd%e6%b2%92%e8%be%a6%e6%b3%95%e5%af%ab%e6%96%87%e7%ab%a0/"]
-tags: ["公告", "VPS", "DirectSpace"]
-categories: ["本站公告"]
+tags: ["Blogging", "Hosting"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-08_165402.jpg"><img class="size-full wp-image-5324 aligncenter" title="2011-07-08_165402" src="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-08_165402.jpg" alt="" width="244" height="61" /></a>

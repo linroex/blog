@@ -3,8 +3,8 @@ title: "GIMP - 自由軟體界的Photoshop、可安裝多達百種外掛程式"
 date: 2011-05-27T16:01:03
 slug: "gimp-free-photoshop-alternative"
 aliases: ["/posts/gimp-%e8%87%aa%e7%94%b1%e8%bb%9f%e9%ab%94%e7%95%8c%e7%9a%84photoshop%e3%80%81%e5%8f%af%e5%ae%89%e8%a3%9d%e5%a4%9a%e9%81%94%e7%99%be%e7%a8%ae%e5%a4%96%e6%8e%9b%e7%a8%8b%e5%bc%8f/"]
-tags: ["opensource", "GIMP", "Photoshop", "自由軟體"]
-categories: ["軟體分享", "影像處理"]
+tags: ["GIMP", "Photoshop"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-27_155901.jpg"><img class="size-large wp-image-5162 aligncenter" title="2011-05-27_155901" src="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-27_155901-520x417.jpg" alt="" width="520" height="417" /></a>

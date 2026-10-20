@@ -3,8 +3,8 @@ title: "【App Store】Opera Mini for iPhone／iPod Touch使用心得&教學"
 date: 2010-04-17T10:06:55
 slug: "opera-mini-for-iphone-review"
 aliases: ["/posts/%e3%80%90app-store%e3%80%91opera-mini-for-iphone%ef%bc%8fipod-touch%e4%bd%bf%e7%94%a8%e5%bf%83%e5%be%97%e6%95%99%e5%ad%b8/"]
-tags: ["opera", "Apple", "iPod Touch", "App Store"]
-categories: ["瀏覽器", "iPod Touch"]
+tags: ["Opera", "iPhone", "App Store"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/04/2010-04-17_091928.png"><img class="alignnone size-large wp-image-2958" title="2010-04-17_091928" src="{{< param imageBase >}}/wp-content/uploads/2010/04/2010-04-17_091928-499x303.png" alt="" width="499" height="303" /></a>

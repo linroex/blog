@@ -3,8 +3,8 @@ title: "JavaScript 操作瀏覽器歷史紀錄、修改網址與上一頁事件�
 date: 2017-01-14T12:59:02
 slug: "javascript-manipulate-browser-history"
 aliases: ["/posts/javascript-%e6%93%8d%e4%bd%9c%e7%80%8f%e8%a6%bd%e5%99%a8%e6%ad%b7%e5%8f%b2%e7%b4%80%e9%8c%84%e3%80%81%e4%bf%ae%e6%94%b9%e7%b6%b2%e5%9d%80%e8%88%87%e4%b8%8a%e4%b8%80%e9%a0%81%e4%ba%8b%e4%bb%b6%ef%bc%88/"]
-tags: ["JavaScript", "HTML5"]
-categories: []
+tags: ["JavaScript", "HTML"]
+categories: ["Programming"]
 ---
 
 在 JavaScript 當道的今日，使用 JS 進行網頁的操作如 Ajax、頁面切換、彈出視窗等等越來越常見，甚至進一步出現了 React JS、Vue JS 等可以幫助你開發 Single Page Application (SPA) 的 JS Framework；在使用 JS 進行網頁操作時最怕的問題莫過於網址的變化與歷史紀錄，例如透過 jQuery 進行頁面切換後，因為是 JS 的行為所以網址不會變化，而且當使用者按下瀏覽器左上角的上一頁時，會直接回到別的頁面，因為在歷史紀錄裡面不會紀錄 JS 的操作（事實上也無法紀錄），要解決這一系列問題，可以透過 HTML5 提供的 history.pushState、history.replaceState 以及 onpopstate 事件來解決。

@@ -3,8 +3,8 @@ title: "【公告】異常回報&建議區"
 date: 2009-05-10T22:40:13
 slug: "bug-report-suggestion-area"
 aliases: ["/posts/%e7%95%b0%e5%b8%b8%e5%9b%9e%e5%a0%b1%e5%bb%ba%e8%ad%b0%e5%8d%80/"]
-tags: []
-categories: ["本站公告"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 最近都在火狐上面用東西

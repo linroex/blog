@@ -2,9 +2,9 @@
 title: "SQL注意事項 - `符號與&#039;符號的差別"
 date: 2011-02-11T10:43:48
 slug: "sql-single-vs-double-quotes"
-aliases: ["/posts/sql%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a0%85-%e7%ac%a6%e8%99%9f%e8%88%87%e7%ac%a6%e8%99%9f%e7%9a%84%e5%b7%ae%e5%88%a5/"]
+aliases: ["/posts/sql%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a0%85-%e7%ac%a6%e8%99%9f%e8%88%87%e7%ac%a6%e8%99%9f%e7%9a%84%e5%b7%ae%e5%88%a5/", "/posts/sql-single-vs-double-quotes-2/", "/posts/sql%e6%b3%a8%e6%84%8f%e4%ba%8b-%e7%ac%a6%e8%99%9f%e8%88%87%e7%ac%a6%e8%99%9f%e7%9a%84%e5%b7%ae%e5%88%a5/"]
 tags: ["SQL"]
-categories: ["SQL"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2010-07-27_233518.jpg"><img class="alignnone size-large wp-image-206" title="2010-07-27_233518" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2010-07-27_233518-540x259.jpg" alt="" width="432" height="207" /></a>

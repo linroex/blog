@@ -3,8 +3,8 @@ title: "TinyUmbrella 幫助你備份iPad、iPhone的SHSH以便降級"
 date: 2011-07-26T16:09:12
 slug: "tinyumbrella-backup-shsh-downgrade"
 aliases: ["/posts/tinyumbrella-%e5%b9%ab%e5%8a%a9%e4%bd%a0%e5%82%99%e4%bb%bdipad%e3%80%81iphone%e7%9a%84shsh%e4%bb%a5%e4%be%bf%e9%99%8d%e7%b4%9a/"]
-tags: ["iPad", "JB", "iOS", "SHSH"]
-categories: ["iPod Touch", "Apple", "iOS"]
+tags: ["iOS", "Jailbreak"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-26_155602.jpg"><img class="alignnone size-large wp-image-5491" title="2011-07-26_155602" src="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-26_155602-520x363.jpg" alt="" width="520" height="363" /></a>

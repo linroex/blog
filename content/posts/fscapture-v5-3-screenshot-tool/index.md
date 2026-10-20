@@ -3,8 +3,8 @@ title: "FastStone Capture v5.3 - 免費截圖程式(附完整教學)"
 date: 2009-07-31T17:25:03
 slug: "fscapture-v5-3-screenshot-tool"
 aliases: ["/posts/fscapture-v5-3-%e5%85%8d%e8%b2%bb%e6%88%aa%e5%9c%96%e7%a8%8b%e5%bc%8f%e9%99%84%e5%ae%8c%e6%95%b4%e6%95%99%e5%ad%b8/"]
-tags: ["截圖程式"]
-categories: ["截圖程式"]
+tags: ["Screenshots"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/07/123.png"><img class="size-full wp-image-1696 aligncenter" title="123" src="{{< param imageBase >}}/wp-content/uploads/2009/07/123.png" alt="123" width="216" height="55" /></a></p>

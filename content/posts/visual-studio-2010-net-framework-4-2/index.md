@@ -3,8 +3,8 @@ title: "Visual Studio 2010 - 使用.NET Famework 4來做軟體開發、更完善
 date: 2010-12-13T17:56:39
 slug: "visual-studio-2010-net-framework-4-2"
 aliases: ["/posts/visual-studio-2010-%e4%bd%bf%e7%94%a8-net-famework-4%e4%be%86%e5%81%9a%e8%bb%9f%e9%ab%94%e9%96%8b%e7%99%bc%e3%80%81%e6%9b%b4%e5%ae%8c%e5%96%84%e7%9a%84%e5%b9%b3%e8%a1%8c%e5%8c%96%e9%81%8b%e7%ae%97-2/"]
-tags: [".NET", "編譯器", "Microsoft", "Visual Studio 2010"]
-categories: ["編譯器"]
+tags: ["Visual Studio", ".NET"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-10_224908.jpg"><img class="size-large wp-image-4164 aligncenter" title="2010-12-10_224908" src="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-10_224908-520x314.jpg" alt="" width="520" height="314" /></a></p>

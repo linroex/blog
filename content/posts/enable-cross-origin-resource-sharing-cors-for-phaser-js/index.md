@@ -2,8 +2,8 @@
 title: "Enable Cross-Origin Resource Sharing (CORS) for Phaser.js"
 date: 2016-12-02T14:01:31
 slug: "enable-cross-origin-resource-sharing-cors-for-phaser-js"
-tags: ["JavaScript", "PhaserJS", "Game Develop"]
-categories: []
+tags: ["JavaScript", "CORS"]
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/螢幕快照-2016-12-02-下午1.56.00.jpg"]
 ---
 

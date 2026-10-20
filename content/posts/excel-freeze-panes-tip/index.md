@@ -4,7 +4,7 @@ date: 2009-05-20T19:57:41
 slug: "excel-freeze-panes-tip"
 aliases: ["/posts/excel%e5%87%8d%e7%b5%90%e7%aa%97%e6%a0%bc%e5%b0%8f%e7%a7%98%e6%8a%80/"]
 tags: ["Excel"]
-categories: ["文書處理"]
+categories: ["Software"]
 ---
 
 這是我在布萊恩大大的重灌狂人上看到的文章,我就把它重新寫一遍發到我部落格嚕(因為不能盜文XD),我想不來恩大大應該不會對我怎樣吧!!

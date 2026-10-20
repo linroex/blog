@@ -3,8 +3,8 @@ title: "Use the ClientLogin 取得存取Google Account帳戶的權限"
 date: 2011-04-30T20:49:46
 slug: "use-clientlogin-google-account"
 aliases: ["/posts/use-the-clientlogin-%e5%8f%96%e5%be%97%e5%ad%98%e5%8f%96google-account%e5%b8%b3%e6%88%b6%e7%9a%84%e6%ac%8a%e9%99%90/"]
-tags: ["API", "Google", "cURL", "ClientLogin", "Google Account"]
-categories: ["Google API"]
+tags: ["Google API"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-30_200036.jpg"><img class="size-full wp-image-435 aligncenter" title="2011-04-30_200036" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-30_200036.jpg" alt="" width="507" height="453" /></a>

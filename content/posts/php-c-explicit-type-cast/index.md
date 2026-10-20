@@ -3,8 +3,8 @@ title: "【PHP】【C++】簡潔的強制顯式轉型別語法"
 date: 2011-02-15T22:57:49
 slug: "php-c-explicit-type-cast"
 aliases: ["/posts/%e3%80%90php%e3%80%91%e3%80%90c%e3%80%91%e7%b0%a1%e6%bd%94%e7%9a%84%e5%bc%b7%e5%88%b6%e9%a1%af%e5%bc%8f%e8%bd%89%e5%9e%8b%e5%88%a5%e8%aa%9e%e6%b3%95/"]
-tags: ["PHP", "C++", "型別", "轉型別"]
-categories: ["PHP", "C++"]
+tags: ["PHP", "C++"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-15_225730.jpg"><img class="size-large wp-image-282 aligncenter" title="2011-02-15_225730" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-15_225730-540x352.jpg" alt="" width="540" height="352" /></a></p>

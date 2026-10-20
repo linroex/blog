@@ -3,8 +3,8 @@ title: "Pietty - 支援中文的SSH連線程式(原形是Putty)"
 date: 2011-02-24T22:55:01
 slug: "pietty-chinese-ssh-client"
 aliases: ["/posts/pietty-%e6%94%af%e6%8f%b4%e4%b8%ad%e6%96%87%e7%9a%84ssh%e9%80%a3%e7%b7%9a%e7%a8%8b%e5%bc%8f%e5%8e%9f%e5%bd%a2%e6%98%afputty/"]
-tags: ["pietty", "putty", "ssh"]
-categories: ["軟體分享", "Linux"]
+tags: ["SSH"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-24_223747.jpg"><img class="aligncenter" title="2011-02-24_223747" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-24_223747.jpg" alt="" width="421" height="301" /></a>

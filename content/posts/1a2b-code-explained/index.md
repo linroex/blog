@@ -3,8 +3,8 @@ title: "1A2B程式碼、詳解"
 date: 2011-07-08T18:00:28
 slug: "1a2b-code-explained"
 aliases: ["/posts/1a2b%e7%a8%8b%e5%bc%8f%e7%a2%bc%e3%80%81%e8%a9%b3%e8%a7%a3/"]
-tags: ["C++", "1A2B"]
-categories: ["C++"]
+tags: ["C++"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-08_175731.jpg"><img class="alignnone size-large wp-image-550" title="2011-07-08_175731" src="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-08_175731-540x352.jpg" alt="" width="540" height="352" /></a>

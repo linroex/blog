@@ -4,7 +4,7 @@ date: 2017-01-29T23:55:48
 slug: "google-analytics-tips-annotations"
 aliases: ["/posts/google-analytics-tips-%e8%ae%93%e8%a8%bb%e8%a7%a3%e5%91%8a%e8%a8%b4%e6%9c%aa%e4%be%86%e7%9a%84%e4%bd%a0%ef%bc%8c%e6%b5%81%e9%87%8f%e5%bf%bd%e9%ab%98%e5%bf%bd%e4%bd%8e%e6%98%af%e6%80%8e%e5%9b%9e/"]
 tags: ["Google Analytics"]
-categories: []
+categories: ["Blog"]
 ---
 
 每次網站改版或是做一些實驗後，都會導致 Google Analytics 的數據有所變化，例如跳出率增加等等，也許短時間內你還記得是什麼原因導致流量或數據有巨變，但如果過了一年，你還能記得當初的原因嗎？ 如同寫程式會需要註解，其實 Google Analytics 有內建註解功能，可以讓你在特定的日期寫筆記，這樣在閱讀報表時就能明白是發生了什麼事情導致流量出現變化啦！

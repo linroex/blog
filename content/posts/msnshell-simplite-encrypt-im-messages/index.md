@@ -3,8 +3,8 @@ title: "用MSNShell以及SimpLite-Yahoo加密你的即時通訊訊息,防止網�
 date: 2010-01-22T19:26:07
 slug: "msnshell-simplite-encrypt-im-messages"
 aliases: ["/posts/%e7%94%a8msnshell%e4%bb%a5%e5%8f%8asimplite-yahoo%e5%8a%a0%e5%af%86%e4%bd%a0%e7%9a%84%e5%8d%b3%e6%99%82%e9%80%9a%e8%a8%8a%e8%a8%8a%e6%81%af%e9%98%b2%e6%ad%a2%e7%b6%b2%e7%ae%a1%e5%81%b4%e9%8c%84/"]
-tags: ["Yahoo", "及時通", "微軟MSN"]
-categories: ["資訊安全", "奇摩即時通", "微軟MSN"]
+tags: ["Instant Messaging", "Encryption"]
+categories: ["Security"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/01/2010-01-22_194640.png"><img class="alignnone size-large wp-image-2525" title="2010-01-22_194640" src="{{< param imageBase >}}/wp-content/uploads/2010/01/2010-01-22_194640-375x400.png" alt="" width="375" height="400" /></a>

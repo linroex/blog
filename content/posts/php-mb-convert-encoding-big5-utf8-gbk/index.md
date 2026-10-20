@@ -3,8 +3,8 @@ title: "【PHP】mb_convert_encoding - 遇到某些API的回傳值編碼不是�
 date: 2011-02-04T12:24:55
 slug: "php-mb-convert-encoding-big5-utf8-gbk"
 aliases: ["/posts/%e3%80%90php%e3%80%91mb_convert_encoding-big5%e3%80%81utf8%e3%80%81gbk%e7%ad%89%e5%a4%9a%e7%a8%ae%e7%b7%a8%e7%a2%bc%e6%96%b9%e5%bc%8f%e4%ba%92%e8%bd%89/"]
-tags: ["PHP", "big5", "utf8", "編碼轉換"]
-categories: []
+tags: ["PHP", "Encoding"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-04_123628.jpg"><img class="alignnone size-large wp-image-4662" title="2011-02-04_123628" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-04_123628-520x303.jpg" alt="" width="520" height="303" /></a>

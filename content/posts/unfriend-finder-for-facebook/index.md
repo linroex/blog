@@ -3,8 +3,8 @@ title: "想知道誰移除你Facebook好友嘛？ 讓Unfriend Finder來幫助你
 date: 2011-08-25T09:09:23
 slug: "unfriend-finder-for-facebook"
 aliases: ["/posts/%e6%83%b3%e7%9f%a5%e9%81%93%e8%aa%b0%e7%a7%bb%e9%99%a4%e4%bd%a0facebook%e5%a5%bd%e5%8f%8b%e5%98%9b%ef%bc%9f-%e8%ae%93unfriend-finder%e4%be%86%e5%b9%ab%e5%8a%a9%e4%bd%a0xd/"]
-tags: ["Chrome", "Facebook", "Friend"]
-categories: ["Chrome", "Facebook"]
+tags: ["Facebook", "Chrome Extensions"]
+categories: ["Web Apps"]
 ---
 
 <p><a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-25_090806.jpg"><img class="size-full wp-image-5717 aligncenter" title="2011-08-25_090806" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-25_090806.jpg" alt="" width="421" height="154" /></a></p>

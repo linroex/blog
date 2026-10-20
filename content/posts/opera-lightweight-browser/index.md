@@ -3,8 +3,8 @@ title: "Opera 體積小,耗用資源少的瀏覽器"
 date: 2009-06-04T18:38:47
 slug: "opera-lightweight-browser"
 aliases: ["/posts/opera-%e9%ab%94%e7%a9%8d%e5%b0%8f%e8%80%97%e7%94%a8%e8%b3%87%e6%ba%90%e5%b0%91%e7%9a%84%e7%80%8f%e8%a6%bd%e5%99%a8/"]
-tags: ["opera"]
-categories: ["瀏覽器"]
+tags: ["Opera"]
+categories: ["Software"]
 ---
 
 Opera是一個可以與火狐和IE齊名的瀏覽器,Opera的特色在於開啟時耗用的系統資源極少,且檔案體積小,非常適合放置在隨身碟上面使用,另外Opera的穩定度也絕對不輸火狐,還有Opera對於CSS語法的支援性很高,大部分的語法都支援,不像IE有一堆語法不支援

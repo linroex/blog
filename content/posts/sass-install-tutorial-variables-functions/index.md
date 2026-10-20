@@ -3,8 +3,8 @@ title: "當CSS遇上變數、函式，就變成SASS啦～ SASS安裝教學"
 date: 2012-02-07T21:31:00
 slug: "sass-install-tutorial-variables-functions"
 aliases: ["/posts/%e7%95%b6css%e9%81%87%e4%b8%8a%e8%ae%8a%e6%95%b8%e3%80%81%e5%87%bd%e5%bc%8f%ef%bc%8c%e5%b0%b1%e8%ae%8a%e6%88%90sass%e5%95%a6%ef%bd%9e-sass%e5%ae%89%e8%a3%9d%e6%95%99%e5%ad%b8/"]
-tags: ["編譯", "CSS", "Ruby", "SASS"]
-categories: ["CSS", "SASS"]
+tags: ["SASS", "CSS"]
+categories: ["Programming"]
 ---
 
 同時會寫程式跟CSS的人應該都會有一種想法，就是想要讓CSS裡面可以使用變數、函式這些寫程式才有的東西，因為很多CSS語法其實是重複的，如果可以有變數，有函式，那撰寫CSS的速度就會變快很多，一般來講這夢想是不可能實現的... 不過今天要跟大家介紹一個新的玩具，他叫做SASS，透過SASS，你可以讓CSS變得很不一樣～

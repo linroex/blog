@@ -3,8 +3,8 @@ title: "ebuddy-支援Yahoo.MSN.GTalk.QQ的線上即時通(附教學)"
 date: 2009-10-25T11:51:08
 slug: "ebuddy-multi-im-client"
 aliases: ["/posts/ebuddy-%e6%94%af%e6%8f%b4yahoo-msn-gtalk-qq%e7%9a%84%e7%b7%9a%e4%b8%8a%e5%8d%b3%e6%99%82%e9%80%9a%e9%99%84%e6%95%99%e5%ad%b8/"]
-tags: ["Web即時通訊"]
-categories: ["實用網站"]
+tags: ["Instant Messaging"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/10/2009-10-25-10-31-38.jpg"><img class="aligncenter size-full wp-image-2090" title="2009-10-25 10 31 38" src="{{< param imageBase >}}/wp-content/uploads/2009/10/2009-10-25-10-31-38.jpg" alt="2009-10-25 10 31 38" width="85" height="83" /></a>

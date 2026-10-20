@@ -3,8 +3,8 @@ title: "VirtualBox免費又公開原始碼的虛擬機軟體 - 下載及安裝�
 date: 2010-08-21T10:00:48
 slug: "virtualbox-free-vm-software"
 aliases: ["/posts/virtualbox%e5%85%8d%e8%b2%bb%e5%8f%88%e5%85%ac%e9%96%8b%e5%8e%9f%e5%a7%8b%e7%a2%bc%e7%9a%84%e8%99%9b%e6%93%ac%e6%a9%9f%e8%bb%9f%e9%ab%94-%e4%b8%8b%e8%bc%89%e5%8f%8a%e5%ae%89%e8%a3%9d%e6%95%99/"]
-tags: ["VMware", "虛擬機", "VirtualBox", "VirtualPC", "VMware Player", "雙視窗"]
-categories: ["虛擬機"]
+tags: ["VirtualBox", "Virtual Machines"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/08/2010-08-05_003258.jpg"><img class="size-large wp-image-3652 aligncenter" title="2010-08-05_003258" src="{{< param imageBase >}}/wp-content/uploads/2010/08/2010-08-05_003258-550x400.jpg" alt="" width="550" height="400" /></a></p>

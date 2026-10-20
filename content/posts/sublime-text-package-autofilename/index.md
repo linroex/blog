@@ -4,7 +4,7 @@ date: 2017-01-08T00:51:48
 slug: "sublime-text-package-autofilename"
 aliases: ["/posts/%e8%a6%ba%e5%be%97%e8%bc%b8%e5%85%a5%e6%aa%94%e6%a1%88%e8%b7%af%e5%be%91%e5%be%88%e9%ba%bb%e7%85%a9%e5%97%8e%ef%bc%9f-%e8%ae%93-sublime-text-package-autofilename-%e5%b9%ab%e4%bd%a0%e8%a7%a3%e6%b1%ba/"]
 tags: ["Sublime Text"]
-categories: []
+categories: ["Software"]
 ---
 
 在寫程式時最討厭的事情，輸入檔案路徑絕對可以排上前幾名，每次要輸入檔案路徑，例如在 HTML 裡面載入 JS、CSS、或是用 Python 開啟檔案時，都要切換視窗到 Finder 去複製檔案名稱，但如果你跟我一樣是 Sublime Text 愛好者，用 Sublime Text 打遍各種程式語言，那麼，讓 <a href="https://packagecontrol.io/packages/AutoFileName">AutoFileName</a> 來當你的好幫手吧！

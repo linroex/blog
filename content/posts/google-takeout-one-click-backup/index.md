@@ -3,8 +3,8 @@ title: "Google Takeout 一鍵快速備份你的Google Picasa、Contact、Google 
 date: 2012-01-23T18:07:31
 slug: "google-takeout-one-click-backup"
 aliases: ["/posts/google-takeout-%e4%b8%80%e9%8d%b5%e5%bf%ab%e9%80%9f%e5%82%99%e4%bb%bd%e4%bd%a0%e7%9a%84google-picasa%e3%80%81contact%e3%80%81google-plus%e7%ad%89%e8%b3%87%e6%96%99/"]
-tags: ["Google", "Backup", "Google Plus", "Picasa", "Takeout"]
-categories: ["Google"]
+tags: ["Google", "Backup"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-25_111705.jpg"><img class="alignnone size-large wp-image-5976" title="2012-01-25_111705" src="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-25_111705-520x343.jpg" alt="" width="520" height="343" /></a>

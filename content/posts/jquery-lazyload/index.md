@@ -3,8 +3,8 @@ title: "【jQuery】Lazyload - 延遲圖片載入"
 date: 2011-04-27T19:15:30
 slug: "jquery-lazyload"
 aliases: ["/posts/%e3%80%90jquery%e3%80%91lazyload-%e5%bb%b6%e9%81%b2%e5%9c%96%e7%89%87%e8%bc%89%e5%85%a5/"]
-tags: ["JavaScript", "jQuery", "Lazyload"]
-categories: ["jQuery"]
+tags: ["jQuery", "JavaScript"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-27_191427.jpg"><img class="size-large wp-image-429 aligncenter" title="2011-04-27_191427" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-27_191427-540x481.jpg" alt="" width="540" height="481" /></a>

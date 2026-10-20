@@ -3,8 +3,8 @@ title: "PollDaddy 支援中文的投票服務"
 date: 2009-07-09T11:11:06
 slug: "polldaddy-poll-service"
 aliases: ["/posts/polldaddy-%e6%94%af%e6%8f%b4%e4%b8%ad%e6%96%87%e7%9a%84%e6%8a%95%e7%a5%a8%e6%9c%8d%e5%8b%99/"]
-tags: ["線上投票"]
-categories: ["實用網站"]
+tags: ["Online Polls"]
+categories: ["Web Apps"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-09_094353.jpg"><img class="size-full wp-image-1569 aligncenter" title="2009-07-09_094353" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-09_094353.jpg" alt="2009-07-09_094353" width="308" height="88" /></a></p>

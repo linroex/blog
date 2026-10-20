@@ -2,8 +2,8 @@
 title: "GitHub API Note"
 date: 2017-02-23T23:59:42
 slug: "github-api-note"
-tags: ["API", "Github", "RESTFul API", "OAuth"]
-categories: []
+tags: ["GitHub", "API"]
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2017/02/github.png"]
 ---
 

@@ -3,8 +3,8 @@ title: "Subscribe To Comments - 自動告知留言者他的留言者被回覆了
 date: 2009-06-21T09:13:26
 slug: "wordpress-comment-reply-notification"
 aliases: ["/posts/wp%e5%a4%96%e6%8e%9b%e8%87%aa%e5%8b%95%e5%91%8a%e7%9f%a5%e7%95%99%e8%a8%80%e8%80%85%e4%bb%96%e7%9a%84%e7%95%99%e8%a8%80%e8%80%85%e8%a2%ab%e5%9b%9e%e8%a6%86%e4%ba%86/"]
-tags: ["WordPress"]
-categories: ["WordPress"]
+tags: ["WordPress", "WordPress Plugins"]
+categories: ["Blog"]
 ---
 
 今天要跟各位介紹的外掛程式是sSubscribe To Comments可以自動告訴留言者他的留言被回覆了,而不用留言者自己回來查看,Subscribe To Comments是香腸大哥他告訴我的,個人認為蠻好用的就分享大家

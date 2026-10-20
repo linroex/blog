@@ -4,7 +4,7 @@ date: 2009-07-07T13:54:44
 slug: "wordpress-more-tag-continue-reading"
 aliases: ["/posts/wordpress-%e5%9c%a8%e6%96%87%e7%ab%a0%e4%b8%ad%e6%8f%92%e5%85%a5%e7%b9%bc%e7%ba%8c%e9%96%b1%e8%ae%80%e6%a8%99%e7%b1%a4/"]
 tags: ["WordPress"]
-categories: ["WordPress"]
+categories: ["Blog"]
 ---
 
 今天要交大家一個實用的小秘技,就是more標籤,剛架設WordPress的人想必都會發現WordPress沒有內建所謂可以讓文章只顯示幾行的功能,所以每篇文章在首頁上都是全文顯示,這樣會讓首頁變的很醜,其實有一個方法可以插入繼續閱讀標籤,而且是WordPress內建的,話說我剛開始還把它當成&lt;hr&gt;標籤來用XD

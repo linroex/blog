@@ -3,8 +3,8 @@ title: "如何用 Python 印出進度條的效果"
 date: 2023-02-18T16:16:32
 slug: "python-print-progress-bar"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e7%94%a8-python-%e5%8d%b0%e5%87%ba%e9%80%b2%e5%ba%a6%e6%a2%9d%e7%9a%84%e6%95%88%e6%9e%9c/"]
-tags: []
-categories: ["Python"]
+tags: ["Python"]
+categories: ["Programming"]
 ---
 
 <figure class="wp-block-image size-full"><img src="{{< param imageBase >}}/wp-content/uploads/2023/02/CleanShot-2023-02-18-at-16.00.47.gif" alt="" class="wp-image-7786"/></figure>

@@ -4,7 +4,7 @@ date: 2017-01-09T23:36:47
 slug: "ngrok-local-webhook-development"
 aliases: ["/posts/ngrok-%e8%ae%93%e6%9c%ac%e6%a9%9f%e4%b9%9f%e5%8f%af%e4%bb%a5%e9%96%8b%e7%99%bc-webhook-%e5%85%8d%e9%83%a8%e7%bd%b2%e7%92%b0%e5%a2%83%e7%9a%84%e7%a5%9e%e5%99%a8/"]
 tags: ["Ngrok"]
-categories: []
+categories: ["Programming"]
 ---
 
 <a href="https://ngrok.com">Ngrok</a> 是後端開發者必備的神器，每次在本機 localhost 開發網站時，遇到 webhook、API Callback、OAuth 都會很頭痛，以之前開發 Mandrill Webhook 接收開信、發信事件為例，因為要設定網址在 Mandrill 後台才能測試，所以程式寫完後要上傳到伺服器才能知道結果，對於開發速度會造成蠻大的影響，而 <a href="https://ngrok.com">Ngrok</a> 就是為了解決這樣的問題而誕生！

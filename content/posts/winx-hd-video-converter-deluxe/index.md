@@ -3,8 +3,8 @@ title: "WinX HD Video Converter Deluxe 強大易用的影片轉檔軟體！"
 date: 2012-02-29T22:26:36
 slug: "winx-hd-video-converter-deluxe"
 aliases: ["/posts/winx-hd-video-converter-deluxe-%e5%bc%b7%e5%a4%a7%e6%98%93%e7%94%a8%e7%9a%84%e5%bd%b1%e7%89%87%e8%bd%89%e6%aa%94%e8%bb%9f%e9%ab%94%ef%bc%81/"]
-tags: ["轉檔", "WinX"]
-categories: ["音樂播放&amp;轉檔"]
+tags: ["Media Conversion"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2012/02/2012-02-29_212322.jpg"><img class="alignnone size-full wp-image-6069" title="2012-02-29_212322" src="{{< param imageBase >}}/wp-content/uploads/2012/02/2012-02-29_212322.jpg" alt="" width="400" height="220" /></a>

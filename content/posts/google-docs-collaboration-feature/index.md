@@ -3,8 +3,8 @@ title: "Google Docs 協作功能 - 站長個人覺得比Office 2010還好用"
 date: 2010-08-04T01:46:36
 slug: "google-docs-collaboration-feature"
 aliases: ["/posts/google-docs-%e5%8d%94%e4%bd%9c%e5%8a%9f%e8%83%bd-%e7%ab%99%e9%95%b7%e5%80%8b%e4%ba%ba%e8%a6%ba%e5%be%97%e6%af%94office-2010%e9%82%84%e5%a5%bd%e7%94%a8/"]
-tags: ["Google Docs", "Office 2010", "協作功能", "網頁設計比賽"]
-categories: ["文書處理", "Google"]
+tags: ["Google Docs", "Office"]
+categories: ["Web Apps"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/08/2010-08-04_010620.jpg"><img class="size-large wp-image-3625 aligncenter" title="2010-08-04_010620" src="{{< param imageBase >}}/wp-content/uploads/2010/08/2010-08-04_010620-550x334.jpg" alt="" width="550" height="334" /></a></p>

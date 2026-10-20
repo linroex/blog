@@ -3,8 +3,8 @@ title: "Google +1按鈕 - 會影響搜尋排名的Google版「讚」（附 +1的
 date: 2011-06-05T12:43:51
 slug: "google-plus-one-button-seo"
 aliases: ["/posts/google-1%e6%8c%89%e9%88%95-%e6%9c%83%e5%bd%b1%e9%9f%bf%e6%90%9c%e5%b0%8b%e6%8e%92%e5%90%8d%e7%9a%84google%e7%89%88%e3%80%8c%e8%ae%9a%e3%80%8d%ef%bc%88%e9%99%84google-1%e7%9a%84chrome%e5%a4%96/"]
-tags: ["Google", "SEO", "Facebook", "+1", "讚"]
-categories: ["Google"]
+tags: ["SEO", "Google Plus"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-05_123411.jpg"><img class="size-large wp-image-5204 aligncenter" title="2011-06-05_123411" src="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-05_123411-520x320.jpg" alt="" width="520" height="320" /></a>

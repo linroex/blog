@@ -2,8 +2,8 @@
 title: "How to Ignore Python Warning"
 date: 2023-03-12T13:25:45
 slug: "how-to-ignore-python-warning"
-tags: []
-categories: ["Python"]
+tags: ["Python"]
+categories: ["Programming"]
 ---
 
 <p>在寫 Python 時偶爾會遇到一些無法解決或意義不大的警告訊息（Warning），例如前陣子使用 OpenPyxl 時它常常會提醒我：<code> warn("Workbook contains no default style, apply openpyxl's default")</code> ，這個 Warning 是提醒 OpenPyxl 會自動套用預設樣式到我載入的檔案，至於要如何解決這個 Warning？ 你需要用 Office 打開這個 Excel 檔案，重新存檔。像這就是一個對當下場景的我來說意義不大的警告訊息，因為我的程式是拿 Excel 檔的內容來使用，樣式對我沒有影響。</p>

@@ -3,8 +3,8 @@ title: "Doomi  基於Adobe AIR的ToDoList程式，方便你規劃行程"
 date: 2011-08-07T17:25:38
 slug: "doomi-adobe-air-todolist"
 aliases: ["/posts/doomi-%e5%9f%ba%e6%96%bcadobe-air%e7%9a%84todolist%e7%a8%8b%e5%bc%8f%ef%bc%8c%e6%96%b9%e4%be%bf%e4%bd%a0%e8%a6%8f%e5%8a%83%e8%a1%8c%e7%a8%8b/"]
-tags: ["Adobe AIR", "ToDoList"]
-categories: ["軟體分享"]
+tags: ["Adobe AIR"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-07_165914.jpg"><img class="size-full wp-image-5593 aligncenter" title="2011-08-07_165914" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-07_165914.jpg" alt="" width="307" height="230" /></a><a href="http://doominow.com/" target="_blank">Doomi</a>是一套基於Adobe AIR技術的應用程式，它可以幫助你建立ToDoList，也就是備忘錄，類似Doomi的程式很多，像是Google Desktop就有這類功能的Widget，另外連iOS 5都打算內建Reminders這款ToDoList App。今天要介紹的Doomi它的最大特色就是介面直覺又好看，幾乎不需要做任何教學，你一看到他介面就知道要怎操作，另外使用Doomi之前要先安裝Adobe AIR才可以

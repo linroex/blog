@@ -3,8 +3,8 @@ title: "收到Google Wave的邀請函囉(邀請函2封,需要的留言)"
 date: 2009-11-14T18:52:02
 slug: "received-google-wave-invitation"
 aliases: ["/posts/%e6%94%b6%e5%88%b0google-wave%e7%9a%84%e9%82%80%e8%ab%8b%e5%87%bd%e5%9b%89/"]
-tags: ["Google", "Google Wave"]
-categories: ["生活札記", "Google"]
+tags: ["Google"]
+categories: ["Web Apps"]
 ---
 
 等了好久終於收到了最近很多人都聽過的Google Wave邀請函囉,我想大家對Google Wave都不陌生吧,Google Wave就是Google最近要推出的一個新服務,整合了郵件系統還有很多的google服務,有點像是MSN(因為它具有即時性),其實我也不太懂Google wave代表甚麼,以下就引用別人的文章好了,不過目前Google Wave還只是在測試期,必須要有邀請函才可以使用,我最近一直去一些論壇要邀請函總算是給我拿到一封了

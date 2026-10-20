@@ -2,8 +2,8 @@
 title: "Kibana Date Type Field Query"
 date: 2017-01-19T02:18:24
 slug: "kibana-date-type-field-query"
-tags: ["Kibana", "Elastic"]
-categories: []
+tags: ["Kibana", "Elasticsearch"]
+categories: ["SRE"]
 images: ["%%IMG%%/wp-content/uploads/2017/01/Kibana-6.png"]
 ---
 

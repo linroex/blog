@@ -3,8 +3,8 @@ title: "HxD - 一套優秀的16進位檢視器"
 date: 2009-06-28T09:00:10
 slug: "hxd-hex-viewer"
 aliases: ["/posts/hxd-%e4%b8%80%e5%a5%97%e5%84%aa%e7%a7%80%e7%9a%8416%e9%80%b2%e4%bd%8d%e6%aa%a2%e8%a6%96%e5%99%a8/"]
-tags: []
-categories: ["加/解密&amp;殼"]
+tags: ["Reverse Engineering"]
+categories: ["Security"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-27-20.jpg"><img class="alignnone size-full wp-image-1478" title="2009-06-27-20" src="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-27-20.jpg" alt="2009-06-27-20" width="613" height="361" /></a>

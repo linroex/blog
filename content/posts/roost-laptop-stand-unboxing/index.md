@@ -3,8 +3,8 @@ title: "Roost Laptop Stand 方便攜帶筆電架開箱文"
 date: 2016-12-20T00:59:13
 slug: "roost-laptop-stand-unboxing"
 aliases: ["/posts/roost-laptop-stand-%e6%96%b9%e4%be%bf%e6%94%9c%e5%b8%b6%e7%ad%86%e9%9b%bb%e6%9e%b6%e9%96%8b%e7%ae%b1%e6%96%87/"]
-tags: []
-categories: []
+tags: ["Laptops"]
+categories: ["Hardware"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/IMG_5307.jpg"]
 ---
 

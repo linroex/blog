@@ -3,8 +3,8 @@ title: "VMware Workstation 虛擬機界的權威,讓你的電腦可以同時開�
 date: 2010-07-11T00:07:29
 slug: "vmware-workstation-virtual-machine"
 aliases: ["/posts/vmware-workstation-%e8%99%9b%e6%93%ac%e6%a9%9f%e7%95%8c%e7%9a%84%e6%ac%8a%e5%a8%81%e8%ae%93%e4%bd%a0%e7%9a%84%e9%9b%bb%e8%85%a6%e5%8f%af%e4%bb%a5%e5%90%8c%e6%99%82%e9%96%8b%e5%95%9f%e5%85%a9%e5%a5%97/"]
-tags: ["VMware", "VMware下載", "虛擬機"]
-categories: ["虛擬機"]
+tags: ["VMware", "Virtual Machines"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/07/2010-07-10_211926.jpg"><img class="alignnone size-large wp-image-3434" title="2010-07-10_211926" src="{{< param imageBase >}}/wp-content/uploads/2010/07/2010-07-10_211926-550x192.jpg" alt="" width="550" height="192" /></a>

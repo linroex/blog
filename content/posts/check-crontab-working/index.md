@@ -4,7 +4,7 @@ date: 2017-01-20T18:16:15
 slug: "check-crontab-working"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e7%a2%ba%e8%aa%8d%e6%88%91%e7%9a%84-crontab-%e6%ad%a3%e5%b8%b8%e9%81%8b%e4%bd%9c%ef%bc%9f/"]
 tags: ["Linux", "crontab"]
-categories: []
+categories: ["SRE"]
 ---
 
 不知道大家是否都有同樣的煩惱？ 剛學會 crontab 時，始終不確定自己的設定是否正確，每次設定完都不確定是否有照預期的跑，在這我分享兩招可以讓大家確定自己的 crontab 是否正確設定！

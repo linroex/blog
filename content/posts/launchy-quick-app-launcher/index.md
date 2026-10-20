@@ -3,8 +3,8 @@ title: "Launchy - 快速開啟程式的好幫手"
 date: 2011-03-01T00:56:13
 slug: "launchy-quick-app-launcher"
 aliases: ["/posts/launchy-%e5%bf%ab%e9%80%9f%e9%96%8b%e5%95%9f%e7%a8%8b%e5%bc%8f%e7%9a%84%e5%a5%bd%e5%b9%ab%e6%89%8b/"]
-tags: ["Launchy", "快速開啟"]
-categories: ["軟體分享"]
+tags: ["Windows"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-01_005305.jpg"><img class="aligncenter" style="background-image: none; padding-left: 0px; padding-right: 0px; display: block; float: none; padding-top: 0px; border: 0px;" title="2011-03-01_005305" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-01_005305_thumb.jpg" border="0" alt="2011-03-01_005305" width="465" height="145" /></a>

@@ -3,8 +3,8 @@ title: "【CMS】使用外掛為何會讓瀏覽速度變慢、伺服器效能變
 date: 2011-04-17T09:00:37
 slug: "cms-plugin-speed-issues"
 aliases: ["/posts/%e3%80%90cms%e3%80%91%e4%bd%bf%e7%94%a8%e5%a4%96%e6%8e%9b%e7%82%ba%e4%bd%95%e6%9c%83%e8%ae%93%e7%80%8f%e8%a6%bd%e9%80%9f%e5%ba%a6%e8%ae%8a%e6%85%a2%e3%80%81%e4%bc%ba%e6%9c%8d%e5%99%a8%e6%95%88/"]
-tags: ["WordPress", "外掛", "Hook API", "插件"]
-categories: ["WordPress"]
+tags: ["WordPress", "WordPress Plugins"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-16_183400.jpg"><img class="size-full wp-image-5031 aligncenter" title="2011-04-16_183400" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-16_183400.jpg" alt="" width="300" height="300" /></a>

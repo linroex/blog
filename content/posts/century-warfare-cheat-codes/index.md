@@ -3,8 +3,8 @@ title: "世紀爭霸密技"
 date: 2009-05-10T21:45:31
 slug: "century-warfare-cheat-codes"
 aliases: ["/posts/%e4%b8%96%e7%b4%80%e7%88%ad%e9%9c%b8%e5%af%86%e6%8a%80/"]
-tags: ["世紀爭霸"]
-categories: ["單機遊戲"]
+tags: ["Century Warfare"]
+categories: ["Games"]
 ---
 
 今天在玩世紀爭霸

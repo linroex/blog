@@ -3,8 +3,8 @@ title: "RockMelt- 採用Chromium核心的社群瀏覽器(Facebook)"
 date: 2010-11-13T10:47:34
 slug: "rockmelt-social-browser"
 aliases: ["/posts/rockmelt-%e6%8e%a1%e7%94%a8chromium%e6%a0%b8%e5%bf%83%e7%9a%84%e7%a4%be%e7%be%a4%e7%80%8f%e8%a6%bd%e5%99%a8facebook/"]
-tags: ["Chrome", "Facebook", "RockMelt", "Twitter"]
-categories: ["瀏覽器"]
+tags: ["Chrome", "Facebook"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-13_102345.jpg"><img class="size-full wp-image-3998 aligncenter" title="2010-11-13_102345" src="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-13_102345.jpg" alt="" width="281" height="99" /></a></p>

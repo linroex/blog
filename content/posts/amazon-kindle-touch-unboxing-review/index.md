@@ -3,8 +3,8 @@ title: "Amazon Kindle Touch 開箱文 ＆ 誰適合Kindle？"
 date: 2012-02-02T23:55:58
 slug: "amazon-kindle-touch-unboxing-review"
 aliases: ["/posts/amazon-kindle-touch-%e9%96%8b%e7%ae%b1%e6%96%87-%ef%bc%86-%e8%aa%b0%e9%81%a9%e5%90%88kindle%ef%bc%9f/"]
-tags: ["Amazon", "Kindle", "電子書", "Kindle Touch"]
-categories: ["Kindle"]
+tags: ["Kindle", "E-books"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2012/02/CIMG0050.jpg"><img title="CIMG0050" src="{{< param imageBase >}}/wp-content/uploads/2012/02/CIMG0050-520x390.jpg" alt="" width="520" height="390" /></a>

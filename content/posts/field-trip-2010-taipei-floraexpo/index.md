@@ -3,8 +3,8 @@ title: "校外教學-2010花博遊記(好累...)"
 date: 2010-12-25T00:18:40
 slug: "field-trip-2010-taipei-floraexpo"
 aliases: ["/posts/%e6%a0%a1%e5%a4%96%e6%95%99%e5%ad%b8-2010%e8%8a%b1%e5%8d%9a%e9%81%8a%e8%a8%98%e5%a5%bd%e7%b4%af/"]
-tags: ["遊記", "松山家商", "校外教學", "花博"]
-categories: ["生活札記"]
+tags: ["Songshan Vocational School"]
+categories: ["Life"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/12/DSCN0284.jpg"><img title="DSCN0284" src="{{< param imageBase >}}/wp-content/uploads/2010/12/DSCN0284-520x390.jpg" alt="" width="520" height="390" /></a>

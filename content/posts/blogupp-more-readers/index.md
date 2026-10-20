@@ -3,8 +3,8 @@ title: "blogupp - 讓您的文章被更多人看到"
 date: 2009-10-10T21:35:50
 slug: "blogupp-more-readers"
 aliases: ["/posts/blogupp-%e8%ae%93%e6%82%a8%e7%9a%84%e6%96%87%e7%ab%a0%e8%a2%ab%e6%9b%b4%e5%a4%9a%e4%ba%ba%e7%9c%8b%e5%88%b0/"]
-tags: ["WordPress"]
-categories: ["部落格"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-27-1-01.jpg"><img class="size-full wp-image-1469 aligncenter" title="2009-06-27-1-01" src="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-27-1-01.jpg" alt="2009-06-27-1-01" width="152" height="53" /></a></p>

@@ -3,7 +3,7 @@ title: "Python Convert String to Boolean"
 date: 2016-12-08T00:18:21
 slug: "python-convert-string-to-boolean"
 tags: ["Python"]
-categories: []
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/Artboard-3.png"]
 ---
 

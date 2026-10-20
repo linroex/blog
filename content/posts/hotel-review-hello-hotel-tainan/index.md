@@ -3,8 +3,8 @@ title: "承億輕旅台南館住宿心得 - 台南平價背包客棧"
 date: 2016-12-22T02:04:23
 slug: "hotel-review-hello-hotel-tainan"
 aliases: ["/posts/%e6%89%bf%e5%84%84%e8%bc%95%e6%97%85%e5%8f%b0%e5%8d%97%e9%a4%a8%e4%bd%8f%e5%ae%bf%e5%bf%83%e5%be%97-%e5%8f%b0%e5%8d%97%e5%b9%b3%e5%83%b9%e8%83%8c%e5%8c%85%e5%ae%a2%e6%a3%a7/"]
-tags: ["背包客棧", "青年旅館", "台南", "海安路", "住宿", "台南住宿"]
-categories: []
+tags: ["Tainan", "Hostels"]
+categories: ["Travel"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/IMG_5098.jpg"]
 ---
 

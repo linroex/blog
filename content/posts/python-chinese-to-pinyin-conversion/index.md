@@ -4,7 +4,7 @@ date: 2016-12-09T00:05:43
 slug: "python-chinese-to-pinyin-conversion"
 aliases: ["/posts/python-%e6%bc%a2%e8%aa%9e%e6%8b%bc%e9%9f%b3%e8%99%95%e7%90%86%ef%bc%88%e5%a7%93%e5%90%8d%e4%b8%ad%e7%bf%bb%e8%8b%b1%e3%80%81%e5%9c%b0%e5%9d%80%e4%b8%ad%e7%bf%bb%e8%8b%b1%ef%bc%89/"]
 tags: ["Python"]
-categories: []
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/Artboard-3.png"]
 ---
 

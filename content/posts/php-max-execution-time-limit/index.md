@@ -4,7 +4,7 @@ date: 2011-08-09T15:04:03
 slug: "php-max-execution-time-limit"
 aliases: ["/posts/%e4%bf%ae%e6%94%b9php%e7%9a%84%e5%9f%b7%e8%a1%8c%e6%99%82%e9%96%93%e4%b8%8a%e9%99%90%ef%bc%8c%e9%81%bf%e5%85%8d%e7%a8%8b%e5%bc%8f%e5%9f%b7%e8%a1%8c%e9%81%8e%e4%b9%85%e8%a2%ab%e7%b5%82%e6%ad%a2/"]
 tags: ["PHP"]
-categories: ["PHP"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-09_150333.jpg"><img class="alignnone size-large wp-image-678" title="2011-08-09_150333" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-09_150333-540x423.jpg" alt="" width="540" height="423" /></a>

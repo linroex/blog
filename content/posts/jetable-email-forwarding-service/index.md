@@ -3,8 +3,8 @@ title: "jetable.org  信箱轉寄服務,讓您的真實信箱不外洩"
 date: 2009-06-09T20:50:10
 slug: "jetable-email-forwarding-service"
 aliases: ["/posts/jetableorg-%e4%bf%a1%e7%ae%b1%e8%bd%89%e5%af%84%e6%9c%8d%e5%8b%99%e8%ae%93%e6%82%a8%e7%9a%84%e7%9c%9f%e5%af%a6%e4%bf%a1%e7%ae%b1%e4%b8%8d%e5%a4%96%e6%b4%a9/"]
-tags: ["網際網路"]
-categories: ["實用網站"]
+tags: ["Email"]
+categories: ["Web Apps"]
 summary: "jetable.org是一個幫助你轉寄信件的網站,當你在他們網站上註冊時他會給你一個亂碼組成的信箱,你可以利用這組信箱請帳號或其他的,而且會寄到他們的伺服器以後再轉寄給你,這樣一來妳的信箱地址就不會被洩漏了"
 ---
 

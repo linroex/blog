@@ -3,8 +3,8 @@ title: "利用酒精(Alcohol120)輕鬆破解光碟防拷,讓你不用擔心光�
 date: 2009-07-03T10:46:03
 slug: "game-disc-copy-protection-arayscanner"
 aliases: ["/posts/%e9%81%8a%e6%88%b2%e5%85%89%e7%a2%9f%e9%98%b2%e6%8b%b7%e7%a0%b4%e8%a7%a31-arayscanner%e4%bd%bf%e7%94%a8%e6%95%99%e5%ad%b8/"]
-tags: ["遊戲"]
-categories: ["燒錄程式"]
+tags: ["Disc Burning", "Cracking"]
+categories: ["Software"]
 ---
 
 我想很多人都有玩過遊戲吧,也知道很多單機遊戲啟動時往往需要安碟片才能,如果光碟損毀就不能玩遊戲,這時候大家應該都會想要備份一片吧!但是遊戲公司因為自身利益著想都會加上防拷措施,用普通方法是不能燒錄的,那............ 要怎麼辦? 今天這篇文章聽。風會交各位讀者如何利用酒精120來破解防拷設計

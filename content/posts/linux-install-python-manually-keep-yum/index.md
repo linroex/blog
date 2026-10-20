@@ -3,8 +3,8 @@ title: "如何在Linux裡面手動安裝Python並且避免yum不能運作的問�
 date: 2011-08-19T08:00:45
 slug: "linux-install-python-manually-keep-yum"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%9c%a8linux%e8%a3%a1%e9%9d%a2%e6%89%8b%e5%8b%95%e5%ae%89%e8%a3%9dpython%e4%b8%a6%e4%b8%94%e9%81%bf%e5%85%8dyum%e4%b8%8d%e8%83%bd%e9%81%8b%e4%bd%9c%e7%9a%84%e5%95%8f%e9%a1%8c/"]
-tags: ["Python", "Linux", "yum"]
-categories: ["Python", "Linux"]
+tags: ["Linux", "Python"]
+categories: ["SRE"]
 ---
 
 之前曾經寫過一個程式可以自動備份Linux裡的重要資料並且上傳到Google Storage，當時用的語言是Python 2.7，但是Linux裡面內建的Python是2.4，而且就算你用yum去進行升級，最高也只會到2.4，這時候你如果想要安裝更新版的Python就只能自行編譯了，下面將用Python 3.2進行教學

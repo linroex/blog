@@ -3,8 +3,8 @@ title: "2010台北101跨年實錄"
 date: 2010-01-01T20:32:17
 slug: "2010-taipei-101-new-year-live"
 aliases: ["/posts/2010%e5%8f%b0%e5%8c%97101%e8%b7%a8%e5%b9%b4%e5%af%a6%e9%8c%84/"]
-tags: ["跨年"]
-categories: ["生活札記"]
+tags: ["Taipei", "New Year"]
+categories: ["Life"]
 ---
 
 <a href="http://lh6.ggpht.com/_Oa6EYoORRA4/Sz3VOQH7u8I/AAAAAAAAAaA/pbaLapdobCU/s640/DSCN9889.JPG"><img class="alignnone" title="2010-1" src="http://lh6.ggpht.com/_Oa6EYoORRA4/Sz3VOQH7u8I/AAAAAAAAAaA/pbaLapdobCU/s640/DSCN9889.JPG" alt="" width="384" height="288" /></a>

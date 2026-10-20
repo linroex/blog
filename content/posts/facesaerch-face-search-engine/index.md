@@ -3,8 +3,8 @@ title: "Facesaerch  人臉搜尋引擎"
 date: 2009-05-31T10:22:38
 slug: "facesaerch-face-search-engine"
 aliases: ["/posts/facesaerch-%e4%ba%ba%e8%87%89%e6%90%9c%e5%b0%8b%e5%bc%95%e6%93%8e/"]
-tags: []
-categories: ["實用網站"]
+tags: ["Search Engines"]
+categories: ["Web Apps"]
 ---
 
 facesaerch是一個可以讓你輸入關鍵字就找出圖片的搜尋引擎,是使用Google提供的API來找圖的,個人認為蠻神奇的,不過她好像不支援中文搜尋,我輸入中文時很難找到資料,另外它的準確度也不高= =(越有名的人越ˇ容易找到),不過我剛有試了一下,輸入我的暱稱linroex竟然會有我的照片ㄟ:)

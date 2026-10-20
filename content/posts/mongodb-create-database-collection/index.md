@@ -3,8 +3,8 @@ title: "如何在Mongodb裡面建立資料庫、資料表？"
 date: 2012-01-23T18:38:22
 slug: "mongodb-create-database-collection"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%9c%a8mongodb%e8%a3%a1%e9%9d%a2%e5%bb%ba%e7%ab%8b%e8%b3%87%e6%96%99%e5%ba%ab%e3%80%81%e8%b3%87%e6%96%99%e8%a1%a8%ef%bc%9f/"]
-tags: ["Mongodb", "NoSQL"]
-categories: ["Mongodb"]
+tags: ["MongoDB"]
+categories: ["Programming"]
 ---
 
 之前在玩Mongodb時，在他官方的文件裡面找了很久都找不到關於如何建立資料庫、資料表的語法。一般來講在SQL裡面，都是要預先建立好資料表的，也會有相關的指令，例如Create Table、Create Database，然而我在Mongodb裡面完全找不到相關指令，後來上網找了一下資料才知道原來這就是他的特色之一：Schema Free

@@ -3,8 +3,8 @@ title: "如何直接在PHP字串（SQL Query）中夾帶陣列、$_POST、$_GET"
 date: 2011-08-01T14:23:03
 slug: "php-embed-array-post-get-in-sql-string"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e7%9b%b4%e6%8e%a5%e5%9c%a8php%e5%ad%97%e4%b8%b2%ef%bc%88sql-query%ef%bc%89%e4%b8%ad%e5%a4%be%e5%b8%b6%e9%99%a3%e5%88%97%e3%80%81_post%e3%80%81_get/"]
-tags: ["PHP", "SQL", "String"]
-categories: ["PHP"]
+tags: ["PHP", "SQL"]
+categories: ["Programming"]
 ---
 
 最近幾天在寫一個小程式的時候遇到一個問題，就是我想要直接在我的SQL查詢語句裡面夾帶$_POST變數，不想要用串接運算子來做串接，可是因為引號的問題所以讓我搞了很久才會用，這裡簡單的介紹一下，並且我要感謝Bu跟蒼時弦教會我這個方法！如果不是他們我可能還不知道這個方式，另外這個方式不只可以用在$_POST，也可以用在其他陣列

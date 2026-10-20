@@ -3,8 +3,8 @@ title: "唸大學，可以是選擇，而非必經之路"
 date: 2016-06-22T16:43:45
 slug: "university-a-choice-not-necessity"
 aliases: ["/posts/%e5%94%b8%e5%a4%a7%e5%ad%b8%ef%bc%8c%e5%8f%af%e4%bb%a5%e6%98%af%e9%81%b8%e6%93%87%ef%bc%8c%e8%80%8c%e9%9d%9e%e5%bf%85%e7%b6%93%e4%b9%8b%e8%b7%af/"]
-tags: []
-categories: ["生活札記"]
+tags: ["University"]
+categories: ["Life"]
 images: ["%%IMG%%/wp-content/uploads/2016/06/IMG_2822.jpg"]
 ---
 

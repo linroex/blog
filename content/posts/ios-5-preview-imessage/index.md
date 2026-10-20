@@ -3,8 +3,8 @@ title: "iOS 5 搶先報導 - iMessage、新版通知介面、Free PC以及多達
 date: 2011-06-12T01:52:28
 slug: "ios-5-preview-imessage"
 aliases: ["/posts/ios-5-%e6%90%b6%e5%85%88%e5%a0%b1%e5%b0%8e-imessage%e3%80%81%e6%96%b0%e7%89%88%e9%80%9a%e7%9f%a5%e4%bb%8b%e9%9d%a2%e3%80%81free-pc%e4%bb%a5%e5%8f%8a%e5%a4%9a%e9%81%94%e7%99%be%e9%a0%85%e6%94%b9/"]
-tags: []
-categories: ["Apple", "iOS"]
+tags: ["iOS", "Apple"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/06/IMG_0001.jpg"><img class="size-large wp-image-5227 aligncenter" title="IMG_0001" src="{{< param imageBase >}}/wp-content/uploads/2011/06/IMG_0001-375x500.jpg" alt="" width="375" height="500" /></a>

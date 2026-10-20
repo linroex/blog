@@ -3,8 +3,8 @@ title: "FastestTube 支援Chrome、Firefox、IE的Youtube影片下載器，內�
 date: 2012-01-27T09:00:24
 slug: "fastesttube-video-downloader"
 aliases: ["/posts/fastesttube-%e6%94%af%e6%8f%b4chrome%e3%80%81firefox%e3%80%81ie%e7%9a%84youtube%e5%bd%b1%e7%89%87%e4%b8%8b%e8%bc%89%e5%99%a8%ef%bc%8c%e5%85%a7%e5%bb%ba%e8%bd%89%e6%aa%94%e5%8a%9f%e8%83%bd/"]
-tags: ["Chrome", "Youtube", "Chrome Plugin", "Download", "FastestTube"]
-categories: ["Chrome", "Firefox"]
+tags: ["YouTube", "Chrome Extensions"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-26_144935.jpg"><img class="size-full wp-image-6012 aligncenter" title="2012-01-26_144935" src="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-26_144935.jpg" alt="" width="460" height="136" /></a>

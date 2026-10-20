@@ -3,8 +3,8 @@ title: "IDEOS 小精靈手機 Android2.2 開箱文"
 date: 2010-11-25T20:10:02
 slug: "hhtc-ideos-android-unboxing"
 aliases: ["/posts/ideos-%e5%b0%8f%e7%b2%be%e9%9d%88%e6%89%8b%e6%a9%9f-android2-2-%e9%96%8b%e7%ae%b1%e6%96%87/"]
-tags: ["開箱文", "Android", "Android2.2", "IDEOS", "小精靈"]
-categories: ["Android", "開箱文"]
+tags: ["Android"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/11/DSCN0229.jpg"><img class="aligncenter size-large wp-image-4058" title="DSCN0229" src="{{< param imageBase >}}/wp-content/uploads/2010/11/DSCN0229-520x390.jpg" alt="" width="520" height="390" /></a>

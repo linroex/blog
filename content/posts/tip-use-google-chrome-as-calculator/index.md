@@ -3,8 +3,8 @@ title: "【密技】把Google Chrome當計算機用"
 date: 2010-02-12T13:25:55
 slug: "tip-use-google-chrome-as-calculator"
 aliases: ["/posts/%e3%80%90%e5%af%86%e6%8a%80%e3%80%91%e6%8a%8agoogle-chrome%e7%95%b6%e8%a8%88%e7%ae%97%e6%a9%9f%e7%94%a8/"]
-tags: ["Google", "Google Chrome"]
-categories: ["瀏覽器", "Google"]
+tags: ["Chrome"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/02/2010-02-12_125922.png"><img class="size-medium wp-image-2674 aligncenter" title="2010-02-12_125922" src="{{< param imageBase >}}/wp-content/uploads/2010/02/2010-02-12_125922-300x216.png" alt="" width="300" height="216" /></a></p>

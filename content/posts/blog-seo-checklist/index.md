@@ -3,8 +3,8 @@ title: "部落格SEO要點 - 讓部落格排名UP！UP！UP！必做的幾件事
 date: 2010-01-03T12:30:20
 slug: "blog-seo-checklist"
 aliases: ["/posts/%e9%83%a8%e8%90%bd%e6%a0%bcseo%e8%a6%81%e9%bb%9e-%e8%ae%93%e9%83%a8%e8%90%bd%e6%a0%bc%e6%8e%92%e5%90%8dup%ef%bc%81up%ef%bc%81up%ef%bc%81%e5%bf%85%e5%81%9a%e7%9a%84%e5%b9%be%e4%bb%b6%e4%ba%8b/"]
-tags: ["SEO", "Blog"]
-categories: ["網際網路"]
+tags: ["SEO", "Blogging"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/01/2010-01-03_113756.png"><img class="size-medium wp-image-2433 alignleft" title="2010-01-03_113756" src="{{< param imageBase >}}/wp-content/uploads/2010/01/2010-01-03_113756-300x216.png" alt="" width="300" height="216" /></a>

@@ -3,8 +3,8 @@ title: "小心!Gmail信箱收到署名是\"我\"的信件?"
 date: 2009-06-20T12:17:23
 slug: "gmail-spoofed-email-signed-by-me"
 aliases: ["/posts/%e5%b0%8f%e5%bf%83gmail%e4%bf%a1%e7%ae%b1%e6%94%b6%e5%88%b0%e7%bd%b2%e5%90%8d%e6%98%af%e6%88%91%e7%9a%84%e4%bf%a1%e4%bb%b6/"]
-tags: []
-categories: ["Google"]
+tags: ["Gmail", "Email"]
+categories: ["Security"]
 ---
 
 話說使用Gmail的用戶最近應該都常收到署名是"我"的文章吧!

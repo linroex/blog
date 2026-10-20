@@ -3,8 +3,8 @@ title: "設定帳號保安，讓你的Facebook帳號更安全"
 date: 2011-12-03T17:01:56
 slug: "facebook-account-security-settings"
 aliases: ["/posts/%e8%a8%ad%e5%ae%9a%e5%b8%b3%e8%99%9f%e4%bf%9d%e5%ae%89%ef%bc%8c%e8%ae%93%e4%bd%a0%e7%9a%84facebook%e5%b8%b3%e8%99%9f%e6%9b%b4%e5%ae%89%e5%85%a8/"]
-tags: ["Facebook", "帳號保安", "木馬", "駭客"]
-categories: ["Facebook"]
+tags: ["Facebook", "Account Security"]
+categories: ["Security"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/12/2011-12-03_170812.jpg"><img class="size-full wp-image-5871 aligncenter" title="2011-12-03_170812" src="{{< param imageBase >}}/wp-content/uploads/2011/12/2011-12-03_170812.jpg" alt="" width="191" height="55" /></a>

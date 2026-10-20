@@ -3,8 +3,8 @@ title: "讓你的隨身碟用的長長久久 - 安全移除隨身碟"
 date: 2009-07-04T09:10:46
 slug: "safely-remove-usb-drive"
 aliases: ["/posts/%e5%ae%89%e5%85%a8%e7%a7%bb%e9%99%a4%e9%9a%a8%e8%ba%ab%e7%a2%9f/"]
-tags: ["USB"]
-categories: ["Windows系列"]
+tags: ["Windows", "USB"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-04_090237.jpg"><img class="alignnone size-full wp-image-1514" title="2009-07-04_090237" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-04_090237.jpg" alt="2009-07-04_090237" width="500" height="322" /></a>

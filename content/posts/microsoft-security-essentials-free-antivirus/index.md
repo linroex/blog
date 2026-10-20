@@ -3,8 +3,8 @@ title: "Microsoft Security Essentials - 微軟出的「免費」防毒軟體！"
 date: 2011-04-30T19:29:33
 slug: "microsoft-security-essentials-free-antivirus"
 aliases: ["/posts/microsoft-security-essentials-%e5%be%ae%e8%bb%9f%e5%87%ba%e7%9a%84%e3%80%8c%e5%85%8d%e8%b2%bb%e3%80%8d%e9%98%b2%e6%af%92%e8%bb%9f%e9%ab%94%ef%bc%81/"]
-tags: ["微軟", "Microsoft Security Essentials", "免費", "防毒軟體"]
-categories: ["防毒軟體"]
+tags: ["Antivirus", "Microsoft"]
+categories: ["Security"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-30_191336.jpg"><img class="size-large wp-image-5073 aligncenter" title="2011-04-30_191336" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-30_191336-520x364.jpg" alt="" width="520" height="364" /></a>

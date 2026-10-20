@@ -3,8 +3,8 @@ title: "貼心為背包客想的高雄青年旅館 - 旅悅 Dwell Hostel"
 date: 2017-04-03T11:27:11
 slug: "dwell-hostel-kaohsiung-for-backpackers"
 aliases: ["/posts/%e8%b2%bc%e5%bf%83%e7%82%ba%e8%83%8c%e5%8c%85%e5%ae%a2%e6%83%b3%e7%9a%84%e9%ab%98%e9%9b%84%e9%9d%92%e5%b9%b4%e6%97%85%e9%a4%a8-%e6%97%85%e6%82%85-dwell-hostel/"]
-tags: ["高雄", "背包客棧", "青年旅館", "住宿", "高雄住宿"]
-categories: []
+tags: ["Kaohsiung", "Hostels"]
+categories: ["Travel"]
 images: ["%%IMG%%/wp-content/uploads/2017/04/IMG_7880.jpg"]
 ---
 

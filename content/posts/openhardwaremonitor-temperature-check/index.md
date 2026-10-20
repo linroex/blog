@@ -3,8 +3,8 @@ title: "OpenHardwareMonitor - 檢查電腦硬碟、顯示卡、CPU的溫度"
 date: 2011-02-11T08:30:51
 slug: "openhardwaremonitor-temperature-check"
 aliases: ["/posts/openhardwaremonitor-%e6%aa%a2%e6%9f%a5%e9%9b%bb%e8%85%a6%e7%a1%ac%e7%a2%9f%e3%80%81%e9%a1%af%e7%a4%ba%e5%8d%a1%e3%80%81cpu%e7%9a%84%e6%ba%ab%e5%ba%a6/"]
-tags: ["顯示卡", "CPU", "OpenHardwareMonitor", "溫度", "硬碟"]
-categories: ["軟體分享", "Windows系列"]
+tags: ["PC Hardware", "Temperature"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-08_203335.jpg"><img class="size-large wp-image-4690 aligncenter" title="2011-02-08_203335" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-08_203335-455x500.jpg" alt="" width="455" height="500" /></a></p>

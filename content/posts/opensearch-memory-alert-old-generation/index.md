@@ -3,7 +3,7 @@ title: "OpenSearch Memory Alert 響了又恢復，是記憶體不夠嗎？"
 date: 2026-10-19T22:19:33+08:00
 slug: "opensearch-memory-alert-old-generation"
 tags: ["OpenSearch", "JVM", "Prometheus"]
-categories: []
+categories: ["SRE"]
 summary: ""
 draft: false
 ---

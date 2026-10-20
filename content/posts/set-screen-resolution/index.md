@@ -4,7 +4,7 @@ date: 2009-05-08T11:01:00
 slug: "set-screen-resolution"
 aliases: ["/posts/%e8%a8%ad%e5%ae%9a%e8%9e%a2%e5%b9%95%e8%a7%a3%e6%9e%90%e5%ba%a6/"]
 tags: ["Windows"]
-categories: ["Windows系列"]
+categories: ["Hardware"]
 ---
 
 今天要敎各位的是修改螢幕的解析度

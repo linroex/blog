@@ -3,8 +3,8 @@ title: "110 陽明交大資工所丁組（實務）推甄心得"
 date: 2021-09-24T23:06:01
 slug: "nycu-cs-master-recommendation-interview"
 aliases: ["/posts/110-%e9%99%bd%e6%98%8e%e4%ba%a4%e5%a4%a7%e8%b3%87%e5%b7%a5%e6%89%80%e4%b8%81%e7%b5%84%ef%bc%88%e5%af%a6%e5%8b%99%ef%bc%89%e6%8e%a8%e7%94%84%e5%bf%83%e5%be%97/"]
-tags: []
-categories: []
+tags: ["Graduate School", "University"]
+categories: ["Life"]
 ---
 
 <p>小弟是今年七月剛進陽明交大資工所丁組的同學，目前待了三個月覺得真的不錯，所以來推薦給大家，但想說心得文有點不會寫，所以我想用 Q&amp;A 的方式來寫這篇文章，如果大家有什麼問題也可以在底下留言，我回覆後也會更新上來。</p>

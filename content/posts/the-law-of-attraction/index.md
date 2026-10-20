@@ -4,7 +4,7 @@ date: 2012-09-09T01:12:53
 slug: "the-law-of-attraction"
 aliases: ["/posts/%e6%89%80%e8%ac%82%e3%80%8c%e5%90%b8%e5%bc%95%e5%8a%9b%e6%b3%95%e5%89%87%e3%80%8d/"]
 tags: []
-categories: ["生活札記"]
+categories: ["Life"]
 ---
 
 今天在誠品閱讀《秘密》一書，之前一直以為這本書是小說，直到今天才知道，原來他是歸類在心理區。 讀了秘密這本書，我有蠻多感想的！

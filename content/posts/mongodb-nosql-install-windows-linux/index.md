@@ -3,8 +3,8 @@ title: "Mongodb 文件式的NoSQL系統 ＆ Windows、Linux安裝教學"
 date: 2012-01-24T14:26:45
 slug: "mongodb-nosql-install-windows-linux"
 aliases: ["/posts/mongodb-%e6%96%87%e4%bb%b6%e5%bc%8f%e7%9a%84nosql%e7%b3%bb%e7%b5%b1-%ef%bc%86-windows%e3%80%81linux%e5%ae%89%e8%a3%9d%e6%95%99%e5%ad%b8/"]
-tags: ["Windows", "Linux", "Mongodb", "NoSQL"]
-categories: ["Mongodb"]
+tags: ["MongoDB"]
+categories: ["Programming"]
 ---
 
 前一陣子因為Ben大的指導，所以踏進了我一直很有興趣可是都沒有實際常試過的NoSQL世界，而我接觸到的第一個NoSQL System（也是目前唯一會的）就是Mongodb，原本看了很多介紹NoSQL的文章，我還以為NoSQL跟一般的SQL差很多，實際接觸Mongodb之後才發現其實兩者很像，只是在原理上有點不同，還有效能更好，不過鄉對應的，有些SQL可以做到的事情，NoSQL就不能達到，這部份就要看大家的取捨、需求，NoSQL的部份不是這篇文章要講的，這篇文章要講的是介紹Mongodb還有教大家怎麼安裝在Windows上面

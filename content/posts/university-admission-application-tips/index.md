@@ -3,8 +3,8 @@ title: "關於大學備審製作的兩三事"
 date: 2013-03-23T15:46:36
 slug: "university-admission-application-tips"
 aliases: ["/posts/%e9%97%9c%e6%96%bc%e5%a4%a7%e5%ad%b8%e5%82%99%e5%af%a9%e8%a3%bd%e4%bd%9c%e7%9a%84%e5%85%a9%e4%b8%89%e4%ba%8b/"]
-tags: []
-categories: ["軟體分享"]
+tags: ["University"]
+categories: ["Life"]
 ---
 
 本來是想要寫一系列完整的文章來介紹大學備審，但因為小弟還要準備統測，實在沒時間寫文章，所以這裡就把一些常見的問題還有要注意的事情整理起來給大家參考，例如把Word檔案轉成PDF、檔案太大等問題

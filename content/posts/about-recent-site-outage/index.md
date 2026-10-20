@@ -3,8 +3,8 @@ title: "關於前幾天網站無法連線的說明"
 date: 2011-08-05T23:15:59
 slug: "about-recent-site-outage"
 aliases: ["/posts/%e9%97%9c%e6%96%bc%e5%89%8d%e5%b9%be%e5%a4%a9%e7%b6%b2%e7%ab%99%e7%84%a1%e6%b3%95%e9%80%a3%e7%b7%9a%e7%9a%84%e8%aa%aa%e6%98%8e/"]
-tags: ["公告"]
-categories: ["本站公告"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 我想很多人都有注意到，昨天一整天我的網站都無法連線，這裡要說明一下發生了什麼事情，絕對不是站長想放棄經營了XD

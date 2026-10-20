@@ -3,8 +3,8 @@ title: "ASUS RT-N13U 無線網路分享器開箱文～ 除了無線網路以外�
 date: 2011-05-17T22:57:51
 slug: "asus-rt-n13u-router-unboxing"
 aliases: ["/posts/asus-rt-n13u-%e7%84%a1%e7%b7%9a%e7%b6%b2%e8%b7%af%e5%88%86%e4%ba%ab%e5%99%a8%e9%96%8b%e7%ae%b1%e6%96%87%ef%bd%9e-%e9%99%a4%e4%ba%86%e7%84%a1%e7%b7%9a%e7%b6%b2%e8%b7%af%e4%bb%a5%e5%a4%96%ef%bc%8c/"]
-tags: ["開箱文", "無線網路", "FTP", "ASUS"]
-categories: ["開箱文", "3C產品"]
+tags: ["Wi-Fi", "ASUS"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/CIMG0032.jpg"><img class="size-large wp-image-5090 aligncenter" title="CIMG0032" src="{{< param imageBase >}}/wp-content/uploads/2011/05/CIMG0032-520x390.jpg" alt="" width="520" height="390" /></a>

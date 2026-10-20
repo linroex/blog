@@ -4,7 +4,7 @@ date: 2010-01-29T00:01:56
 slug: "do-you-want-to-buy-apple-ipad"
 aliases: ["/posts/%e5%a4%a7%e5%ae%b6%e6%9c%83%e6%83%b3%e8%b2%b7apple-ipad%e5%97%8e/"]
 tags: ["Apple", "iPad"]
-categories: ["生活札記"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="http://l.yimg.com/o/xp/afp/20100128/11/3016990467.jpg"><img class="aligncenter" title="iPad" src="http://l.yimg.com/o/xp/afp/20100128/11/3016990467.jpg" alt="" width="319" height="211" /></a></p>

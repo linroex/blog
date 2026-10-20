@@ -3,8 +3,8 @@ title: "Special Offer Kindle 免破解關閉廣告教學"
 date: 2019-05-17T23:34:20
 slug: "kindle-special-offer-disable-ads"
 aliases: ["/posts/special-offer-kindle-%e5%85%8d%e7%a0%b4%e8%a7%a3%e9%97%9c%e9%96%89%e5%bb%a3%e5%91%8a%e6%95%99%e5%ad%b8/"]
-tags: ["Amazon", "Kindle", "電子書", "Ebook"]
-categories: ["Kindle"]
+tags: ["Kindle", "E-books"]
+categories: ["Hardware"]
 images: ["%%IMG%%/wp-content/uploads/2019/05/pinho-1396925-unsplash-1.jpg"]
 ---
 

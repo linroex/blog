@@ -3,8 +3,8 @@ title: "7-Zip Theme Manager 1.1 幫你的7-zip換一個佈景"
 date: 2009-06-26T18:56:03
 slug: "7-zip-theme-manager"
 aliases: ["/posts/7-zip-theme-manager-11-%e5%b9%ab%e4%bd%a0%e7%9a%847-zip%e6%8f%9b%e4%b8%80%e5%80%8b%e4%bd%88%e6%99%af%e6%9c%aa%e5%ae%8c%e6%88%90/"]
-tags: ["壓縮程式"]
-categories: ["軟體分享"]
+tags: ["Compression Software"]
+categories: ["Software"]
 ---
 
 有使用7-zip的人應該都曾想過一件事  -  7-zip能不能像火狐等程式一樣改佈景",因為每天都看到一樣的佈景實在很無聊~~ 今天要介紹的7-Zip Theme Manager 1.1就是一個能夠幫7-zip換布景的程式,它內建了很多種佈景,不過這套程式是英文的,有些人可能不太喜歡............... 等我改天有空把它中文化吧!

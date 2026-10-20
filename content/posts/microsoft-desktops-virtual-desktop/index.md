@@ -4,7 +4,7 @@ date: 2009-06-27T09:57:00
 slug: "microsoft-desktops-virtual-desktop"
 aliases: ["/posts/%e8%b6%85%e8%bc%95%e5%b7%a7%e3%80%81%e5%85%8d%e8%b2%bb%e7%9a%84%e5%be%ae%e8%bb%9f%e7%89%8c%e8%99%9b%e6%93%ac%e6%a1%8c%e9%9d%a2%e8%bb%9f%e9%ab%94-desktops-10/"]
 tags: ["Windows"]
-categories: ["軟體分享"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2008/12/2009-06-27-12.jpg"><img class="alignnone size-full wp-image-1462" title="2009-06-27-12" src="{{< param imageBase >}}/wp-content/uploads/2008/12/2009-06-27-12.jpg" alt="2009-06-27-12" width="240" height="55" /></a>

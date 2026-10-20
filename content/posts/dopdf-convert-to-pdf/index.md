@@ -3,8 +3,8 @@ title: "doPDF 輕鬆把文件、網頁轉換成PDF格式"
 date: 2011-07-21T09:00:42
 slug: "dopdf-convert-to-pdf"
 aliases: ["/posts/dopdf-%e8%bc%95%e9%ac%86%e6%8a%8a%e6%96%87%e4%bb%b6%e3%80%81%e7%b6%b2%e9%a0%81%e8%bd%89%e6%8f%9b%e6%88%90pdf%e6%a0%bc%e5%bc%8f/"]
-tags: ["doPDF", "PDF"]
-categories: ["軟體分享"]
+tags: ["PDF"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-20_025558.jpg"><img class="size-large wp-image-5461 aligncenter" title="2011-07-20_025558" src="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-20_025558-520x361.jpg" alt="" width="520" height="361" /></a>

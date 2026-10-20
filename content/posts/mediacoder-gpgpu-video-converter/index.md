@@ -3,8 +3,8 @@ title: "MediaCoder 支援GPGPU技術的免費轉檔軟體"
 date: 2011-08-29T08:00:45
 slug: "mediacoder-gpgpu-video-converter"
 aliases: ["/posts/mediacoder-%e6%94%af%e6%8f%b4gpgpu%e6%8a%80%e8%a1%93%e7%9a%84%e5%85%8d%e8%b2%bb%e8%bd%89%e6%aa%94%e8%bb%9f%e9%ab%94/"]
-tags: ["Open Source", "GPGPU", "MediaCoder", "轉檔"]
-categories: ["音樂播放&amp;轉檔"]
+tags: ["MediaCoder", "Media Conversion"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-26_175211.jpg"><img class="size-full wp-image-5738 aligncenter" title="2011-08-26_175211" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-26_175211.jpg" alt="" width="399" height="374" /></a>

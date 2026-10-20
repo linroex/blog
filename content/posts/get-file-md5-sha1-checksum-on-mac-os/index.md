@@ -2,8 +2,8 @@
 title: "Get File MD5, SHA1 Checksum on Mac OS"
 date: 2016-12-11T10:00:03
 slug: "get-file-md5-sha1-checksum-on-mac-os"
-tags: ["MD5", "SHA1", "Mac OS"]
-categories: []
+tags: ["macOS", "MD5"]
+categories: ["Hardware"]
 ---
 
 之前在 Windows 習慣做任何事情都要另外安裝程式，檢視圖片要另外裝、瀏覽 PDF 要另外裝，計算檔案 MD5、SHA1 也要另外裝程式，但實際上在 Mac OS X 不用這麼麻煩！ 如果你要計算檔案的 MD5 或 SHA1 Checksum，其實就有內建的小工具可以使用囉！

@@ -3,8 +3,8 @@ title: "遲到兩天的... iPad 1開箱文～ 16GB、WiFi"
 date: 2011-03-12T12:01:42
 slug: "ipad-1-16gb-wifi-unboxing"
 aliases: ["/posts/%e9%81%b2%e5%88%b0%e5%85%a9%e5%a4%a9%e7%9a%84-ipad-1%e9%96%8b%e7%ae%b1%e6%96%87%ef%bd%9e-16gb%e3%80%81wifi/"]
-tags: ["Apple", "iPad", "開箱文", "iOS"]
-categories: ["開箱文"]
+tags: ["iPad", "Apple"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/03/CIMG0031.jpg"><img class="size-large wp-image-4881 aligncenter" title="CIMG0031" src="{{< param imageBase >}}/wp-content/uploads/2011/03/CIMG0031-520x390.jpg" alt="" width="520" height="390" /></a>

@@ -3,7 +3,7 @@ title: "Python Generate Datetime Series"
 date: 2017-07-30T02:30:16
 slug: "python-generate-datetime-series"
 tags: ["Python", "Pandas"]
-categories: []
+categories: ["Programming"]
 ---
 
 在 Excel 很簡單的拖曳就可以產生連續的日期們，而在 Python 你可以利用 datetime 和 timedelta 兩個模組做到類似的事情，不管是要間隔一小時、間格一天、間隔一個月都可以做到。

@@ -3,8 +3,8 @@ title: "如何判斷瀏覽器是IE並套用相應的程式碼？ (If IE技巧)"
 date: 2011-02-28T13:54:10
 slug: "detect-ie-browser-if-ie-technique"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%88%a4%e6%96%b7%e7%80%8f%e8%a6%bd%e5%99%a8%e6%98%afie%e4%b8%a6%e5%a5%97%e7%94%a8%e7%9b%b8%e6%87%89%e7%9a%84%e7%a8%8b%e5%bc%8f%e7%a2%bc%ef%bc%9f-if-ie%e6%8a%80%e5%b7%a7/"]
-tags: ["CSS", "IE", "IE判斷式"]
-categories: ["CSS"]
+tags: ["CSS", "IE"]
+categories: ["Programming"]
 ---
 
 如果你是一個網頁設計師，那當你在設計網頁時最討厭的一件事一定是：瀏覽器相容性，每一種瀏覽器對於CSS、JavaScript的支援都不一樣，往往你的CSS語法用Cgrome瀏覽器看的時候很正常，可是換成Firefox卻會有不同效果出現，而這種情況又以IE最常發生，因為IE對於CSS、JavaScript的支援度最差，別的瀏覽器可能是效果不同，IE卻有可能是沒有效果… 所以這篇文章就是要教大家如何去針對IE瀏覽器或非IE瀏覽器套用特定的程式碼、CSS語法

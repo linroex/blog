@@ -4,7 +4,7 @@ date: 2009-05-17T12:40:18
 slug: "wordpress-password-change-tutorial"
 aliases: ["/posts/wp%e5%b8%b3%e5%af%86%e4%bf%ae%e6%94%b9%e6%95%99%e5%ad%b8/"]
 tags: ["WordPress"]
-categories: ["WordPress"]
+categories: ["Blog"]
 ---
 
 上一篇我們完成了WP的架設,系統也給了你一組帳號密碼,只不過那組密碼實在太難記了,而且帳號是adm很容易被猜出,對於部落格的安全有一定威脅

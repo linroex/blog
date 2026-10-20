@@ -3,8 +3,8 @@ title: "WordPress安裝教學 － 全球最多人使用的部落格(Blog)架站�
 date: 2010-05-31T11:02:53
 slug: "wordpress-installation-tutorial"
 aliases: ["/posts/wordpress%e5%ae%89%e8%a3%9d%e6%95%99%e5%ad%b8-%ef%bc%8d-%e5%85%a8%e7%90%83%e6%9c%80%e5%a4%9a%e4%ba%ba%e4%bd%bf%e7%94%a8%e7%9a%84%e9%83%a8%e8%90%bd%e6%a0%bcblog%e6%9e%b6%e7%ab%99%e8%bb%9f%e9%ab%94/"]
-tags: ["PHP", "WordPress", "Blog", "CPanel"]
-categories: ["WordPress"]
+tags: ["WordPress"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/05/wordpress-logo-stacked-rgb.png"><img class="alignnone size-full wp-image-3200" title="wordpress-logo-stacked-rgb" src="{{< param imageBase >}}/wp-content/uploads/2010/05/wordpress-logo-stacked-rgb.png" alt="" width="350" height="217" /></a>

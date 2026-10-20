@@ -3,7 +3,7 @@ title: "Why Python No Output With Tee"
 date: 2018-06-16T01:12:08
 slug: "why-python-no-output-with-tee"
 tags: ["Python", "Linux"]
-categories: []
+categories: ["Programming"]
 ---
 
 最近用 Python 寫了個 Slack Bot，因為偷懶所以我把 log 訊息直接 print 出來後用 tee 指令存到檔案裡，這樣就可以同時在 console 看到運作的資訊，又能將這些資訊保留到檔案裡，不過在用 Python print() 搭配 tee 時我卻發現我指定的 log File 常常沒有內容，或是該出現的訊息很晚才出現，研究後才知道原來 Python 的 print 函式會判斷輸出的環境，如果是輸出到 Shell 的話會立刻輸出，但如果不是輸出到 Shell 則會先存在 Buffer，等緩衝區滿了再一次輸出，當你把 Python 搭配 tee 使用時就會遇到緩衝區的問題，導致預期的輸出沒有及時出現在螢幕和檔案中。

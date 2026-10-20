@@ -3,8 +3,8 @@ title: "如何安裝和移除Android App(Android Market使用教學)"
 date: 2011-02-03T10:00:17
 slug: "install-uninstall-android-app-market-2"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%ae%89%e8%a3%9d%e5%92%8c%e7%a7%bb%e9%99%a4android-appandroid-market%e4%bd%bf%e7%94%a8%e6%95%99%e5%ad%b8-2/"]
-tags: ["Android", "Android Market"]
-categories: ["Android"]
+tags: ["Android"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/01/snap20110130_103508.png"><img class="size-full wp-image-4521 aligncenter" title="snap20110130_103508" src="{{< param imageBase >}}/wp-content/uploads/2011/01/snap20110130_103508.png" alt="" width="240" height="320" /></a></p>

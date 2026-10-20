@@ -3,8 +3,8 @@ title: "透過Gettext for PHP快速做出多國語系程式"
 date: 2011-07-18T22:47:40
 slug: "php-gettext-multilanguage-program"
 aliases: ["/posts/%e9%80%8f%e9%81%8egettext-for-php%e5%bf%ab%e9%80%9f%e5%81%9a%e5%87%ba%e5%a4%9a%e5%9c%8b%e8%aa%9e%e7%b3%bb%e7%a8%8b%e5%bc%8f/"]
-tags: ["PHP", "Gettext", "GNU", "php.ini"]
-categories: ["PHP"]
+tags: ["PHP", "Gettext"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-18_224707.jpg"><img class="alignnone size-large wp-image-555" title="2011-07-18_224707" src="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-18_224707-540x378.jpg" alt="" width="540" height="378" /></a>

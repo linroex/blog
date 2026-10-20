@@ -4,7 +4,7 @@ date: 2009-04-18T04:56:00
 slug: "windows-edit-tool-mis-utility"
 aliases: ["/posts/windows-edit-tool-%e9%9b%bb%e8%85%a6%e9%ab%98%e6%89%8b%e3%80%81mis%e5%bf%85%e5%82%99%e7%9a%84%e7%b3%bb%e7%b5%b1%e4%bf%ae%e6%94%b9%e5%b0%8f%e5%b7%a5%e5%85%b7%ef%bc%81/"]
 tags: ["Windows"]
-categories: ["Windows系列"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/05/1416361847.jpg"><img src="{{< param imageBase >}}/wp-content/uploads/2009/05/1416361847.jpg" alt="" width="288" height="386" /></a>

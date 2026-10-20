@@ -4,7 +4,7 @@ date: 2017-04-26T09:54:28
 slug: "css-inner-border"
 aliases: ["/posts/css-inner-border-%e5%85%a7%e6%a1%86%e7%b7%9a/"]
 tags: ["CSS"]
-categories: []
+categories: ["Programming"]
 ---
 
 這次在設計<a href="http://me.coder.tw">個人入口頁</a>時因為想做出內框線（Inner Border）的效果，學到一種很聰明的寫法，提到 CSS Inner Border，直覺肯定是想到用 padding 或 margin 把盒子撐大，但其實這樣是行不通的，當你把盒子撐大時，框線也會跟著移動，無法做出內框線的樣式。

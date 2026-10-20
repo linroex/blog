@@ -3,8 +3,8 @@ title: "Gmail研究室六大必用功能,翻譯郵件.取消傳送.罐頭回應�
 date: 2009-12-06T14:02:06
 slug: "gmail-labs-6-must-use-features"
 aliases: ["/posts/gmail%e7%a0%94%e7%a9%b6%e5%ae%a4%e5%85%ad%e5%a4%a7%e5%bf%85%e7%94%a8%e5%8a%9f%e8%83%bd%e7%bf%bb%e8%ad%af%e9%83%b5%e4%bb%b6-%e5%8f%96%e6%b6%88%e5%82%b3%e9%80%81-%e7%bd%90%e9%a0%ad%e5%9b%9e%e6%87%89/"]
-tags: ["Google", "Gmail"]
-categories: ["Google"]
+tags: ["Gmail"]
+categories: ["Web Apps"]
 ---
 
 <a style="text-decoration: none;" href="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-06_112500.jpg"><img class="aligncenter size-medium wp-image-2341" title="2009-12-06_112500" src="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-06_112500-300x216.jpg" alt="2009-12-06_112500" width="300" height="216" /></a>

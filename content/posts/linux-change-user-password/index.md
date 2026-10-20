@@ -3,8 +3,8 @@ title: "【Linux】如何修改使用者密碼（適用iOS系統修改SSH密碼�
 date: 2011-03-18T15:59:06
 slug: "linux-change-user-password"
 aliases: ["/posts/%e3%80%90linux%e3%80%91%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e4%bd%bf%e7%94%a8%e8%80%85%e5%af%86%e7%a2%bc%ef%bc%88%e9%81%a9%e7%94%a8ios%e7%b3%bb%e7%b5%b1%e4%bf%ae%e6%94%b9ssh%e5%af%86%e7%a2%bc%ef%bc%89/"]
-tags: ["iPad", "Linux", "iOS"]
-categories: ["Linux", "資訊安全", "iPod Touch"]
+tags: ["Linux", "SSH"]
+categories: ["SRE"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-18_160128.jpg"><img class="size-large wp-image-4913 aligncenter" title="2011-03-18_160128" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-18_160128-520x395.jpg" alt="" width="520" height="395" /></a>

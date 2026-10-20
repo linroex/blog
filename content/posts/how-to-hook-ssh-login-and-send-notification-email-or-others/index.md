@@ -2,8 +2,8 @@
 title: "How to hook SSH Login and send notification (email or others)"
 date: 2016-07-30T11:01:44
 slug: "how-to-hook-ssh-login-and-send-notification-email-or-others"
-tags: ["ssh", "pam"]
-categories: ["英文"]
+tags: ["SSH", "Linux"]
+categories: ["SRE"]
 images: ["%%IMG%%/wp-content/uploads/2016/07/by-wlodek-428549_1280.jpg"]
 ---
 

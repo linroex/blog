@@ -3,8 +3,8 @@ title: "如何測試網站是否成功設定 CORS"
 date: 2017-01-04T11:58:44
 slug: "test-cors-enabled-on-website"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e6%b8%ac%e8%a9%a6%e7%b6%b2%e7%ab%99%e6%98%af%e5%90%a6%e6%88%90%e5%8a%9f%e5%95%9f%e7%94%a8-cross-origin-resource-sharing%ef%bc%88cors%ef%bc%89/"]
-tags: ["cURL", "CORS"]
-categories: []
+tags: ["CORS", "cURL"]
+categories: ["Programming"]
 ---
 
 透過 Cross-Origin Resource Sharing（以下簡稱 CORS）的設定可以讓 JavaScript 突破瀏覽器同源政策，存取不同網域的資源（API），但每次設定完 CORS 都很頭痛要如何判斷伺服器真的有設定成功，因為有時候瀏覽器針對 CORS 會做快取，導致伺服器設定無誤，但不管你怎麼重新整理網頁都失敗的現象。這邊教大家用 cURL 直接檢視 header 是否有啟用 CORS 囉！

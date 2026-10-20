@@ -3,8 +3,8 @@ title: "Avast - 免費防毒軟體的箇中翹楚，支援沙盒、網站封鎖�
 date: 2011-06-19T11:52:38
 slug: "avast-free-antivirus"
 aliases: ["/posts/avast-%e5%85%8d%e8%b2%bb%e9%98%b2%e6%af%92%e8%bb%9f%e9%ab%94%e7%9a%84%e7%ae%87%e4%b8%ad%e7%bf%b9%e6%a5%9a%ef%bc%8c%e6%94%af%e6%8f%b4%e6%b2%99%e7%9b%92%e3%80%81%e7%b6%b2%e7%ab%99%e5%b0%81%e9%8e%96/"]
-tags: ["免費", "防毒軟體", "Avast", "排程掃描", "沙盒"]
-categories: ["防毒軟體"]
+tags: ["Antivirus", "Avast"]
+categories: ["Security"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-19_115026.jpg"><img class="size-large wp-image-5265 aligncenter" title="2011-06-19_115026" src="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-19_115026-520x394.jpg" alt="" width="520" height="394" /></a>

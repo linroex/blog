@@ -3,8 +3,8 @@ title: "Mac OS 螢幕截圖快捷鍵、格式與儲存位置設定"
 date: 2017-01-01T10:00:26
 slug: "macos-screenshot-shortcut-format-location"
 aliases: ["/posts/mac-os-%e8%9e%a2%e5%b9%95%e6%88%aa%e5%9c%96%e5%bf%ab%e6%8d%b7%e9%8d%b5%e3%80%81%e6%a0%bc%e5%bc%8f%e8%88%87%e5%84%b2%e5%ad%98%e4%bd%8d%e7%bd%ae%e8%a8%ad%e5%ae%9a/"]
-tags: ["Mac OS"]
-categories: []
+tags: ["macOS", "Screenshots"]
+categories: ["Hardware"]
 ---
 
 我喜歡使用 Mac 的其中一個原因，就是它本身內建了許多好用的功能，例如螢幕截圖、圖片編輯等等，雖然 Windows 也有內建這些功能，但實在是雞肋的很，最後還是需要去安裝一堆應用程式；今天這邊要告訴你，其實 Mac OS 已經內建很強大的螢幕截圖功能囉！ 甚至可以設定截圖後的儲存位置、格式等等！

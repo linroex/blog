@@ -4,7 +4,7 @@ date: 2009-04-17T12:40:00
 slug: "vb-call-close-form-syntax"
 aliases: ["/posts/vb%e5%91%bc%e5%8f%ab%e8%a1%a8%e5%96%ae%e9%97%9c%e9%96%89%e8%a1%a8%e5%96%ae%e8%aa%9e%e6%b3%95/"]
 tags: ["VB"]
-categories: ["VB.NET"]
+categories: ["Programming"]
 ---
 
 <font size="2">&nbsp;在VB裡面如果你要切換表單的話可以使用show()語法<br/>

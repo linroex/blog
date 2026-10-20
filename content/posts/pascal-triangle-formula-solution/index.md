@@ -3,8 +3,8 @@ title: "帕斯卡（巴斯卡）三角形公式解！（感謝滄海）"
 date: 2011-07-24T08:25:37
 slug: "pascal-triangle-formula-solution"
 aliases: ["/posts/%e5%b8%95%e6%96%af%e5%8d%a1%ef%bc%88%e5%b7%b4%e6%96%af%e5%8d%a1%ef%bc%89%e4%b8%89%e8%a7%92%e5%bd%a2%e5%85%ac%e5%bc%8f%e8%a7%a3%ef%bc%81%ef%bc%88%e6%84%9f%e8%ac%9d%e6%bb%84%e6%b5%b7%ef%bc%89/"]
-tags: ["PHP", "公式", "帕斯卡三角形"]
-categories: ["PHP"]
+tags: ["Math", "PHP"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/210px-PascalTriangleAnimated2.gif"><img title="210px-PascalTriangleAnimated2" src="{{< param imageBase >}}/wp-content/uploads/2011/07/210px-PascalTriangleAnimated2.gif" alt="" width="210" height="194" /></a>

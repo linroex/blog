@@ -3,8 +3,8 @@ title: "Google Chrome OS - Google出的雲端作業系統(安裝教學)"
 date: 2010-07-11T18:11:31
 slug: "google-chrome-os-install-tutorial"
 aliases: ["/posts/google-chrome-os-google%e5%87%ba%e7%9a%84%e9%9b%b2%e7%ab%af%e4%bd%9c%e6%a5%ad%e7%b3%bb%e7%b5%b1%e5%ae%89%e8%a3%9d%e6%95%99%e5%ad%b8/"]
-tags: ["Google", "小筆電", "Chrome OS", "作業系統", "雲端運算"]
-categories: ["Linux", "Google"]
+tags: ["Chrome OS"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/06/2010-06-19_160846.jpg"><img class="alignnone size-large wp-image-3310" title="2010-06-19_160846" src="{{< param imageBase >}}/wp-content/uploads/2010/06/2010-06-19_160846-537x400.jpg" alt="" width="537" height="400" /></a>

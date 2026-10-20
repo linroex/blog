@@ -3,8 +3,8 @@ title: "湊整數實作思路與方法"
 date: 2017-01-11T23:30:33
 slug: "rounding-integer-approach"
 aliases: ["/posts/%e6%b9%8a%e6%95%b4%e6%95%b8%e5%af%a6%e4%bd%9c%e6%80%9d%e8%b7%af%e8%88%87%e6%96%b9%e6%b3%95/"]
-tags: ["JavaScript", "電子商務"]
-categories: []
+tags: ["JavaScript"]
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2017/01/螢幕快照-2017-01-11-下午11.30.05.jpg"]
 ---
 

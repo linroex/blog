@@ -3,7 +3,7 @@ title: "WordPress2.8.1 Beta"
 date: 2009-06-21T14:12:27
 slug: "wordpress281-beta"
 tags: ["WordPress"]
-categories: ["WordPress"]
+categories: ["Blog"]
 ---
 
 WordPress2.8.1 Beta出來囉!

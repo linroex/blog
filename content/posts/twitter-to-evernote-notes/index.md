@@ -3,8 +3,8 @@ title: "透過Twitter也能寫筆記到Evernote你知道嘛？"
 date: 2011-07-27T21:59:57
 slug: "twitter-to-evernote-notes"
 aliases: ["/posts/%e9%80%8f%e9%81%8etwitter%e4%b9%9f%e8%83%bd%e5%af%ab%e7%ad%86%e8%a8%98%e5%88%b0evernote%e4%bd%a0%e7%9f%a5%e9%81%93%e5%98%9b%ef%bc%9f/"]
-tags: ["Twitter", "Evernote", "同步", "筆記"]
-categories: ["Twitter"]
+tags: ["Twitter", "Evernote"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-27_214506.jpg"><img title="2011-07-27_214506" src="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-27_214506_thumb.jpg" alt="2011-07-27_214506" width="524" height="350" /></a>

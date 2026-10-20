@@ -4,7 +4,7 @@ date: 2017-01-27T23:58:26
 slug: "time-command-execution-in-terminal"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%9c%a8-terminal-%e8%a8%88%e7%ae%97%e6%8c%87%e4%bb%a4%e5%9f%b7%e8%a1%8c%e7%9a%84%e6%99%82%e9%96%93%ef%bc%9f/"]
 tags: ["Linux"]
-categories: []
+categories: ["SRE"]
 ---
 
 你有想過幫你在 Terminal 執行的指令計算執行時間嗎？ 前陣子因為工作上的需求，用各種指令兜了一個檔案分類工具出來，但因為對效能有嚴格的要求，需要在指定時間內完成，所以查到 time 這個好用的指令可以幫我們計算指令的執行時間。

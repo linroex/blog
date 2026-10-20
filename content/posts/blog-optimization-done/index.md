@@ -3,8 +3,8 @@ title: "部落格優化工作完成囉!"
 date: 2009-08-30T10:22:59
 slug: "blog-optimization-done"
 aliases: ["/posts/%e9%83%a8%e8%90%bd%e6%a0%bc%e5%84%aa%e5%8c%96%e5%b7%a5%e4%bd%9c%e5%ae%8c%e6%88%90%e5%9b%89/"]
-tags: []
-categories: ["本站公告"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 哈~

@@ -3,8 +3,8 @@ title: "FindBook - 方便的書籍比價網站"
 date: 2010-06-02T11:31:23
 slug: "findbook-book-price-comparison"
 aliases: ["/posts/findbook-%e6%96%b9%e4%be%bf%e7%9a%84%e6%9b%b8%e7%b1%8d%e6%af%94%e5%83%b9%e7%b6%b2%e7%ab%99/"]
-tags: ["FindBook", "比價網站", "網路購物"]
-categories: ["網際網路"]
+tags: ["Price Comparison"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/06/logo-standard.gif"><img class="alignnone size-full wp-image-3256" title="logo-standard" src="{{< param imageBase >}}/wp-content/uploads/2010/06/logo-standard.gif" alt="" width="231" height="88" /></a>

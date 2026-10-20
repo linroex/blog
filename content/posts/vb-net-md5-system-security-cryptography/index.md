@@ -4,7 +4,7 @@ date: 2011-07-26T12:17:23
 slug: "vb-net-md5-system-security-cryptography"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%9c%a8vb-net%e8%a3%a1%e9%9d%a2%e8%a8%88%e7%ae%97md5%e7%a2%bc%ef%bc%9f-%ef%bc%88system-security-cryptography%ef%bc%89/"]
 tags: ["VB", ".NET", "MD5"]
-categories: []
+categories: ["Programming"]
 ---
 
 最近因為寫了一個密碼產生器，剛好需要用到md5運算，平常在PHP時都是直接用md5()就可以取得MD5碼了，可是VB我沒有實際嘗試去用過MD5碼，原本還在擔心.NET裡面會不會沒有MD5的資源，這樣子就必須要自己來寫....Orz，幸好去查了一下MSDN的結果是有的～ 只是過程稍微負責了點，不過也幸好MSDN有提供一個getMD5hash的function，所以我就直接引用啦

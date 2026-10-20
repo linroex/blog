@@ -3,8 +3,8 @@ title: "Ubuntu 10.10 安裝教學(新版介面的安裝教學)"
 date: 2010-11-26T22:54:10
 slug: "ubuntu-10-10-shotwell-fast-boot"
 aliases: ["/posts/ubuntu10-10-%ef%bc%8d-%e5%85%a7%e5%bb%ba%e7%be%8e%e5%b7%a5%e8%bb%9f%e9%ab%94%e6%8f%9b%e7%94%a8shotwell%e9%82%84%e6%9c%89%e8%b6%85%e5%bf%ab%e9%96%8b%e6%a9%9f%e9%80%9f%e5%ba%a6/"]
-tags: ["Ubuntu", "Linux", "Shotwell", "安裝教學", "軟體中心"]
-categories: ["作業系統"]
+tags: ["Ubuntu", "Linux"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-13-19-21-56.jpg"><img class="alignnone size-large wp-image-4024" title="2010-11-13-19-21-56" src="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-13-19-21-56-520x292.jpg" alt="" width="520" height="292" /></a></p>

@@ -2,8 +2,8 @@
 title: "How to make elasticsearch.py Fast (Bulk Operate)"
 date: 2016-12-08T00:57:01
 slug: "how-to-make-elasticsearch-py-fast-bulk-operate"
-tags: ["Python", "Elasticsearch", "AWS Lambda"]
-categories: []
+tags: ["Python", "Elasticsearch"]
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/Artboard-1.png"]
 ---
 

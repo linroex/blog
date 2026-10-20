@@ -3,8 +3,8 @@ title: "SASS基本使用教學：變數、函式、繼承、巢狀撰寫"
 date: 2012-02-07T23:14:55
 slug: "sass-basic-tutorial-variables-nesting"
 aliases: ["/posts/sass%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8%e6%95%99%e5%ad%b8%ef%bc%9a%e8%ae%8a%e6%95%b8%e3%80%81%e5%87%bd%e5%bc%8f%e3%80%81%e7%b9%bc%e6%89%bf%e3%80%81%e5%b7%a2%e7%8b%80%e6%92%b0%e5%af%ab/"]
-tags: ["CSS", "SASS", "SCSS"]
-categories: ["CSS", "SASS"]
+tags: ["SASS", "CSS"]
+categories: ["Programming"]
 ---
 
 在前一篇文章<a href="https://coder.tw/?p=859" target="_blank">《當CSS遇上變數、函式，就變成SASS啦～ SASS安裝教學》</a>有教到要如何安裝SASS，而在這篇文章中，則是要教大家如何使用SASS ，這篇文章會提到SASS裡面的四個特色：變數（Variables）、函式（Mixin）、繼承（extend）、巢狀撰寫（Nesting）

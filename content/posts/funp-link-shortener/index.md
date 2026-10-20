@@ -3,8 +3,8 @@ title: "Funp 輕鬆成就人氣王"
 date: 2009-07-15T12:24:11
 slug: "funp-link-shortener"
 aliases: ["/posts/funp-%e8%bc%95%e9%ac%86%e6%88%90%e5%b0%b1%e4%ba%ba%e6%b0%a3%e7%8e%8b/"]
-tags: ["funp"]
-categories: ["部落格"]
+tags: ["URL Shortener"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-15_122446.jpg"><img class="alignnone size-full wp-image-1639" title="2009-07-15_122446" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-15_122446.jpg" alt="2009-07-15_122446" width="171" height="93" /></a>

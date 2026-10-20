@@ -3,8 +3,8 @@ title: "KMPlayer暗藏知名射擊遊戲 － 雷電(Raiden)"
 date: 2010-06-17T23:11:17
 slug: "kmplayer-hidden-raiden-game"
 aliases: ["/posts/kmplayer%e6%9a%97%e8%97%8f%e7%9f%a5%e5%90%8d%e5%b0%84%e6%93%8a%e9%81%8a%e6%88%b2-%ef%bc%8d-%e9%9b%b7%e9%9b%bbraiden/"]
-tags: ["iPod Touch", "KMPlayer", "PSP", "Raiden", "射擊遊戲", "雷電"]
-categories: ["單機遊戲", "音樂播放&amp;轉檔"]
+tags: ["Raiden"]
+categories: ["Games"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/06/2010-06-17_223934.jpg"><img class="size-large wp-image-3295 aligncenter" title="2010-06-17_223934" src="{{< param imageBase >}}/wp-content/uploads/2010/06/2010-06-17_223934-340x400.jpg" alt="" width="340" height="400" /></a></p>

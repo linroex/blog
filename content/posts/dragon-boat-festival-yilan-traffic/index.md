@@ -3,8 +3,8 @@ title: "端午連假，跟塞車說掰掰 - 宜蘭篇"
 date: 2016-06-10T14:29:03
 slug: "dragon-boat-festival-yilan-traffic"
 aliases: ["/posts/%e7%ab%af%e5%8d%88%e9%80%a3%e5%81%87%ef%bc%8c%e8%b7%9f%e5%a1%9e%e8%bb%8a%e8%aa%aa%e6%8e%b0%e6%8e%b0-%e5%ae%9c%e8%98%ad%e7%af%87/"]
-tags: ["Google", "Data", "BigQuery"]
-categories: []
+tags: ["Yilan", "BigQuery"]
+categories: ["Travel"]
 images: ["%%IMG%%/wp-content/uploads/2016/06/IMG_2865.jpg"]
 ---
 

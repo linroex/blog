@@ -3,8 +3,8 @@ title: "益品書屋 EP Books - 這裡賣的不是書不是飲料更不是空間
 date: 2016-12-24T20:50:16
 slug: "ep-books-store-review"
 aliases: ["/posts/%e7%9b%8a%e5%93%81%e6%9b%b8%e5%b1%8b-ep-books-%e9%80%99%e8%a3%a1%e8%b3%a3%e7%9a%84%e4%b8%8d%e6%98%af%e6%9b%b8%e4%b8%8d%e6%98%af%e9%a3%b2%e6%96%99%e6%9b%b4%e4%b8%8d%e6%98%af%e7%a9%ba%e9%96%93/"]
-tags: []
-categories: []
+tags: ["Bookstores"]
+categories: ["Life"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/IMG_5544.jpg"]
 ---
 

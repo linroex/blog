@@ -3,8 +3,8 @@ title: "如何手動開啟、關閉WordPress的維護模式？"
 date: 2011-02-14T09:00:32
 slug: "wordpress-manual-maintenance-mode"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e6%89%8b%e5%8b%95%e9%96%8b%e5%95%9f%e3%80%81%e9%97%9c%e9%96%89wordpress%e7%9a%84%e7%b6%ad%e8%ad%b7%e6%a8%a1%e5%bc%8f%ef%bc%9f/"]
-tags: ["WordPress", "維護模式"]
-categories: ["WordPress"]
+tags: ["WordPress"]
+categories: ["Blog"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-08_204200.jpg"><img class="size-large wp-image-4693 aligncenter" title="2011-02-08_204200" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-08_204200-520x282.jpg" alt="" width="520" height="282" /></a></p>

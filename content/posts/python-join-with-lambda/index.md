@@ -4,7 +4,7 @@ date: 2016-12-13T16:05:52
 slug: "python-join-with-lambda"
 aliases: ["/posts/python-join-with-lambda-%e6%9b%b4%e5%ae%a2%e8%a3%bd%e5%8c%96%e7%9a%84-join/"]
 tags: ["Python"]
-categories: []
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/Artboard-3.png"]
 ---
 

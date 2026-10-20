@@ -3,8 +3,8 @@ title: "【Ubuntu】ADSL(PPPoE)上網教學 - pppoeconf"
 date: 2010-12-15T08:00:40
 slug: "ubuntu-adsl-pppoe-pppoeconf"
 aliases: ["/posts/%e3%80%90ubuntu%e3%80%91adslpppoe%e4%b8%8a%e7%b6%b2%e6%95%99%e5%ad%b8-pppoeconf/"]
-tags: ["Ubuntu", "Linux", "ADSL", "PPPoE"]
-categories: ["Linux"]
+tags: ["Ubuntu", "Networking"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-13_231404.jpg"><img class="size-full wp-image-4199 aligncenter" title="2010-12-13_231404" src="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-13_231404.jpg" alt="" width="402" height="330" /></a></p>

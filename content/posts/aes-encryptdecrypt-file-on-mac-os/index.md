@@ -2,8 +2,8 @@
 title: "AES Encrypt/Decrypt File on Mac OS"
 date: 2016-12-28T14:06:30
 slug: "aes-encryptdecrypt-file-on-mac-os"
-tags: ["Mac OS", "OpenSSL", "AES", "Encrypto"]
-categories: []
+tags: ["AES", "macOS"]
+categories: ["Security"]
 ---
 
 當你要透過 Facebook、Email 傳送機密性較高的資料時，例如 Google API Token、公司年度帳務等資料時，你真的信任這些網路服務嗎？就我來說我是不信任的，因為有太多的可能性，從被駭客攻擊到該公司內控不佳導致員工可以檢視客戶資料，種種的可能性讓我其實不太敢把機密資料放在網際網路上傳送，但現在這時代，不透過 Email、Facebook Messenger 這些網路服務傳送資料幾乎不可能，這時候你可以選擇使用 AES 把檔案加密，並透過你信任的管道把密碼告知對方，例如電話、實體溝通等等，或最起碼透過不同管道傳送密碼來降低被一網打盡的風險。

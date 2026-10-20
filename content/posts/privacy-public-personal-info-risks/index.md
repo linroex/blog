@@ -3,8 +3,8 @@ title: "你還保有隱私權嘛？ 漫談公開個人資料的危害"
 date: 2011-03-21T01:15:36
 slug: "privacy-public-personal-info-risks"
 aliases: ["/posts/%e4%bd%a0%e9%82%84%e4%bf%9d%e6%9c%89%e9%9a%b1%e7%a7%81%e6%ac%8a%e5%98%9b%ef%bc%9f-%e6%bc%ab%e8%ab%87%e5%85%ac%e9%96%8b%e5%80%8b%e4%ba%ba%e8%b3%87%e6%96%99%e7%9a%84%e5%8d%b1%e5%ae%b3/"]
-tags: ["Facebook", "心理測驗", "臉書", "隱私權"]
-categories: ["Facebook"]
+tags: ["Privacy", "Facebook"]
+categories: ["Security"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-21_010320.jpg"><img class="size-large wp-image-4958 aligncenter" title="2011-03-21_010320" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-21_010320-520x387.jpg" alt="" width="520" height="387" /></a>

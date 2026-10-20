@@ -4,7 +4,7 @@ date: 2009-07-02T10:25:30
 slug: "vb-redim-array-resize"
 aliases: ["/posts/vb-redim-%e5%be%9e%e6%96%b0%e8%a8%ad%e5%ae%9a%e9%99%a3%e5%88%97%e9%95%b7%e5%ba%a6/"]
 tags: ["VB"]
-categories: ["VB.NET"]
+categories: ["Programming"]
 ---
 
 學過VB的人想必都知道Dim語法吧

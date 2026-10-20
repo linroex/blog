@@ -2,8 +2,8 @@
 title: "Vue.js Render Object as Table in Beautiful Way"
 date: 2017-03-17T01:39:34
 slug: "vue-js-render-object-as-table-in-beautiful-way"
-tags: ["JavaScript", "Vue.js"]
-categories: ["英文"]
+tags: ["Vue.js", "JavaScript"]
+categories: ["Programming"]
 ---
 
 In Vue.js we can use v-for to render Array as HTML Table or List beautifully, but If we want render Object key and value as Table, for example, I use JS Object and Array to store many Contact info, each Contact have different key, I want display Contact 1 info in a table, It seems v-for not good at here?

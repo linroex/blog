@@ -2,9 +2,9 @@
 title: "【Java】JDK安裝與Java原始檔編譯教學"
 date: 2011-01-27T23:11:20
 slug: "java-jdk-install-compile-tutorial"
-aliases: ["/posts/%e3%80%90java%e3%80%91jdk%e5%ae%89%e8%a3%9d%e8%88%87java%e5%8e%9f%e5%a7%8b%e6%aa%94%e7%b7%a8%e8%ad%af%e6%95%99%e5%ad%b8/"]
-tags: ["PHP", "JDK", "java"]
-categories: ["Java"]
+aliases: ["/posts/%e3%80%90java%e3%80%91jdk%e5%ae%89%e8%a3%9d%e8%88%87java%e5%8e%9f%e5%a7%8b%e6%aa%94%e7%b7%a8%e8%ad%af%e6%95%99%e5%ad%b8/", "/posts/java-install-jdk-compile-source/", "/posts/%e3%80%90java%e3%80%91%e5%a6%82%e4%bd%95%e5%ae%89%e8%a3%9djdk%e4%b8%a6%e4%b8%94%e7%b7%a8%e8%ad%afjava%e5%8e%9f%e5%a7%8b%e7%a2%bc%ef%bc%9f/"]
+tags: ["Java"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-27_232013.jpg"><img class="alignnone size-large wp-image-4475" title="2011-01-27_232013" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-27_232013-520x339.jpg" alt="" width="520" height="339" /></a>

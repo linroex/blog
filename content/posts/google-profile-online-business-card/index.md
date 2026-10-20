@@ -3,8 +3,8 @@ title: "透過Google個人資料做一份簡單的網路名片～"
 date: 2011-04-23T09:56:56
 slug: "google-profile-online-business-card"
 aliases: ["/posts/%e9%80%8f%e9%81%8egoogle%e5%80%8b%e4%ba%ba%e8%b3%87%e6%96%99%e5%81%9a%e4%b8%80%e4%bb%bd%e7%b0%a1%e5%96%ae%e7%9a%84%e7%b6%b2%e8%b7%af%e5%90%8d%e7%89%87%ef%bd%9e/"]
-tags: ["Google", "個人介紹", "個人資料", "名片"]
-categories: ["Google"]
+tags: ["Google"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-23_094507.jpg"><img class="size-large wp-image-5038 aligncenter" title="2011-04-23_094507" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-23_094507-520x320.jpg" alt="" width="520" height="320" /></a>

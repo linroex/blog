@@ -3,8 +3,8 @@ title: "Feedburner - 製作永久的RSS位址(申請教學)"
 date: 2009-07-26T11:37:15
 slug: "feedburner-permanent-rss-url"
 aliases: ["/posts/feedburner-%e8%a3%bd%e4%bd%9c%e6%b0%b8%e4%b9%85%e7%9a%84rss%e4%bd%8d%e5%9d%80%e7%94%b3%e8%ab%8b%e6%95%99%e5%ad%b8/"]
-tags: ["WordPress", "RSS", "Feedburner"]
-categories: ["部落格"]
+tags: ["RSS", "Feedburner"]
+categories: ["Blog"]
 ---
 
 <strong><a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-12_151618.jpg"><img class="alignnone size-full wp-image-1597" title="2009-07-12_151618" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-12_151618.jpg" alt="2009-07-12_151618" width="198" height="51" /></a></strong>

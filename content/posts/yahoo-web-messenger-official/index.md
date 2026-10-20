@@ -3,8 +3,8 @@ title: "Yahoo官方版的網頁型即時通,支援繁體中文"
 date: 2009-10-25T22:10:01
 slug: "yahoo-web-messenger-official"
 aliases: ["/posts/yahoowebmessenger-yahoo%e5%ae%98%e6%96%b9%e7%89%88%e7%9a%84%e7%b6%b2%e9%a0%81%e5%9e%8b%e5%8d%b3%e6%99%82%e9%80%9a%e6%94%af%e6%8f%b4%e7%b9%81%e9%ab%94%e4%b8%ad%e6%96%87/"]
-tags: ["Web即時通訊"]
-categories: ["奇摩即時通"]
+tags: ["Instant Messaging"]
+categories: ["Web Apps"]
 ---
 
 <p style="text-align: center;"><strong><a href="{{< param imageBase >}}/wp-content/uploads/2009/10/2009-10-25_214806.jpg"><img class="alignnone size-full wp-image-2116" title="2009-10-25_214806" src="{{< param imageBase >}}/wp-content/uploads/2009/10/2009-10-25_214806.jpg" alt="2009-10-25_214806" width="300" height="213" /></a></strong></p>

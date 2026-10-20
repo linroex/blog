@@ -4,7 +4,7 @@ date: 2017-01-03T20:43:11
 slug: "javascript-page-load-focus-exit-events"
 aliases: ["/posts/javascript-page-load%e3%80%81focus%e3%80%81unfocus%e3%80%81exit-event/"]
 tags: ["JavaScript"]
-categories: []
+categories: ["Programming"]
 ---
 
 用 JavaScript 記錄使用者何時進入網頁我想大家都會，但你有想過如何判斷使用者「關閉」網頁嗎？ 甚至現在的瀏覽器都是用 Tab 的形式呈現多個網頁，有沒有可能使用者其實是在看別人的網頁，而你的頁面只是掛著呢？ 例如 Youtube 就常遇到這問題，使用者把頁面放著聽歌，但實際上卻是在看 Facebook...。

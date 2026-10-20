@@ -3,8 +3,8 @@ title: "逐風技術誌開站囉～"
 date: 2011-02-11T11:58:25
 slug: "zhufeng-tech-blog-launched"
 aliases: ["/posts/%e9%80%90%e9%a2%a8%e6%8a%80%e8%a1%93%e8%aa%8c%e9%96%8b%e7%ab%99%e5%9b%89%ef%bd%9e/"]
-tags: ["公告"]
-categories: ["站務相關"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 忙了一整天，從昨天把網站架好到今天網址綁定好，差不多24小時了～ 這裡正式宣佈：逐風技術誌開站啦～

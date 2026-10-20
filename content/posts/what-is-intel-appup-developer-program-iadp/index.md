@@ -3,8 +3,8 @@ title: "什麼是Intel AppUp Developer Program？（IADP）＆帳戶申請教學
 date: 2011-05-27T20:31:08
 slug: "what-is-intel-appup-developer-program-iadp"
 aliases: ["/posts/%e4%bb%80%e9%ba%bc%e6%98%afintel-appup-developer-program%ef%bc%9f%ef%bc%88iadp%ef%bc%89%ef%bc%86%e5%b8%b3%e6%88%b6%e7%94%b3%e8%ab%8b%e6%95%99%e5%ad%b8/"]
-tags: ["App Up", "Intel"]
-categories: ["Intel"]
+tags: ["Intel"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-27_193324.jpg"><img class="size-large wp-image-500 aligncenter" title="2011-05-27_193324" src="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-27_193324-540x359.jpg" alt="" width="540" height="359" /></a>

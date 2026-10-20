@@ -3,8 +3,8 @@ title: "whos.amung.us - 部落客最愛使用的線上人數計數器"
 date: 2009-10-04T17:10:05
 slug: "whos-among-us-online-counter"
 aliases: ["/posts/whos-amung-us-%e5%85%8d%e7%94%b3%e8%ab%8b%e7%9a%84%e7%b7%9a%e4%b8%8a%e4%ba%ba%e6%95%b8%e7%b5%b1%e8%a8%88%e5%a4%96%e6%8e%9b/"]
-tags: ["線上人數", "部落格工具"]
-categories: ["部落格"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/10/20091004_165017.jpg"><img style="display: inline; border: 0px;" title="2009-10-04_165017" src="{{< param imageBase >}}/wp-content/uploads/2009/10/20091004_165017_thumb.jpg" border="0" alt="2009-10-04_165017" width="327" height="107" /></a>

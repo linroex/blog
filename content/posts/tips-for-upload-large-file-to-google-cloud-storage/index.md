@@ -2,8 +2,8 @@
 title: "Tips for Upload Large File to Google Cloud Storage"
 date: 2016-12-04T10:00:49
 slug: "tips-for-upload-large-file-to-google-cloud-storage"
-tags: ["Google", "Google Cloud Platform", "GCP Storage"]
-categories: []
+tags: ["GCP"]
+categories: ["Programming"]
 ---
 
 因為我有定期備份資料的習慣，會把 Google、Facebook、Evernote、相簿等等資料都定期備份到 Google Cloud Storage 上面，每次用瀏覽器上傳都會很煩惱上傳速度慢的問題，而且如果網路斷線還要重新傳送那 10 GB 的大檔案，後來研究了官方文件，找到一些關於上傳大檔案到 Google Cloud Storage 時很好用的小技巧分享給大家。

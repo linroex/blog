@@ -4,7 +4,7 @@ date: 2009-11-29T08:32:53
 slug: "how-to-set-bios-cd-boot"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e8%a8%ad%e5%ae%9abios%e6%88%90%e5%85%89%e7%a2%9f%e9%96%8b%e6%a9%9f%e9%87%8d%e7%81%8c%e9%9b%bb%e8%85%a6%e5%bf%85%e5%ad%b8/"]
 tags: ["BIOS"]
-categories: ["BIOS", "作業系統"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/11/20091129_074650.jpg"><img style="border-bottom: 0px; border-left: 0px; display: block; float: none; margin-left: auto; border-top: 0px; margin-right: auto; border-right: 0px" title="2009-11-29_074650" src="{{< param imageBase >}}/wp-content/uploads/2009/11/20091129_074650_thumb.jpg" border="0" alt="2009-11-29_074650" width="354" height="261" /></a>

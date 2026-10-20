@@ -3,8 +3,8 @@ title: "TeamViewer - 製作個人版的遠端遙控程式"
 date: 2009-09-26T19:21:47
 slug: "teamviewer-firewall-pierce-custom-logo"
 aliases: ["/posts/teamviewer-%e8%bc%95%e9%ac%86%e7%aa%81%e7%a0%b4%e9%98%b2%e7%81%ab%e7%89%86%e9%82%84%e5%8f%af%e4%bb%a5%e6%94%be%e4%b8%8a%e8%87%aa%e5%b7%b1%e7%9a%84logo/"]
-tags: ["遠端遙控"]
-categories: ["網際網路"]
+tags: ["TeamViewer"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/09/2009-09-20-000.jpg"><img class="alignnone size-full wp-image-1930" title="2009-09-20-000" src="{{< param imageBase >}}/wp-content/uploads/2009/09/2009-09-20-000.jpg" alt="2009-09-20-000" width="306" height="100" /></a>

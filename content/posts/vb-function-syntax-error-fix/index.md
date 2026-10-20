@@ -4,7 +4,7 @@ date: 2009-04-19T07:17:00
 slug: "vb-function-syntax-error-fix"
 aliases: ["/posts/vb%e5%a6%82%e4%bd%95%e5%af%ab%e5%87%bd%e5%bc%8f%e9%87%8d%e5%a4%a7%e9%8c%af%e8%aa%a4%e4%bf%ae%e6%ad%a3/"]
 tags: ["VB"]
-categories: ["VB.NET"]
+categories: ["Programming"]
 ---
 
 今天要敎大家的是如何自己寫函式

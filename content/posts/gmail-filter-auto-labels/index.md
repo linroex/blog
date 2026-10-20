@@ -3,8 +3,8 @@ title: "Gmail篩選器  自動幫你做信箱分類"
 date: 2009-06-14T12:37:15
 slug: "gmail-filter-auto-labels"
 aliases: ["/posts/gmail%e7%af%a9%e9%81%b8%e5%99%a8-%e8%87%aa%e5%8b%95%e5%b9%ab%e4%bd%a0%e5%81%9a%e4%bf%a1%e7%ae%b1%e5%88%86%e9%a1%9e/"]
-tags: ["Google"]
-categories: ["Google"]
+tags: ["Gmail"]
+categories: ["Web Apps"]
 ---
 
 Gmail內建有一個篩選器功能,可以根據信件的資訊來篩選信件並做某些動作,例如收到來自abc@gmail.com的信就就直接刪除,或者是加上某些標籤等等,利用Gmail篩選器還可以幫你阻擋垃圾信件,只要設定非認識的人寄過來的而且有附加檔案就能擋住60%的病毒信件,將Gmail的篩選器功能利用好絕對可以讓你省下很多的時間

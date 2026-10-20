@@ -3,8 +3,8 @@ title: "【PHP】透過glob、scandir、readdir取得資料夾內的檔案列表
 date: 2011-08-17T17:27:32
 slug: "php-glob-scandir-readdir-list-files"
 aliases: ["/posts/%e3%80%90php%e3%80%91%e9%80%8f%e9%81%8eglob%e3%80%81scandir%e3%80%81readdir%e5%8f%96%e5%be%97%e8%b3%87%e6%96%99%e5%a4%be%e5%85%a7%e7%9a%84%e6%aa%94%e6%a1%88%e5%88%97%e8%a1%a8/"]
-tags: ["PHP", "dir", "glob", "檔案列表", "資料夾"]
-categories: ["PHP"]
+tags: ["PHP"]
+categories: ["Programming"]
 ---
 
 有時候會需要寫PHP程式去取得指定資料夾內的檔案列表，例如在做網路硬碟程式時舊需要這種功能，這裡要跟大家介紹三個函式都可以做到這種功能，只是使用上不太一樣，這三個函式分別是glob、scandir、readdir

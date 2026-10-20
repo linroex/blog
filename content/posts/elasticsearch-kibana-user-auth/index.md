@@ -3,8 +3,8 @@ title: "Elasticsearch、Kibana 使用者認證設定"
 date: 2017-01-15T10:00:51
 slug: "elasticsearch-kibana-user-auth"
 aliases: ["/posts/elasticsearch%e3%80%81kibana-%e4%bd%bf%e7%94%a8%e8%80%85%e8%aa%8d%e8%ad%89%e8%a8%ad%e5%ae%9a/"]
-tags: ["Elasticsearch", "Kibana", "X-Pack", "Nginx"]
-categories: []
+tags: ["Elasticsearch", "Kibana"]
+categories: ["SRE"]
 ---
 
 當你將 Elasticsearch 和 Kibana 安裝完後，你會發現一個十分嚴重的問題：「咦，帳號密碼勒？」沒錯，Elasticsearch 和 Kibana 是沒有提供一般常見的使用者模組，你只能透過 Bind IP 或是 Bind Port 的方式設定內網使用，但如果你跟敝公司一樣沒有固定 IP，或是你想要設定幾組帳密來使用的話，就繼續讀下去吧，這篇文章將會分享當 Elasticsearch 和 Kibana 的基本使用者認證該如何設定，採用 HTTP Auth 的方式。

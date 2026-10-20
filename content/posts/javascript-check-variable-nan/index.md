@@ -4,7 +4,7 @@ date: 2017-02-14T22:44:05
 slug: "javascript-check-variable-nan"
 aliases: ["/posts/javascript-%e5%88%a4%e6%96%b7%e8%ae%8a%e6%95%b8%e6%98%af%e5%90%a6%e7%ad%89%e6%96%bc-nan/"]
 tags: ["JavaScript"]
-categories: []
+categories: ["Programming"]
 ---
 
 在 JavaScript 實在有太多奇怪的眉眉角角了，今天因為把字串轉數字用到 parseFloat，如果進去的參數無法轉成數字則會回應 NaN (Not a Number)，我就寫了如下語法來判斷：

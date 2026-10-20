@@ -2,8 +2,8 @@
 title: "ACM: Q001 (★☆☆☆☆)"
 date: 2009-07-25T21:39:49
 slug: "acm001"
-tags: []
-categories: ["ACM"]
+tags: ["ACM"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: left;"><strong> </strong>請寫一個程式求出2個數的GCD(最大公因數)</p>

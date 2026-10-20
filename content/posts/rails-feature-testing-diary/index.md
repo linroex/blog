@@ -3,8 +3,8 @@ title: "Rails Capybara Feature Testing 踩雷日記"
 date: 2017-01-16T20:32:53
 slug: "rails-feature-testing-diary"
 aliases: ["/posts/rails-%e3%84%86-feature-testing-%e8%b8%a9%e9%9b%b7%e6%97%a5%e8%a8%98/"]
-tags: ["Rails", "Capybara", "RSpec"]
-categories: []
+tags: ["Rails", "Testing"]
+categories: ["Programming"]
 ---
 
 用一句話形容今天，大概是「第一次學 Capybara 踩地雷就上手」，花了整整六小時(以上)在寫兩個簡單的測試，途中遇到各種有趣的地雷，不寫一篇文章紀錄這慘烈的一天我怕今天氣到睡不著覺。 先聲明，這是第一次寫測試，所以有些觀念可能是錯誤或過舊的，歡迎大家留言告知，一定立刻修改，這不是一篇技術文，而是一篇發洩文（怒）

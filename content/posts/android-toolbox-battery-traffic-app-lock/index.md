@@ -3,8 +3,8 @@ title: "【Android】正點工具箱 - 電量、上網流量、程式鎖、軟�
 date: 2011-07-20T00:42:27
 slug: "android-toolbox-battery-traffic-app-lock"
 aliases: ["/posts/%e3%80%90android%e3%80%91%e6%ad%a3%e9%bb%9e%e5%b7%a5%e5%85%b7%e7%ae%b1-%e9%9b%bb%e9%87%8f%e3%80%81%e4%b8%8a%e7%b6%b2%e6%b5%81%e9%87%8f%e3%80%81%e7%a8%8b%e5%bc%8f%e9%8e%96%e3%80%81%e8%bb%9f%e9%ab%94/"]
-tags: ["Android", "Android Market", "App", "工具箱", "流量控制"]
-categories: ["Android"]
+tags: ["Android"]
+categories: ["Software"]
 ---
 
 &nbsp;

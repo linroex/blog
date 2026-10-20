@@ -3,8 +3,8 @@ title: "Python 3 在 Windows 命令提示字元輸出時遇到 CP950 錯誤"
 date: 2017-02-21T23:59:09
 slug: "python-cp950-encoding-error-windows-console"
 aliases: ["/posts/python-3-%e5%9c%a8-windows-%e5%91%bd%e4%bb%a4%e6%8f%90%e7%a4%ba%e5%ad%97%e5%85%83%e8%bc%b8%e5%87%ba%e6%99%82%e9%81%87%e5%88%b0-cp950-%e9%8c%af%e8%aa%a4/"]
-tags: ["Windows", "Python"]
-categories: []
+tags: ["Python", "Windows"]
+categories: ["Programming"]
 ---
 
 今天在教學弟妹寫程式時，用 Python 印出一段中文字到命令提示字元，卻遇到「UnicodeEncodeError: 'cp950' codec can't encode character」這個錯誤，嘗試了各種方法都無法解決，最後爬了文章才搞懂是怎麼回事。

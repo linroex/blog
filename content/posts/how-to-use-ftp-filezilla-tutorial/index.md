@@ -3,8 +3,8 @@ title: "如何使用FTP連線? FileZilla連線教學"
 date: 2010-08-30T22:04:23
 slug: "how-to-use-ftp-filezilla-tutorial"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8ftp%e9%80%a3%e7%b7%9a-filezilla%e9%80%a3%e7%b7%9a%e6%95%99%e5%ad%b8/"]
-tags: ["FileZilla", "FTP"]
-categories: ["軟體分享", "FTP"]
+tags: ["FTP", "FileZilla"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/08/2010-08-30_213528.jpg"><img class="size-large wp-image-3729 aligncenter" title="2010-08-30_213528" src="{{< param imageBase >}}/wp-content/uploads/2010/08/2010-08-30_213528-480x400.jpg" alt="" width="480" height="400" /></a></p>

@@ -3,8 +3,8 @@ title: "【Chrome 外掛】One Number   自動檢查Gmail、Google Reader以及G
 date: 2010-10-24T15:15:36
 slug: "chrome-extension-one-number-check-gmail"
 aliases: ["/posts/%e3%80%90chrome-extensions%e3%80%91one-number-%e8%87%aa%e5%8b%95%e6%aa%a2%e6%9f%a5gmail%e3%80%81google-reader%e4%bb%a5%e5%8f%8agoogle-voice%e6%98%af%e5%90%a6%e6%9c%89%e6%96%b0%e8%a8%8a%e6%81%af/"]
-tags: ["Google", "Gmail", "Google Chrome", "Extensions", "Reader"]
-categories: ["Chrome"]
+tags: ["Chrome Extensions", "Gmail"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/10/2010-10-24_150258.jpg"><img class="size-full wp-image-3867 aligncenter" title="2010-10-24_150258" src="{{< param imageBase >}}/wp-content/uploads/2010/10/2010-10-24_150258.jpg" alt="" width="381" height="290" /></a></p>

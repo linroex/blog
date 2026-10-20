@@ -3,8 +3,8 @@ title: "ViewPad 7、Galaxy Tab、iPad大車拼"
 date: 2010-12-01T00:29:01
 slug: "viewpad-galaxy-tab-ipad-comparison"
 aliases: ["/posts/viewpad-7%e3%80%81galaxy-tab%e3%80%81ipad%e5%a4%a7%e8%bb%8a%e6%8b%bc/"]
-tags: ["iPad", "Android", "Galaxy Tab", "ViewPad", "平板電腦"]
-categories: ["3C產品"]
+tags: ["Tablets", "Android", "iPad"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-01_001559.jpg"><img class="alignnone size-large wp-image-4130" title="2010-12-01_001559" src="{{< param imageBase >}}/wp-content/uploads/2010/12/2010-12-01_001559-520x291.jpg" alt="" width="520" height="291" /></a>

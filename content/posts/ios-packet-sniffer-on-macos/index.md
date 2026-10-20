@@ -2,8 +2,8 @@
 title: "iOS Packet Sniffer on macOS"
 date: 2017-02-02T18:37:10
 slug: "ios-packet-sniffer-on-macos"
-tags: ["Mac", "iOS", "Xcode", "封包攔截"]
-categories: []
+tags: ["Packet Capture", "iOS", "macOS"]
+categories: ["Security"]
 ---
 
 在開發 iOS App 或做些見不得人的事情時，會需要攔截封包，在電腦上攔截封包首推 Wireshark ，但如果想在你的 iOS Device (iPhone、iPad) 上攔截封包呢？ 你可以架設 Proxy 讓 iOS Device 連上去，或是 JB 後在裝置內使用 tcpdump，但這兩個方式都太麻煩，這裡推薦使用 Xcode Command Line Tools 內的 rvictl 指令來處理，不用複雜的設定或 JB，只要一行指令，就可以在電腦上用任意軟體攔截封包。

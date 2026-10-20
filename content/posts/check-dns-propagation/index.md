@@ -3,8 +3,8 @@ title: "如何檢查網址的DNS是否設定成功？"
 date: 2011-02-01T18:00:25
 slug: "check-dns-propagation"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e6%aa%a2%e6%9f%a5%e7%b6%b2%e5%9d%80%e7%9a%84dns%e6%98%af%e5%90%a6%e8%a8%ad%e5%ae%9a%e6%88%90%e5%8a%9f%ef%bc%9f/"]
-tags: ["DNS", "CMD"]
-categories: ["Windows系列", "網站架設", "CMD"]
+tags: ["DNS"]
+categories: ["SRE"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-30_163607.jpg"><img class="size-large wp-image-4567 aligncenter" title="2011-01-30_163607" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-30_163607-520x339.jpg" alt="" width="520" height="339" /></a></p>

@@ -4,7 +4,7 @@ date: 2009-09-06T20:57:29
 slug: "google-maps-street-view-preview"
 aliases: ["/posts/google-%e5%9c%b0%e5%9c%96%e5%8f%88%e4%b8%80%e6%96%b0%e5%8a%9f%e8%83%bd-%e8%a1%97%e6%99%af%e9%a0%90%e8%a6%bd/"]
 tags: ["Google"]
-categories: ["Google"]
+categories: ["Web Apps"]
 ---
 
 話說Google所提供的電子地圖 - Google Maps又出了一個新的功能,其實這也不能說是甚麼新功能,正確來講他應該是首次出現台北版的,這個功能就是 - 街景預覽,甚麼叫做街景預覽呢?我想大家都看過電子地圖吧!通常電子地圖都是長成圖A的樣子

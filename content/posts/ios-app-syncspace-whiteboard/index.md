@@ -3,8 +3,8 @@ title: "【iOS App】好用的同步白板、手寫筆記App - SyncSpace"
 date: 2011-07-29T20:11:13
 slug: "ios-app-syncspace-whiteboard"
 aliases: ["/posts/%e3%80%90ios-app%e3%80%91%e5%a5%bd%e7%94%a8%e7%9a%84%e5%90%8c%e6%ad%a5%e7%99%bd%e6%9d%bf-syncspace/"]
-tags: ["App Store", "iOS", "同步", "白板"]
-categories: ["Apple", "iOS"]
+tags: ["iOS", "App Store"]
+categories: ["Software"]
 ---
 
 &nbsp;

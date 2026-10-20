@@ -3,8 +3,8 @@ title: "Mac OS 在 Terminal 快速移動游標位置"
 date: 2016-12-14T01:14:21
 slug: "macos-terminal-cursor-movement"
 aliases: ["/posts/mac-os-%e5%9c%a8-terminal-%e5%bf%ab%e9%80%9f%e7%a7%bb%e5%8b%95%e6%b8%b8%e6%a8%99%e4%bd%8d%e7%bd%ae/"]
-tags: ["Mac"]
-categories: []
+tags: ["macOS"]
+categories: ["Hardware"]
 ---
 
 因為睡意深沉，今天就選一個簡單的小東西來分享吧！ 每次在操作 vim、terminal 時，遇到那種超長的一行指令（文字）都覺得很麻煩，要按方向鍵按到天荒地老才能移動到你要的位置，今天來分享三種方式，可以讓你快速的移動游標到指定位置。

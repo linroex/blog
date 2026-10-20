@@ -3,8 +3,8 @@ title: "CPU-Z 迅速了解電腦的硬體配備"
 date: 2009-07-15T11:47:39
 slug: "cpu-z-hardware-info"
 aliases: ["/posts/cpu-z-%e8%bf%85%e9%80%9f%e4%ba%86%e8%a7%a3%e9%9b%bb%e8%85%a6%e7%9a%84%e7%a1%ac%e9%ab%94%e9%85%8d%e5%82%99/"]
-tags: ["cpu z", "硬體"]
-categories: ["軟體分享"]
+tags: ["PC Hardware"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-15_112144.jpg"><img class="size-full wp-image-1617 aligncenter" title="2009-07-15_112144" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-15_112144.jpg" alt="2009-07-15_112144" width="109" height="58" /></a></p>

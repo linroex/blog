@@ -3,8 +3,8 @@ title: "Google Cloud Connect - 讓Microsoft office跟上潮流雲端化~"
 date: 2011-03-22T07:00:13
 slug: "google-cloud-connect-for-office"
 aliases: ["/posts/google-cloud-connect-%e8%ae%93microsoft-office%e8%b7%9f%e4%b8%8a%e6%bd%ae%e6%b5%81%e9%9b%b2%e7%ab%af%e5%8c%96/"]
-tags: ["Google", "Microsoft", "office", "Google Cloud Connect", "雲端"]
-categories: ["Google", "office"]
+tags: ["Google", "Office"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-19_195248.jpg"><img class="size-large wp-image-4936 aligncenter" title="2011-03-19_195248" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-19_195248-520x311.jpg" alt="" width="520" height="311" /></a>

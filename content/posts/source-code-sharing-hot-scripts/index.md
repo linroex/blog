@@ -3,8 +3,8 @@ title: "原碼分享-HOT SCRIPTS"
 date: 2009-05-02T03:42:00
 slug: "source-code-sharing-hot-scripts"
 aliases: ["/posts/%e5%8e%9f%e7%a2%bc%e5%88%86%e4%ba%ab-hot-scripts/"]
-tags: ["PHP", "VB", "IE"]
-categories: ["實用網站"]
+tags: ["PHP", "VB"]
+categories: ["Programming"]
 ---
 
 &nbsp;相信各位在寫程式時都常需要去找尋原始碼來參考吧<br/>

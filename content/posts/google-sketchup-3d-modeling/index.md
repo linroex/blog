@@ -3,8 +3,8 @@ title: "Google SketchUp - 3D建模程式"
 date: 2009-07-22T14:20:06
 slug: "google-sketchup-3d-modeling"
 aliases: ["/posts/google-sketchup-3d%e5%bb%ba%e6%a8%a1%e7%a8%8b%e5%bc%8f/"]
-tags: ["VB", "google sketchup 6"]
-categories: ["軟體分享"]
+tags: ["SketchUp"]
+categories: ["Software"]
 summary: "Google SketchUp是Google公司最近收購的一個軟體,這套程式專門給那些建築師 or 設計師用的, 因為這套程式可以讓使用者繪製出3D的圖形,其實功能跟AutoCad差不多,但是他是免費的,不像AutoCAD很貴,而且他可以畫3D圖(AutoCAD好像也能@@)反正總而言之他是一個很優的程式~~(對設計師而言),另外根據Google SketchUp官網的消息是說你如果會Ruby這種程式語言的話你可以自己幫她寫外掛程式(可惜不是VB)"
 ---
 

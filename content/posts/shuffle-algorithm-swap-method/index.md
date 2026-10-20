@@ -3,8 +3,8 @@ title: "洗牌演算法（交換法）"
 date: 2011-06-05T01:00:07
 slug: "shuffle-algorithm-swap-method"
 aliases: ["/posts/%e6%b4%97%e7%89%8c%e6%bc%94%e7%ae%97%e6%b3%95%ef%bc%88%e4%ba%a4%e6%8f%9b%e6%b3%95%ef%bc%89/"]
-tags: ["C++", "亂數", "洗牌演算法"]
-categories: ["C++", "演算法"]
+tags: ["Algorithms", "C++"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-05_005920.jpg"><img class="size-large wp-image-534 aligncenter" title="2011-06-05_005920" src="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-05_005920-540x352.jpg" alt="" width="540" height="352" /></a>

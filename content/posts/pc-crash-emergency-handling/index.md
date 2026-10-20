@@ -3,8 +3,8 @@ title: "電腦當機時的緊急處理辦法"
 date: 2009-07-08T18:55:40
 slug: "pc-crash-emergency-handling"
 aliases: ["/posts/%e9%9b%bb%e8%85%a6%e7%95%b6%e6%a9%9f%e6%99%82%e7%9a%84%e7%b7%8a%e6%80%a5%e8%99%95%e7%90%86%e8%be%a6%e6%b3%95/"]
-tags: ["Windows", "WordPress"]
-categories: ["Windows系列"]
+tags: ["Windows"]
+categories: ["Hardware"]
 ---
 
 電腦當機了怎麼辦?該不會又要重新開機吧...............

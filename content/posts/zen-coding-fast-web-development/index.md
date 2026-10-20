@@ -3,8 +3,8 @@ title: "Zen Coding 幫助你快速開發網站的好東西，喜歡手寫網頁�
 date: 2011-08-22T21:40:44
 slug: "zen-coding-fast-web-development"
 aliases: ["/posts/zen-coding-%e5%b9%ab%e5%8a%a9%e4%bd%a0%e5%bf%ab%e9%80%9f%e9%96%8b%e7%99%bc%e7%b6%b2%e7%ab%99%e7%9a%84%e5%a5%bd%e6%9d%b1%e8%a5%bf%ef%bc%8c%e5%96%9c%e6%ad%a1%e6%89%8b%e5%af%ab%e7%b6%b2%e9%a0%81%e7%9a%84/"]
-tags: ["CSS", "Notepad", "HTML", "Zen Coding"]
-categories: ["文字編輯器", "Plugins"]
+tags: ["HTML", "CSS"]
+categories: ["Programming"]
 ---
 
 我想應該很多人都跟我一樣，寫網頁時不喜歡用DW直接拉介面，而是喜歡開啟Notepad直接撰寫HTML吧～ 這種方法的好處是可以磨練自己XD 但是壞處卻是開發速度有點慢（其實習慣這種方式之後速度比DW還要快...XD） 今天要跟大家介紹Zen Coding，他可以讓你的寫網頁速度加快N倍！你可以直接用CSS語句的方式寫網頁～

@@ -3,8 +3,8 @@ title: "第一次在 GCP Storage 放置靜態網頁就上手"
 date: 2017-04-10T09:20:02
 slug: "static-site-on-gcp-storage"
 aliases: ["/posts/%e7%ac%ac%e4%b8%80%e6%ac%a1%e5%9c%a8-gcp-storage-%e6%94%be%e7%bd%ae%e9%9d%9c%e6%85%8b%e7%b6%b2%e9%a0%81%e5%b0%b1%e4%b8%8a%e6%89%8b/"]
-tags: ["Google", "Google Cloud Platform", "GCP Storage", "GCP"]
-categories: []
+tags: ["GCP"]
+categories: ["Blog"]
 ---
 
 想要在 Google Cloud Storage 放置靜態網頁卻不知從何下手嗎？每次把檔案放到 Google Cloud Storage 分享給朋友還要按「公開」很麻煩麻？  這幾天因為工作需求研究了下，最開始以為只要設定好 Domain 並將檔案共享就可以了，研究後才知道還有許多小撇步，例如每次上傳檔案都要設定公開實在麻煩，其實可以設定上傳到指定 Bucket 預設都公開，甚至還可以設定 Index、404 頁面的預設檔案名稱，甚至一直以為無解的 SSL 問題，官方也提示了不錯的解法！

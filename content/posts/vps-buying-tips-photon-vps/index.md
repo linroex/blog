@@ -3,8 +3,8 @@ title: "【VPS】購買VPS的注意事項、推薦VPS商：PhotonVPS"
 date: 2011-02-09T09:10:26
 slug: "vps-buying-tips-photon-vps"
 aliases: ["/posts/%e3%80%90vps%e3%80%91%e8%b3%bc%e8%b2%b7vps%e7%9a%84%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a0%85%e3%80%81%e6%8e%a8%e8%96%a6vps%e5%95%86%ef%bc%9aphotonvps/"]
-tags: ["VPS", "PhotonVPS"]
-categories: ["Linux", "VPS"]
+tags: ["VPS"]
+categories: ["SRE"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-01-30_145824.jpg"><img class="size-full wp-image-4545 aligncenter" title="2011-01-30_145824" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-01-30_145824.jpg" alt="" width="239" height="90" /></a></p>

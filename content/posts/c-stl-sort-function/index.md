@@ -3,8 +3,8 @@ title: "【C++】使用STL內建的sort()函式做到排序功能！"
 date: 2011-08-25T10:30:09
 slug: "c-stl-sort-function"
 aliases: ["/posts/%e3%80%90c%e3%80%91%e4%bd%bf%e7%94%a8stl%e5%85%a7%e5%bb%ba%e7%9a%84sort%e5%87%bd%e5%bc%8f%e5%81%9a%e5%88%b0%e6%8e%92%e5%ba%8f%e5%8a%9f%e8%83%bd%ef%bc%81/"]
-tags: ["C++", "reverse", "Sort", "STL"]
-categories: ["C++"]
+tags: ["C++"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-25_102642.jpg"><img class="alignnone size-large wp-image-724" title="2011-08-25_102642" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-25_102642-540x352.jpg" alt="" width="540" height="352" /></a>

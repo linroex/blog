@@ -3,8 +3,8 @@ title: "如何用 Excel 快速計算不同級距的數量"
 date: 2017-08-03T02:42:37
 slug: "excel-quick-count-by-range"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e7%94%a8-excel-%e5%bf%ab%e9%80%9f%e8%a8%88%e7%ae%97%e4%b8%8d%e5%90%8c%e7%b4%9a%e8%b7%9d%e7%9a%84%e6%95%b8%e9%87%8f/"]
-tags: ["Google", "Excel", "Data"]
-categories: []
+tags: ["Excel"]
+categories: ["Software"]
 ---
 
 在做數據分析時，總不免會將數據區分成不同級聚以便觀察，例如將學生分類成 80-100 分、60-80 分或不及格的，並計算在不同群內的學生人數以便進行分析，這時候 Excel（ Google Sheets ） 的 FREQUENCY 函式就能幫上大忙啦！

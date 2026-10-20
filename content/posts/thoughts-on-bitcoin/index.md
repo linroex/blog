@@ -4,7 +4,7 @@ date: 2013-11-20T09:24:24
 slug: "thoughts-on-bitcoin"
 aliases: ["/posts/%e9%97%9c%e6%96%bcbitcoin%e7%9a%84%e4%b8%80%e4%ba%9b%e7%9c%8b%e6%b3%95/"]
 tags: ["Bitcoin"]
-categories: ["生活札記"]
+categories: ["Life"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2013/11/Screen-Shot-2013-11-20-at-9.23.47-AM.jpg"><img class="size-full wp-image-6312 aligncenter" alt="Screen Shot 2013-11-20 at 9.23.47 AM" src="{{< param imageBase >}}/wp-content/uploads/2013/11/Screen-Shot-2013-11-20-at-9.23.47-AM.jpg" width="200" height="58" /></a>

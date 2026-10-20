@@ -3,8 +3,8 @@ title: "從 udn讀書吧的購物體驗談電子商務流程優化"
 date: 2017-01-30T17:16:31
 slug: "udn-bookstore-ecommerce-flow-optimization"
 aliases: ["/posts/%e5%be%9e-udn%e8%ae%80%e6%9b%b8%e5%90%a7%e7%9a%84%e8%b3%bc%e7%89%a9%e9%ab%94%e9%a9%97%e8%ab%87%e9%9b%bb%e5%ad%90%e5%95%86%e5%8b%99%e6%b5%81%e7%a8%8b%e5%84%aa%e5%8c%96/"]
-tags: ["網站優化", "UX"]
-categories: []
+tags: ["UX", "E-commerce"]
+categories: ["Blog"]
 images: ["%%IMG%%/wp-content/uploads/2017/01/螢幕快照-2017-01-30-下午5.16.04.jpg"]
 ---
 

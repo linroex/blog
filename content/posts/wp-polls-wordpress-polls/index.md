@@ -3,8 +3,8 @@ title: "WP-Polls - WordPress專屬的投票外掛"
 date: 2009-10-18T10:18:00
 slug: "wp-polls-wordpress-polls"
 aliases: ["/posts/wp-polls-%e8%ae%93%e4%bd%a0%e7%9a%84wordpress%e9%83%a8%e8%90%bd%e6%a0%bc%e4%b9%9f%e6%9c%89%e6%8a%95%e7%a5%a8%e5%8a%9f%e8%83%bd/"]
-tags: ["WordPress", "WordPress外掛"]
-categories: ["WordPress"]
+tags: ["WordPress", "WordPress Plugins"]
+categories: ["Blog"]
 ---
 
 <p style="text-align: left;">聽風站長今天要跟各位介紹一個外掛叫做WP-Polls,WP-Polls這個外掛可以讓你的部落格擁有Ajax的投票功能,而且WP-Polls完全不用錢,也不會有任何限制,此外速度也不會變慢,你可能會擔心WP-Polls的布景不夠漂亮,這也不成問題,因為你可以自己設定WP-Polls的佈景.配色</p>

@@ -3,8 +3,8 @@ title: "WhatTheFont 判斷文字的字型"
 date: 2009-06-23T20:55:54
 slug: "whatthefont-font-identifier"
 aliases: ["/posts/whatthefont-%e5%88%a4%e6%96%b7%e6%96%87%e5%ad%97%e7%9a%84%e5%ad%97%e5%9e%8b/"]
-tags: ["字型"]
-categories: ["實用網站"]
+tags: ["Fonts"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-23-05.jpg"><img class="alignnone size-full wp-image-1431" title="2009-06-23-05" src="{{< param imageBase >}}/wp-content/uploads/2009/06/2009-06-23-05.jpg" alt="2009-06-23-05" width="178" height="101" /></a>

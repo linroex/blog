@@ -3,8 +3,8 @@ title: "WP Security Scan - 掃描你的WordPress有沒有漏洞"
 date: 2009-11-14T16:39:56
 slug: "wp-security-scan-plugin"
 aliases: ["/posts/wp-security-scan-%e6%8e%83%e6%8f%8f%e4%bd%a0%e7%9a%84wordpress%e6%9c%89%e6%b2%92%e6%9c%89%e6%bc%8f%e6%b4%9e/"]
-tags: ["WordPress"]
-categories: ["WordPress"]
+tags: ["WordPress", "Hardening"]
+categories: ["Blog"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/11/2009-11-14-15-27-06.jpg"><img class="size-medium wp-image-2223 aligncenter" title="2009-11-14 15 27 06" src="{{< param imageBase >}}/wp-content/uploads/2009/11/2009-11-14-15-27-06-300x216.jpg" alt="2009-11-14 15 27 06" width="300" height="216" /></a></p>

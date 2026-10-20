@@ -3,8 +3,8 @@ title: "WordPress 檔案上傳時遇到「HTTP 錯誤」的可能原因與解法
 date: 2017-01-30T01:37:25
 slug: "wordpress-upload-http-error-fix"
 aliases: ["/posts/wordpress-%e6%aa%94%e6%a1%88%e4%b8%8a%e5%82%b3%e6%99%82%e9%81%87%e5%88%b0%e3%80%8chttp-%e9%8c%af%e8%aa%a4%e3%80%8d%e7%9a%84%e5%8f%af%e8%83%bd%e5%8e%9f%e5%9b%a0%e8%88%87%e8%a7%a3%e6%b3%95/"]
-tags: ["PHP", "WordPress"]
-categories: []
+tags: ["WordPress"]
+categories: ["Blog"]
 ---
 
 使用 WordPress 的朋友在上傳圖片時，偶爾會遇到「HTTP 錯誤」的問題，上網搜尋會看到許多說法，有的說是檔案權限問題，有的則是說要加上一段程式碼到佈景內，其實這些說法都「有可能」，最正確的作法是去檢視伺服器的 Error Log 來判斷究竟錯誤原因為何，剛好今天我也遇到了這問題，就來整理一下我的解決方式以及可能的其他原因！

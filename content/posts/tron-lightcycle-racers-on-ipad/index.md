@@ -3,8 +3,8 @@ title: "看過「創。光速戰記」嘛？LightBike 2讓你在iPad裡面也可
 date: 2011-08-06T01:01:54
 slug: "tron-lightcycle-racers-on-ipad"
 aliases: ["/posts/%e7%9c%8b%e9%81%8e%e3%80%8c%e5%89%b5%e3%80%82%e5%85%89%e9%80%9f%e6%88%b0%e8%a8%98%e3%80%8d%e5%98%9b%ef%bc%9flightbike-2%e8%ae%93%e4%bd%a0%e5%9c%a8ipad%e8%a3%a1%e9%9d%a2%e4%b9%9f%e5%8f%af%e4%bb%a5/"]
-tags: ["Apple", "iPad", "App Store", "Game", "Light Bike 2"]
-categories: ["iPod Touch", "iOS", "App Store"]
+tags: ["iPad", "App Store"]
+categories: ["Games"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/IMG_0037.jpg"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: block; float: none; margin-left: auto; margin-right: auto; padding-top: 0px; border-width: 0px;" title="IMG_0037" src="{{< param imageBase >}}/wp-content/uploads/2011/08/IMG_0037_thumb.jpg" alt="IMG_0037" width="520" height="390" border="0" /></a>

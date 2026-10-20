@@ -3,8 +3,8 @@ title: "怕訪客複製你的文章嗎？ 讓 JS 自動加上提醒文字或禁�
 date: 2017-02-12T23:43:41
 slug: "js-auto-append-reminder-on-copy"
 aliases: ["/posts/%e6%80%95%e8%a8%aa%e5%ae%a2%e8%a4%87%e8%a3%bd%e4%bd%a0%e7%9a%84%e6%96%87%e7%ab%a0%e5%97%8e%ef%bc%9f-%e8%ae%93-js-%e8%87%aa%e5%8b%95%e5%8a%a0%e4%b8%8a%e6%8f%90%e9%86%92%e6%96%87%e5%ad%97%e6%88%96/"]
-tags: ["JavaScript", "SEO", "剪貼簿"]
-categories: []
+tags: ["JavaScript", "SEO"]
+categories: ["Blog"]
 ---
 
 在許多內容網站，都會有所謂的「複製時自動加上原文網址」機制，例如魔境歌詞網、知乎等等，更有的網站直接禁止使用者複製文字，要達到這些功能不困難，只需要幾行簡單的 JavaScript 語法，但需要思考網站是否真的需要加入這樣的功能，當正常訪客複製並轉貼文字到 Facebook，對網站真的造成損害了嗎？ 此外如果真的要防止訪客複製文字，光憑著這些防君子不防小人的手法，到底是保護了利益還是讓網站變得更難使用？

@@ -3,8 +3,8 @@ title: "透過jQuery.qrcode直接在瀏覽器產生QR Code"
 date: 2011-04-08T15:42:44
 slug: "jquery-qrcode-in-browser"
 aliases: ["/posts/%e9%80%8f%e9%81%8ejquery-qrcode%e7%9b%b4%e6%8e%a5%e5%9c%a8%e7%80%8f%e8%a6%bd%e5%99%a8%e7%94%a2%e7%94%9fqr-code/"]
-tags: ["QR Code", "JavaScript", "jQuery"]
-categories: ["jQuery"]
+tags: ["jQuery", "QR Code"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-08_153812.jpg"><img class="size-large wp-image-389 aligncenter" title="2011-04-08_153812" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-08_153812-540x357.jpg" alt="" width="540" height="357" /></a>

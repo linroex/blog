@@ -3,8 +3,8 @@ title: "把筆記型電腦化身為無線網路基地台"
 date: 2010-04-03T10:21:01
 slug: "turn-laptop-into-wifi-hotspot"
 aliases: ["/posts/%e6%8a%8a%e7%ad%86%e8%a8%98%e5%9e%8b%e9%9b%bb%e8%85%a6%e5%8c%96%e8%ba%ab%e7%82%ba%e7%84%a1%e7%b7%9a%e7%b6%b2%e8%b7%af%e5%9f%ba%e5%9c%b0%e5%8f%b0/"]
-tags: ["Apple", "iPod Touch", "無線網路"]
-categories: ["Windows系列", "網際網路", "iPod Touch"]
+tags: ["Windows", "Wi-Fi"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/03/2010-03-28_164010.png"><img class="aligncenter size-medium wp-image-2890" title="2010-03-28_164010" src="{{< param imageBase >}}/wp-content/uploads/2010/03/2010-03-28_164010-300x283.png" alt="" width="300" height="283" /></a>

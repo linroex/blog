@@ -3,8 +3,8 @@ title: "修正病毒照成的錯誤"
 date: 2009-05-03T10:00:00
 slug: "fix-virus-infection"
 aliases: ["/posts/%e4%bf%ae%e6%ad%a3%e7%97%85%e6%af%92%e5%85%a5%e4%be%b5/"]
-tags: ["登錄檔"]
-categories: ["Windows系列"]
+tags: ["Windows"]
+categories: ["Security"]
 ---
 
 病毒有一些部分是利用登錄檔來進行破壞電腦，基本上我只貼一種，登錄檔還有很多地方也有藏，<br/>

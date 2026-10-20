@@ -3,8 +3,8 @@ title: "寒假的最後一天 - 宜蘭太平山行"
 date: 2010-02-21T21:12:57
 slug: "yilan-taiping-mountain-winter-trip"
 aliases: ["/posts/%e5%af%92%e5%81%87%e7%9a%84%e6%9c%80%e5%be%8c%e4%b8%80%e5%a4%a9-%e5%ae%9c%e8%98%ad%e5%a4%aa%e5%b9%b3%e5%b1%b1%e8%a1%8c/"]
-tags: ["遊記"]
-categories: ["生活札記"]
+tags: ["Yilan"]
+categories: ["Travel"]
 ---
 
 <a href="http://picasaweb.google.com.tw/lh/photo/EtAzZkPK_EG3hXXsd2JTNQ?feat=embedwebsite"><img src="http://lh3.ggpht.com/_Oa6EYoORRA4/S4Eq-xV-v4I/AAAAAAAAAf0/9WdxNEUJVvg/s400/DSCN0010.JPG" alt="" /></a>

@@ -3,8 +3,8 @@ title: "6/24 花蓮行第三日"
 date: 2010-06-25T12:06:09
 slug: "624-hualien-trip-day-3"
 aliases: ["/posts/624-%e8%8a%b1%e8%93%ae%e8%a1%8c%e7%ac%ac%e4%b8%89%e6%97%a5/"]
-tags: ["遊記", "花蓮", "密宗", "慶修院", "捷安特環島", "池南部落", "清水斷崖", "鯉魚潭"]
-categories: ["生活札記"]
+tags: ["Hualien"]
+categories: ["Travel"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/06/000111.jpg"><img class="alignnone size-large wp-image-3355" title="000111" src="{{< param imageBase >}}/wp-content/uploads/2010/06/000111-533x400.jpg" alt="" width="533" height="400" /></a>

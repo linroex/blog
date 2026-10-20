@@ -3,8 +3,8 @@ title: "Uptime Robot - 最短間隔5分鐘，檢查你網站是否能瀏覽"
 date: 2011-02-20T13:48:36
 slug: "uptime-robot-5-min-interval-check"
 aliases: ["/posts/uptime-robot-%e6%9c%80%e7%9f%ad%e9%96%93%e9%9a%945%e5%88%86%e9%90%98%ef%bc%8c%e6%aa%a2%e6%9f%a5%e4%bd%a0%e7%b6%b2%e7%ab%99%e6%98%af%e5%90%a6%e8%83%bd%e7%80%8f%e8%a6%bd/"]
-tags: ["Uptime Robot", "上線率"]
-categories: ["實用網站", "網站架設"]
+tags: ["Monitoring", "Uptime Robot"]
+categories: ["SRE"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-20_132741.jpg"><img class="size-large wp-image-4782 aligncenter" title="2011-02-20_132741" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-20_132741-520x381.jpg" alt="" width="520" height="381" /></a></p>

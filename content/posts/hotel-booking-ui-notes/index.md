@@ -3,8 +3,8 @@ title: "飯店訂房介面的三兩事"
 date: 2017-02-25T16:55:26
 slug: "hotel-booking-ui-notes"
 aliases: ["/posts/%e9%a3%af%e5%ba%97%e8%a8%82%e6%88%bf%e4%bb%8b%e9%9d%a2%e7%9a%84%e4%b8%89%e5%85%a9%e4%ba%8b/"]
-tags: ["Airbnb", "旅遊"]
-categories: []
+tags: ["Hotel Booking", "UX"]
+categories: ["Travel"]
 ---
 
 你都在哪裡訂飯店呢？ 是 Agoda、Booking.com 還是 Airbnb 呢？ 恰好最近要去日本旅遊，穿梭各訂房網站時，發現許多有趣的事情，例如明明評價篩選很簡單，為何 Airbnb 到現在還不肯提供呢？ 以及同樣簡單的日期選擇，在這次訂房的過程中，就看到兩種的做法，其實仔細去看不同訂房網站的介面，會發現許多有趣的事情呢！

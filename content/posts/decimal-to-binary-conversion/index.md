@@ -3,8 +3,8 @@ title: "如何把十進位數字轉換成二進位？"
 date: 2011-04-16T19:38:38
 slug: "decimal-to-binary-conversion"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e6%8a%8a%e5%8d%81%e9%80%b2%e4%bd%8d%e6%95%b8%e5%ad%97%e8%bd%89%e6%8f%9b%e6%88%90%e4%ba%8c%e9%80%b2%e4%bd%8d%ef%bc%9f/"]
-tags: ["C++", "二進位", "十進位"]
-categories: ["VB6", "C++"]
+tags: ["C++", "Math"]
+categories: ["Programming"]
 ---
 
 <p><a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-16_185412.jpg"><img title="2011-04-16_185412" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-16_185412.jpg" alt="" width="205" height="237" /></a></p>

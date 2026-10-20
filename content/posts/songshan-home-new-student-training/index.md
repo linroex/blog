@@ -3,8 +3,8 @@ title: "松山家商新生訓練~ 然後要開學了^^"
 date: 2010-08-20T23:47:55
 slug: "songshan-home-new-student-training"
 aliases: ["/posts/%e6%9d%be%e5%b1%b1%e5%ae%b6%e5%95%86%e6%96%b0%e7%94%9f%e8%a8%93%e7%b7%b4-%e7%84%b6%e5%be%8c%e8%a6%81%e9%96%8b%e5%ad%b8%e4%ba%86/"]
-tags: []
-categories: ["生活札記"]
+tags: ["Songshan Vocational School"]
+categories: ["Life"]
 ---
 
 好像是前天的事了吧

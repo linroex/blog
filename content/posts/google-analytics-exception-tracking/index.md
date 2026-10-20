@@ -3,7 +3,7 @@ title: "Google Analytics Exception Tracking"
 date: 2017-02-19T10:15:29
 slug: "google-analytics-exception-tracking"
 tags: ["Google Analytics"]
-categories: []
+categories: ["Blog"]
 ---
 
 其實在 Google Analytics 有隱藏版例外追蹤的功能，透過 Google Analytics 搜集網站前後端（或 App）的例外訊息後加以分析，以我這次的應用場景舉例，當使用者填寫表單並送出後，我會驗證使用者填寫的資訊是否有錯誤，如果有忘記填某個欄位，就會將錯誤訊息送回 GA，之後到 GA 檢視錯誤訊息的出現次數，某種程度上可以猜測是否介面設計不好導致使用者漏了該欄位。

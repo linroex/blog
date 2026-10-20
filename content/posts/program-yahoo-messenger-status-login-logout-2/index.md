@@ -3,8 +3,8 @@ title: "如何寫程式對Yahoo! Messenger進行存取(修改狀態、登入、�
 date: 2010-11-07T14:39:23
 slug: "program-yahoo-messenger-status-login-logout-2"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%af%ab%e7%a8%8b%e5%bc%8f%e5%b0%8dyahoo-messenger%e9%80%b2%e8%a1%8c%e5%ad%98%e5%8f%96%e4%bf%ae%e6%94%b9%e7%8b%80%e6%85%8b%e3%80%81%e7%99%bb%e5%85%a5%e3%80%81%e7%99%bb%e5%87%ba-2/"]
-tags: ["PHP", "VB", "改狀態", "Yahoo", "惡作劇", "即時通"]
-categories: ["VB.NET", "程式語言"]
+tags: ["VB", "Instant Messaging"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-07_153926.jpg"><img class="size-large wp-image-3955 aligncenter" title="2010-11-07_153926" src="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-07_153926-520x292.jpg" alt="" width="520" height="292" /></a></p>

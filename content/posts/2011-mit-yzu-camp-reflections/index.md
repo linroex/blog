@@ -3,8 +3,8 @@ title: "2011 MIT-YZU Camp 感想"
 date: 2011-07-18T21:38:44
 slug: "2011-mit-yzu-camp-reflections"
 aliases: ["/posts/2011-mit-yzu-camp-%e6%84%9f%e6%83%b3/"]
-tags: ["MIT", "My Camp", "元智"]
-categories: ["生活札記"]
+tags: ["Yuan Ze University", "Camps"]
+categories: ["Life"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/CIMG0208.jpg"><img class="size-large wp-image-5386 aligncenter" title="CIMG0208" src="{{< param imageBase >}}/wp-content/uploads/2011/07/CIMG0208-520x390.jpg" alt="" width="520" height="390" /></a>

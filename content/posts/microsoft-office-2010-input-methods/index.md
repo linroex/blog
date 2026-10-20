@@ -3,8 +3,8 @@ title: "Microsoft Office 輸入法 2010 - 包含新注音、新倉頡、新速�
 date: 2010-09-04T10:00:27
 slug: "microsoft-office-2010-input-methods"
 aliases: ["/posts/microsoft-office-%e8%bc%b8%e5%85%a5%e6%b3%95-2010-%e5%8c%85%e5%90%ab%e6%96%b0%e6%b3%a8%e9%9f%b3%e3%80%81%e6%96%b0%e5%80%89%e9%a0%a1%e3%80%81%e6%96%b0%e9%80%9f%e6%88%90%e8%bc%b8%e5%85%a5%e6%b3%95/"]
-tags: ["輸入法", "office", "微軟", "新倉頡", "新注音", "新速成"]
-categories: ["Windows系列", "文書處理"]
+tags: ["Input Methods", "Office"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/08/office-2010.gif"><img class="size-full wp-image-3673 aligncenter" title="office-2010" src="{{< param imageBase >}}/wp-content/uploads/2010/08/office-2010.gif" alt="" width="470" height="150" /></a></p>

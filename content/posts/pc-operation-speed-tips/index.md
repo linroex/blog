@@ -3,8 +3,8 @@ title: "你所不知道的一些小技巧，讓你操作電腦的速度變更快
 date: 2011-05-21T01:26:16
 slug: "pc-operation-speed-tips"
 aliases: ["/posts/%e4%bd%a0%e6%89%80%e4%b8%8d%e7%9f%a5%e9%81%93%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e6%8a%80%e5%b7%a7%ef%bc%8c%e8%ae%93%e4%bd%a0%e6%93%8d%e4%bd%9c%e9%9b%bb%e8%85%a6%e7%9a%84%e9%80%9f%e5%ba%a6%e8%ae%8a/"]
-tags: ["vi", "文字編輯器", "電腦技巧"]
-categories: ["Windows系列", "Linux"]
+tags: ["Windows", "Linux"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/201105210125.jpg"><img class="size-large wp-image-5106 aligncenter" title="201105210125" src="{{< param imageBase >}}/wp-content/uploads/2011/05/201105210125-520x390.jpg" alt="" width="520" height="390" /></a>

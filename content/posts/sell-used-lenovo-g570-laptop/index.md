@@ -3,8 +3,8 @@ title: "[已出售]二手Lenovo G570 筆電，使用近兩年，機器一切正�
 date: 2013-07-25T22:00:05
 slug: "sell-used-lenovo-g570-laptop"
 aliases: ["/posts/%e5%87%ba%e5%94%ae%e4%ba%8c%e6%89%8blenovo-g570-%e7%ad%86%e9%9b%bb%ef%bc%8c%e4%bd%bf%e7%94%a8%e8%bf%91%e5%85%a9%e5%b9%b4%ef%bc%8c%e6%a9%9f%e5%99%a8%e4%b8%80%e5%88%87%e6%ad%a3%e5%b8%b8/"]
-tags: ["G", "G570", "二手", "筆電", "聯想"]
-categories: ["本站公告"]
+tags: ["Laptops", "Secondhand"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2013/07/1.jpg"><img alt="P1040244" src="{{< param imageBase >}}/wp-content/uploads/2013/07/1-520x346.jpg" width="520" height="346" /></a>

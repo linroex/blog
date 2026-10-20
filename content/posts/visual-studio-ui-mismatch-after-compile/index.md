@@ -3,8 +3,8 @@ title: "使用Visual Studio，然後設計出來的介面跟編譯後的介面�
 date: 2011-08-10T17:46:36
 slug: "visual-studio-ui-mismatch-after-compile"
 aliases: ["/posts/%e4%bd%bf%e7%94%a8visual-studio%ef%bc%8c%e7%84%b6%e5%be%8c%e8%a8%ad%e8%a8%88%e5%87%ba%e4%be%86%e7%9a%84%e4%bb%8b%e9%9d%a2%e8%b7%9f%e7%b7%a8%e8%ad%af%e5%be%8c%e7%9a%84%e4%bb%8b%e9%9d%a2%e4%b8%8d/"]
-tags: []
-categories: ["Visual Studio"]
+tags: ["Visual Studio"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-02_200036.jpg"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" title="2011-08-02_200036" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-02_200036_thumb.jpg" alt="2011-08-02_200036" width="520" height="319" border="0" /></a>

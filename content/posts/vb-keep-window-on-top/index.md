@@ -4,7 +4,7 @@ date: 2009-02-14T15:04:00
 slug: "vb-keep-window-on-top"
 aliases: ["/posts/vb%e7%a8%8b%e5%bc%8f%e7%bd%ae%e9%a0%82/"]
 tags: ["VB"]
-categories: ["VB.NET"]
+categories: ["Programming"]
 ---
 
 首先請在程式裡加入timer元件

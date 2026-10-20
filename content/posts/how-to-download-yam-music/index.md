@@ -3,8 +3,8 @@ title: "GooTube FLV - 讓你輕鬆抓.安全抓MP3音樂"
 date: 2009-10-30T04:49:00
 slug: "how-to-download-yam-music"
 aliases: ["/posts/%e6%8a%93yam%e9%9f%b3%e6%a8%82%e7%9a%84%e6%96%b9%e6%b3%95/"]
-tags: ["Yam", "Youtube", "音樂"]
-categories: ["實用網站"]
+tags: ["Yam"]
+categories: ["Web Apps"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2009/04/2009-10-31-16-38-31.jpg"><img class="size-full wp-image-2147 aligncenter" title="2009-10-31 16 38 31" src="{{< param imageBase >}}/wp-content/uploads/2009/04/2009-10-31-16-38-31.jpg" alt="2009-10-31 16 38 31" width="399" height="65" /></a></p>

@@ -4,7 +4,7 @@ date: 2009-06-14T14:53:09
 slug: "php-probe-check-hosting-performance"
 aliases: ["/posts/php%e6%8e%a2%e9%87%9d-%e4%ba%86%e8%a7%a3%e4%bd%a0%e4%bd%bf%e7%94%a8%e7%9a%84%e7%a9%ba%e9%96%93%e7%a9%a9%e5%ba%a6%e7%a8%8b%e5%ba%a6/"]
 tags: ["PHP"]
-categories: ["其他套件"]
+categories: ["SRE"]
 ---
 
 我想有很多的人架站時都是使用免費的虛擬主機吧!

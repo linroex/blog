@@ -3,8 +3,8 @@ title: "Google Chrome 5 Beta - V8引擎大升級且內建Flash Player"
 date: 2010-05-08T16:46:32
 slug: "google-chrome-5-beta-v8-engine"
 aliases: ["/posts/google-chrome-5-beta-v8%e5%bc%95%e6%93%8e%e5%a4%a7%e5%8d%87%e7%b4%9a%e5%85%a7%e5%bb%baflash-player/"]
-tags: ["Google", "Google Chrome", "Flash"]
-categories: ["瀏覽器"]
+tags: ["Chrome"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/05/2010-05-08_164850.jpg"><img class="alignnone size-large wp-image-3101" title="2010-05-08_164850" src="{{< param imageBase >}}/wp-content/uploads/2010/05/2010-05-08_164850-500x295.jpg" alt="" width="400" height="236" /></a>

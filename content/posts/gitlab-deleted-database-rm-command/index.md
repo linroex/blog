@@ -3,8 +3,8 @@ title: "當 GitLab 誤刪資料庫，我們該如何管好 rm 指令？"
 date: 2017-02-01T23:58:28
 slug: "gitlab-deleted-database-rm-command"
 aliases: ["/posts/%e7%95%b6-gitlab-%e8%aa%a4%e5%88%aa%e8%b3%87%e6%96%99%e5%ba%ab%ef%bc%8c%e6%88%91%e5%80%91%e8%a9%b2%e5%a6%82%e4%bd%95%e7%ae%a1%e5%a5%bd-rm-%e6%8c%87%e4%bb%a4%ef%bc%9f/"]
-tags: ["Linux"]
-categories: []
+tags: ["GitLab", "Linux"]
+categories: ["SRE"]
 ---
 
 不小心把根目錄刪除這種慘劇，我們從小都當笑話聽，但可千萬別以為這只是個笑話！ 光小弟自己就看過無數朋友的電腦發生這種慘劇，而今天 GitLab （類似 Github 的服務）的工程師也親身示範了 rm -rf 指令的莫大威力...... 他們把 Production Server 的 Database 砍掉了...... 過去一直覺得這種慘劇不會發生在自己身上，但現在連 GitLab 這種有上萬人在用的服務，都因為大意而發生這種事情，也讓我研究了一下該如何避免，這邊就來聊聊我們該如何把 rm 指令管好吧！

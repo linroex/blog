@@ -3,8 +3,8 @@ title: "【C++】用CMD傳送檔案給主控台應用程式以及傳回資料"
 date: 2010-12-04T10:00:16
 slug: "c-cmd-send-file-to-console-app-2"
 aliases: ["/posts/%e3%80%90c%e3%80%91%e7%94%a8cmd%e5%82%b3%e9%80%81%e6%aa%94%e6%a1%88%e7%b5%a6%e4%b8%bb%e6%8e%a7%e5%8f%b0%e6%87%89%e7%94%a8%e7%a8%8b%e5%bc%8f%e4%bb%a5%e5%8f%8a%e5%82%b3%e5%9b%9e%e8%b3%87%e6%96%99-2/"]
-tags: ["C++", "CMD", "主控台應用程式"]
-categories: ["C/C++"]
+tags: ["C++", "Windows"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-26_232836.jpg"><img class="size-large wp-image-4097 aligncenter" title="2010-11-26_232836" src="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-26_232836-520x365.jpg" alt="" width="520" height="365" /></a></p>

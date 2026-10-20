@@ -3,8 +3,8 @@ title: "Opera Unite 超簡單建立檔案分享、即時通訊、雲端音樂！
 date: 2011-08-10T16:56:26
 slug: "opera-unite-file-sharing-im-music"
 aliases: ["/posts/opera-unite-%e8%b6%85%e7%b0%a1%e5%96%ae%e5%bb%ba%e7%ab%8b%e6%aa%94%e6%a1%88%e5%88%86%e4%ba%ab%e3%80%81%e5%8d%b3%e6%99%82%e9%80%9a%e8%a8%8a%e3%80%81%e9%9b%b2%e7%ab%af%e9%9f%b3%e6%a8%82%ef%bc%81/"]
-tags: ["opera", "網路硬碟", "雲端", "Opera Unite", "雲端影音"]
-categories: ["瀏覽器", "網站架設"]
+tags: ["Opera"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-10_164535.jpg"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: block; float: none; margin-left: auto; margin-right: auto; padding-top: 0px; border: 0px;" title="2011-08-10_164535" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-10_164535_thumb.jpg" alt="2011-08-10_164535" width="520" height="382" border="0" /></a>

@@ -3,7 +3,7 @@ title: "Generate Large File on Linux/macOS"
 date: 2017-01-27T23:59:59
 slug: "generate-large-file-on-linuxmacos"
 tags: ["Linux"]
-categories: []
+categories: ["SRE"]
 ---
 
 有時候為了測試網路速度、硬碟讀寫，或是程式的運作效能等等，我們會需要產生指定大小的檔案作為測試之用，這時大家肯定腦海都浮現出 dd 這傢伙對吧！ 但使用 dd 產生檔案時，是否覺得很慢呢？ 此外你知道除了 dd 之外，還有 truncate、fallocate 這兩個傢伙可以使用嗎？ 這邊會簡單說明如果要產生大檔案，你有哪些方法可以使用、如何使用，以及他們之間的差異。要特別注意，這邊產生的檔案其內容都是無意義的。

@@ -3,8 +3,8 @@ title: "FixDwndp  幫你解決無法連上微軟網站的問題"
 date: 2009-06-20T20:26:08
 slug: "fixdwndp-cannot-connect-microsoft-sites"
 aliases: ["/posts/fixdwndp-%e5%b9%ab%e4%bd%a0%e8%a7%a3%e6%b1%ba%e7%84%a1%e6%b3%95%e9%80%a3%e4%b8%8a%e5%be%ae%e8%bb%9f%e7%b6%b2%e7%ab%99%e7%9a%84%e5%95%8f%e9%a1%8c/"]
-tags: ["殺毒"]
-categories: ["防毒軟體"]
+tags: ["Antivirus", "Microsoft"]
+categories: ["Security"]
 ---
 
 話說我今天在上網時又很意外的發現不能連線到微軟的網站,這讓我想起了上次電腦壞掉的慘況,沒想到..............   竟然真的又發生了!還記得上次我電腦因為不知名原因都不能連線到微軟相關的網站,也不能開啟防毒軟體的網站,還有病毒碼也不能更新,那時我是直接重灌,畢竟電腦也用蠻久了,可是這次電腦才剛買它就來作怪@@

@@ -3,8 +3,8 @@ title: "KartRider Rush - iOS版的跑跑卡丁車，內建3張免費地圖、可
 date: 2011-05-23T10:45:52
 slug: "kartrider-rush-ios"
 aliases: ["/posts/kartrider-rush-ios%e7%89%88%e7%9a%84%e8%b7%91%e8%b7%91%e5%8d%a1%e4%b8%81%e8%bb%8a%ef%bc%8c%e5%85%a7%e5%bb%ba3%e5%bc%b5%e5%85%8d%e8%b2%bb%e5%9c%b0%e5%9c%96%e3%80%81%e5%8f%af%e4%bb%a5%e9%9b%99/"]
-tags: ["iPad", "App Store", "iOS", "Game", "跑跑卡丁車"]
-categories: ["單機遊戲", "iPod Touch"]
+tags: ["KartRider", "iOS"]
+categories: ["Games"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/IMG_0057.jpg"><img class="size-large wp-image-5122 aligncenter" title="IMG_0057" src="{{< param imageBase >}}/wp-content/uploads/2011/05/IMG_0057-520x390.jpg" alt="" width="520" height="390" /></a>

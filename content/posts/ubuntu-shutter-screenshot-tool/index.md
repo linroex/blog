@@ -3,8 +3,8 @@ title: "【Ubuntu】方便且有中文語系的螢幕截圖軟體 - Shutter"
 date: 2011-01-22T09:30:25
 slug: "ubuntu-shutter-screenshot-tool"
 aliases: ["/posts/%e3%80%90ubuntu%e3%80%91%e6%96%b9%e4%be%bf%e4%b8%94%e6%9c%89%e4%b8%ad%e6%96%87%e8%aa%9e%e7%b3%bb%e7%9a%84%e8%9e%a2%e5%b9%95%e6%88%aa%e5%9c%96%e8%bb%9f%e9%ab%94-shutter/"]
-tags: ["Ubuntu", "Shutter", "螢幕截圖"]
-categories: ["Linux", "Ubuntu"]
+tags: ["Ubuntu", "Screenshots"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-21_124127.jpg"><img class="size-large wp-image-4415 aligncenter" title="2011-01-21_124127" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-21_124127-520x437.jpg" alt="" width="520" height="437" /></a></p>

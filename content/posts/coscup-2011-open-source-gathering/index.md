@@ -3,8 +3,8 @@ title: "COSCUP 2011 一場Open Source人的聚會"
 date: 2011-08-22T19:17:13
 slug: "coscup-2011-open-source-gathering"
 aliases: ["/posts/coscup-2011-%e4%b8%80%e5%a0%b4open-source%e4%ba%ba%e7%9a%84%e8%81%9a%e6%9c%83/"]
-tags: ["COSCUP", "Open Source", "社群活動"]
-categories: ["生活札記"]
+tags: ["COSCUP", "Open Source"]
+categories: ["Life"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/CIMG0328.jpg"><img class="alignnone size-large wp-image-5697" title="CIMG0328" src="{{< param imageBase >}}/wp-content/uploads/2011/08/CIMG0328-520x390.jpg" alt="" width="520" height="390" /></a>

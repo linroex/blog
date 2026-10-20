@@ -3,8 +3,8 @@ title: "【Android】Barcode Scanner – 解析QR Code的小工具,讓你快速�
 date: 2011-02-07T09:00:05
 slug: "android-barcode-scanner-install-apk"
 aliases: ["/posts/%e3%80%90android%e3%80%91barcode-scanner-%e8%a7%a3%e6%9e%90qr-code%e7%9a%84%e5%b0%8f%e5%b7%a5%e5%85%b7%e8%ae%93%e4%bd%a0%e5%bf%ab%e9%80%9f%e5%ae%89%e8%a3%9dandroid-app/"]
-tags: ["QR Code"]
-categories: ["Android"]
+tags: ["Android", "QR Code"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/01/snap20110130_160523.jpg"><img class="size-full wp-image-4555 aligncenter" title="snap20110130_160523" src="{{< param imageBase >}}/wp-content/uploads/2011/01/snap20110130_160523.jpg" alt="" width="320" height="240" /></a>

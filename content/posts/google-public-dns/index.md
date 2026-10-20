@@ -4,7 +4,7 @@ date: 2010-01-02T17:27:13
 slug: "google-public-dns"
 aliases: ["/posts/%e8%ae%93google%e4%bf%9d%e8%ad%b7%e6%82%a8%e7%9a%84%e4%b8%8a%e7%b6%b2%e5%ae%89%e5%85%a8-google-public-dns/"]
 tags: ["Google", "DNS"]
-categories: ["Google", "資訊安全"]
+categories: ["Web Apps"]
 ---
 
 <strong>Google Public DNS</strong>是Google最近推出的一項服務,可以讓您使用Google提供的免費DNS上網,使用Google Public DNS的好處就是可以讓你上網比較安全,<span style="color: #0000ff;">而且上網速度也可能會加快</span>,話說目前<a href="http://www.opendns.com/">openDNS</a>也有提供DNS服務,也蠻不錯用的,大家可以參考看看,另外<strong>Google Public DNS</strong>也是Google公司少數幾種不需要連到網站上即可使用的服務(直接在電腦上設定)

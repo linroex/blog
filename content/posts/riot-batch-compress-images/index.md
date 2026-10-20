@@ -3,8 +3,8 @@ title: "讓RIOT幫你批次壓縮PNG,JPEG等圖檔到指定大小"
 date: 2010-09-11T10:00:36
 slug: "riot-batch-compress-images"
 aliases: ["/posts/%e8%ae%93riot%e5%b9%ab%e4%bd%a0%e6%89%b9%e6%ac%a1%e5%a3%93%e7%b8%aepngjpeg%e7%ad%89%e5%9c%96%e6%aa%94%e5%88%b0%e6%8c%87%e5%ae%9a%e5%a4%a7%e5%b0%8f/"]
-tags: ["Blog", "JPEG", "PNG", "RIOT", "批次壓縮"]
-categories: ["影像處理"]
+tags: ["Image Compression"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/08/2010-08-05_000328.jpg"><img class="aligncenter size-large wp-image-3642" title="2010-08-05_000328" src="{{< param imageBase >}}/wp-content/uploads/2010/08/2010-08-05_000328-546x400.jpg" alt="" width="546" height="400" /></a>

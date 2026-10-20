@@ -3,8 +3,8 @@ title: "如何修改SSH預設的22連接埠改走其他Port？"
 date: 2011-04-16T10:56:20
 slug: "change-ssh-default-port-22"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9ssh%e9%a0%90%e8%a8%ad%e7%9a%8422%e9%80%a3%e6%8e%a5%e5%9f%a0%e6%94%b9%e8%b5%b0%e5%85%b6%e4%bb%96port%ef%bc%9f/"]
-tags: ["Linux", "VPS", "ssh", "Port"]
-categories: ["Linux", "網際網路", "VPS"]
+tags: ["SSH", "VPS"]
+categories: ["SRE"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-16_105528.jpg"><img class="size-large wp-image-5027 aligncenter" title="2011-04-16_105528" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-16_105528-520x437.jpg" alt="" width="520" height="437" /></a>▲▲透過SSH，可以遠端幫主機進行很多工作</p>

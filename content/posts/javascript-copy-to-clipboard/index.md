@@ -4,7 +4,7 @@ date: 2016-12-10T15:19:09
 slug: "javascript-copy-to-clipboard"
 aliases: ["/posts/%e4%bd%bf%e7%94%a8-javascript-%e6%93%8d%e4%bd%9c%e5%89%aa%e8%b2%bc%e7%b0%bf%e8%a4%87%e8%a3%bd%e6%96%87%e5%ad%97/"]
 tags: ["JavaScript", "jQuery"]
-categories: ["JavaScript"]
+categories: ["Programming"]
 ---
 
 在過去想要用 JavaScript 操作剪貼簿進行複製、貼上的動作十分麻煩，之前在開發 NTUST.ME 臺科短網址時，為了方便大家複製縮短後的網址，特別研究了 JavaScript 對剪貼簿操作的 API，發現在較新版的瀏覽器，其實有一個 execCommand 可以進行許多方便的文字操作，例如複製、全選等等，以下就讓我來介紹一下吧！

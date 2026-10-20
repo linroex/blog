@@ -3,8 +3,8 @@ title: "【公告】更換佈景Pyrmont V2,歡迎大家提供意見"
 date: 2010-01-09T20:12:11
 slug: "announcement-new-theme-pyrmont-v2"
 aliases: ["/posts/%e3%80%90%e5%85%ac%e5%91%8a%e3%80%91%e6%9b%b4%e6%8f%9b%e4%bd%88%e6%99%afpyrmont-v2%e6%ad%a1%e8%bf%8e%e5%a4%a7%e5%ae%b6%e6%8f%90%e4%be%9b%e6%84%8f%e8%a6%8b/"]
-tags: ["theme"]
-categories: ["本站公告"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 大家安安~

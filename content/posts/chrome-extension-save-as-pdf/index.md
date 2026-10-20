@@ -3,8 +3,8 @@ title: "【Chrome Plugins】Save as PDF 把網頁存成PDF格式以便保存"
 date: 2011-09-03T10:46:51
 slug: "chrome-extension-save-as-pdf"
 aliases: ["/posts/%e3%80%90chrome-plugins%e3%80%91save-as-pdf-%e6%8a%8a%e7%b6%b2%e9%a0%81%e5%ad%98%e6%88%90pdf%e6%a0%bc%e5%bc%8f%e4%bb%a5%e4%be%bf%e4%bf%9d%e5%ad%98/"]
-tags: ["Google", "Chrome", "外掛", "PDF"]
-categories: ["Chrome"]
+tags: ["Chrome Extensions", "PDF"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/09/2011-09-03_104640.jpg"><img class="size-large wp-image-5752 aligncenter" title="2011-09-03_104640" src="{{< param imageBase >}}/wp-content/uploads/2011/09/2011-09-03_104640-520x165.jpg" alt="" width="520" height="165" /></a>

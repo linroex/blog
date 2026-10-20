@@ -3,8 +3,8 @@ title: "Calibre 電子書轉檔、編輯、閱讀一應俱全，還可將電子�
 date: 2012-01-26T09:00:03
 slug: "calibre-ebook-manager"
 aliases: ["/posts/calibre-%e9%9b%bb%e5%ad%90%e6%9b%b8%e8%bd%89%e6%aa%94%e3%80%81%e7%b7%a8%e8%bc%af%e3%80%81%e9%96%b1%e8%ae%80%e4%b8%80%e6%87%89%e4%bf%b1%e5%85%a8%ef%bc%8c%e9%82%84%e5%8f%af%e5%b0%87%e9%9b%bb%e5%ad%90/"]
-tags: ["Kindle", "Calibre", "epub", "mobi", "電子書"]
-categories: ["Kindle"]
+tags: ["Calibre", "E-books"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-25_152817.jpg"><img class="alignnone size-large wp-image-5986" title="2012-01-25_152817" src="{{< param imageBase >}}/wp-content/uploads/2012/01/2012-01-25_152817-520x381.jpg" alt="" width="520" height="381" /></a>

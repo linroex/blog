@@ -3,8 +3,8 @@ title: "Vista使用心得"
 date: 2009-05-25T19:49:52
 slug: "windows-vista-experience"
 aliases: ["/posts/vista%e4%bd%bf%e7%94%a8%e5%bf%83%e5%be%97/"]
-tags: ["IE"]
-categories: ["Windows系列"]
+tags: ["Windows"]
+categories: ["Hardware"]
 ---
 
 以前都一直聽人說Vista很爛

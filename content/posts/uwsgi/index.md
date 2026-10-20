@@ -2,8 +2,8 @@
 title: "uWSGI"
 date: 2015-07-24T19:17:45
 slug: "uwsgi"
-tags: ["Python"]
-categories: []
+tags: ["Python", "uWSGI"]
+categories: ["SRE"]
 ---
 
 <h1>介紹</h1>

@@ -3,8 +3,8 @@ title: "【VB.Net】取得資料夾中特定格式檔案路徑並存入ArrayList
 date: 2010-11-07T15:45:56
 slug: "vb-net-get-folder-file-paths-arraylist-2"
 aliases: ["/posts/%e3%80%90vb-net%e3%80%91%e5%8f%96%e5%be%97%e8%b3%87%e6%96%99%e5%a4%be%e4%b8%ad%e7%89%b9%e5%ae%9a%e6%a0%bc%e5%bc%8f%e6%aa%94%e6%a1%88%e8%b7%af%e5%be%91%e4%b8%a6%e5%ad%98%e5%85%a5arraylist%e7%a8%8d-2/"]
-tags: ["VB", ".NET", "ArrayList", "My"]
-categories: ["VB.NET"]
+tags: ["VB", ".NET"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-07_154306.jpg"><img class="size-large wp-image-3957 aligncenter" title="2010-11-07_154306" src="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-07_154306-520x311.jpg" alt="" width="520" height="311" /></a></p>

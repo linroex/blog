@@ -3,8 +3,8 @@ title: "UptimeRobot - 網站存活狀態檢查服務"
 date: 2017-01-31T17:26:37
 slug: "uptimerobot-site-monitoring-service"
 aliases: ["/posts/uptimerobot-%e7%b6%b2%e7%ab%99%e5%ad%98%e6%b4%bb%e7%8b%80%e6%85%8b%e6%aa%a2%e6%9f%a5%e6%9c%8d%e5%8b%99/"]
-tags: ["Uptime"]
-categories: []
+tags: ["Monitoring"]
+categories: ["SRE"]
 ---
 
 <a href="https://uptimerobot.com">UptimeRobot</a> 是一個老牌子、穩定且功能完整的網站狀態檢查服務，當你設定完成後，UptimeRobot 會定時去檢查網站是否在線上，這對於網站管理者十分重要，試想如果你更新伺服器後網站壞掉 3 小時你才發現，這三小時的客戶就都流失了！ <a href="https://uptimerobot.com">UptimeRobot</a> 的免費方案是 50 個觀測對象內、每五分鐘檢查一次，此外有支援 HTTP Status、Keyword、Ping、Port 等四種檢測方式，如果有狀況 UptimeRobot 支援簡訊、Email、Slack、WebHook 等多種通知方式，對我而言更重要的是 UptimeRobot 經營穩定，我從 2011 年使用至今。

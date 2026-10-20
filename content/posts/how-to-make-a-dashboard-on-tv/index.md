@@ -2,8 +2,8 @@
 title: "How to make a Dashboard on TV"
 date: 2016-12-23T01:58:44
 slug: "how-to-make-a-dashboard-on-tv"
-tags: ["Dashboard"]
-categories: []
+tags: ["Dashboard", "Monitoring"]
+categories: ["SRE"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/螢幕快照-2016-12-23-上午1.57.42.jpg"]
 ---
 

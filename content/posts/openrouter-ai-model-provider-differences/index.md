@@ -2,7 +2,7 @@
 title: "AI 模型沒換，怎麼突然變笨了？聊聊 OpenRouter 的供應商差異"
 date: 2026-10-19T22:20:15+08:00
 slug: "openrouter-ai-model-provider-differences"
-tags: ["AI", "OpenRouter", "OpenCode"]
+tags: ["OpenRouter", "OpenCode"]
 categories: ["AI"]
 summary: ""
 draft: false

@@ -3,8 +3,8 @@ title: "解決隱藏檔無法開啟"
 date: 2009-05-03T05:38:00
 slug: "fix-hidden-files-cannot-open-registry"
 aliases: ["/posts/%ef%b9%9d%e7%99%bb%e9%8c%84%e6%aa%94%ef%b9%9e%e8%a7%a3%e6%b1%ba%e9%9a%b1%e8%97%8f%e6%aa%94%e7%84%a1%e6%b3%95%e9%96%8b%e5%95%9f/"]
-tags: ["登錄檔"]
-categories: ["Windows系列"]
+tags: ["Windows"]
+categories: ["Hardware"]
 ---
 
 如果中過隨身碟（USB）病毒，有些會將你的隱藏檔變得無法顯現<br/>

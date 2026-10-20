@@ -3,8 +3,8 @@ title: "Plurk Paste - 方便你在Plurk上面張貼極長的訊息、程式碼"
 date: 2011-01-07T15:18:07
 slug: "plurk-paste-long-messages"
 aliases: ["/posts/plurk-paste-%e6%96%b9%e4%be%bf%e4%bd%a0%e5%9c%a8plurk%e4%b8%8a%e9%9d%a2%e5%bc%b5%e8%b2%bc%e6%a5%b5%e9%95%b7%e7%9a%84%e8%a8%8a%e6%81%af%e3%80%81%e7%a8%8b%e5%bc%8f%e7%a2%bc/"]
-tags: ["code", "Plurk", "Plurk Paste"]
-categories: ["實用網站"]
+tags: ["Plurk"]
+categories: ["Web Apps"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-07_150605.jpg"><img class="size-large wp-image-4377 aligncenter" title="2011-01-07_150605" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-07_150605-520x439.jpg" alt="" width="520" height="439" /></a></p>

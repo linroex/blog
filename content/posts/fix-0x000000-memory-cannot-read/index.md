@@ -3,8 +3,8 @@ title: "如何解決「0x000000記憶體不能為Read」"
 date: 2009-02-07T09:24:00
 slug: "fix-0x000000-memory-cannot-read"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e8%a7%a3%e6%b1%ba%e3%80%8c0x000000%e8%a8%98%e6%86%b6%e9%ab%94%e4%b8%8d%e8%83%bd%e7%82%baread%e3%80%8d/"]
-tags: []
-categories: ["Windows系列"]
+tags: ["Windows"]
+categories: ["Hardware"]
 ---
 
 最近玩遊戲時常發生一個問題

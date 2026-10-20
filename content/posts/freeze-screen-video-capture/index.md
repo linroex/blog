@@ -3,8 +3,8 @@ title: "Freez Screen Video Capture - 免費的螢幕錄影程式"
 date: 2009-07-04T11:11:32
 slug: "freeze-screen-video-capture"
 aliases: ["/posts/freez-screen-video-capture-%e5%85%8d%e8%b2%bb%e7%9a%84%e8%9e%a2%e5%b9%95%e9%8c%84%e5%bd%b1%e7%a8%8b%e5%bc%8f/"]
-tags: ["錄影程式"]
-categories: ["錄影程式"]
+tags: ["Screen Recording"]
+categories: ["Software"]
 summary: "Freez Screen Video Capture這套程式可以提共你很多基本的螢幕錄影功能,不但免費而且有人幫忙做好了中文化版,而且他還可以將檔案輸出成AVI格式,布過它本身並沒有內建編輯器的功能其實蠻可惜的"
 ---
 

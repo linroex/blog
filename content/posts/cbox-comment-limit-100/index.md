@@ -3,8 +3,8 @@ title: "Cbox 部落格留言板外掛,限制留言數100篇"
 date: 2009-06-10T20:29:49
 slug: "cbox-comment-limit-100"
 aliases: ["/posts/cbox-%e9%83%a8%e8%90%bd%e6%a0%bc%e7%95%99%e8%a8%80%e6%9d%bf%e5%a4%96%e6%8e%9b%e9%99%90%e5%88%b6%e7%95%99%e8%a8%80%e6%95%b8100%e7%af%87/"]
-tags: ["部落格外掛"]
-categories: ["部落格"]
+tags: ["Blogging"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/06/title4.gif"><img class="alignnone size-full wp-image-1273" title="title4" src="{{< param imageBase >}}/wp-content/uploads/2009/06/title4.gif" alt="title4" width="195" height="79" /></a>

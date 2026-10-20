@@ -2,9 +2,9 @@
 title: "PHPMyAdmin資料庫手動備份與還原"
 date: 2011-02-11T11:11:08
 slug: "phpmyadmin-manual-backup-restore"
-aliases: ["/posts/phpmyadmin%e8%b3%87%e6%96%99%e5%ba%ab%e6%89%8b%e5%8b%95%e5%82%99%e4%bb%bd%e8%88%87%e9%82%84%e5%8e%9f/"]
-tags: ["MySQL", "PHPMyAdmin", "備份"]
-categories: ["PHP", "SQL"]
+aliases: ["/posts/phpmyadmin%e8%b3%87%e6%96%99%e5%ba%ab%e6%89%8b%e5%8b%95%e5%82%99%e4%bb%bd%e8%88%87%e9%82%84%e5%8e%9f/", "/posts/phpmyadmin-manual-backup-restore-2/", "/posts/phpmyadmin%e8%b3%87%e6%96%99%e5%ba%ab%e6%89%8b%e5%8b%95%e5%82%99%e4%bb%bd%e8%88%87%e9%82%84%e5%8e%9f-2/"]
+tags: ["PHPMyAdmin", "MySQL", "Backup"]
+categories: ["SRE"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-11_110444.jpg"><img class="alignnone size-full wp-image-220" title="2011-02-11_110444" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-11_110444.jpg" alt="" width="478" height="378" /></a>

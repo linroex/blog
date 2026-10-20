@@ -2,8 +2,8 @@
 title: "My Kindle Ebook Manage Workflow"
 date: 2019-05-18T00:56:28
 slug: "my-kindle-ebook-manage-workflow"
-tags: ["Amazon", "Kindle", "Calibre", "電子書", "Ebook", "IFTTT"]
-categories: ["Kindle"]
+tags: ["Kindle", "E-books", "Calibre"]
+categories: ["Hardware"]
 images: ["%%IMG%%/wp-content/uploads/2019/05/nemichandra-hombannavar-131171-unsplash.jpg"]
 ---
 

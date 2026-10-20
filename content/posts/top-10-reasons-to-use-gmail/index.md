@@ -3,8 +3,8 @@ title: "十大項你一定要使用Gmail的理由與Gmail使用教學"
 date: 2009-11-08T14:05:22
 slug: "top-10-reasons-to-use-gmail"
 aliases: ["/posts/%e5%8d%81%e5%a4%a7%e4%bd%a0%e4%b8%80%e5%ae%9a%e8%a6%81%e4%bd%bf%e7%94%a8gmail%e7%9a%84%e7%90%86%e7%94%b1%e8%88%87gmail%e4%bd%bf%e7%94%a8%e6%95%99%e5%ad%b8%e6%95%99%e5%ad%b8/"]
-tags: ["Google", "Gmail"]
-categories: ["Google", "信箱"]
+tags: ["Gmail"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/11/2009-11-08_101821.jpg"><img class="aligncenter size-full wp-image-2191" title="2009-11-08_101821" src="{{< param imageBase >}}/wp-content/uploads/2009/11/2009-11-08_101821.jpg" alt="2009-11-08_101821" width="142" height="53" /></a>

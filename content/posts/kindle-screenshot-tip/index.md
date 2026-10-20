@@ -3,8 +3,8 @@ title: "親愛的，你知道 Kindle 也能螢幕截圖嗎？"
 date: 2019-05-17T23:46:41
 slug: "kindle-screenshot-tip"
 aliases: ["/posts/%e8%a6%aa%e6%84%9b%e7%9a%84%ef%bc%8c%e4%bd%a0%e7%9f%a5%e9%81%93-kindle-%e4%b9%9f%e8%83%bd%e8%9e%a2%e5%b9%95%e6%88%aa%e5%9c%96%e5%97%8e%ef%bc%9f/"]
-tags: ["Amazon", "Kindle", "電子書", "Ebook"]
-categories: ["Kindle"]
+tags: ["Kindle", "E-books"]
+categories: ["Hardware"]
 images: ["%%IMG%%/wp-content/uploads/2019/05/freestocks-org-65299-unsplash.jpg"]
 ---
 

@@ -3,8 +3,8 @@ title: "【Google API】透過Google Chart API產生QR-Code，附PHP範例程式
 date: 2011-02-24T23:25:20
 slug: "google-chart-api-qr-code-php"
 aliases: ["/posts/%e3%80%90google-api%e3%80%91%e9%80%8f%e9%81%8egoogle-chart-api%e7%94%a2%e7%94%9fqr-code%ef%bc%8c%e9%99%84php%e7%af%84%e4%be%8b%e7%a8%8b%e5%bc%8f%e7%a2%bc/"]
-tags: ["Google", "Google Chart API", "QR Code", "條碼"]
-categories: ["PHP", "Google API"]
+tags: ["Google API", "PHP", "QR Code"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-24_230500.jpg"><img class="size-large wp-image-328 aligncenter" title="2011-02-24_230500" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-24_230500-540x396.jpg" alt="" width="540" height="396" /></a>

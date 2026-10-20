@@ -3,8 +3,8 @@ title: "Amazon Web Service 多重驗證（MFA）設備遺失處理記述"
 date: 2014-01-15T00:00:09
 slug: "aws-mfa-device-lost-recovery"
 aliases: ["/posts/amazon-web-service-%e5%a4%9a%e9%87%8d%e9%a9%97%e8%ad%89%ef%bc%88mfa%ef%bc%89%e8%a8%ad%e5%82%99%e9%81%ba%e5%a4%b1%e8%99%95%e7%90%86%e8%a8%98%e8%bf%b0/"]
-tags: ["Amazon Web Service", "AWS"]
-categories: ["網際網路"]
+tags: ["AWS"]
+categories: ["SRE"]
 ---
 
 這是一篇記錄AWS MFA遺失時處理方式的文章，我的AWS帳戶都會啟用多重驗證，也就是登入時除了輸入密碼，還要輸入手機上面的驗證碼，但之前因為不小心刪掉驗證碼的App，害我不能登入AWS，而且AWS不知為何，一般會使用二段式驗證的網路服務，都會讓使用者可以把驗證碼寄到簡訊，但AWS卻只有提供手機App產生驗證碼這種方式！ 後來我查了些文章才解決這次危機。

@@ -3,8 +3,8 @@ title: "Yam Batch Download - 批次抓取Yam音樂以及智慧命名功能"
 date: 2010-07-27T22:33:05
 slug: "yam-batch-download-smart-naming-2"
 aliases: ["/posts/yam-batch-download-%e6%89%b9%e6%ac%a1%e6%8a%93%e5%8f%96yam%e9%9f%b3%e6%a8%82%e4%bb%a5%e5%8f%8a%e6%99%ba%e6%85%a7%e5%91%bd%e5%90%8d%e5%8a%9f%e8%83%bd-2/"]
-tags: ["VB", "Yam天空", "影音分享", "抓音樂"]
-categories: ["軟體分享", "VB.NET"]
+tags: ["Yam"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/07/2010-07-27_220336.jpg"><img class="size-large wp-image-3515 aligncenter" title="2010-07-27_220336" src="{{< param imageBase >}}/wp-content/uploads/2010/07/2010-07-27_220336-550x380.jpg" alt="" width="550" height="380" /></a></p>

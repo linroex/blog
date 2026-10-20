@@ -3,8 +3,8 @@ title: "【PHP】使用curl-lib取得無名/Yam音樂的真實下載位址"
 date: 2011-01-25T18:31:04
 slug: "php-curl-get-yam-music-download-url-2"
 aliases: ["/posts/%e3%80%90php%e3%80%91%e4%bd%bf%e7%94%a8curl-lib%e5%8f%96%e5%be%97%e7%84%a1%e5%90%8dyam%e9%9f%b3%e6%a8%82%e7%9a%84%e7%9c%9f%e5%af%a6%e4%b8%8b%e8%bc%89%e4%bd%8d%e5%9d%80-2/"]
-tags: ["PHP", "cURL", "Yam", "wretch"]
-categories: []
+tags: ["PHP", "cURL", "Yam"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;">&nbsp;</p>

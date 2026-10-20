@@ -3,8 +3,8 @@ title: "墾丁露營區整理筆記"
 date: 2017-01-28T10:48:53
 slug: "kenting-campsite-notes"
 aliases: ["/posts/%e5%a2%be%e4%b8%81%e9%9c%b2%e7%87%9f%e5%8d%80%e6%95%b4%e7%90%86%e7%ad%86%e8%a8%98/"]
-tags: ["墾丁", "露營"]
-categories: []
+tags: ["Kenting", "Camping"]
+categories: ["Travel"]
 images: ["%%IMG%%/wp-content/uploads/2017/01/IMG_6324.jpg"]
 ---
 

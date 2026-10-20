@@ -3,7 +3,7 @@ title: "How to use Python GroupBy Data (List+Dict)"
 date: 2016-12-07T01:13:27
 slug: "how-to-use-python-groupby-data-listdict"
 tags: ["Python"]
-categories: []
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/Artboard-3.png"]
 ---
 

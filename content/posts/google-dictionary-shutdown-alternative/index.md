@@ -3,8 +3,8 @@ title: "前些日子Google字典被無預警停用，我們該怎麼辦！？"
 date: 2011-08-12T17:10:31
 slug: "google-dictionary-shutdown-alternative"
 aliases: ["/posts/%e5%89%8d%e4%ba%9b%e6%97%a5%e5%ad%90google%e5%ad%97%e5%85%b8%e8%a2%ab%e7%84%a1%e9%a0%90%e8%ad%a6%e5%81%9c%e7%94%a8%ef%bc%8c%e6%88%91%e5%80%91%e8%a9%b2%e6%80%8e%e9%ba%bc%e8%be%a6%ef%bc%81%ef%bc%9f/"]
-tags: ["API", "Google", "字典"]
-categories: ["實用網站", "Google"]
+tags: ["Google", "Dictionary"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-12_170415.jpg"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: block; float: none; margin-left: auto; margin-right: auto; padding-top: 0px; border-width: 0px;" title="2011-08-12_170415" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-12_170415_thumb.jpg" alt="2011-08-12_170415" width="298" height="151" border="0" /></a>

@@ -3,8 +3,8 @@ title: "如何把影片轉換成音樂？ MediaCoder擷取音軌功能"
 date: 2012-01-28T09:30:56
 slug: "convert-video-to-audio-mediacoder"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e6%8a%8a%e5%bd%b1%e7%89%87%e8%bd%89%e6%8f%9b%e6%88%90%e9%9f%b3%e6%a8%82%ef%bc%9f-mediacoder%e6%93%b7%e5%8f%96%e9%9f%b3%e8%bb%8c%e5%8a%9f%e8%83%bd/"]
-tags: ["MediaCoder", "MP3", "MP4"]
-categories: ["音樂播放&amp;轉檔"]
+tags: ["MediaCoder", "Media Conversion"]
+categories: ["Software"]
 ---
 
 這篇文章是要教大家如何把「影片」轉換成「音樂」，很多時候你可能會在一些影片分享網站（例：Youtube）下載到一些好聽的音樂MV，但是下載下來的格式卻是MP4、FLV這類「影片格式」，這時候你就可以透過MediaCoder這套軟體內建的音軌擷取功能將影片轉成音樂檔～

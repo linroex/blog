@@ -3,8 +3,8 @@ title: "第一桶金：Google ADSense廣告費還有領取西聯匯款注意事�
 date: 2011-01-31T19:18:50
 slug: "google-adsense-first-payment-western-union"
 aliases: ["/posts/%e7%ac%ac%e4%b8%80%e6%a1%b6%e9%87%91%ef%bc%9agoogle-adsense%e5%bb%a3%e5%91%8a%e8%b2%bb%e9%82%84%e6%9c%89%e9%a0%98%e5%8f%96%e8%a5%bf%e8%81%af%e5%8c%af%e6%ac%be%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a0%85/"]
-tags: ["Google", "Google ADSense", "台新銀行", "國泰世華", "西聯匯款"]
-categories: ["Google"]
+tags: ["Google AdSense"]
+categories: ["Blog"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-31_191640.jpg"><img class="size-full wp-image-4609 aligncenter" title="2011-01-31_191640" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-31_191640.jpg" alt="" width="206" height="74" /></a></p>

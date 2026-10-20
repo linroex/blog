@@ -3,8 +3,8 @@ title: "PHPConf 心得分享"
 date: 2011-12-03T17:57:20
 slug: "phpconf-taiwan-recap"
 aliases: ["/posts/phpconf-%e5%bf%83%e5%be%97%e5%88%86%e4%ba%ab/"]
-tags: ["PHP", "PHPConf"]
-categories: ["PHP"]
+tags: ["PHP", "Conferences"]
+categories: ["Life"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/12/phpconf2011_1318928649.png"><img class="aligncenter size-full wp-image-774" title="phpconf2011_1318928649" src="{{< param imageBase >}}/wp-content/uploads/2011/12/phpconf2011_1318928649.png" alt="" width="403" height="178" /></a>

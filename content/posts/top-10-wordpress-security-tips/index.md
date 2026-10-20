@@ -3,8 +3,8 @@ title: "十大WordPress安全設置技巧"
 date: 2009-11-14T22:51:54
 slug: "top-10-wordpress-security-tips"
 aliases: ["/posts/%e3%80%90%e8%bd%89%e8%bc%89%e3%80%91%e5%8d%81%e5%a4%a7wordpress%e5%ae%89%e5%85%a8%e8%ae%be%e7%bd%ae%e6%8a%80%e5%b7%a7/"]
-tags: ["WordPress"]
-categories: ["WordPress"]
+tags: ["WordPress", "Hardening"]
+categories: ["Blog"]
 ---
 
 <p style="margin-top: 10px; margin-right: 0px; margin-bottom: 15px; margin-left: 0px; word-break: break-all; padding: 0px;"></p>

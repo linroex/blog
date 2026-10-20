@@ -2,8 +2,8 @@
 title: "Google Chrome 7 - 支援GPU硬體加速"
 date: 2010-10-24T15:30:53
 slug: "google-chrome-7-gpu"
-tags: ["Google", "Facebook", "Google Chrome", "GPU", "Web Game", "硬體加速"]
-categories: ["Chrome"]
+tags: ["Chrome", "Hardware Acceleration"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/10/2010-10-24_141649.jpg"><img class="alignnone size-full wp-image-3863" title="2010-10-24_141649" src="{{< param imageBase >}}/wp-content/uploads/2010/10/2010-10-24_141649.jpg" alt="" width="508" height="277" /></a>

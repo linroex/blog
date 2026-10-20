@@ -3,7 +3,7 @@ title: "How to Prevent JS Input onFocus Event Fire After Page onFocus"
 date: 2017-02-16T11:27:59
 slug: "how-to-prevent-js-input-onfocus-event-fire-after-page-onfocus"
 tags: ["JavaScript", "HTML"]
-categories: []
+categories: ["Programming"]
 ---
 
 最近的工作是在網站中置入 Google Analytics 的使用者事件追蹤程式碼，我透過 HTML Event 的做法將程式碼掛在 Input 上面，只要使用者點擊特定的欄位、按鈕就會發送一筆記錄到 Google Analytics，這樣的做法沒有什麼問題，但我發現當使用者點擊 Input 欄位後如果切換到其他網頁（Chrome Tabs），當使用者在切換回我的頁面（Page onFocus）時，Input onFocus 事件卻被自動觸發了！

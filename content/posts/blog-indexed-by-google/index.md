@@ -3,8 +3,8 @@ title: "Blog進Google搜尋引擎了"
 date: 2009-06-06T20:51:01
 slug: "blog-indexed-by-google"
 aliases: ["/posts/blog%e9%80%b2google%e6%90%9c%e5%b0%8b%e5%bc%95%e6%93%8e%e4%ba%86/"]
-tags: []
-categories: ["生活札記"]
+tags: ["SEO", "Google"]
+categories: ["Blog"]
 ---
 
 最近發現人氣突然變高了

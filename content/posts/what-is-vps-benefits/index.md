@@ -3,8 +3,8 @@ title: "【VPS】什麼是VPS? 使用VPS有什麼好處嘛?"
 date: 2011-02-05T09:00:59
 slug: "what-is-vps-benefits"
 aliases: ["/posts/%e4%bb%80%e9%ba%bc%e6%98%afvps-%e4%bd%bf%e7%94%a8vps%e6%9c%89%e4%bb%80%e9%ba%bc%e5%a5%bd%e8%99%95%e5%98%9b/"]
-tags: ["捕夢網", "Linux", "OpenVZ", "VPS", "Xen"]
-categories: ["Linux", "VPS"]
+tags: ["VPS"]
+categories: ["SRE"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-30_140229.jpg"><img class="size-large wp-image-4535 aligncenter" title="2011-01-30_140229" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-30_140229-520x391.jpg" alt="" width="520" height="391" /></a></p>

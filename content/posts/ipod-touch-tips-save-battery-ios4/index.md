@@ -3,8 +3,8 @@ title: "iPod Touch的使用心得及技巧 - 節省電力,增加iOS4效能,善�
 date: 2010-08-01T01:23:54
 slug: "ipod-touch-tips-save-battery-ios4"
 aliases: ["/posts/ipod-touch%e7%9a%84%e4%bd%bf%e7%94%a8%e5%bf%83%e5%be%97%e5%8f%8a%e6%8a%80%e5%b7%a7-%e7%af%80%e7%9c%81%e9%9b%bb%e5%8a%9b%e5%a2%9e%e5%8a%a0ios4%e6%95%88%e8%83%bd%e5%96%84%e7%94%a8%e8%a8%88%e6%95%b8/"]
-tags: ["Apple", "iPod Touch", "iPhone"]
-categories: ["iPod Touch"]
+tags: ["iPod Touch", "iOS"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/08/IMG_0146.png"><img class="size-full wp-image-3563 aligncenter" title="IMG_0146" src="{{< param imageBase >}}/wp-content/uploads/2010/08/IMG_0146.png" alt="" width="320" height="480" /></a></p>

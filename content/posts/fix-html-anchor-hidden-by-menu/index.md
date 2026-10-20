@@ -3,8 +3,8 @@ title: "解決 HTML Anchor 內文被選單遮住的問題"
 date: 2017-02-20T23:28:39
 slug: "fix-html-anchor-hidden-by-menu"
 aliases: ["/posts/%e8%a7%a3%e6%b1%ba-html-anchor-%e5%85%a7%e6%96%87%e8%a2%ab%e9%81%b8%e5%96%ae%e9%81%ae%e4%bd%8f%e7%9a%84%e5%95%8f%e9%a1%8c/"]
-tags: ["CSS", "HTML"]
-categories: []
+tags: ["HTML", "CSS"]
+categories: ["Programming"]
 ---
 
 HTML 的 Anchor 錨點功能十分方便，當網頁過長時可以透過 Anchor 讓訪客快速的移到指定段落，這樣的手法在許多技術文件、部落格都有出現，如果你看到類似 https://coder.tw/?p=123#section1 的網址就是應用 HTML Anchor 的特性，這樣的特性雖然方便卻也帶來一些問題，最常見因為網頁最上方有浮動選單，當訪客點擊 Anchor 連結進到網頁後，雖然瀏覽器有自動捲到指定章節，但卻有部分文字被選單遮住，我始終很煩惱這問題，今天恰好在閱讀 Facebook 技術文件時發現他們的解法蠻不錯的。

@@ -3,8 +3,8 @@ title: "【開箱文】WEICHO 網路攝影機WA-306,800萬靜態畫素,自動對
 date: 2010-12-18T21:01:36
 slug: "unboxing-weicho-webcam-wa-306800"
 aliases: ["/posts/%e3%80%90%e9%96%8b%e7%ae%b1%e6%96%87%e3%80%91weicho-%e7%b6%b2%e8%b7%af%e6%94%9d%e5%bd%b1%e6%a9%9fwa-306800%e8%90%ac%e9%9d%9c%e6%85%8b%e7%95%ab%e7%b4%a0%e8%87%aa%e5%8b%95%e5%b0%8d%e7%84%a6/"]
-tags: ["開箱文", "光華商場", "網路攝影機", "自動對焦"]
-categories: ["開箱文", "3C產品"]
+tags: ["Webcams"]
+categories: ["Hardware"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/12/DSCN02611.jpg"><img class="size-large wp-image-4263 aligncenter" title="DSCN0261" src="{{< param imageBase >}}/wp-content/uploads/2010/12/DSCN02611-520x390.jpg" alt="" width="520" height="390" /></a></p>

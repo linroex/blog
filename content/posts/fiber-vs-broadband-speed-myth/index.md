@@ -3,8 +3,8 @@ title: "光纖真的比ADSL快? 破除大家對光纖的迷思"
 date: 2009-10-31T09:43:54
 slug: "fiber-vs-broadband-speed-myth"
 aliases: ["/posts/%e5%85%89%e7%ba%96%e7%9c%9f%e7%9a%84%e6%af%94%e5%af%ac%e9%a0%bb%e5%bf%ab-%e7%a0%b4%e9%99%a4%e5%a4%a7%e5%ae%b6%e5%b0%8d%e5%85%89%e7%ba%96%e7%9a%84%e8%bf%b7%e6%80%9d/"]
-tags: ["網路", "迷思"]
-categories: ["網際網路"]
+tags: ["Networking"]
+categories: ["Hardware"]
 ---
 
 光纖真的比普通的寬頻網路快嗎?其實在<span style="color: #ff0000;"><strong>同樣速率的情況下</strong></span>光纖與寬頻的速度是沒有差別的,舉個例子好了!假如你現在用的是2M/56K的寬頻網路,然後你去跟中華電信申請要升級變成2M/56K的光纖網路,你可能會以為速度有變快,其實跟以前是一樣的。

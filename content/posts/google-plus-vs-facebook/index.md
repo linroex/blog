@@ -3,8 +3,8 @@ title: "當Google決定要跟Facebook硬幹時... Google Plus出現啦~"
 date: 2011-07-02T14:28:32
 slug: "google-plus-vs-facebook"
 aliases: ["/posts/%e7%95%b6google%e6%b1%ba%e5%ae%9a%e8%a6%81%e8%b7%9ffacebook%e7%a1%ac%e5%b9%b9%e6%99%82-google-plus%e5%87%ba%e7%8f%be%e5%95%a6/"]
-tags: ["Google", "Facebook", "社交網站"]
-categories: ["Google"]
+tags: ["Google Plus", "Facebook"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-02_140236.jpg"><img class="size-large wp-image-5292 aligncenter" title="2011-07-02_140236" src="{{< param imageBase >}}/wp-content/uploads/2011/07/2011-07-02_140236-520x322.jpg" alt="" width="520" height="322" /></a>

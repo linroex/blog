@@ -3,8 +3,8 @@ title: "【Android】Dolphin HD瀏覽器 - 支援頁籤、同步書籤、滑鼠�
 date: 2010-12-20T08:00:03
 slug: "android-dolphin-hd-browser"
 aliases: ["/posts/%e3%80%90android%e3%80%91dolphin-hd%e7%80%8f%e8%a6%bd%e5%99%a8-%e6%94%af%e6%8f%b4%e9%a0%81%e7%b1%a4%e3%80%81%e5%90%8c%e6%ad%a5%e6%9b%b8%e7%b1%a4%e3%80%81%e6%bb%91%e9%bc%a0%e6%89%8b%e5%8b%a2%e7%9a%84/"]
-tags: ["RSS", "Android", "滑鼠手勢", "瀏覽器"]
-categories: ["Android"]
+tags: ["Android"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/12/snap20101216_110612.png"><img class="size-full wp-image-4233 aligncenter" title="snap20101216_110612" src="{{< param imageBase >}}/wp-content/uploads/2010/12/snap20101216_110612.png" alt="" width="240" height="320" /></a></p>

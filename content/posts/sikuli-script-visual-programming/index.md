@@ -3,8 +3,8 @@ title: "Sikuli Script - 創新.易寫的程式語言"
 date: 2010-02-05T11:28:04
 slug: "sikuli-script-visual-programming"
 aliases: ["/posts/sikuli-script-%e5%89%b5%e6%96%b0-%e6%98%93%e5%af%ab%e7%9a%84%e7%a8%8b%e5%bc%8f%e8%aa%9e%e8%a8%80/"]
-tags: ["MIT", "Sikuli", "程式語言"]
-categories: ["程式語言"]
+tags: ["Sikuli"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/02/set-ip.png"><img class="size-large wp-image-2616 aligncenter" title="set-ip" src="{{< param imageBase >}}/wp-content/uploads/2010/02/set-ip-399x400.png" alt="" width="399" height="400" /></a></p>

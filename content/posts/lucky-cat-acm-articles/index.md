@@ -4,7 +4,7 @@ date: 2009-06-11T18:00:45
 slug: "lucky-cat-acm-articles"
 aliases: ["/posts/lucky%e8%b2%93%e7%9a%84acm%e5%9c%92%e5%9c%b0/"]
 tags: ["ACM"]
-categories: ["ACM"]
+categories: ["Programming"]
 ---
 
 Lucky貓的ACM園地是一個在程式設計界很有名的網站

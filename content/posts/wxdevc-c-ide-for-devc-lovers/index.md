@@ -3,8 +3,8 @@ title: "wxDevC++ - Dev C++的愛好者一定要知道的C++ IDE"
 date: 2011-05-18T00:22:47
 slug: "wxdevc-c-ide-for-devc-lovers"
 aliases: ["/posts/wxdevc-dev-c%e7%9a%84%e6%84%9b%e5%a5%bd%e8%80%85%e4%b8%80%e5%ae%9a%e8%a6%81%e7%9f%a5%e9%81%93%e7%9a%84c-ide/"]
-tags: ["C++", "IDE", "DevC++"]
-categories: ["C++", "IDE"]
+tags: ["C++", "IDE"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-18_000748.jpg"><img class="size-full wp-image-479 aligncenter" title="2011-05-18_000748" src="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-18_000748.jpg" alt="" width="471" height="292" /></a>

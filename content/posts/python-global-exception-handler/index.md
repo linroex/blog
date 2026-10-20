@@ -3,7 +3,7 @@ title: "Python Global Exception Handler"
 date: 2017-01-02T15:00:12
 slug: "python-global-exception-handler"
 tags: ["Python"]
-categories: []
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/Artboard-3.png"]
 ---
 

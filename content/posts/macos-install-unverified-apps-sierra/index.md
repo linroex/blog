@@ -3,8 +3,8 @@ title: "如何安裝未經驗證的應用程式到 macOS Sierra"
 date: 2016-12-31T00:49:12
 slug: "macos-install-unverified-apps-sierra"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%ae%89%e8%a3%9d%e6%9c%aa%e7%b6%93%e9%a9%97%e8%ad%89%e7%9a%84%e6%87%89%e7%94%a8%e7%a8%8b%e5%bc%8f%e5%88%b0-macos-sierra/"]
-tags: ["Mac OS"]
-categories: []
+tags: ["macOS"]
+categories: ["Hardware"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/螢幕快照-2016-12-31-上午12.47.27.jpg"]
 ---
 

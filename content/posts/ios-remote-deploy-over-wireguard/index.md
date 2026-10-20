@@ -2,8 +2,8 @@
 title: "手機不在家，也能用 Xcode 遠端佈署 iOS App"
 date: 2026-10-20T07:59:50+08:00
 slug: "ios-remote-deploy-over-wireguard"
-tags: ["iOS", "Xcode", "WireGuard", "RouterOS"]
-categories: ["AI"]
+tags: ["iOS", "Xcode", "WireGuard"]
+categories: ["Programming"]
 summary: ""
 draft: false
 ---

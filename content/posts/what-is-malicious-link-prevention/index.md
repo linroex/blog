@@ -3,8 +3,8 @@ title: "什麼是惡意連結？要如何防範惡意連結攻擊？"
 date: 2011-04-27T17:47:13
 slug: "what-is-malicious-link-prevention"
 aliases: ["/posts/%e4%bb%80%e9%ba%bc%e6%98%af%e6%83%a1%e6%84%8f%e9%80%a3%e7%b5%90%ef%bc%9f%e8%a6%81%e5%a6%82%e4%bd%95%e9%98%b2%e7%af%84%e6%83%a1%e6%84%8f%e9%80%a3%e7%b5%90%e6%94%bb%e6%93%8a%ef%bc%9f/"]
-tags: ["Facebook", "Norton Safe Web", "惡意連結"]
-categories: ["資訊安全", "Facebook"]
+tags: ["Malicious Links", "Facebook"]
+categories: ["Security"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-27_174057.jpg"><img class="size-large wp-image-5056 aligncenter" title="2011-04-27_174057" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-27_174057-520x428.jpg" alt="" width="520" height="428" /></a>

@@ -3,8 +3,8 @@ title: "Jeremy牌答錄機 V1.7 任何版本即時通皆可使用的自動答覆
 date: 2009-12-13T10:22:32
 slug: "jeremy-answer-machine-v1-7"
 aliases: ["/posts/jeremy%e7%89%8c%e7%ad%94%e9%8c%84%e6%a9%9f-v1-7-%e4%bb%bb%e4%bd%95%e7%89%88%e6%9c%ac%e5%8d%b3%e6%99%82%e9%80%9a%e7%9a%86%e5%8f%af%e4%bd%bf%e7%94%a8%e7%9a%84%e8%87%aa%e5%8b%95%e7%ad%94%e8%a6%86/"]
-tags: ["Yahoo", "及時通"]
-categories: ["即時通訊"]
+tags: ["Instant Messaging"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-13_110308.jpg"><img class="size-large wp-image-2373 alignleft" title="2009-12-13_110308" src="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-13_110308-374x400.jpg" alt="2009-12-13_110308" width="299" height="320" /></a>

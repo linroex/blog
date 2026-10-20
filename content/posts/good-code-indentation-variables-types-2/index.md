@@ -3,8 +3,8 @@ title: "如何寫出好的程式碼：縮排、定義變數與型別還有註解
 date: 2011-01-29T22:07:05
 slug: "good-code-indentation-variables-types-2"
 aliases: ["/posts/%e5%a6%82%e4%bd%95%e5%af%ab%e5%87%ba%e5%a5%bd%e7%9a%84%e7%a8%8b%e5%bc%8f%e7%a2%bc%ef%bc%9a%e7%b8%ae%e6%8e%92%e3%80%81%e5%ae%9a%e7%be%a9%e8%ae%8a%e6%95%b8%e8%88%87%e5%9e%8b%e5%88%a5%e9%82%84%e6%9c%89-2/"]
-tags: []
-categories: ["程式語言"]
+tags: ["Coding"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-29_215359.jpg"><img class="size-large wp-image-4494 aligncenter" title="2011-01-29_215359" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-29_215359-520x428.jpg" alt="" width="520" height="428" /></a></p>

@@ -2,8 +2,8 @@
 title: "WTF Elastic X-Pack License - How to uninstall X-Pack"
 date: 2017-01-16T10:30:47
 slug: "wtf-elastic-x-pack-license-how-to-uninstall-x-pack"
-tags: ["Elasticsearch", "Kibana", "X-Pack"]
-categories: []
+tags: ["Elasticsearch", "Kibana"]
+categories: ["SRE"]
 ---
 
 如果你透過搜尋引擎找到這篇文章，想必對 X-Pack 跟我一樣有著滿滿的怨念。最開始覺得 X-Pack 是個免費好用的外掛就把它裝到 Elasticsearch 跟 Kibana 身上，結果過了 30 天才看到提示說因為 License 過期，你需要去「更新授權碼」，否則不能登入 Kibana，其實到這邊我都還以為是註冊一個帳號就可以拿到新的授權碼，結果到官方網站看了很久，我沒有看到任何關於授權、費用、購買之類的文字（後來發現其實有，很小... 你們是有沒有想賺錢阿），最後竟然是靠 Google 搜尋才找到價格方案的頁面。

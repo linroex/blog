@@ -3,8 +3,8 @@ title: "Mongodb的安全性設定：帳戶設定、登入IP設定"
 date: 2012-01-25T15:12:55
 slug: "mongodb-security-account-ip-settings"
 aliases: ["/posts/mongodb%e7%9a%84%e5%ae%89%e5%85%a8%e6%80%a7%e8%a8%ad%e5%ae%9a%ef%bc%9a%e5%b8%b3%e6%88%b6%e8%a8%ad%e5%ae%9a%e3%80%81%e7%99%bb%e5%85%a5ip%e8%a8%ad%e5%ae%9a/"]
-tags: ["Mongodb", "安全性"]
-categories: ["Mongodb"]
+tags: ["MongoDB", "Hardening"]
+categories: ["SRE"]
 ---
 
 預設情況下Mongodb是沒有任何防護的，不需要任何帳號就可以遠端登入，如果要用它來寫程式其實是很危險的，所以在這篇文章中，我會教大家如何幫Mongodb加入帳戶的設定，變成需要帳號密碼才能登入，然後也會教大家設定登入的IP限制

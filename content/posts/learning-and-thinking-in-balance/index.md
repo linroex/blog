@@ -3,8 +3,8 @@ title: "難道你不懂「學思並重」嘛？"
 date: 2012-09-10T22:00:08
 slug: "learning-and-thinking-in-balance"
 aliases: ["/posts/%e9%9b%a3%e9%81%93%e4%bd%a0%e4%b8%8d%e6%87%82%e3%80%8c%e5%ad%b8%e6%80%9d%e4%b8%a6%e9%87%8d%e3%80%8d%e5%98%9b%ef%bc%9f/"]
-tags: []
-categories: ["生活札記"]
+tags: ["Learning"]
+categories: ["Life"]
 ---
 
 一個今天發生的小故事， 我在和同學討論經濟題目，旁邊一個同學就很不滿的說：「XXX你為什麼總是喜歡想一些奇怪的問題來找別人麻煩？ 課本上怎麼寫就背起來阿！ 想那麼多幹嘛」，一瞬間我明白，為何有人花許多時間念書卻沒有成效，不是因為笨，而是因為方法錯了！

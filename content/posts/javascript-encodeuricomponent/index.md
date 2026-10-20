@@ -3,8 +3,8 @@ title: "【JavaScript】encodeURIComponent 編碼網址用的函式"
 date: 2009-07-22T14:49:56
 slug: "javascript-encodeuricomponent"
 aliases: ["/posts/javascriptencodeuricomponent-%e7%b7%a8%e7%a2%bc%e7%b6%b2%e5%9d%80%e7%94%a8%e7%9a%84%e5%87%bd%e5%bc%8f/"]
-tags: []
-categories: ["JavaScript"]
+tags: ["JavaScript"]
+categories: ["Programming"]
 ---
 
 當你在使用JavaScript來做一些GET指令時你應該經常會發現一個問題就是JavaScript他會要求你把網址編碼吧,遇到這種需要編碼網址才能使用的函式你可以使用encodeURIComponent來幫網址進行編碼

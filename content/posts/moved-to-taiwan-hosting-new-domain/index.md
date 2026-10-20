@@ -3,8 +3,8 @@ title: "換到台灣主機與新網址囉~"
 date: 2010-07-09T18:16:11
 slug: "moved-to-taiwan-hosting-new-domain"
 aliases: ["/posts/%e6%8f%9b%e5%88%b0%e5%8f%b0%e7%81%a3%e4%b8%bb%e6%a9%9f%e8%88%87%e6%96%b0%e7%b6%b2%e5%9d%80%e5%9b%89/"]
-tags: ["server zoo", "twbbs.org", "捕夢網", "搬家"]
-categories: ["本站公告"]
+tags: ["Blogging", "Hosting"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/07/2010-07-09_181154.jpg"><img class="alignnone size-large wp-image-3428" title="2010-07-09_181154" src="{{< param imageBase >}}/wp-content/uploads/2010/07/2010-07-09_181154-550x334.jpg" alt="" width="550" height="334" /></a>

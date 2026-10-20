@@ -3,8 +3,8 @@ title: "Macbook Air 2013開箱文，號稱世界最長12小時續航力"
 date: 2013-07-12T22:20:59
 slug: "macbook-air-2013-unboxing"
 aliases: ["/posts/macbook-air-2013%e9%96%8b%e7%ae%b1%e6%96%87%ef%bc%8c%e8%99%9f%e7%a8%b1%e4%b8%96%e7%95%8c%e6%9c%80%e9%95%b712%e5%b0%8f%e6%99%82%e7%ba%8c%e8%88%aa%e5%8a%9b/"]
-tags: ["Apple", "開箱文", "Haswell", "Macbook Air", "MBA"]
-categories: []
+tags: ["Apple", "macOS"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2013/07/P1040216.jpg"><img class="alignnone size-large wp-image-6269" alt="P1040216" src="{{< param imageBase >}}/wp-content/uploads/2013/07/P1040216-520x347.jpg" width="520" height="347" /></a>

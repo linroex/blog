@@ -3,8 +3,8 @@ title: "WinRAR使用教學 - 市場佔有率最高的壓縮軟體"
 date: 2009-11-07T17:01:54
 slug: "winrar-popular-compression-software"
 aliases: ["/posts/winrar-%e5%b8%82%e5%a0%b4%e4%bd%94%e6%9c%89%e7%8e%87%e6%9c%80%e9%ab%98%e7%9a%84%e5%a3%93%e7%b8%ae%e8%bb%9f%e9%ab%94/"]
-tags: ["壓縮程式"]
-categories: ["軟體分享"]
+tags: ["Compression Software"]
+categories: ["Software"]
 ---
 
 WinRAR是目前市場上佔有率最高的壓縮軟體,WinRAR與7-zip一樣都有支援許多的功能,除了最基本的壓縮.解壓縮以外,還有分片檔案分割、資料恢復、資料加密等功能,另外WinRAR還可以讓你做出自解壓縮檔,不需要安裝解壓縮程式就可以開啟檔案,十分方便,只不過WinRAR是一套商業性的軟體,你只能試用40天,過了40天你就必需要付費。

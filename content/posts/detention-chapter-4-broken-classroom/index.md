@@ -3,8 +3,8 @@ title: "返校 Detention 第四章 斷掉的教室通過方法"
 date: 2017-02-11T20:28:04
 slug: "detention-chapter-4-broken-classroom"
 aliases: ["/posts/%e8%bf%94%e6%a0%a1-detention-%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%96%b7%e6%8e%89%e7%9a%84%e6%95%99%e5%ae%a4%e9%80%9a%e9%81%8e%e6%96%b9%e6%b3%95/"]
-tags: ["遊戲", "返校", "祕技", "Detention"]
-categories: []
+tags: ["Detention", "Walkthrough"]
+categories: ["Games"]
 images: ["%%IMG%%/wp-content/uploads/2017/02/螢幕快照-2017-02-10-下午8.21.27.jpg"]
 ---
 

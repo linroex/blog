@@ -3,8 +3,8 @@ title: "三角形產生：左上、左下、右上、右下"
 date: 2011-03-21T02:46:28
 slug: "loop-practice-print-triangle"
 aliases: ["/posts/%e8%bf%b4%e5%9c%88%e7%b7%b4%e7%bf%92-%e4%b8%89%e8%a7%92%e5%bd%a2%e7%94%a2%e7%94%9f/"]
-tags: ["C++", "三角形", "迴圈"]
-categories: ["C++"]
+tags: ["C++"]
+categories: ["Programming"]
 ---
 
 <p><a href="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-21_024015.jpg"><img class="size-large wp-image-379 aligncenter" title="2011-03-21_024015" src="{{< param imageBase >}}/wp-content/uploads/2011/03/2011-03-21_024015-540x492.jpg" alt="" width="540" height="492" /></a></p>

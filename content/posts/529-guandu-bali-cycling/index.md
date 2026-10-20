@@ -3,8 +3,8 @@ title: "5/29 關渡八里腳踏車行～"
 date: 2011-05-31T00:06:51
 slug: "529-guandu-bali-cycling"
 aliases: ["/posts/529-%e9%97%9c%e6%b8%a1%e5%85%ab%e9%87%8c%e8%85%b3%e8%b8%8f%e8%bb%8a%e8%a1%8c%ef%bd%9e/"]
-tags: ["遊記", "捷運", "八里", "腳踏車", "關渡"]
-categories: ["生活札記"]
+tags: ["Cycling", "Taipei"]
+categories: ["Travel"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/CIMG0058.jpg"><img class="size-large wp-image-5170 aligncenter" title="CIMG0058" src="{{< param imageBase >}}/wp-content/uploads/2011/05/CIMG0058-520x390.jpg" alt="" width="520" height="390" /></a>

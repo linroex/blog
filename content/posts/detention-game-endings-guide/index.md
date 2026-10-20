@@ -3,8 +3,8 @@ title: "返校 Detention 好壞結局攻略"
 date: 2017-02-10T22:26:40
 slug: "detention-game-endings-guide"
 aliases: ["/posts/%e8%bf%94%e6%a0%a1-detention-%e5%a5%bd%e5%a3%9e%e7%b5%90%e5%b1%80%e6%94%bb%e7%95%a5/"]
-tags: ["遊戲", "返校", "攻略"]
-categories: []
+tags: ["Detention", "Walkthrough"]
+categories: ["Games"]
 images: ["%%IMG%%/wp-content/uploads/2017/02/螢幕快照-2017-02-10-下午8.43.08.jpg"]
 ---
 

@@ -3,8 +3,8 @@ title: "WoW Tainan  窩。台南 背包客棧 - 台南青年旅館推薦"
 date: 2017-04-08T15:06:21
 slug: "wow-tainan-hostel-review"
 aliases: ["/posts/wow-tainan-%e7%aa%a9%e3%80%82%e5%8f%b0%e5%8d%97-%e8%83%8c%e5%8c%85%e5%ae%a2%e6%a3%a7-%e5%8f%b0%e5%8d%97%e9%9d%92%e5%b9%b4%e6%97%85%e9%a4%a8%e6%8e%a8%e8%96%a6/"]
-tags: ["背包客棧", "青年旅館", "台南", "住宿", "台南住宿"]
-categories: []
+tags: ["Tainan", "Hostels"]
+categories: ["Travel"]
 images: ["%%IMG%%/wp-content/uploads/2017/04/IMG_8007.jpg"]
 ---
 

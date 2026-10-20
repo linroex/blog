@@ -3,8 +3,8 @@ title: "開啟Google 兩步驟驗證功能，透過手機幫你的Google帳戶�
 date: 2011-08-09T13:09:12
 slug: "google-two-step-verification"
 aliases: ["/posts/%e9%96%8b%e5%95%9fgoogle-%e5%85%a9%e6%ad%a5%e9%a9%9f%e9%a9%97%e8%ad%89%e5%8a%9f%e8%83%bd%ef%bc%8c%e9%80%8f%e9%81%8e%e6%89%8b%e6%a9%9f%e5%b9%ab%e4%bd%a0%e7%9a%84google%e5%b8%b3%e6%88%b6%e5%8a%a0/"]
-tags: ["Google", "兩步驟驗證", "通訊鎖"]
-categories: ["Google"]
+tags: ["Two-Step Verification", "Google"]
+categories: ["Security"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-09_130834.jpg"><img class="alignnone size-large wp-image-5626" title="2011-08-09_130834" src="{{< param imageBase >}}/wp-content/uploads/2011/08/2011-08-09_130834-520x368.jpg" alt="" width="520" height="368" /></a>

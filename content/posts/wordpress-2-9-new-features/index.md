@@ -4,7 +4,7 @@ date: 2009-12-19T16:11:03
 slug: "wordpress-2-9-new-features"
 aliases: ["/posts/wordpress-2-9-%e5%a2%9e%e5%8a%a0%e4%ba%86%e8%a0%bb%e5%a4%9a%e7%9a%84%e6%96%b0%e5%8a%9f%e8%83%bd%e5%80%8b%e4%ba%ba%e6%b8%ac%e8%a9%a6%e6%b2%92%e6%9c%89%e9%87%8d%e5%a4%a7%e5%95%8f%e9%a1%8c/"]
 tags: ["WordPress"]
-categories: ["WordPress"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-19_162302.jpg"><img class="alignnone size-large wp-image-2386" title="2009-12-19_162302" src="{{< param imageBase >}}/wp-content/uploads/2009/12/2009-12-19_162302-500x303.jpg" alt="" width="500" height="303" /></a>

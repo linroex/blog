@@ -4,7 +4,7 @@ date: 2011-06-12T02:13:32
 slug: "pastie-paste-code-site"
 aliases: ["/posts/pastie-%e8%ae%93%e4%bd%a0%e5%bc%b5%e8%b2%bc%e7%a8%8b%e5%bc%8f%e7%a2%bc%e7%9a%84%e7%b6%b2%e7%ab%99%ef%bc%8c%e4%b8%a6%e4%b8%94%e5%8f%af%e4%bb%a5%e5%b5%8c%e5%85%a5%e5%a4%96%e9%83%a8%e7%b6%b2%e7%ab%99/"]
 tags: ["Pastie"]
-categories: ["其他"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-12_015959.jpg"><img class="size-large wp-image-540 aligncenter" title="2011-06-12_015959" src="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-12_015959-540x443.jpg" alt="" width="540" height="443" /></a>

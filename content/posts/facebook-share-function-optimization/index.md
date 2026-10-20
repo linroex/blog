@@ -3,8 +3,8 @@ title: "分享到臉書的網址總是不如預期的呈現嗎？ 來看看該�
 date: 2017-02-18T20:39:46
 slug: "facebook-share-function-optimization"
 aliases: ["/posts/%e8%87%89%e6%9b%b8%e5%88%86%e4%ba%ab%e5%8a%9f%e8%83%bd%e5%84%aa%e5%8c%96/"]
-tags: ["Facebook"]
-categories: []
+tags: ["Facebook", "SEO"]
+categories: ["Blog"]
 ---
 
 相信對每位站長而言，Facebook 都已成為和 Google 同樣重要的流量來源，過去我們為了搜尋引擎做了許多 SEO 優化，但你知道嗎？ 其實 Facebook 也有推出一份《<a href="https://developers.facebook.com/docs/sharing/best-practices">網站與行動應用程式的分享最佳作法</a>》闡述該如何調整網頁，讓你的網頁被使用者分享到 Facebook 時可以用最佳的方式呈現，在這篇文章中會分享我在個人部落格所做的嘗試。

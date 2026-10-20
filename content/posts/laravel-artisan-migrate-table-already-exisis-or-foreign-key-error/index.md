@@ -3,7 +3,7 @@ title: "Laravel Artisan Migrate \"Table Already Exists\" or \"Foreign Key\" Erro
 date: 2016-12-12T04:57:46
 slug: "laravel-artisan-migrate-table-already-exisis-or-foreign-key-error"
 tags: ["PHP", "Laravel"]
-categories: ["PHP"]
+categories: ["Programming"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/laravel.png"]
 ---
 

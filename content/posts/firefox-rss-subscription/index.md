@@ -3,8 +3,8 @@ title: "Firefox訂閱RSS - 讓你邊看網頁邊閱讀新聞"
 date: 2009-05-27T20:19:32
 slug: "firefox-rss-subscription"
 aliases: ["/posts/firefox%e8%a8%82%e9%96%b1rss/"]
-tags: ["Firefox"]
-categories: ["瀏覽器"]
+tags: ["Firefox", "RSS"]
+categories: ["Software"]
 summary: "各位知道嗎?firefox目前有一個很棒的功能就是可以直接訂閱RSS,不用安裝外掛,而且讀取速度也蠻快的,不知道是啥時推出的功能,我是最近才發現滴::)   廢話不多說,現在就來教大家怎麼使用firefox來訂閱網站的RSS..............................."
 ---
 

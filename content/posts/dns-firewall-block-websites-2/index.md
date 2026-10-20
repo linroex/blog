@@ -3,8 +3,8 @@ title: "DNS Firewall - 限制進入指定網站，快速修改DNS對應"
 date: 2011-01-21T11:46:20
 slug: "dns-firewall-block-websites-2"
 aliases: ["/posts/dns-firewall-%e9%99%90%e5%88%b6%e9%80%b2%e5%85%a5%e6%8c%87%e5%ae%9a%e7%b6%b2%e7%ab%99%ef%bc%8c%e5%bf%ab%e9%80%9f%e4%bf%ae%e6%94%b9dns%e5%b0%8d%e6%87%89-2/"]
-tags: ["DNS", "Windows", "Facebook", "localhost"]
-categories: ["軟體分享", "VB.NET"]
+tags: ["DNS", "VB"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-21_112455.jpg"><img class="size-full wp-image-4393 aligncenter" title="2011-01-21_112455" src="{{< param imageBase >}}/wp-content/uploads/2011/01/2011-01-21_112455.jpg" alt="" width="339" height="413" /></a></p>

@@ -2,8 +2,8 @@
 title: "BigQuery SQL String Split"
 date: 2017-09-17T13:39:48
 slug: "bigquery-sql-string-split"
-tags: ["SQL", "BigQuery"]
-categories: []
+tags: ["BigQuery", "SQL"]
+categories: ["Programming"]
 ---
 
 相信大家對 split 都不陌生，這可說是程式設計師最常用的十個函式之一，在 BigQuery 也有 split，但因為是 SQL 的關係用法和一般程式語言不太一樣，此外 BigQuery 又分成 Standard SQL 和 Legacy SQL，而這兩種版本雖然都有 split，但使用方式更是截然不同。

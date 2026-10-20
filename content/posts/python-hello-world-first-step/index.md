@@ -3,8 +3,8 @@ title: "【Python】踏入Python世界的第一步：HelloWorld(輸出文字與�
 date: 2011-02-20T09:00:54
 slug: "python-hello-world-first-step"
 aliases: ["/posts/%e3%80%90python%e3%80%91%e8%b8%8f%e5%85%a5python%e4%b8%96%e7%95%8c%e7%9a%84%e7%ac%ac%e4%b8%80%e6%ad%a5%ef%bc%9ahelloworld%e8%bc%b8%e5%87%ba%e6%96%87%e5%ad%97%e8%88%87%e8%a8%bb%e8%a7%a3%e7%9a%84/"]
-tags: ["IDLE", "Python"]
-categories: ["Python"]
+tags: ["Python"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-18_231056.jpg"><img class="size-large wp-image-315 aligncenter" title="2011-02-18_231056" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-18_231056-540x393.jpg" alt="" width="540" height="393" /></a></p>

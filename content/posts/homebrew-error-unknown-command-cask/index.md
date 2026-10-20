@@ -2,8 +2,8 @@
 title: "Homebrew - Error: Unknown command: cask"
 date: 2016-12-23T02:11:29
 slug: "homebrew-error-unknown-command-cask"
-tags: ["Mac OS", "Homebrew"]
-categories: []
+tags: ["Homebrew", "macOS"]
+categories: ["Software"]
 images: ["%%IMG%%/wp-content/uploads/2016/12/Artboard-4.png"]
 ---
 

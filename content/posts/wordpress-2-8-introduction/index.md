@@ -4,7 +4,7 @@ date: 2009-06-13T17:16:13
 slug: "wordpress-2-8-introduction"
 aliases: ["/posts/wordpress2-8%e4%bb%8b%e7%b4%b9/"]
 tags: ["WordPress"]
-categories: ["WordPress"]
+categories: ["Blog"]
 ---
 
 今天終於把WordPress從2.7更新到2.8了!據說這次的WordPress2.8是著重在於效能方面,其實沒有增加很多功能,不過有更新了很多舊版的bug(700多個,很恐怖吧),另外這次推出的WordPress2.8還是有一些新功能啦(不過就像上面說的,沒有很多),而介面方面可能會給你一種錯覺就是............  更新好像只是改版本號而已= =,因為這次更新在介面上仍是維持2.7的後台介面,沒有明顯變化,大致上要講的就是這些,接下來帶各位來看看WordPress2.8幾項主要的新功能吧

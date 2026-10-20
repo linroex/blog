@@ -3,8 +3,8 @@ title: "目標達成！逐風者載入速度成功降至7.6秒"
 date: 2010-01-17T15:36:46
 slug: "site-load-speed-down-to-7-6-seconds"
 aliases: ["/posts/%e7%9b%ae%e6%a8%99%e9%81%94%e6%88%90%ef%bc%81%e9%80%90%e9%a2%a8%e8%80%85%e8%bc%89%e5%85%a5%e9%80%9f%e5%ba%a6%e6%88%90%e5%8a%9f%e9%99%8d%e8%87%b37-6%e7%a7%92/"]
-tags: []
-categories: ["本站公告"]
+tags: ["Website Optimization"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/01/2010-01-17_150211.png"><img class="alignnone size-large wp-image-2453" title="2010-01-17_150211" src="{{< param imageBase >}}/wp-content/uploads/2010/01/2010-01-17_150211-500x360.png" alt="" width="500" height="360" /></a>

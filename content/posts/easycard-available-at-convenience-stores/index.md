@@ -3,8 +3,8 @@ title: "悠遊卡也可以到7-11.全家.萊爾富等四大超商使用囉!"
 date: 2010-04-05T18:40:37
 slug: "easycard-available-at-convenience-stores"
 aliases: ["/posts/%e6%82%a0%e9%81%8a%e5%8d%a1%e4%b9%9f%e5%8f%af%e4%bb%a5%e5%88%b07-11-%e5%85%a8%e5%ae%b6-%e8%90%8a%e7%88%be%e5%af%8c%e7%ad%89%e5%9b%9b%e5%a4%a7%e8%b6%85%e5%95%86%e4%bd%bf%e7%94%a8%e5%9b%89/"]
-tags: ["悠遊卡"]
-categories: []
+tags: ["EasyCard"]
+categories: ["Life"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/04/DSCN9990-e1270462644407.jpg"><img class="aligncenter size-medium wp-image-2913" title="DSCN9990" src="{{< param imageBase >}}/wp-content/uploads/2010/04/DSCN9990-300x225.jpg" alt="" width="300" height="225" /></a>

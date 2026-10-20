@@ -3,8 +3,8 @@ title: "【Chrome外掛】goo.gl URL Shortener - 利用Google幫你把網址縮�
 date: 2010-10-27T23:47:09
 slug: "chrome-extension-googl-url-shortener"
 aliases: ["/posts/%e3%80%90chrome%e5%a4%96%e6%8e%9b%e3%80%91goo-gl-url-shortener-%e5%88%a9%e7%94%a8google%e5%b9%ab%e4%bd%a0%e6%8a%8a%e7%b6%b2%e5%9d%80%e7%b8%ae%e7%9f%ad/"]
-tags: ["Google", "QR Code", "Google Chrome", "goo.gl", "短網址"]
-categories: ["Google", "Chrome"]
+tags: ["Chrome Extensions", "URL Shortener"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/10/2010-10-27_233009.jpg"><img class="size-full wp-image-3902 aligncenter" title="2010-10-27_233009" src="{{< param imageBase >}}/wp-content/uploads/2010/10/2010-10-27_233009.jpg" alt="" width="283" height="222" /></a></p>

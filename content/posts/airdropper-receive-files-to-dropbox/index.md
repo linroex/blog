@@ -3,8 +3,8 @@ title: "AirDropper - 讓所有人都能傳檔案到你的Dropbox"
 date: 2010-11-10T09:00:48
 slug: "airdropper-receive-files-to-dropbox"
 aliases: ["/posts/airdropper-%e8%ae%93%e6%89%80%e6%9c%89%e4%ba%ba%e9%83%bd%e8%83%bd%e5%82%b3%e6%aa%94%e6%a1%88%e5%88%b0%e4%bd%a0%e7%9a%84dropbox/"]
-tags: ["Dropbox", "AirDropper", "外掛", "擴充程式"]
-categories: ["網路硬碟"]
+tags: ["Dropbox"]
+categories: ["Web Apps"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-07_163631.jpg"><img class="size-large wp-image-3962 aligncenter" title="2010-11-07_163631" src="{{< param imageBase >}}/wp-content/uploads/2010/11/2010-11-07_163631-520x363.jpg" alt="" width="520" height="363" /></a></p>

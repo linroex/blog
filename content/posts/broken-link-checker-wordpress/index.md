@@ -3,8 +3,8 @@ title: "Broken Link Checker - 自動幫你檢查WordPress中的失效連結與�
 date: 2010-05-28T00:05:48
 slug: "broken-link-checker-wordpress"
 aliases: ["/posts/broken-link-checker-%e8%87%aa%e5%8b%95%e5%b9%ab%e4%bd%a0%e6%aa%a2%e6%9f%a5wordpress%e4%b8%ad%e7%9a%84%e5%a4%b1%e6%95%88%e9%80%a3%e7%b5%90%e8%88%87%e6%8e%9b%e6%8e%89%e7%9a%84%e5%9c%96%e7%89%87/"]
-tags: ["WordPress", "WordPress外掛"]
-categories: ["WordPress"]
+tags: ["WordPress", "WordPress Plugins"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/05/2010-05-28_000215.jpg"><img class="size-large wp-image-3186 alignleft" title="2010-05-28_000215" src="{{< param imageBase >}}/wp-content/uploads/2010/05/2010-05-28_000215-500x303.jpg" alt="" width="500" height="303" /></a>

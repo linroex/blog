@@ -3,8 +3,8 @@ title: "Ubuntu9.04介紹及安裝教學"
 date: 2009-05-27T19:49:14
 slug: "ubuntu-9-04-review"
 aliases: ["/posts/ubuntu904%e4%bb%8b%e7%b4%b9-windows7%e7%9a%84%e6%9c%80%e7%b5%82%e5%b0%8d%e6%89%8b/"]
-tags: ["Ubuntu"]
-categories: ["Linux"]
+tags: ["Ubuntu", "Linux"]
+categories: ["Hardware"]
 summary: "感覺Ubuntu9.0.4這次的更新是衝者W7來的,因為W7才剛出來沒多久Ubuntu就更新了,而且很多功能都跟W7很像,甚至有超越的可能!!如果不是因為太少程式支援Ubuntu,可能現在最有名的作業系統就是他了~~\n\n簡單的介紹一下Ubuntu,他是屬於Linux的作業系統,也就是說他是公開原始碼的\n,你可以自行去修改裡面的內容,而且他也是免費的,穩定度絕對大幅超過Windows系列,在Ubuntu裡面你想看到一次當機都屬難得呢XD 不過目前市面上支援Ubuntu的程式很少,尤其是遊戲,沒有遊戲是支援Ubuntu的,也因此導致Ubuntu沒辦法像Windows系列一樣擁有超高使用者,另外Ubuntu的更新速度大約半年出一個新版本,更新........................................"
 ---
 

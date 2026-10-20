@@ -3,8 +3,8 @@ title: "Firefox 4 相較Firefox 3.6的六倍速、更精簡的介面！"
 date: 2011-04-05T00:29:21
 slug: "firefox-4-faster-simple-interface"
 aliases: ["/posts/firefox-4-%e6%9b%b4%e5%99%81%e5%bf%83%e7%9a%84%e9%80%9f%e5%ba%a6%e3%80%81%e6%9b%b4%e7%b2%be%e7%b0%a1%e7%9a%84%e4%bb%8b%e9%9d%a2%ef%bc%81/"]
-tags: ["Firefox", "瀏覽器", "WebM"]
-categories: ["瀏覽器", "Firefox"]
+tags: ["Firefox"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-05_001659.jpg"><img class="size-large wp-image-4983 aligncenter" title="2011-04-05_001659" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-05_001659-520x444.jpg" alt="" width="520" height="444" /></a>

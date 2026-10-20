@@ -3,8 +3,8 @@ title: "Facebook Graph API 部分用戶無法取得 Email 欄位的解決方法"
 date: 2016-12-02T12:18:56
 slug: "facebook-graph-api-missing-email-fix"
 aliases: ["/posts/facebook-graph-api-%e9%83%a8%e5%88%86%e7%94%a8%e6%88%b6%e7%84%a1%e6%b3%95%e5%8f%96%e5%be%97-email-%e6%ac%84%e4%bd%8d%e7%9a%84%e8%a7%a3%e6%b1%ba%e6%96%b9%e6%b3%95/"]
-tags: ["PHP", "Facebook", "facebook-graph-api"]
-categories: []
+tags: ["Facebook API", "PHP"]
+categories: ["Programming"]
 ---
 
 最近遇到一個很有趣的小問題，我們開發的一個競賽投票系統遇到零星使用者無法投票的問題，該系統以 Laravel 開發，讓使用者可以透過 Facebook 登入後，投票給指定的作品，每日一票，只取得最基本的 Email、Name 資料以供抽獎用，在測試時一切安好沒問題，可是上線後卻有零星的使用者抱怨投票完顯示錯誤訊息「whoops looks like something went wrong」而大部分使用者是可以正常投票的。

@@ -3,8 +3,8 @@ title: "藍芽鍵盤、iPad架子開箱文～"
 date: 2011-07-08T17:33:02
 slug: "unboxing-bluetooth-keyboard-ipad-stand"
 aliases: ["/posts/%e8%97%8d%e8%8a%bd%e9%8d%b5%e7%9b%a4%e3%80%81ipad%e6%9e%b6%e5%ad%90%e9%96%8b%e7%ae%b1%e6%96%87%ef%bd%9e/"]
-tags: ["iPad", "開箱文", "藍芽", "藍芽鍵盤"]
-categories: ["開箱文"]
+tags: ["iPad", "Bluetooth Keyboards"]
+categories: ["Hardware"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/07/270193_250193274994137_100000103984786_1153287_4390769_n.jpg"><img class="size-large wp-image-5330 aligncenter" title="270193_250193274994137_100000103984786_1153287_4390769_n" src="{{< param imageBase >}}/wp-content/uploads/2011/07/270193_250193274994137_100000103984786_1153287_4390769_n-520x393.jpg" alt="" width="520" height="393" /></a>

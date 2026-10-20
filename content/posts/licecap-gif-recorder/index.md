@@ -3,8 +3,8 @@ title: "還在煩惱怎麼錄製 GIF 嗎？ 讓 LICEcap 來幫你！"
 date: 2017-01-21T23:59:09
 slug: "licecap-gif-recorder"
 aliases: ["/posts/%e9%82%84%e5%9c%a8%e7%85%a9%e6%83%b1%e6%80%8e%e9%ba%bc%e9%8c%84%e8%a3%bd-gif-%e5%97%8e%ef%bc%9f-%e8%ae%93-licecap-%e4%be%86%e5%b9%ab%e4%bd%a0%ef%bc%81/"]
-tags: ["LICEcap", "GIF"]
-categories: []
+tags: ["GIF"]
+categories: ["Software"]
 ---
 
 GIF 這格式曾經絕跡，直到最近因為 Facebook、Twitter 的興起，越來越多人拿 GIF 來製作動圖，或是用在 Messenger 當作貼圖，而我自己則是拿來當作部落格文章的教學影片之用，GIF 的好處是檔案精簡、在網頁上載入方便，對於某些動作比較粗略的情況，拿 GIF 來作為教學所用十分適合；今天要跟大家分享的 <a href="http://www.cockos.com/licecap/">LICEcap</a> 可以用螢幕錄影的方式製作 GIF 圖檔，支援 Mac、Windows，介面操作簡易，我部落格最近的 GIF 都是使用 <a href="http://www.cockos.com/licecap/">LICEcap</a> 所錄製的。

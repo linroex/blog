@@ -3,8 +3,8 @@ title: "身為一個會眾我看到了什麼 - PyCon Taiwan 2016"
 date: 2016-06-23T15:09:56
 slug: "pycon-taiwan-2016-recap"
 aliases: ["/posts/%e8%ba%ab%e7%82%ba%e4%b8%80%e5%80%8b%e6%9c%83%e7%9c%be%e6%88%91%e7%9c%8b%e5%88%b0%e4%ba%86%e4%bb%80%e9%ba%bc-pycon-taiwan-2016/"]
-tags: ["Python", "PyCon"]
-categories: ["生活札記"]
+tags: ["PyCon", "Python"]
+categories: ["Life"]
 images: ["%%IMG%%/wp-content/uploads/2016/06/IMG_2765.jpg"]
 ---
 

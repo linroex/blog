@@ -3,8 +3,8 @@ title: "掌門精釀啤酒 - 適合下班後小酌的超讚啤酒吧"
 date: 2017-01-15T01:13:53
 slug: "zhangmen-craft-beer-bar"
 aliases: ["/posts/%e6%8e%8c%e9%96%80%e7%b2%be%e9%87%80%e5%95%a4%e9%85%92-%e9%81%a9%e5%90%88%e4%b8%8b%e7%8f%ad%e5%be%8c%e5%b0%8f%e9%85%8c%e7%9a%84%e8%b6%85%e8%ae%9a%e5%95%a4%e9%85%92%e5%90%a7/"]
-tags: ["永康街", "酒吧", "台北", "精釀啤酒"]
-categories: []
+tags: ["Taipei", "Craft Beer"]
+categories: ["Life"]
 images: ["%%IMG%%/wp-content/uploads/2017/01/IMG_5587.jpg"]
 ---
 

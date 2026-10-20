@@ -3,8 +3,8 @@ title: "DropBox 超簡單的網路硬碟,同步你的資料"
 date: 2010-06-26T00:22:42
 slug: "dropbox-sync-your-data"
 aliases: ["/posts/dropbox-%e8%b6%85%e7%b0%a1%e5%96%ae%e7%9a%84%e7%b6%b2%e8%b7%af%e7%a1%ac%e7%a2%9f%e5%90%8c%e6%ad%a5%e4%bd%a0%e7%9a%84%e8%b3%87%e6%96%99/"]
-tags: ["iPod Touch", "網路硬碟", "雲端運算", "Dropbox", "檔案同步"]
-categories: ["網路硬碟"]
+tags: ["Dropbox"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/06/2010-06-26_002515.jpg"><img class="alignnone size-full wp-image-3399" title="2010-06-26_002515" src="{{< param imageBase >}}/wp-content/uploads/2010/06/2010-06-26_002515.jpg" alt="" width="244" height="81" /></a>

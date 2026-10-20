@@ -3,8 +3,8 @@ title: "Mail Bomb - 純粹惡作劇的信箱炸彈~"
 date: 2010-10-05T22:28:00
 slug: "mail-bomb-prank"
 aliases: ["/posts/mail-bomb-%e7%b4%94%e7%b2%b9%e6%83%a1%e4%bd%9c%e5%8a%87%e7%9a%84%e4%bf%a1%e7%ae%b1%e7%82%b8%e5%bd%88/"]
-tags: ["PHP", "Mail Bomb", "信箱炸彈", "惡作劇"]
-categories: []
+tags: ["Email", "Pranks"]
+categories: ["Security"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/10/2010-10-05_223404.jpg"><img class="size-large wp-image-3846 aligncenter" title="2010-10-05_223404" src="{{< param imageBase >}}/wp-content/uploads/2010/10/2010-10-05_223404-550x299.jpg" alt="" width="550" height="299" /></a></p>

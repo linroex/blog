@@ -3,8 +3,8 @@ title: "Pocket 稍後閱讀好幫手，讓你保留沒時間看完的文章"
 date: 2013-06-29T20:29:33
 slug: "pocket-read-later"
 aliases: ["/posts/pocket-%e7%a8%8d%e5%be%8c%e9%96%b1%e8%ae%80%e5%a5%bd%e5%b9%ab%e6%89%8b%ef%bc%8c%e8%ae%93%e4%bd%a0%e4%bf%9d%e7%95%99%e6%b2%92%e6%99%82%e9%96%93%e7%9c%8b%e5%ae%8c%e7%9a%84%e6%96%87%e7%ab%a0/"]
-tags: ["App Store", "Android", "iOS", "App", "Pocket", "Read it later"]
-categories: ["實用網站"]
+tags: ["Pocket"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2013/06/56A7F5A7-0AF3-4B43-B810-04CC2B5E0409.png"><img class="alignleft" src="{{< param imageBase >}}/wp-content/uploads/2013/06/56A7F5A7-0AF3-4B43-B810-04CC2B5E0409-281x500.png" alt="56A7F5A7-0AF3-4B43-B810-04CC2B5E0409" width="281" height="500" /></a>

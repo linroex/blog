@@ -2,9 +2,9 @@
 title: "在.NET程式裡面要如何取用Windows的環境變數(系統變數) - 以VB.Net作範例"
 date: 2011-02-11T09:55:35
 slug: "net-windows-environment-variables-vb-net"
-aliases: ["/posts/%e5%9c%a8-net%e7%a8%8b%e5%bc%8f%e8%a3%a1%e9%9d%a2%e8%a6%81%e5%a6%82%e4%bd%95%e5%8f%96%e7%94%a8windows%e7%9a%84%e7%92%b0%e5%a2%83%e8%ae%8a%e6%95%b8%e7%b3%bb%e7%b5%b1%e8%ae%8a%e6%95%b8-%e4%bb%a5vb-n/"]
-tags: ["Windows", "VB", ".NET", "環境變數"]
-categories: []
+aliases: ["/posts/%e5%9c%a8-net%e7%a8%8b%e5%bc%8f%e8%a3%a1%e9%9d%a2%e8%a6%81%e5%a6%82%e4%bd%95%e5%8f%96%e7%94%a8windows%e7%9a%84%e7%92%b0%e5%a2%83%e8%ae%8a%e6%95%b8%e7%b3%bb%e7%b5%b1%e8%ae%8a%e6%95%b8-%e4%bb%a5vb-n/", "/posts/net-windows-environment-variables-vb-net-2/", "/posts/%e5%9c%a8-net%e7%a8%8b%e5%bc%8f%e8%a3%a1%e9%9d%a2%e8%a6%81%e5%a6%82%e4%bd%95%e5%8f%96%e7%94%a8windows%e7%9a%84%e7%92%b0%e5%a2%83%e8%ae%8a%e6%95%b8%e7%b3%bb%e7%b5%b1%e8%ae%8a%e6%95%b8-%e4%bb%a5vb-n-2/"]
+tags: ["VB", ".NET", "Windows"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2010-11-07_144258.jpg"><img class="alignnone size-full wp-image-165" title="2010-11-07_144258" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2010-11-07_144258.jpg" alt="" width="394" height="406" /></a></p>

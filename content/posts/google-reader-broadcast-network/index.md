@@ -3,8 +3,8 @@ title: "Google Reader 製作聯播網"
 date: 2009-06-15T12:41:07
 slug: "google-reader-broadcast-network"
 aliases: ["/posts/google-reader-%e8%a3%bd%e4%bd%9c%e8%81%af%e6%92%ad%e7%b6%b2/"]
-tags: ["Google"]
-categories: ["Google"]
+tags: ["Google", "RSS"]
+categories: ["Web Apps"]
 ---
 
 Google Reader這個網站我們已經在Google Reader 線上RSS閱讀器 這篇文章中提過了,當時說過他有很多神奇的功能,布過沒有講的很明白,現在我們就要交各位如何使用Google Reader來製作RSS的應用   —    聯撥我想常打Blog的人都知道聯撥吧!他會自動把每個參予者部落格的新文章都貼出來,可以讓部落格文章能見度提高,是一種很優的技術XD

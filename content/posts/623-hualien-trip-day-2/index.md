@@ -3,8 +3,8 @@ title: "6/23 花蓮行第二日"
 date: 2010-06-23T22:34:43
 slug: "623-hualien-trip-day-2"
 aliases: ["/posts/623-%e8%8a%b1%e8%93%ae%e8%a1%8c%e7%ac%ac%e4%ba%8c%e6%97%a5/"]
-tags: ["遊記", "花蓮", "七星潭", "林田山", "洄瀾", "老周蒸餃"]
-categories: ["生活札記"]
+tags: ["Hualien"]
+categories: ["Travel"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2010/06/DSCN0056.jpg"><img class="alignnone size-large wp-image-3332" title="DSCN0056" src="{{< param imageBase >}}/wp-content/uploads/2010/06/DSCN0056-533x400.jpg" alt="" width="533" height="400" /></a>

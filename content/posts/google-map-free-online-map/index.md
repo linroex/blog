@@ -4,7 +4,7 @@ date: 2009-07-24T17:17:42
 slug: "google-map-free-online-map"
 aliases: ["/posts/google-map-%e5%85%8d%e8%b2%bb%e7%9a%84%e7%b7%9a%e4%b8%8a%e5%9c%b0%e5%9c%96/"]
 tags: ["Google"]
-categories: ["Google"]
+categories: ["Web Apps"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-24_171708.jpg"><img class="alignnone size-full wp-image-1677" title="2009-07-24_171708" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-24_171708.jpg" alt="2009-07-24_171708" width="155" height="71" /></a>

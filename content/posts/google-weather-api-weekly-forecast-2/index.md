@@ -3,8 +3,8 @@ title: "Google Weather API - 幫助你取得一整週的天氣狀況"
 date: 2011-02-04T00:48:56
 slug: "google-weather-api-weekly-forecast-2"
 aliases: ["/posts/google-weather-api-%e5%b9%ab%e5%8a%a9%e4%bd%a0%e5%8f%96%e5%be%97%e4%b8%80%e6%95%b4%e9%80%b1%e7%9a%84%e5%a4%a9%e6%b0%a3%e7%8b%80%e6%b3%81-2/"]
-tags: ["PHP", "API", "Google", "天氣"]
-categories: ["Google"]
+tags: ["Google API", "PHP"]
+categories: ["Programming"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-04_004255.jpg"><img class="size-large wp-image-4648 aligncenter" title="2011-02-04_004255" src="{{< param imageBase >}}/wp-content/uploads/2011/02/2011-02-04_004255-520x416.jpg" alt="" width="520" height="416" /></a></p>

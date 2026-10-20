@@ -3,8 +3,8 @@ title: "8/1起Google將全面放棄舊型瀏覽器，你還在用IE6、Firefox 3
 date: 2011-06-06T19:31:14
 slug: "google-drops-old-browser-support"
 aliases: ["/posts/81%e8%b5%b7google%e5%b0%87%e5%85%a8%e9%9d%a2%e6%94%be%e6%a3%84%e8%88%8a%e5%9e%8b%e7%80%8f%e8%a6%bd%e5%99%a8%ef%bc%8c%e4%bd%a0%e9%82%84%e5%9c%a8%e7%94%a8ie6%e3%80%81firefox-3-5%e5%98%9b%ef%bc%9f/"]
-tags: ["Google", "IE", "Chrome", "Firefox", "Safari"]
-categories: ["瀏覽器", "Google"]
+tags: ["Chrome", "IE", "Firefox"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-06_193037.jpg"><img class="size-full wp-image-5215 aligncenter" title="2011-06-06_193037" src="{{< param imageBase >}}/wp-content/uploads/2011/06/2011-06-06_193037.jpg" alt="" width="344" height="337" /></a>

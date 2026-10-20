@@ -3,8 +3,8 @@ title: "【CSS 3】透過transform: rotate做出圖片、網頁傾斜的效果"
 date: 2011-04-23T09:22:08
 slug: "css3-transform-rotate"
 aliases: ["/posts/%e3%80%90css-3%e3%80%91%e9%80%8f%e9%81%8etransform-rotate%e5%81%9a%e5%87%ba%e5%9c%96%e7%89%87%e3%80%81%e7%b6%b2%e9%a0%81%e5%82%be%e6%96%9c%e7%9a%84%e6%95%88%e6%9e%9c/"]
-tags: ["CSS", "CSS 3", "transform: rotate"]
-categories: ["CSS"]
+tags: ["CSS"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-23_085636.jpg"><img class="size-large wp-image-422 aligncenter" title="2011-04-23_085636" src="{{< param imageBase >}}/wp-content/uploads/2011/04/2011-04-23_085636-540x386.jpg" alt="" width="540" height="386" /></a>

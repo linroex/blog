@@ -2,8 +2,8 @@
 title: "BigQuery Federate Google Sheet Table Occur Access Denied Error"
 date: 2017-09-14T21:45:47
 slug: "bigquery-federate-google-sheet-table-occur-access-denied-error"
-tags: ["BigQuery"]
-categories: []
+tags: ["BigQuery", "Google"]
+categories: ["Programming"]
 ---
 
 BigQuery 可以讓你把資料表和 Google Drive 的 Google Sheet 連結在一起，當 Google Sheet 有修改時資料表會立刻跟著修改，在使用這種 Federate Table 時有些人可能會遇到 Access Denied 的問題，當你在 WebUI 上查詢時沒有問題，但如果用 Command Lin Tool 的 bq 來查詢，會出現以下錯誤訊息：

@@ -3,7 +3,7 @@ title: "WordPress2.8.1 RC"
 date: 2009-07-08T11:14:51
 slug: "wordpress2-8-1-rc"
 tags: ["WordPress"]
-categories: ["WordPress"]
+categories: ["Blog"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-08_110952.jpg"><img class="alignnone size-full wp-image-1562" title="2009-07-08_110952" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-08_110952.jpg" alt="2009-07-08_110952" width="323" height="75" /></a>

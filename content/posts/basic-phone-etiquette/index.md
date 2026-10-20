@@ -3,8 +3,8 @@ title: "打電話的基本禮儀之國中生必看"
 date: 2011-05-01T15:14:39
 slug: "basic-phone-etiquette"
 aliases: ["/posts/%e6%89%93%e9%9b%bb%e8%a9%b1%e7%9a%84%e5%9f%ba%e6%9c%ac%e7%a6%ae%e5%84%80%e4%b9%8b%e5%9c%8b%e4%b8%ad%e7%94%9f%e5%bf%85%e7%9c%8b/"]
-tags: ["電話禮儀"]
-categories: ["生活札記"]
+tags: ["Phone Etiquette"]
+categories: ["Life"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/phone.jpg"><img class="size-full wp-image-5083 aligncenter" title="phone" src="{{< param imageBase >}}/wp-content/uploads/2011/05/phone.jpg" alt="" width="300" height="300" /></a>

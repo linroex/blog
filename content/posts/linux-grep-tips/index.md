@@ -3,8 +3,8 @@ title: "Linux Grep Tips - 搜尋有指定字串的列"
 date: 2017-01-20T18:32:31
 slug: "linux-grep-tips"
 aliases: ["/posts/linux-grep-tips-%e6%90%9c%e5%b0%8b%e6%9c%89%e6%8c%87%e5%ae%9a%e5%ad%97%e4%b8%b2%e7%9a%84%e5%88%97/"]
-tags: ["Linux", "grep"]
-categories: []
+tags: ["Linux"]
+categories: ["SRE"]
 ---
 
 在 Linux 裡面有時我們會需要從檔案中快速的搜尋帶有關鍵字的「列」，例如在看 log 時可能會想找出某個時間發生的錯誤，打開檔案一行行找實在不怎麼經濟實惠，這時你就會需要 grep 的幫助啦！

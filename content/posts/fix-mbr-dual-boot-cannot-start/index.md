@@ -3,8 +3,8 @@ title: "安裝雙系統時電腦變得無法開機? 來修復MBR檔吧~"
 date: 2010-09-11T22:19:31
 slug: "fix-mbr-dual-boot-cannot-start"
 aliases: ["/posts/%e5%ae%89%e8%a3%9d%e9%9b%99%e7%b3%bb%e7%b5%b1%e6%99%82%e9%9b%bb%e8%85%a6%e8%ae%8a%e5%be%97%e7%84%a1%e6%b3%95%e9%96%8b%e6%a9%9f-%e4%be%86%e4%bf%ae%e5%be%a9mbr%e6%aa%94%e5%90%a7/"]
-tags: ["Ubuntu", "chkdsk", "fixmbr", "MBR", "無法進入作業系統", "無法開機"]
-categories: ["Windows系列", "作業系統"]
+tags: ["Windows"]
+categories: ["Hardware"]
 ---
 
 最近在玩Ubuntu時遇上了一件事,那就是如果你手動的把Ubuntu所在的硬碟給格式化你的電腦就會無法進入作業系統,這是因為系統的MBR檔被破壞了,同樣會遇到這種情況不只是把Ubuntu直接格式化會遇到,有時候灌雙系統也會遇到這種情況,遇到這種事情時別驚慌,因為MBR檔是可以修復的,而且步驟上也不是很難,首先要先準備好Windows的安裝光碟,然後設定好光碟開機....

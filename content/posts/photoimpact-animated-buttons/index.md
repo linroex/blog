@@ -3,8 +3,8 @@ title: "PhotoImpact製作動態按鈕"
 date: 2009-07-05T10:16:27
 slug: "photoimpact-animated-buttons"
 aliases: ["/posts/phtoimpact%e8%a3%bd%e4%bd%9c%e5%8b%95%e6%85%8b%e6%8c%89%e9%88%95/"]
-tags: ["PhtoImpact"]
-categories: ["影像處理"]
+tags: ["PhotoImpact"]
+categories: ["Software"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-04_200250.jpg"><img class="alignnone size-full wp-image-1531" title="2009-07-04_200250" src="{{< param imageBase >}}/wp-content/uploads/2009/07/2009-07-04_200250.jpg" alt="2009-07-04_200250" width="500" height="452" /></a>

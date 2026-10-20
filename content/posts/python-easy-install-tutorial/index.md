@@ -3,8 +3,8 @@ title: "讓Python安裝模組變得更簡單～ easy_install使用教學+egg檔�
 date: 2011-05-01T16:50:04
 slug: "python-easy-install-tutorial"
 aliases: ["/posts/%e8%ae%93python%e5%ae%89%e8%a3%9d%e6%a8%a1%e7%b5%84%e8%ae%8a%e5%be%97%e6%9b%b4%e7%b0%a1%e5%96%ae%ef%bd%9e-easy_install%e4%bd%bf%e7%94%a8%e6%95%99%e5%ad%b8/"]
-tags: ["Python", "easy_install", "egg", "ez_setup", "模組"]
-categories: ["Python"]
+tags: ["Python"]
+categories: ["Programming"]
 ---
 
 <a href="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-01_170827.jpg"><img class="aligncenter" title="2011-05-01_170827" src="{{< param imageBase >}}/wp-content/uploads/2011/05/2011-05-01_170827-540x352.jpg" alt="" width="540" height="352" /></a>

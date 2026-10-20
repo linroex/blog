@@ -3,8 +3,8 @@ title: "什麼是QR Code？ QR Code製作教學～(PsQrEdit)"
 date: 2010-12-10T15:52:31
 slug: "what-is-qr-code-psqredit-tutorial"
 aliases: ["/posts/%e4%bb%80%e9%ba%bc%e6%98%afqr-code%ef%bc%9f-qr-code%e8%a3%bd%e4%bd%9c%e6%95%99%e5%ad%b8%ef%bd%9epsqredit/"]
-tags: ["QR Code", "PsQrEdit", "一維條碼", "二維條碼"]
-categories: []
+tags: ["QR Code"]
+categories: ["Software"]
 ---
 
 <p style="text-align: center;"><a href="{{< param imageBase >}}/wp-content/uploads/2010/11/qrcode.png"><img class="aligncenter" title="{{< param imageBase >}}/wp-content/uploads/2010/11/qrcode.png" src="{{< param imageBase >}}/wp-content/uploads/2010/11/qrcode.png" alt="" width="135" height="135" /></a></p>

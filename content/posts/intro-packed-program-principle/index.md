@@ -3,8 +3,8 @@ title: "淺談加殼程式的原理"
 date: 2009-07-07T20:29:10
 slug: "intro-packed-program-principle"
 aliases: ["/posts/%e6%b7%ba%e8%ab%87%e5%8a%a0%e6%ae%bc%e7%a8%8b%e5%bc%8f%e7%9a%84%e5%8e%9f%e7%90%86/"]
-tags: []
-categories: ["加/解密&amp;殼"]
+tags: ["Reverse Engineering"]
+categories: ["Security"]
 ---
 
 大家都聽過加殼程式吧,例如UPX這類的,但是各位知道他的原理嗎?有沒有嘗試寫過這樣的程式呢?很難?其實他道理是很簡單的,以下就由聽。風來為各位分說分說吧~

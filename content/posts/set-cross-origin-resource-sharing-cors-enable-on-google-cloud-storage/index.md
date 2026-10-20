@@ -2,8 +2,8 @@
 title: "Set Cross-Origin Resource Sharing (CORS) Enable on Google Cloud Storage"
 date: 2016-12-02T13:50:59
 slug: "set-cross-origin-resource-sharing-cors-enable-on-google-cloud-storage"
-tags: ["Google", "Google Cloud Platform", "GCP Storage", "CORS"]
-categories: []
+tags: ["GCP", "CORS"]
+categories: ["Programming"]
 ---
 
 最近因為社課教大家用 Phaser 開發小遊戲，有許多素材需要讓學員在 Codepen 上使用，所以需要一個支援 CORS 的網路空間來放置素材，腦筋動著動著就想到便宜大碗又可以綁定自己 Domain 的 Google Cloud Storage 去啦！

@@ -2,8 +2,8 @@
 title: "Trello API Note"
 date: 2017-02-22T23:59:29
 slug: "trello-api-note"
-tags: ["Trello"]
-categories: []
+tags: ["Trello", "API"]
+categories: ["Programming"]
 ---
 
 今天因為在開發公司 Dashboard 的關係，需要寫程式去計算每天的開發點數，讓 Dashboard 能夠呈現每個月的開發點數變化，所以玩了 Trello API，簡單筆記在這裡。 前情提要，我們部門使用 Scrum 的點數方式來評估開發進度，幫每個 Issue 設定一個難度點數，搭配 Trello Scrum 外掛使用。
