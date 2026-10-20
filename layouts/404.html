@@ -1,0 +1,23 @@
+{{- define "main" }}
+<div class="not-found">404</div>
+<p id="lang-missing" class="lang-missing" hidden></p>
+<script>
+(function () {
+  // GitHub Pages serves this one 404 page for every missing path. A language
+  // path that is missing usually means the page has no translation there.
+  var m = location.pathname.match(/^\/(en|ja)(\/.*)$/);
+  if (!m) return;
+  var text = {
+    en: { msg: "This page is not available in English.", link: "Read the Chinese version →" },
+    ja: { msg: "このページは日本語版がありません。", link: "繁体字中国語版を見る →" }
+  }[m[1]];
+  var box = document.getElementById("lang-missing");
+  box.hidden = false;
+  box.appendChild(document.createTextNode(text.msg + " "));
+  var a = document.createElement("a");
+  a.href = m[2];
+  a.textContent = text.link;
+  box.appendChild(a);
+})();
+</script>
+{{- end }}{{/* end main */ -}}
