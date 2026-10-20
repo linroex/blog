@@ -5,7 +5,7 @@ slug: "opensearch-memory-alert-old-generation"
 tags: ["OpenSearch", "JVM", "Prometheus"]
 categories: ["SRE"]
 summary: ""
-draft: true
+draft: false
 ---
 
 私は 100 近くの OpenSearch クラスターを管理しています。先日、Heap のアラートが鳴りました。ただし全クラスターではなく、いくつかのクラスターだけです。このアラートの条件は Heap 使用率が 75% を超えることです。鳴ったクラスターは数分後に自然に回復し、また鳴る、を繰り返していました。

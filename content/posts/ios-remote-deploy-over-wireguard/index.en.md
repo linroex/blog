@@ -5,7 +5,7 @@ slug: "ios-remote-deploy-over-wireguard"
 tags: ["iOS", "Xcode", "WireGuard"]
 categories: ["Programming"]
 summary: ""
-draft: true
+draft: false
 ---
 
 In the age of AI, many of us control our home computers remotely and let AI write code while we are out. Web development is easy: connect the computer to Tailscale or WireGuard, and you can open the page and debug from anywhere. Apps are different. App Store review takes days, and even TestFlight takes about half an hour before you can install a build on your phone. No matter how fast AI writes code, you get stuck here.

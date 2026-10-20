@@ -5,7 +5,7 @@ slug: "openrouter-ai-model-provider-differences"
 tags: ["OpenRouter", "OpenCode"]
 categories: ["AI"]
 summary: ""
-draft: true
+draft: false
 ---
 
 I recently used DeepSeek V4.1 Flash on OpenRouter and ran into a frustrating problem: the same model was sometimes smart and sometimes clearly dumb. When it was dumb, it even got the tool call format wrong, or kept repeating the same step without making progress. The model name never changed, yet it felt like a different model. This made me notice something that is easy to overlook: **besides choosing a model, which provider actually runs the model also affects the experience.**

@@ -5,7 +5,7 @@ slug: "opensearch-memory-alert-old-generation"
 tags: ["OpenSearch", "JVM", "Prometheus"]
 categories: ["SRE"]
 summary: ""
-draft: true
+draft: false
 ---
 
 I manage close to a hundred OpenSearch clusters. A while ago, the heap alert started firing, but only on a few clusters, not all of them. The alert fires when heap usage goes above 75%. On those few clusters, it would recover by itself a few minutes later, and then fire again.

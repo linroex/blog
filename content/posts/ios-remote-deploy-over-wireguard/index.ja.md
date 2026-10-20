@@ -5,7 +5,7 @@ slug: "ios-remote-deploy-over-wireguard"
 tags: ["iOS", "Xcode", "WireGuard"]
 categories: ["Programming"]
 summary: ""
-draft: true
+draft: false
 ---
 
 AI の時代になり、外出先から AI に家のパソコンを操作させてコードを書くのが当たり前になりました。Web 開発なら簡単で、パソコンを Tailscale や WireGuard につないでおけば、外からでもそのままページを開いてデバッグできます。しかしアプリはそうはいきません。App Store の審査には数日かかり、TestFlight でもスマホにインストールしてテストできるまで 30 分ほどかかります。AI がどれだけ速くコードを書いても、ここで止まってしまいます。

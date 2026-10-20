@@ -5,7 +5,7 @@ slug: "openrouter-ai-model-provider-differences"
 tags: ["OpenRouter", "OpenCode"]
 categories: ["AI"]
 summary: ""
-draft: true
+draft: false
 ---
 
 最近 OpenRouter で DeepSeek V4.1 Flash を使っていて、困った状況に出くわしました。同じモデルなのに、とても賢いときもあれば、明らかに賢くないときもあるのです。賢くないときは、ツール呼び出し（tool call）の形式まで間違えたり、同じことを繰り返して堂々巡りになり、まったく進まなかったりします。モデル名は変わっていないのに、まるで別人のようでした。これで、普段見落としがちな点に気づきました。**モデルを選ぶだけでなく、実際にどのプロバイダーがそのモデルを動かしているかも、使い心地に影響するのです。**
