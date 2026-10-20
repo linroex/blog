@@ -47,7 +47,7 @@
 
 {{- $categories := slice }}
 {{- $currentCategory := "" }}
-{{- if or .IsHome (eq .RelPermalink "/posts/") }}
+{{- if or .IsHome (and (eq .Kind "section") (eq .Section "posts")) }}
 {{- range $pages }}
   {{- range .Params.categories }}
     {{- $categories = $categories | append . }}
@@ -161,9 +161,9 @@
 {{- if $showSidebar }}
 <aside class="sidebar">
   <div class="sidebar-section">
-    <h3 class="sidebar-title">分類</h3>
+    <h3 class="sidebar-title">{{ i18n "categories" }}</h3>
     <nav class="sidebar-nav">
-      <a href="{{ "/posts/" | absLangURL }}" class="all-link {{ if eq $currentCategory "" }}active{{ end }}">全部</a>
+      <a href="{{ "/posts/" | absLangURL }}" class="all-link {{ if eq $currentCategory "" }}active{{ end }}">{{ i18n "all" }}</a>
       {{- range $categories }}
       {{- with site.GetPage (printf "/categories/%s" (urlize .)) }}
       <a href="{{ .Permalink }}" class="{{ if eq $currentCategory .LinkTitle }}active{{ end }}">{{ .LinkTitle }}</a>

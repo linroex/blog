@@ -65,7 +65,7 @@
 <aside class="sidebar">
   {{- with .Params.categories }}
   <div class="sidebar-section">
-    <h3 class="sidebar-title">分類</h3>
+    <h3 class="sidebar-title">{{ i18n "categories" }}</h3>
     <ul class="sidebar-tags">
       {{- range . }}
       {{- with $.Site.GetPage (printf "/categories/%s" (urlize .)) }}
@@ -77,7 +77,7 @@
   {{- end }}
   {{- with $tagPages }}
   <div class="sidebar-section">
-    <h3 class="sidebar-title">標籤</h3>
+    <h3 class="sidebar-title">{{ i18n "tags" }}</h3>
     <ul class="sidebar-tags">
       {{- range . }}
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>

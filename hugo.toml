@@ -1,13 +1,13 @@
 baseURL = "https://coder.tw/"
-locale = "zh-tw"
 title = "Lin's Blog"
 theme = "PaperMod"
+defaultContentLanguage = "zh-tw"
+defaultContentLanguageInSubdir = false
 
 [pagination]
 pagerSize = 10
 
 [params]
-  description = "我的技術部落格"
   disableThemeToggle = true
 
   disableSpecial1stPost = true
@@ -29,22 +29,72 @@ pagerSize = 10
   category = "categories"
   tag = "tags"
 
-[menu]
-  [[menu.main]]
-    identifier = "posts"
-    name = "文章"
-    url = "/posts/"
+[languages]
+  [languages.zh-tw]
+    languageName = "繁中"
+    locale = "zh-TW"
     weight = 1
-  [[menu.main]]
-    identifier = "categories"
-    name = "分類"
-    url = "/categories/"
+    [languages.zh-tw.params]
+      description = "我的技術部落格"
+    [[languages.zh-tw.menu.main]]
+      identifier = "posts"
+      name = "文章"
+      url = "/posts/"
+      weight = 1
+    [[languages.zh-tw.menu.main]]
+      identifier = "categories"
+      name = "分類"
+      url = "/categories/"
+      weight = 2
+    [[languages.zh-tw.menu.main]]
+      identifier = "about"
+      name = "關於"
+      url = "/about/"
+      weight = 3
+
+  [languages.en]
+    languageName = "English"
+    locale = "en-US"
     weight = 2
-  [[menu.main]]
-    identifier = "about"
-    name = "關於"
-    url = "/about/"
+    [languages.en.params]
+      description = "Lin's tech blog"
+    [[languages.en.menu.main]]
+      identifier = "posts"
+      name = "Posts"
+      url = "/posts/"
+      weight = 1
+    [[languages.en.menu.main]]
+      identifier = "categories"
+      name = "Categories"
+      url = "/categories/"
+      weight = 2
+    [[languages.en.menu.main]]
+      identifier = "about"
+      name = "About"
+      url = "/about/"
+      weight = 3
+
+  [languages.ja]
+    languageName = "日本語"
+    locale = "ja-JP"
     weight = 3
+    [languages.ja.params]
+      description = "Lin の技術ブログ"
+    [[languages.ja.menu.main]]
+      identifier = "posts"
+      name = "記事"
+      url = "/posts/"
+      weight = 1
+    [[languages.ja.menu.main]]
+      identifier = "categories"
+      name = "カテゴリー"
+      url = "/categories/"
+      weight = 2
+    [[languages.ja.menu.main]]
+      identifier = "about"
+      name = "プロフィール"
+      url = "/about/"
+      weight = 3
 
 [markup]
   [markup.goldmark.renderer]
@@ -54,4 +104,3 @@ pagerSize = 10
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 3
-
