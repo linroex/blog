@@ -3,6 +3,7 @@ title = "Lin's Blog"
 theme = "PaperMod"
 defaultContentLanguage = "zh-tw"
 defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
 
 [pagination]
 pagerSize = 10
@@ -17,7 +18,6 @@ pagerSize = 10
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
-  enableRobotsTXT = true
 
 [params.profileMode]
   enabled = false
