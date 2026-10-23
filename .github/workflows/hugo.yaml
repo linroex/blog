@@ -4,6 +4,12 @@ name: Deploy Hugo site to Pages
 on:
   push:
     branches: ["main"]
+    # 這些檔案不會進入網站輸出，改動時不需要重新部署
+    paths-ignore:
+      - ".gitignore"
+      - "MCP.md"
+      - "archetypes/**"
+      - "scripts/**"
   pull_request:
     branches: ["main"]
   workflow_dispatch:
