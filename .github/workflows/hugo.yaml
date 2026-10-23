@@ -4,15 +4,16 @@ name: Deploy Hugo site to Pages
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  pages: read
 
 concurrency:
-  group: "pages"
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.event.pull_request.number) || 'pages' }}
   cancel-in-progress: false
 
 defaults:
@@ -34,19 +35,33 @@ jobs:
         with:
           submodules: recursive
       - name: Setup Pages
+        if: github.event_name != 'pull_request'
         id: pages
         uses: actions/configure-pages@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test SEO validator
+        run: python3 -m unittest discover -s scripts -p 'test_check_seo.py' -v
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
         run: |
-          hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url || 'https://coder.tw' }}/"
+      - name: Validate published article SEO
+        run: python3 scripts/check_seo.py --public-dir public --base-url "${{ steps.pages.outputs.base_url || 'https://coder.tw' }}/"
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
   deploy:
+    if: github.event_name != 'pull_request'
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
