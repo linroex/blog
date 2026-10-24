@@ -9,7 +9,9 @@ beforeAll(() => {
 });
 function setup(handler: (url: URL, init: RequestInit) => Response) {
   const env = { ...baseEnv, GITHUB_APP_ID: crypto.randomUUID(), GITHUB_INSTALLATION_ID: '123', GITHUB_APP_PRIVATE_KEY: privateKey };
-  const fetcher = vi.fn(async (input: string | URL | Request, init: RequestInit = {}) => {
+  const fetcher = vi.fn(async function (this: unknown, input: string | URL | Request, init: RequestInit = {}) {
+    // Match workerd's receiver requirement; Node's fetch is more permissive.
+    expect(this).toBeUndefined();
     const url = new URL(String(input));
     if (url.pathname === '/app/installations/123/access_tokens') {
       expect(JSON.parse(init.body as string)).toEqual({ repositories: ['blog'], permissions: { contents: 'write', actions: 'read' } });

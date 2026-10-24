@@ -37,9 +37,11 @@ export class GitHubRepository implements Repository {
   private async api<T>(path: string, method = 'GET', body?: unknown, missing = false): Promise<T | null> {
     if (++this.calls > 40) throw new BlogError('request_budget', 'Too many GitHub operations; use a smaller page or retry the operation');
     const token = await installationToken(this.env, this.fetcher);
+    // Workerd's global fetch rejects an unrelated receiver (this repository).
+    const fetcher = this.fetcher;
     let response: Response;
     try {
-      response = await this.fetcher(`https://api.github.com${this.base}${path}`, {
+      response = await fetcher(`https://api.github.com${this.base}${path}`, {
         method, headers: headers(token), body: body === undefined ? undefined : JSON.stringify(body), signal: AbortSignal.timeout(15_000),
       });
     } catch { throw new BlogError('github_unavailable', 'GitHub request timed out or disconnected; check operation status before retrying a write'); }
