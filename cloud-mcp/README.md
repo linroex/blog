@@ -4,6 +4,13 @@ Remote Streamable HTTP MCP for the existing Hugo repository. The site remains on
 GitHub Pages; the Worker uses GitHub APIs, and never connects to your computer.
 The original `scripts/mcp_server.py` remains available for local stdio clients.
 
+Production endpoint: `https://lins-blog-mcp.linroex.workers.dev/mcp`.
+The checked-in `wrangler.jsonc` contains the production account, KV binding and
+owner allowlist; it contains no credentials. Run `npm run deploy` for subsequent
+production code updates. Use an ignored `wrangler.local.jsonc` for test overrides.
+The GitHub App is `linroex-blog-mcp`, installed only on `linroex/blog`.
+OAuth and App credentials are stored separately in Cloudflare Worker secrets.
+
 ## Architecture and publication contract
 
 ```text

@@ -3,21 +3,31 @@
   "name": "lins-blog-mcp",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-24",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
   "workers_dev": true,
   "preview_urls": false,
   "vars": {
-    "PUBLIC_ORIGIN": "https://lins-blog-mcp.REPLACE_ME.workers.dev",
+    "PUBLIC_ORIGIN": "https://lins-blog-mcp.linroex.workers.dev",
     "GITHUB_OWNER": "linroex",
     "GITHUB_REPO": "blog",
     "GITHUB_BRANCH": "main",
-    "ALLOWED_GITHUB_USER_ID": "REPLACE_ME",
+    "ALLOWED_GITHUB_USER_ID": "1254953",
     "SITE_URL": "https://coder.tw",
     "VALIDATION_WORKFLOW": "mcp-validate.yaml",
     "DEPLOY_WORKFLOW": "hugo.yaml"
   },
   "kv_namespaces": [
-    { "binding": "OAUTH_KV", "id": "REPLACE_WITH_KV_NAMESPACE_ID" }
+    {
+      "binding": "OAUTH_KV",
+      "id": "98e83579992f434880d63b09150fc0b1"
+    }
   ],
-  "observability": { "enabled": true, "head_sampling_rate": 0.1 }
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1
+  },
+  "account_id": "0da15629cc8401faeee452ff11dc9db9"
 }

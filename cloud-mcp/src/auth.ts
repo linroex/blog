@@ -25,7 +25,9 @@ export async function authHandler(request: Request, env: Env): Promise<Response>
       const details = await oauth.describeConsent(original);
       const consent = await oauth.beginConsent(original);
       consent.headers.set('Content-Type', 'text/html; charset=utf-8');
-      consent.headers.set('Referrer-Policy', 'no-referrer');
+      // no-referrer makes browser form POSTs send Origin: null, breaking
+      // the same-origin CSRF check below. Still suppress cross-origin referrers.
+      consent.headers.set('Referrer-Policy', 'same-origin');
       return new Response(consentPage(details, consent.handle), { headers: consent.headers });
     }
     if (url.pathname === '/authorize' && request.method === 'POST') {

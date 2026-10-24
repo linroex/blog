@@ -54,6 +54,7 @@ async function login(userId = 123) {
     code_challenge: challenge, code_challenge_method: 'S256', resource: `${origin}/mcp`, scope: 'blog:manage offline_access', state: 'client-state' });
   const consent = await h.call(`/authorize?${query}`, {}, true);
   expect(consent.status).toBe(200);
+  expect(consent.headers.get('Referrer-Policy')).toBe('same-origin');
   const page = await consent.text();
   const handle = /name="handle" value="([^"]+)"/.exec(page)![1];
   const approval = await h.call('/authorize', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', Origin: origin },
@@ -116,6 +117,7 @@ it('rejects an OAuth callback without browser binding and cross-origin consent p
   const { call } = harness();
   expect((await call('/callback?state=stolen&code=stolen')).status).toBe(400);
   expect((await call('/authorize', { method: 'POST', headers: { Origin: 'https://evil.example' }, body: 'handle=stolen' })).status).toBe(403);
+  expect((await call('/authorize', { method: 'POST', headers: { Origin: 'null' }, body: 'handle=stolen' })).status).toBe(403);
 });
 
 it('escapes untrusted client metadata on the consent page', () => {
