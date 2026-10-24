@@ -1,5 +1,10 @@
 # Blog MCP server
 
+For ChatGPT web without a tunnel to this computer, use the separate
+[Cloudflare HTTP MCP](cloud-mcp/README.md). It stores drafts in GitHub branches,
+validates candidates with GitHub Actions, and publishes through a repo-scoped
+GitHub App. The stdio server and workflow described below remain available.
+
 `scripts/mcp_server.py` lets MCP-compatible AI tools read this Hugo blog, save
 drafts, validate the site, and publish one approved post through Git. It uses
 Python's standard library only.

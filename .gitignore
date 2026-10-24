@@ -2,3 +2,10 @@ public/
 resources/_gen/
 .hugo_build.lock
 __pycache__/
+cloud-mcp/node_modules/
+cloud-mcp/.wrangler/
+cloud-mcp/dist/
+cloud-mcp/.dev.vars*
+!cloud-mcp/.dev.vars.example
+cloud-mcp/.env*
+cloud-mcp/wrangler.local.jsonc
