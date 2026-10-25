@@ -61,7 +61,7 @@ MCP 其實有兩種連線方式：
 
 所以如果想在網頁版用，就得自己給管家一支手機，這支手機就是這篇要裝的 FastMCP：外面打進來的電話由它接起來，轉告管家，管家做完事，再透過它回話。
 
-（圖 3：轉接架構 —— 由左到右：網頁版 AI（機房）→ 網路 → 手機（FastMCP）→ 管家（Bear MCP）→ Bear；手機、管家、Bear 三者框起來標示「你的 Mac」；機房到手機的箭頭標「網路型」，手機到管家的箭頭標「本機型」）
+![轉接架構：機房裡的網頁版 AI 透過網路型（HTTP）連到你 Mac 上的手機（FastMCP），FastMCP 再用本機型（stdio）轉交給管家（Bear MCP），由管家操作 Bear](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/c67c96f2695ad4bfabb15570f26902f629ed31d851050a98f8bc7fdefe736a75/fig3-proxy-architecture.png)
 
 當然，如果你只在桌面版用，那就不需要轉，直接用本機型就好。
 
