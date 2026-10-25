@@ -1,6 +1,7 @@
 import { sha256, sign, verify } from './crypto';
 import { document, edit, newDocument, postPath, taipeiDate } from './document';
 import { imageAsset, imageManifest, imagePath, imageView, MAX_IMAGES, type ImageAsset } from './images';
+import { R2Images, UPLOAD_SECONDS, validateUpload, type ImageStorage, type ImageUpload } from './r2-images';
 import { BlogError, type Env, type FileChange, type FileContent, type Lang, type Repository } from './types';
 
 const META_PATH = '.mcp/draft.json';
@@ -25,7 +26,7 @@ export interface ArticleIndex {
 
 export class Blog {
   constructor(private repo: Repository, private env: Env, private userId: string,
-    private loadIndex: () => Promise<ArticleIndex>) {}
+    private loadIndex: () => Promise<ArticleIndex>, private imageStorage: ImageStorage = new R2Images(env)) {}
 
   private branch(slug: string, lang: Lang) { postPath(slug, lang); return `mcp/drafts/${slug}/${lang}`; }
   private async main() {
@@ -63,6 +64,7 @@ export class Blog {
       sha256: await sha256(file.text), revision, source };
   }
   private imagePreview(slug: string, asset: ImageAsset, revision: string) {
+    if (asset.storage === 'r2') return imageView(slug, asset);
     return { ...imageView(slug, asset), preview_url:
       `https://raw.githubusercontent.com/${this.env.GITHUB_OWNER}/${this.env.GITHUB_REPO}/${revision}/${imagePath(slug, asset.filename)}` };
   }
@@ -108,31 +110,53 @@ export class Blog {
     else await this.repo.createRef(this.branch(slug, lang), revision);
     return this.view(slug, lang, { text: raw, sha: '' }, revision, 'draft');
   }
-  async uploadImage(slug: string, lang: Lang, expectedRevision: string, filename: string, encoded: string) {
-    const asset = await imageAsset(filename, encoded);
-    const path = imagePath(slug, filename);
+  async prepareImageUpload(slug: string, lang: Lang, expectedRevision: string, filename: string,
+    mimeType: string, size: number, expectedHash?: string) {
+    validateUpload(filename, mimeType, size, this.imageStorage.maximum);
+    if (expectedHash !== undefined && !/^[a-f0-9]{64}$/.test(expectedHash)) throw new BlogError('invalid_image', 'sha256 must be a lowercase SHA-256 hex digest');
     const current = await this.effective(slug, lang);
     if (current.revision !== expectedRevision) throw new BlogError('conflict', 'Article changed; read it again before uploading');
-    const active = current.source === 'draft';
-    const images = imageManifest(active ? current.draft!.meta.images : undefined);
-    const previous = images.find(a => a.filename === filename);
-    if (previous && previous.sha256 !== asset.sha256) throw new BlogError('image_exists', 'Image names are immutable; choose a new filename');
-    const existing = await this.repo.binary(path, current.revision);
-    if (existing && (await imageAsset(filename, existing.base64)).sha256 !== asset.sha256) {
-      throw new BlogError('image_exists', 'Image names are immutable; choose a new filename');
+    const images = imageManifest(current.source === 'draft' ? current.draft!.meta.images : undefined);
+    if (images.some(a => a.filename === filename)) throw new BlogError('image_exists', 'This draft already has that filename; choose a new filename');
+    if (images.length >= MAX_IMAGES) throw new BlogError('invalid_image', 'A draft supports at most 8 uploaded images');
+    const uploadId = crypto.randomUUID();
+    const upload: ImageUpload = { upload_id: uploadId, user_id: this.userId, slug, lang, expected_revision: expectedRevision,
+      filename, mime_type: mimeType, size, pending_key: `blog-mcp/pending/${uploadId}/${filename}`,
+      upload_expires: Date.now() + UPLOAD_SECONDS * 1000, expires: Date.now() + 86400_000,
+      ...(expectedHash ? { expected_sha256: expectedHash } : {}) };
+    const offer = await this.imageStorage.offer(upload);
+    return { upload_id: uploadId, upload_ticket: await sign(this.env.CONFIRMATION_SECRET, 'image-upload', upload),
+      ...offer, method: 'PUT', expires_in_seconds: UPLOAD_SECONDS, completion_expires_at: new Date(upload.expires).toISOString(),
+      max_image_bytes: this.imageStorage.maximum,
+      instructions: 'Use your file/network execution tool to PUT the raw image bytes to upload_url with every required_header before expiry. Do not put base64 in an MCP call. Then call complete_image_upload with upload_ticket. The MCP connector itself does not transfer chat attachments. Do not send OAuth or permanent storage credentials to the upload URL. Upload URLs are sensitive; do not quote them in the final answer.' };
+  }
+  async completeImageUpload(ticket: string) {
+    const upload = await verify<ImageUpload>(this.env.CONFIRMATION_SECRET, 'image-upload', ticket);
+    if (upload.user_id !== this.userId) throw new BlogError('forbidden', 'Upload belongs to another user');
+    postPath(upload.slug, upload.lang);
+    const current = await this.effective(upload.slug, upload.lang);
+    const previous = imageManifest(current.draft?.meta.images).find(a => a.storage === 'r2' && a.upload_id === upload.upload_id);
+    if (previous) {
+      await this.imageStorage.discard(upload);
+      return { ...this.imagePreview(upload.slug, previous, current.revision), revision: current.revision,
+        source: current.source, already_completed: true };
     }
-    if (previous && existing) return { ...this.imagePreview(slug, asset, current.revision), revision: current.revision, source: 'draft', uploaded: false };
-    if (!previous && images.length >= MAX_IMAGES) throw new BlogError('invalid_image', 'A draft supports at most 8 uploaded images');
-    const meta: DraftMeta = active ? current.draft!.meta : { slug, lang, base_post_sha: current.file.sha };
-    meta.images = [...images.filter(a => a.filename !== filename), asset].sort((a, b) => a.filename.localeCompare(b.filename));
+    if (upload.expires < Date.now()) throw new BlogError('expired', 'Upload completion ticket expired; prepare and upload again');
+    if (current.revision !== upload.expected_revision) throw new BlogError('conflict', 'Article changed during upload; read it and prepare a new upload');
+    const images = imageManifest(current.source === 'draft' ? current.draft!.meta.images : undefined);
+    if (images.length >= MAX_IMAGES || images.some(a => a.filename === upload.filename)) throw new BlogError('conflict', 'Image list changed; read the draft before uploading');
+    const asset = await this.imageStorage.complete(upload);
+    const meta: DraftMeta = current.source === 'draft' ? current.draft!.meta : { slug: upload.slug, lang: upload.lang, base_post_sha: current.file.sha };
+    meta.images = [...images, asset].sort((a, b) => a.filename.localeCompare(b.filename));
     const raw = edit(current.file.text, { draft: true });
     const parent = current.draft?.revision ?? current.main;
-    const revision = await this.repo.writeCommit(parent, { [postPath(slug, lang)]: raw,
-      [path]: { base64: encoded }, [META_PATH]: JSON.stringify(meta) }, `Draft image: ${slug}/${filename} (${lang})`);
+    const revision = await this.repo.writeCommit(parent, { [postPath(upload.slug, upload.lang)]: raw,
+      [META_PATH]: JSON.stringify(meta) }, `Draft image: ${upload.slug}/${upload.filename} (${upload.lang})`);
     if (current.draft) await this.repo.advanceRef(current.draft.branch, revision);
-    else await this.repo.createRef(this.branch(slug, lang), revision);
-    return { ...this.imagePreview(slug, asset, revision), revision, source: 'draft', uploaded: true,
-      instructions: 'Use markdown in the article, using this new revision for update_post. Upload is saved on a public draft branch; publish the article to deploy it.' };
+    else await this.repo.createRef(this.branch(upload.slug, upload.lang), revision);
+    await this.imageStorage.discard(upload);
+    return { ...this.imagePreview(upload.slug, asset, revision), revision, source: 'draft', already_completed: false,
+      instructions: 'Image bytes are on R2 and publicly accessible. Insert markdown with update_post using this new revision, then prepare and approve the article normally.' };
   }
   async preparePublish(slug: string, lang: Lang) {
     const draft = await this.draft(slug, lang);
@@ -148,6 +172,7 @@ export class Blog {
     const images = imageManifest(draft.meta.images);
     const changes: Record<string, FileChange> = { [postPath(slug, lang)]: raw };
     for (const asset of images) {
+      if (asset.storage === 'r2') { await this.imageStorage.verify(asset, slug); continue; }
       const path = imagePath(slug, asset.filename);
       const image = await this.repo.binary(path, draft.revision);
       if (!image || (await imageAsset(asset.filename, image.base64)).sha256 !== asset.sha256) throw new BlogError('invalid_image', 'Draft image changed or is missing; upload it again');
@@ -222,6 +247,7 @@ export class Blog {
     });
     const images = imageManifest(meta.images);
     for (const asset of images) {
+      if (asset.storage === 'r2') { await this.imageStorage.verify(asset, meta.slug); continue; }
       const image = await this.repo.binary(imagePath(meta.slug, asset.filename), commit.sha);
       if (!image || (await imageAsset(asset.filename, image.base64)).sha256 !== asset.sha256) throw new BlogError('invalid_operation', 'Candidate image changed');
     }
@@ -243,6 +269,9 @@ export class Blog {
     if (main !== meta.base_main || await this.repo.head(this.branch(slug, lang)) !== meta.draft_revision) throw new BlogError('conflict', 'Main or draft changed; prepare and confirm again');
     const validation = await this.validation(commit.sha, branch);
     if (!validation.valid) throw new BlogError('validation_required', 'This exact candidate has not passed validation');
+    for (const asset of imageManifest(meta.images)) {
+      if (asset.storage === 'r2') await this.imageStorage.verify(asset, slug);
+    }
     await this.repo.advanceRef(this.env.GITHUB_BRANCH, commit.sha);
     return this.publishedResult(meta, commit.sha);
   }

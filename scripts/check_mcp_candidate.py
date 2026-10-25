@@ -10,6 +10,7 @@ import json
 import os
 import re
 import subprocess
+import tomllib
 from pathlib import Path
 
 from blog_content import parse_frontmatter, split_document
@@ -38,7 +39,19 @@ def validate_candidate(root: Path, ref_name: str) -> dict:
     if git("show", "-s", "--format=%P", "HEAD") != data["base_main"]:
         raise ValueError("Candidate must have exactly its recorded base parent")
     images = image_manifest(data.get('images', []))
-    allowed_images = {image_view(slug, asset)['path']: asset for asset in images}
+    allowed_images = {image_view(slug, asset)['path']: asset for asset in images if asset.get('storage') != 'r2'}
+    # R2 bytes never enter Git. Check identity against the trusted base config,
+    # without fetching any candidate-provided URL or requiring CI credentials.
+    if any(asset.get('storage') == 'r2' for asset in images):
+        config = tomllib.loads(git('show', 'HEAD^:hugo.toml'))
+        public_base = config.get('params', {}).get('imageBase', '').rstrip('/')
+        if not public_base.startswith('https://'):
+            raise ValueError('Missing trusted R2 image base')
+        for asset in images:
+            if asset.get('storage') == 'r2':
+                key = f"blog-mcp/images/{slug}/{asset['sha256']}/{asset['filename']}"
+                if asset['key'] != key or asset['url'] != f'{public_base}/{key}':
+                    raise ValueError('R2 image identity or public URL changed')
     changed = git("diff", "--name-only", "--no-renames", "HEAD^", "HEAD", "--").splitlines()
     if not changed or not set(changed) <= {path, *allowed_images}:
         raise ValueError("Candidate must change exactly the selected article and its declared images")

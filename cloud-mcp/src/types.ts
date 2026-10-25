@@ -14,6 +14,12 @@ export interface Env {
   GITHUB_INSTALLATION_ID: string;
   GITHUB_APP_PRIVATE_KEY: string;
   CONFIRMATION_SECRET: string;
+  R2_ACCOUNT_ID?: string;
+  R2_BUCKET_NAME?: string;
+  R2_PUBLIC_BASE_URL?: string;
+  R2_ACCESS_KEY_ID?: string;
+  R2_SECRET_ACCESS_KEY?: string;
+  IMAGE_MAX_BYTES?: string;
 }
 
 export class BlogError extends Error {

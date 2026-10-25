@@ -20,7 +20,11 @@
     "DEPLOY_WORKFLOW": "hugo.yaml",
     "ACCESS_TEAM_DOMAIN": "momokatw.cloudflareaccess.com",
     "ACCESS_AUD": "fd1be715bdb1c3ee1cd03e430ee6f669e38f6d89056446dbcece4dffdab72518",
-    "ALLOWED_ACCESS_EMAIL": "linroex@coder.tw"
+    "ALLOWED_ACCESS_EMAIL": "linroex@coder.tw",
+    "R2_ACCOUNT_ID": "0da15629cc8401faeee452ff11dc9db9",
+    "R2_BUCKET_NAME": "blog",
+    "R2_PUBLIC_BASE_URL": "https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev",
+    "IMAGE_MAX_BYTES": "26214400"
   },
   "observability": {
     "enabled": true,

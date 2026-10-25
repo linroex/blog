@@ -20,8 +20,8 @@ index and validate candidate commits/SEO during site builds.
 
 ## Tools and authoring workflow
 
-The server exposes ten tools: `list_posts`, `read_post`, `create_post`,
-`update_post`, `upload_image`, `prepare_publish`, `get_operation_status`,
+The server exposes eleven tools: `list_posts`, `read_post`, `create_post`,
+`update_post`, `prepare_image_upload`, `complete_image_upload`, `prepare_publish`, `get_operation_status`,
 `publish_post`, `get_repo_status`, and `read_config`.
 
 1. List/read articles to avoid slug collisions. `read_post` prefers an active
@@ -41,39 +41,76 @@ The server exposes ten tools: `list_posts`, `read_post`, `create_post`,
 
 ## Upload article images
 
-Create or read the article first, then call `upload_image`:
+All clients use one flow: **prepare → HTTP PUT to R2 → complete**. Image bytes
+go to the existing `blog` R2 bucket. GitHub stores Markdown and the image manifest,
+not the new image files. The former base64 `upload_image` tool is retired.
 
-```json
-{
-  "slug": "my-post",
-  "lang": "zh-tw",
-  "expected_revision": "<full revision from the latest article read or write>",
-  "filename": "chart.png",
-  "data_base64": "<standard padded base64 of the image bytes>"
-}
-```
+1. Create/read the article, obtain the original image's byte length and MIME type,
+   and call `prepare_image_upload`:
 
-The result includes `path`, `relative_url`, `markdown`, `preview_url`, `mime_type`,
-`size`, `sha256`, and the new `revision`. Use that revision for the next upload
-or article edit. For example, `![](images/chart.png)` references
-`content/posts/my-post/images/chart.png`, a Hugo page resource shared by the
-article's translations. The preview URL is pinned to the draft commit.
+   ```json
+   {
+     "slug": "my-post",
+     "lang": "zh-tw",
+     "expected_revision": "<latest article revision>",
+     "filename": "chart.png",
+     "mime_type": "image/png",
+     "size": 2097152
+   }
+   ```
 
-- PNG, JPEG, GIF and WebP only, with matching file signatures; no SVG.
-- At most 1 MiB decoded per image and 8 uploaded images per language draft.
-- Filenames use lowercase ASCII letters, digits and hyphens, with one supported
-  extension. No directories, URL fetching or local file paths are accepted.
-- Send standard padded base64 without a data URL prefix or whitespace.
-- Identical bytes may reuse a filename; different bytes require a new name.
-- Uploads save to a public draft branch. Insert the Markdown and follow the
-  normal preview/approval workflow to publish them to the website.
-- The signed candidate includes article and image hashes. Later uploads make an
-  earlier confirmation stale. Publication includes only the selected article
-  and its declared new images, preserving other drafts and translations.
+   An optional `sha256` binds the upload to a known original file. The result has
+   `upload_url`, `required_headers`, `upload_ticket` and expiry information. This
+   step does not write a draft or reserve a revision.
+2. Within five minutes, use a file/network execution tool to HTTP **PUT the raw
+   file bytes** to `upload_url` with **every** returned header. Do not use multipart
+   form data or base64. `Content-Length` is the original file's exact byte length;
+   it, `Content-Type` and `If-None-Match: *` are signed. Do not send MCP OAuth or
+   permanent storage credentials. Treat the URL as a temporary secret.
+3. Call `complete_image_upload` with `{ "upload_ticket": "<returned ticket>" }`.
+   It verifies the stored length, file signature and SHA-256, saves an immutable
+   final object, and records its metadata on the draft. It returns `url`,
+   `markdown`, `preview_url`, `sha256`, `size`, and the new `revision`.
+4. Insert that absolute R2 Markdown with `update_post`, using the returned revision.
+   Continue normal prepare/preview/approval/publication. The image itself is
+   already public after completion, even before the article is published.
 
-The upload manifest lives in the draft branch's `.mcp/draft.json` and is never
-copied to main. New images use GitHub/Hugo and require no additional storage
-credentials. Existing R2 image URLs remain valid.
+Limits and recovery:
+
+- PNG, JPEG, GIF and WebP with matching file signatures; no SVG. Files are not
+  decoded, resized, stripped of metadata or virus-scanned.
+- Up to **25 MiB per image**, eight completed images per language draft.
+- Lowercase letters, digits and hyphens in filenames; one supported extension;
+  no directories, arbitrary source URLs or server-side local file paths.
+- The agent must have access to the **original bytes and outbound HTTPS PUT**.
+  An MCP connection alone cannot read a chat attachment. ChatGPT, Claude and Muse
+  use this same contract, but their attachment/network capabilities must be tested
+  separately. No client-specific file parameter or browser widget is required.
+- A pending object cannot be overwritten while it exists. A signed URL can be
+  retried during its five-minute lifetime; it is not a single-use credential.
+  After completion, reusing it can only recreate the temporary object, never
+  change the final image referenced by the article.
+- Completion tickets last 24 hours. After a lost response, retry the same ticket;
+  successful completion returns the recorded revision instead of another commit.
+  If the article changed during upload, reread and prepare a fresh upload.
+- An HTTP client may report a connection error when R2 rejects a large duplicate
+  PUT before consuming its body. Complete the original upload before preparing a
+  replacement; `complete_image_upload` can confirm that the first PUT arrived.
+- Different content uses a different SHA-256 path. A draft filename already in
+  its manifest requires a new name. Translations can reuse an existing absolute
+  R2 URL without uploading again.
+
+Final keys are `blog-mcp/images/<slug>/<sha256>/<filename>`; temporary keys are
+`blog-mcp/pending/<random UUID>/<filename>`. Neither is a private asset store.
+The server deletes the temporary object after the Git commit succeeds. Abandoned
+or rejected uploads and unreferenced final objects may remain; no bucket-wide
+lifecycle changes or automatic deletion of final images are installed.
+
+The signed candidate binds the R2 manifest. The Worker verifies object metadata
+before preparation, preview and publication. CI independently restricts URLs and
+keys to the selected article and trusted Hugo `params.imageBase`, and rejects
+image binaries submitted under an R2 manifest. Existing Git-backed draft images
+remain publishable through compatibility code; there is only one new upload flow.
 
 ## Translations
 
@@ -99,5 +136,5 @@ npm run smoke
 Roll out the Python candidate checker and helpers to main before deploying the
 Worker, because candidates inherit their checks from main. Then deploy using the
 existing production configuration and secrets, run `npm run check:edge`, and
-refresh the ChatGPT Blog MCP tool list to discover `upload_image`. Authentication
-and deployment configuration are documented in [cloud-mcp/README.md](cloud-mcp/README.md).
+refresh existing clients to discover `prepare_image_upload` and
+`complete_image_upload`. Authentication and deployment configuration are documented in [cloud-mcp/README.md](cloud-mcp/README.md).

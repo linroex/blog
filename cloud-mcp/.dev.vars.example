@@ -5,3 +5,6 @@ GITHUB_INSTALLATION_ID=
 GITHUB_APP_PRIVATE_KEY=
 # Generate with: openssl rand -hex 32
 CONFIRMATION_SECRET=
+# R2 S3 credentials scoped to object read/write on the configured bucket.
+R2_ACCESS_KEY_ID=
+R2_SECRET_ACCESS_KEY=

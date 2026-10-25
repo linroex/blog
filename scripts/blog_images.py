@@ -3,8 +3,10 @@ import hashlib
 import re
 
 MAX_IMAGE_BYTES = 1024 * 1024
+MAX_R2_IMAGE_BYTES = 25 * 1024 * 1024
 MAX_IMAGES = 8
 IMAGE_NAME = re.compile(r"[a-z0-9][a-z0-9-]{0,79}\.(png|jpg|jpeg|gif|webp)")
+IMAGE_TYPES = {"png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg", "gif": "image/gif", "webp": "image/webp"}
 
 
 def image_asset(filename, raw):
@@ -32,12 +34,21 @@ def image_manifest(value):
         raise ValueError("A draft supports at most 8 uploaded images")
     names = set()
     for asset in value:
-        if not isinstance(asset, dict) or not isinstance(asset.get("filename"), str) or not IMAGE_NAME.fullmatch(asset["filename"]) or asset["filename"] in names or not re.fullmatch(r"[a-f0-9]{64}", str(asset.get("sha256"))) or type(asset.get("size")) is not int or not 1 <= asset["size"] <= MAX_IMAGE_BYTES:
+        if not isinstance(asset, dict) or not isinstance(asset.get("filename"), str) or not IMAGE_NAME.fullmatch(asset["filename"]) or asset["filename"] in names or not re.fullmatch(r"[a-f0-9]{64}", str(asset.get("sha256"))) or type(asset.get("size")) is not int or not 1 <= asset["size"] <= (MAX_R2_IMAGE_BYTES if asset.get('storage') == 'r2' else MAX_IMAGE_BYTES):
             raise ValueError("Invalid image manifest")
+        if asset.get('mime_type') != IMAGE_TYPES[asset['filename'].rsplit('.', 1)[1]]:
+            raise ValueError('Invalid image MIME type')
+        if asset.get('storage') == 'r2':
+            if not re.fullmatch(r'[a-f0-9-]{36}', str(asset.get('upload_id'))) or not re.fullmatch(r'blog-mcp/images/[a-z0-9-]+/[a-f0-9]{64}/[a-z0-9.-]+', str(asset.get('key'))) or not isinstance(asset.get('url'), str) or not asset['url'].startswith('https://') or len(asset['url']) > 2048:
+                raise ValueError('Invalid R2 image manifest')
+        elif 'storage' in asset:
+            raise ValueError('Unknown image storage')
         names.add(asset["filename"])
     return value
 
 
 def image_view(slug, asset):
+    if asset.get('storage') == 'r2':
+        return {**asset, 'preview_url': asset['url'], 'markdown': f"![]({asset['url']})"}
     relative = f"images/{asset['filename']}"
     return {**asset, "path": f"content/posts/{slug}/{relative}", "relative_url": relative, "markdown": f"![]({relative})"}

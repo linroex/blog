@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { Blog, type ArticleIndex } from '../src/blog';
 import { newDocument } from '../src/document';
+import type { ImageStorage } from '../src/r2-images';
 import { BlogError, type Commit, type Env, type FileChange, type FileContent, type Repository, type Run } from '../src/types';
 
 export const hash = (value: string) => createHash('sha1').update(value).digest('hex');
@@ -72,9 +73,9 @@ export class FakeRepo implements Repository {
     this.branches.set('main', sha);
   }
 }
-export function setup() {
+export function setup(imageStorage?: ImageStorage) {
   const repo = new FakeRepo();
   const index: ArticleIndex = { schema_version: 1, commit: repo.branches.get('main')!, posts: [{ slug: 'original', title: 'Original', summary: '', draft: false, translations: [] }] };
-  const blog = new Blog(repo, env, '123', async () => index);
+  const blog = new Blog(repo, env, '123', async () => index, imageStorage);
   return { repo, blog, index };
 }

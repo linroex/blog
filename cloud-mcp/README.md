@@ -13,7 +13,7 @@ for test overrides. See `access-rollout.json` for the deployed IDs, acceptance
 evidence and the seven-day legacy KV retention deadline. The current ChatGPT
 connection is **Blog MCP**; Claude web uses **Blog** at the same HTTP endpoint.
 The previous ChatGPT `blog` installation was retired. See `image-upload-rollout.json`
-for the image-upload release and the owner's subsequently expanded callback list.
+for the historical Git-backed image-upload release and the owner's subsequently expanded callback list.
 The GitHub App is `linroex-blog-mcp`, installed only on `linroex/blog`.
 GitHub App credentials and the publication confirmation key remain Worker secrets.
 Cloudflare Access owns login, client registration, access tokens and refresh grants.
@@ -59,8 +59,9 @@ ChatGPT / Claude web → Managed OAuth → Worker-level Access → ctx.access + 
   the live site. No private draft storage is promised.
 - A draft's `.mcp/draft.json` records its language and original published blob
   SHA. This file stays on the draft branch. Candidates are fresh commits on main
-  with **only the selected Markdown file and declared new image files changed**;
-  draft branch history is not merged. Images-only candidates are also allowed.
+  with **only the selected Markdown file changed** for R2 uploads; draft branch
+  history is not merged. Compatibility code still permits declared legacy Git
+  images. R2 images are public before article publication.
 - Candidates set `draft: false` and trigger `mcp-validate.yaml`. The Worker checks
   the exact candidate SHA, workflow and branch, then issues a signed confirmation
   valid for 24 hours. The client must show the entire preview and get explicit
@@ -86,11 +87,11 @@ Python scripts in `scripts/` are build/index/validation helpers, not MCP servers
 | --- | --- | --- |
 | HTTP entry | [src/index.ts](src/index.ts), `fetch` | Validate configuration and origin, verify Access identity, route `/health` and `/mcp`, bound the request body, construct `GitHubRepository` and `Blog`, invoke the Agents MCP handler. |
 | Owner authentication | [src/auth.ts](src/auth.ts), `verifyAccess` | Require platform `ctx.access` and a signed Access JWT; map the verified owner email to the existing numeric owner ID. |
-| MCP interface | [src/mcp.ts](src/mcp.ts), `createServer` | Register ten tools, validate input schemas, translate tool calls to `Blog` methods and return structured results/errors. |
+| MCP interface | [src/mcp.ts](src/mcp.ts), `createServer` | Register eleven tools, validate input schemas, translate tool calls to `Blog` methods and return structured results/errors. |
 | Authoring and publication | [src/blog.ts](src/blog.ts), `Blog` | Select draft/published revisions, enforce conflicts, create candidates, poll validation, issue confirmations, update main and recover interrupted publications. |
 | GitHub persistence | [src/github.ts](src/github.ts), `installationToken`, `GitHubRepository` | Obtain a repo-scoped App token; read/write blobs, trees, commits and refs; query Actions. Ref updates always use `force: false`. |
 | Article format and signatures | [src/document.ts](src/document.ts), [src/crypto.ts](src/crypto.ts), [src/types.ts](src/types.ts) | Restrict article paths/languages, parse and edit frontmatter, enforce file limits, hash content and sign purpose-specific candidate/confirmation envelopes. |
-| Uploaded images | [src/images.ts](src/images.ts), `Blog.uploadImage` | Validate image names, size, base64 and signatures; save binary files to the selected draft and bind image hashes into its publication candidate. |
+| Uploaded images | [src/r2-images.ts](src/r2-images.ts), [src/images.ts](src/images.ts), `Blog.prepareImageUpload` / `completeImageUpload` | Sign a five-minute raw PUT to R2, verify bytes, finalize a content-addressed public image and commit only its manifest to the draft. |
 | Candidate checks | [mcp-validate.yaml](../.github/workflows/mcp-validate.yaml), [check_mcp_candidate.py](../scripts/check_mcp_candidate.py) | On candidate pushes, check the recorded parent, selected file and content hash, then build Hugo and validate SEO. The Worker verifies the signed envelope and exact workflow result before publication. |
 | Website and search index | [hugo.yaml](../.github/workflows/hugo.yaml), [export_mcp_index.py](../scripts/export_mcp_index.py) | Build/deploy main to Pages and export `/mcp-index.json`; `index.ts:loadIndex` uses that metadata for listing. Article reads and publication decisions use GitHub directly. |
 
@@ -102,8 +103,9 @@ One publication crosses these layers in this order:
    `.mcp/draft.json` on its draft branch. Updates require `expected_revision`.
    `readPost` defaults to the active draft; `source: published` reads main.
 3. `preparePublish` checks the original article's blob SHA and translation
-   prerequisites, then creates a candidate containing the article and its
-   declared new images on the current main. Existing images cannot be overwritten.
+   prerequisites and R2 object metadata, then creates an article-only candidate
+   on current main. The signed envelope includes the R2 image manifest. Legacy
+   Git draft images are still verified and copied without overwriting main.
    Its commit message stores a signed operation envelope; creating the candidate
    ref triggers `mcp-validate.yaml`. This does not update main.
 4. `operationStatus` reconstructs the operation from the candidate ref and commit
@@ -119,10 +121,11 @@ One publication crosses these layers in this order:
    bookkeeping; newer draft edits are preserved. Only a successful deployment
    workflow produces `hosting_deployment_confirmed: true`.
 
-Durable application state is in GitHub, not Worker memory or a local checkout:
+Durable application state is in GitHub and R2, not Worker memory or a local checkout:
 
 | State | Location |
 | --- | --- |
+| Uploaded image bytes | R2 `blog`: `blog-mcp/images/<slug>/<sha256>/<filename>`; temporary uploads under `blog-mcp/pending/` |
 | Published articles | `main:content/posts/<slug>/index.md`, `index.en.md`, `index.ja.md` |
 | Draft content and publication baseline | `mcp/drafts/<slug>/<lang>`: article file plus `.mcp/draft.json` (`base_post_sha`, optional `published_commit`) |
 | Operation snapshot and recovery identity | `mcp/candidates/<operation_id>`: candidate commit, parent SHA and signed envelope in its commit message |
@@ -172,7 +175,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 The smoke test runs the bundled Worker in workerd with generated RSA test keys,
 a local JWKS responder and simulated `ctx.access`. It verifies private routes,
-real signature checks, retired OAuth routes and ten MCP tools without GitHub
+real signature checks, retired OAuth routes and eleven MCP tools without GitHub
 access. Node integration tests also read a mocked article through HTTP MCP.
 Tests cover forged signatures, issuer/audience/expiry/user/context failures, old
 bearers, rotation, fresh/stale cache behavior and unavailable/malformed JWKS.
@@ -237,7 +240,7 @@ App `linroex-blog-mcp`, installed only on `linroex/blog`.
    Verify a real **Managed OAuth** request succeeds at `/health` (not just a
    browser cookie). Its 200 response is possible only after both `ctx.access`
    and Access JWT verification. Reconnect the existing Blog plugin in ChatGPT,
-   confirm exactly ten tools (including `upload_image`), and read a published article. Test refresh-token
+   confirm exactly eleven tools (including both R2 upload tools), and read a published article. Test refresh-token
    renewal and compare the actual access-token lifetime with 900 seconds.
    Do not publish a test article. If the JWT/context combination is unavailable,
    leave Access enabled and MCP paused while investigating.
@@ -257,7 +260,9 @@ For new installations, first land the existing index and validation workflows on
 main and wait for Pages to export `/mcp-index.json`. The Worker never runs Hugo.
 Keep the GitHub App installed on only the intended repository. App private keys
 must be PKCS#8 PEM. Store only `GITHUB_APP_ID`, `GITHUB_INSTALLATION_ID`,
-`GITHUB_APP_PRIVATE_KEY` and `CONFIRMATION_SECRET` as Worker secrets.
+`GITHUB_APP_PRIVATE_KEY`, `CONFIRMATION_SECRET`, `R2_ACCESS_KEY_ID` and
+`R2_SECRET_ACCESS_KEY` as Worker secrets. R2 credentials should grant object
+read/write only on the configured bucket; the agent never receives them.
 
 For local development, copy `.dev.vars.example` to ignored `.dev.vars`. A local
 Wrangler `access.dev` block may simulate platform identity, but a matching signed
@@ -272,7 +277,8 @@ convenience; use the automated generated-key test harness instead.
 | `read_post` | `slug`, optional `lang`, `source` = `auto` / `draft` / `published`. `auto` prefers an active draft. Returns full content, frontmatter and `revision`. |
 | `create_post` | `slug`, optional `lang`, `title`, `content`, optional `tags`, `categories`, `summary`; immediately commits to a dedicated draft branch. A translation requires an original in draft or main. |
 | `update_post` | Requires `expected_revision`. Optional `expected_published_revision` plus full `content` explicitly reconciles an external edit after reading both versions. No automatic merge or overwrite. |
-| `upload_image` | `slug`, optional `lang`, `expected_revision`, `filename`, `data_base64`. Saves PNG/JPEG/GIF/WebP to the draft; returns Markdown, a commit-pinned `preview_url` and new revision. At most 1 MiB each and 8 per draft; same-name different-content writes are rejected. See [image upload contract](../MCP.md#upload-article-images). |
+| `prepare_image_upload` | `slug`, optional `lang`, `expected_revision`, `filename`, `mime_type`, `size`, optional `sha256`. Returns a five-minute R2 PUT URL, signed required headers and a 24-hour completion ticket; no Git write. |
+| `complete_image_upload` | `upload_ticket`; verifies uploaded bytes, saves an immutable public R2 image and records its metadata in the draft. Returns URL/Markdown and a new revision. Up to 25 MiB each and eight per language draft. See [image upload contract](../MCP.md#upload-article-images). |
 | `prepare_publish` | Returns `operation_id` and `candidate_commit`, starts validation. Publish the original before its translations. |
 | `get_operation_status` | `operation_id`; returns queued/validating/ready/stale/expired/validation_failed/deploying/deployed/deployment_failed. Ready includes complete preview and confirmation. May repair post-publication bookkeeping. |
 | `publish_post` | `slug`, `lang`, `confirmation`; always updates remote main after validation and explicit approval. No `push_to_remote` or local-commit mode. |
@@ -281,19 +287,46 @@ convenience; use the automated generated-key test harness instead.
 Validation is part of preparation, and reads are tools so
 clients need not support resource browsing. All tools require owner authorization.
 
-Image uploads use base64 Git blobs; no R2 credentials or arbitrary URL downloads
-are involved. Draft metadata tracks image names, sizes, types and SHA-256 hashes.
-Preparation verifies those bytes and copies only new images into the candidate.
-Its signed envelope binds the entire manifest; ready previews include image
-metadata and commit-pinned URLs. Candidate CI independently rejects undeclared
-files, changed image hashes, symlinks, executable files and existing-image
-overwrites. The normal version checks invalidate approval after any later upload.
-Roll out the repository changes to main **before** deploying the Worker, including
-`scripts/blog_images.py`, `scripts/check_mcp_candidate.py` and the candidate
-workflow. Candidate checks run from their main-based snapshot; the old checker
-rejects added images. After deploying the Worker, refresh the ChatGPT connection's
-tool list to discover `upload_image`. The dated Access rollout record documents the previous
-nine-tool release; it is not acceptance evidence for this feature.
+Image uploads use one client-neutral flow: prepare, raw HTTPS PUT to R2,
+complete. The connector does not automatically expose a chat attachment's bytes.
+Clients need file access and a network execution tool; platform-specific file
+parameters and widgets are not used. Actual ChatGPT/Claude/Muse attachment
+compatibility remains a client acceptance test.
+
+`R2_ACCOUNT_ID`, `R2_BUCKET_NAME`, `R2_PUBLIC_BASE_URL` and `IMAGE_MAX_BYTES`
+(default 26214400; configurable from 1 to 26214400) are Wrangler variables.
+The two R2 S3 keys are secrets. The public base must match Hugo `params.imageBase`.
+The Worker signs only its configured S3 endpoint and generated keys; it does not
+fetch arbitrary image URLs. Signed `Content-Length`, `Content-Type` and
+`If-None-Match: *` constrain temporary uploads. A ticket is owner-bound and
+purpose-signed with the existing confirmation key. Completion checks actual
+length/signature/hash, then creates a final content-hash key with a conditional
+PUT. It checks final metadata before recording the draft; publication checks it
+again. Signature checks do not decode/re-encode images or strip EXIF metadata.
+
+A failed Git write leaves the temporary object available for a completion retry.
+Only a durable Git attachment permits pending deletion; a lost response returns
+the recorded upload ID without another commit. URLs are reusable until expiry;
+a replay after temporary cleanup cannot overwrite the finalized image. Abandoned
+pending and unreferenced final objects may persist. No lifecycle policy is changed
+and final objects are never automatically deleted, since published articles or
+translations may reference them. Monitor the `blog-mcp/pending/` prefix and audit
+references before any manual cleanup. Final images and pending random-key objects
+are in an existing public bucket, not private draft storage.
+
+Roll out `scripts/blog_images.py` and `scripts/check_mcp_candidate.py` to main
+before deploying the Worker. CI checks the R2 manifest against the trusted parent
+Hugo config and permits no new Git image bytes for those entries. Existing
+Git-backed drafts/candidates remain supported, but `upload_image` is removed.
+After deployment, refresh existing clients' tool lists for the two upload tools.
+Preserve the owner's Managed OAuth callback allowlist.
+
+For an opt-in real R2 integration check, supply the five `R2_*` environment values
+above and run `node scripts/check-r2.mjs` from `cloud-mcp`. Set
+`R2_CHECK_BYTES=26214400` to exercise the maximum. It tests signed PUT, duplicate
+rejection, completion in real local workerd, retry, and public content integrity.
+It deletes and verifies absence of exactly its two uniquely named test objects;
+it creates no article or Git branch. It never prints credentials or signed URLs.
 
 The index can lag main until Pages finishes. Never use it for existence checks or
 publication decisions: the Worker reads those from GitHub. If the initial index

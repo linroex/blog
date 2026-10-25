@@ -17,7 +17,7 @@ class CloudMCPTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.path = "content/posts/hello/index.md"
-        (self.root / "hugo.toml").write_text('baseURL = "https://example.com/"\n')
+        (self.root / "hugo.toml").write_text('baseURL = "https://example.com/"\n[params]\nimageBase = "https://images.example.com"\n')
         self.git("init", "-q")
         self.git("config", "user.name", "Test")
         self.git("config", "user.email", "test@example.com")
@@ -32,7 +32,7 @@ class CloudMCPTests(unittest.TestCase):
         file.parent.mkdir(parents=True, exist_ok=True)
         file.write_text(text, encoding="utf-8")
 
-    def candidate(self, extra=False, bad_hash=False, draft=False, image=False, undeclared=False):
+    def candidate(self, extra=False, bad_hash=False, draft=False, image=False, undeclared=False, r2=None):
         parent = self.git("rev-parse", "HEAD")
         text = f'---\ntitle: "Hello"\ndraft: {str(draft).lower()}\n---\n\nContent\n'
         self.write(self.path, text)
@@ -46,6 +46,8 @@ class CloudMCPTests(unittest.TestCase):
             (self.root / 'content/posts/hello/images/chart.png').write_bytes(raw)
             if not undeclared:
                 data['images'] = [image_asset('chart.png', raw)]
+        if r2 is not None:
+            data['images'] = [r2]
         envelope = base64.urlsafe_b64encode(json.dumps(data).encode()).decode().rstrip("=") + ".signature-verified-by-worker"
         self.git("add", ".")
         self.git("commit", "-qm", "Blog MCP candidate\n\n" + envelope)
@@ -93,6 +95,39 @@ class CloudMCPTests(unittest.TestCase):
         self.git('add', '.')
         self.git('commit', '--amend', '--no-edit', '-q')
         with self.assertRaisesRegex(ValueError, 'regular'):
+            validate_candidate(self.root, 'mcp/candidates/123')
+
+    def r2_asset(self, **changes):
+        asset = {'filename': 'chart.png', 'sha256': 'a' * 64, 'size': 2 * 1024 * 1024,
+                 'mime_type': 'image/png', 'storage': 'r2', 'upload_id': 'b' * 36,
+                 'key': 'blog-mcp/images/hello/' + 'a' * 64 + '/chart.png'}
+        asset['url'] = 'https://images.example.com/' + asset['key']
+        return {**asset, **changes}
+
+    def test_candidate_accepts_r2_manifest_without_git_image_bytes(self):
+        self.candidate(r2=self.r2_asset())
+        data = validate_candidate(self.root, 'mcp/candidates/123')
+        self.assertEqual(data['images'][0]['storage'], 'r2')
+        self.assertEqual(self.git('diff', '--name-only', 'HEAD^', 'HEAD'), self.path)
+
+    def test_candidate_rejects_r2_url_outside_trusted_public_base(self):
+        self.candidate(r2=self.r2_asset(url='https://other.example.com/chart.png'))
+        with self.assertRaisesRegex(ValueError, 'R2 image identity'):
+            validate_candidate(self.root, 'mcp/candidates/123')
+
+    def test_candidate_rejects_r2_key_for_another_article(self):
+        self.candidate(r2=self.r2_asset(key='blog-mcp/images/other/' + 'a' * 64 + '/chart.png'))
+        with self.assertRaisesRegex(ValueError, 'R2 image identity'):
+            validate_candidate(self.root, 'mcp/candidates/123')
+
+    def test_candidate_rejects_r2_oversize(self):
+        self.candidate(r2=self.r2_asset(size=25 * 1024 * 1024 + 1))
+        with self.assertRaisesRegex(ValueError, 'manifest'):
+            validate_candidate(self.root, 'mcp/candidates/123')
+
+    def test_candidate_cannot_add_git_image_using_r2_manifest(self):
+        self.candidate(image=True, r2=self.r2_asset())
+        with self.assertRaisesRegex(ValueError, 'exactly'):
             validate_candidate(self.root, 'mcp/candidates/123')
 
     def test_candidate_rejects_wrong_hash(self):
