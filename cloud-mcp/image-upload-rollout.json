@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-25",
+  "status": "deployed-and-verified",
+  "source_commit": "08662bd28131fa683ace4efdb21a50fe523b14fd",
+  "worker": {
+    "name": "lins-blog-mcp",
+    "version_id": "8e0dac10-2e9d-4bbd-a218-7ef5b11d206b",
+    "endpoint": "https://lins-blog-mcp.linroex.workers.dev/mcp",
+    "existing_secrets_preserved": true,
+    "platform_configuration_changed": false
+  },
+  "verification": {
+    "typescript": "passed",
+    "vitest_passed": 58,
+    "python_tests_passed": 29,
+    "workerd": "passed; ten tools including upload_image",
+    "site_build_and_seo": "passed; 406 article groups and 1218 published article pages",
+    "article_index_parity": "passed; all 406 articles match the retired reader's output",
+    "github_mcp_ci": "https://github.com/linroex/blog/actions/runs/40208519759",
+    "github_pages_deploy": "https://github.com/linroex/blog/actions/runs/40208519750",
+    "edge": "passed; seven private paths, managed OAuth discovery, PKCE, refresh metadata and four denied callback registrations",
+    "chatgpt": "existing Blog MCP connection refreshed; upload_image visible with six write tools and four read tools; published article read succeeded",
+    "claude_web": "existing Blog HTTP connector refreshed; Upload image visible with Needs approval unchanged",
+    "production_test_articles_or_uploads": 0,
+    "refresh_token_renewal": "not exercised across an expiry"
+  },
+  "local_retirement": {
+    "removed_source": ["scripts/mcp_server.py", "scripts/test_mcp_server.py"],
+    "build_helpers": ["scripts/blog_content.py", "scripts/blog_images.py"],
+    "removed_client_entries": ["Codex mcp_servers.blog", "Claude Code blog project mcpServers.blog"],
+    "stopped_exact_python_processes": 5,
+    "remaining_exact_python_processes": 0,
+    "additional_claude_project_and_plugin_config_files_scanned": 44,
+    "remaining_local_blog_config_references": 0
+  },
+  "owner_maintained_oauth_configuration_observed": {
+    "allow_any_on_localhost": false,
+    "allow_any_on_loopback": false,
+    "allowed_uris": [
+      "https://chatgpt.com/connector/oauth/*",
+      "https://grok.com/connectors-oauth-exchange-code/*",
+      "https://console.x.ai/connectors-oauth-exchange-code/*",
+      "https://agent.meta.ai/api/hatch/oauth/callback/*",
+      "https://muse.ai/connect/oauth-callback/*",
+      "https://claude.ai/api/mcp/auth_callback/*",
+      "https://claude.com/api/mcp/auth_callback/*"
+    ],
+    "access_token_lifetime": "15m",
+    "grant_duration": "336h",
+    "note": "Owner confirmed adding these callback patterns. This deployment preserved them. The single-callback configuration in access-rollout.json is historical."
+  }
+}

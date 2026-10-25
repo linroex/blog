@@ -34,13 +34,13 @@ const resource = await (await request(origin + '/.well-known/oauth-protected-res
 assert.equal(resource.resource, origin + '/mcp');
 assert.deepEqual(resource.authorization_servers, [issuer]);
 for (const uri of ['http://localhost:8787/callback', 'http://127.0.0.1:8787/callback',
-  'https://evil.example/callback', 'https://chatgpt.com/connector/oauth/unconfirmed']) {
+  'https://evil.example/callback', 'https://chatgpt.com.evil.example/connector/oauth/callback']) {
   const r = await request(metadata.registration_endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ client_name: 'Rejected callback verification', redirect_uris: [uri],
       response_types: ['code'], grant_types: ['authorization_code', 'refresh_token'], token_endpoint_auth_method: 'none',
       resource: origin + '/mcp' }) });
   const data = await r.json();
-  assert.equal(r.status, 400, 'Unapproved callback was accepted');
+  assert.equal(r.status, 400, `Unapproved callback was accepted: ${uri}`);
   assert.equal(data.error, 'invalid_client_metadata');
   assert.match(data.error_description, /redirect_uri.*not allowed/i);
   assert.ok(!data.client_id);

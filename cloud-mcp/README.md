@@ -11,7 +11,9 @@ it contains no credentials. Configure the Access team domain and audience from t
 actual Access application before deploying. Use an ignored `wrangler.local.jsonc`
 for test overrides. See `access-rollout.json` for the deployed IDs, acceptance
 evidence and the seven-day legacy KV retention deadline. The current ChatGPT
-connection is **Blog MCP**; its previous `blog` installation was retired.
+connection is **Blog MCP**; Claude web uses **Blog** at the same HTTP endpoint.
+The previous ChatGPT `blog` installation was retired. See `image-upload-rollout.json`
+for the image-upload release and the owner's subsequently expanded callback list.
 The GitHub App is `linroex-blog-mcp`, installed only on `linroex/blog`.
 GitHub App credentials and the publication confirmation key remain Worker secrets.
 Cloudflare Access owns login, client registration, access tokens and refresh grants.
@@ -19,7 +21,7 @@ Cloudflare Access owns login, client registration, access tokens and refresh gra
 ## Architecture and publication contract
 
 ```text
-ChatGPT → Managed OAuth → Worker-level Access → ctx.access + Access JWT
+ChatGPT / Claude web → Managed OAuth → Worker-level Access → ctx.access + Access JWT
                                                  ↓
                                            GitHub App → linroex/blog
                                              ├─ mcp/drafts/<slug>/<lang>
@@ -32,8 +34,10 @@ ChatGPT → Managed OAuth → Worker-level Access → ctx.access + Access JWT
   disabled; do not add hostname/path rules or Bypass policies that override it.
 - Only `linroex@coder.tw` may sign in, using Email one-time PIN. Managed OAuth
   access tokens last 15 minutes; refresh grants last 14 days. Localhost and
-  loopback registration are disabled. The redirect allowlist contains only the
-  exact callback observed for this ChatGPT connection.
+  loopback registration are disabled. The owner maintains callback patterns for
+  ChatGPT, Claude, Grok, Meta Agent and Muse; the current observed list is in
+  `access-application.example.json` and `image-upload-rollout.json`. Preserve these
+  owner-added clients when deploying; callback changes are separate platform work.
 - Every Worker route additionally requires `ctx.access` with the configured
   application audience and allowed email, plus a verified
   `Cf-Access-Jwt-Assertion`. `jose.jwtVerify` permits only RS256 and checks the
@@ -138,9 +142,10 @@ before this code runs.
 | Source | What it records |
 | --- | --- |
 | [wrangler.jsonc](wrangler.jsonc) | Worker entry, canonical origin, Access team/AUD, owner allowlist, GitHub repo/workflows and disabled preview URLs. Credentials are Worker secrets. |
-| Cloudflare Access dashboard | Worker destination covering production/previews, owner-only Email PIN policy, Managed OAuth/DCR, exact ChatGPT callback and token/grant lifetimes. Use [Access setup and cutover](#access-setup-and-cutover) to reproduce these settings. |
+| Cloudflare Access dashboard | Worker destination covering production/previews, owner-only Email PIN policy, Managed OAuth/DCR, owner-maintained client callback patterns and token/grant lifetimes. Use [Access setup and cutover](#access-setup-and-cutover) to reproduce these settings. |
 | [access-application.example.json](access-application.example.json) | Example API shape for the platform configuration; not an automatically applied deployment manifest. |
 | [access-rollout.json](access-rollout.json) | Dated acceptance evidence, deployed IDs and legacy cleanup deadline. This is a rollout record, not a live platform inventory. |
+| [image-upload-rollout.json](image-upload-rollout.json) | Image-upload deployment, removal of the local server, ChatGPT/Claude tool refresh and the later owner-added callback patterns. |
 | GitHub App installation | Selected repository and permissions; App credentials and `CONFIRMATION_SECRET` live in Worker secrets. |
 
 When changing authentication or deployment, update this contract and the relevant
@@ -203,12 +208,11 @@ App `linroex-blog-mcp`, installed only on `linroex/blog`.
    Worker routes/Custom Domains for hostname/path policies that take precedence;
    remove only conflicting rules for this Worker. Preserve unrelated apps.
 4. Edit that Access application's Advanced settings: enable Managed OAuth and
-   dynamic registration, disable localhost and loopback clients, and allow only
-   the **exact callback observed in ChatGPT**. Current connection was observed
-   using `https://chatgpt.com/connector/oauth/m5S71mpwznhr`; confirm again
-   after changing authorization servers. Set access token lifetime to `15m` and
-   grant duration to `336h` (14 days). Never enable a wildcard callback merely to
-   make registration pass. See `access-application.example.json` for API shape.
+   dynamic registration and disable localhost and loopback clients. Preserve the
+   owner's approved callback patterns from `access-application.example.json`;
+   the earlier single-ChatGPT callback in `access-rollout.json` is historical.
+   Set access token lifetime to `15m` and grant duration to `336h` (14 days).
+   Do not replace the owner-maintained list as a side effect of a Worker deploy.
 5. Copy the actual team hostname (without scheme/path) and application AUD into
    `ACCESS_TEAM_DOMAIN` and `ACCESS_AUD` in Wrangler. Keep
    `ALLOWED_ACCESS_EMAIL=linroex@coder.tw` and numeric owner ID `1254953`.
@@ -228,7 +232,7 @@ App `linroex-blog-mcp`, installed only on `linroex/blog`.
 7. Existing ChatGPT apps may cache the old OAuth issuer/endpoints. Refreshing
    tools did not replace this configuration during the migration; create a new
    custom MCP connection with DCR and inspect its newly generated callback.
-   Update only that exact callback in Access before connecting. Uninstall the
+   Confirm the callback fits an owner-approved pattern before connecting. Uninstall the
    old connection after successful acceptance; no GitHub data is stored in it.
    Verify a real **Managed OAuth** request succeeds at `/health` (not just a
    browser cookie). Its 200 response is possible only after both `ctx.access`

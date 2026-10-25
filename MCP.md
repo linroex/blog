@@ -9,6 +9,11 @@ GitHub App APIs and GitHub Actions; it does not depend on this computer. The
 former local Python stdio server has been removed. Do not register a local
 `blog` server or a command pointing to `scripts/mcp_server.py`.
 
+The ChatGPT **Blog MCP** plugin and Claude web **Blog** connector both use this
+same endpoint. After updating the Worker, refresh tools in both existing clients;
+there is no need to replace their HTTP connections or change the owner's
+Cloudflare callback allowlist.
+
 See [cloud architecture, configuration and recovery](cloud-mcp/README.md) for
 implementation details. Python scripts under `scripts/` only export the article
 index and validate candidate commits/SEO during site builds.

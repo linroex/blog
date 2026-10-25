@@ -32,7 +32,13 @@
       "allow_any_on_localhost": false,
       "allow_any_on_loopback": false,
       "allowed_uris": [
-        "https://chatgpt.com/connector/oauth/REPLACE_CONFIRMED_CALLBACK_ID"
+        "https://chatgpt.com/connector/oauth/*",
+        "https://grok.com/connectors-oauth-exchange-code/*",
+        "https://console.x.ai/connectors-oauth-exchange-code/*",
+        "https://agent.meta.ai/api/hatch/oauth/callback/*",
+        "https://muse.ai/connect/oauth-callback/*",
+        "https://claude.ai/api/mcp/auth_callback/*",
+        "https://claude.com/api/mcp/auth_callback/*"
       ]
     },
     "grant": {
