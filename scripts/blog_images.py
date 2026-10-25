@@ -4,6 +4,7 @@ import re
 
 MAX_IMAGE_BYTES = 1024 * 1024
 MAX_R2_IMAGE_BYTES = 25 * 1024 * 1024
+MAX_UPLOAD_BYTES = 15 * 1024 * 1024
 MAX_IMAGES = 8
 IMAGE_NAME = re.compile(r"[a-z0-9][a-z0-9-]{0,79}\.(png|jpg|jpeg|gif|webp)")
 IMAGE_TYPES = {"png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg", "gif": "image/gif", "webp": "image/webp"}
@@ -41,6 +42,10 @@ def image_manifest(value):
         if asset.get('storage') == 'r2':
             if not re.fullmatch(r'[a-f0-9-]{36}', str(asset.get('upload_id'))) or not re.fullmatch(r'blog-mcp/images/[a-z0-9-]+/[a-f0-9]{64}/[a-z0-9.-]+', str(asset.get('key'))) or not isinstance(asset.get('url'), str) or not asset['url'].startswith('https://') or len(asset['url']) > 2048:
                 raise ValueError('Invalid R2 image manifest')
+            if 'original' in asset:
+                original = asset['original']
+                if not isinstance(original, dict) or not isinstance(original.get('filename'), str) or not IMAGE_NAME.fullmatch(original['filename']) or not re.fullmatch(r'[a-f0-9]{64}', str(original.get('sha256'))) or original.get('mime_type') != IMAGE_TYPES[original['filename'].rsplit('.', 1)[1]] or type(original.get('size')) is not int or not 1 <= original['size'] <= MAX_UPLOAD_BYTES or asset['size'] > MAX_UPLOAD_BYTES or asset['mime_type'] != 'image/webp' or asset['filename'] != original['filename'].rsplit('.', 1)[0] + '.webp':
+                    raise ValueError('Invalid converted image manifest')
         elif 'storage' in asset:
             raise ValueError('Unknown image storage')
         names.add(asset["filename"])

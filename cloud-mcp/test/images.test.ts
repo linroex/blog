@@ -18,7 +18,7 @@ it('signs one short-lived raw PUT bound to size, type and create-once semantics 
   expect(new URL(offer.upload_url).searchParams.get('X-Amz-Expires')).toBe('300');
   expect(new URL(offer.upload_url).searchParams.get('X-Amz-SignedHeaders')).toBe('content-length;content-type;host;if-none-match');
   expect(offer.required_headers).toEqual({ 'Content-Type': 'image/png', 'Content-Length': String(png.length), 'If-None-Match': '*' });
-  expect(offer.max_image_bytes).toBe(25 * 1024 * 1024);
+  expect(offer.max_image_bytes).toBe(15 * 1024 * 1024);
   expect(await repo.head('mcp/drafts/images/zh-tw')).toBe(post.revision);
   expect(r2.requests).toHaveLength(0);
 });
@@ -27,7 +27,7 @@ it('stores images only on R2 and publishes an article-only candidate with an abs
   await r2.put(offer);
   const image = await blog.completeImageUpload(offer.upload_ticket);
   expect(image.markdown).toBe(`![](${image.url})`);
-  expect(image.url).toMatch(/^https:\/\/images.example.com\/blog-mcp\/images\/images\/[a-f0-9]{64}\/chart.png$/);
+  expect(image.url).toMatch(/^https:\/\/images.example.com\/blog-mcp\/images\/images\/[a-f0-9]{64}\/chart.webp$/);
   expect([...r2.objects.keys()]).toEqual([image.key]);
   expect(Object.keys(repo.commits.get(image.revision)!.files).some(p => p.endsWith('.png'))).toBe(false);
   await blog.updatePost('images', 'zh-tw', image.revision, { content: `Body\n${image.markdown}` });
@@ -40,12 +40,12 @@ it('stores images only on R2 and publishes an article-only candidate with an abs
   expect((status.preview as any).uploaded_images[0].preview_url).toBe(image.url);
   expect((await blog.publishPost('images', 'zh-tw', status.confirmation as string)).committed).toBe(true);
 });
-it('accepts images larger than 1 MiB and bounds metadata and actual bytes at 25 MiB', async () => {
+it('accepts images larger than 1 MiB and bounds metadata and actual bytes at 15 MiB', async () => {
   const { blog, r2, post } = await draft();
   const large = new Uint8Array(LEGACY_IMAGE_BYTES + 1); large.set(png);
   const offer = await blog.prepareImageUpload('images', 'zh-tw', post.revision, 'large.png', 'image/png', large.length);
   await r2.put(offer, large);
-  expect((await blog.completeImageUpload(offer.upload_ticket)).size).toBe(large.length);
+  expect((await blog.completeImageUpload(offer.upload_ticket)).original?.size).toBe(large.length);
   await expect(blog.prepareImageUpload('images', 'zh-tw', post.revision, 'huge.png', 'image/png', MAX_IMAGE_BYTES + 1)).rejects.toMatchObject({ code: 'invalid_image' });
 });
 it('supports retry after lost Git response, leaves pending bytes on Git failure and makes completion idempotent', async () => {
@@ -157,4 +157,54 @@ it('rejects unsafe names, MIME mismatches, unknown storage and oversized legacy 
   await expect(imageAsset('chart.png', Buffer.alloc(LEGACY_IMAGE_BYTES + 1).toString('base64'))).rejects.toThrow();
   const asset = await imageBytes('chart.png', png);
   expect(() => imageManifest([{ ...asset, storage: 'elsewhere' }])).toThrow();
+});
+
+it('records the original hash separately and normalizes filename collisions across formats', async () => {
+  const { blog, r2, offer } = await draft();
+  await r2.put(offer);
+  const image = await blog.completeImageUpload(offer.upload_ticket);
+  expect(image.filename).toBe('chart.webp');
+  expect(image.mime_type).toBe('image/webp');
+  expect(image.original).toEqual(await imageBytes('chart.png', png));
+  for (const [filename, mime] of [['chart.jpg', 'image/jpeg'], ['chart.png', 'image/png'], ['chart.webp', 'image/webp']]) {
+    await expect(blog.prepareImageUpload('images', 'zh-tw', image.revision, filename, mime, 100)).rejects.toMatchObject({ code: 'image_exists' });
+  }
+});
+it('keeps existing WebP bytes without re-encoding', async () => {
+  const { webp } = await import('./r2-helpers');
+  const { repo, r2, index } = imageSetup();
+  const storage = new R2Images({ ...r2Env, IMAGES: undefined }, r2.fetch);
+  const blog = new Blog(repo, r2Env, '123', async () => index, storage);
+  const post = await blog.readPost('original', 'zh-tw');
+  const offer = await blog.prepareImageUpload('original', 'zh-tw', post.revision, 'existing.webp', 'image/webp', webp.length);
+  await r2.put(offer, webp);
+  const image = await blog.completeImageUpload(offer.upload_ticket);
+  expect(image.sha256).toBe((await imageBytes('existing.webp', webp)).sha256);
+  expect(image.original).toBeUndefined();
+});
+it('leaves the original pending and the draft unchanged when conversion fails', async () => {
+  const { blog, r2, offer, post } = await draft();
+  await r2.put(offer);
+  const output = vi.spyOn(r2Env.IMAGES, 'input').mockImplementation(() => { throw new Error('Images quota'); });
+  await expect(blog.completeImageUpload(offer.upload_ticket)).rejects.toMatchObject({ code: 'image_conversion_failed' });
+  expect((await blog.readPost('images', 'zh-tw')).revision).toBe(post.revision);
+  expect([...r2.objects.keys()]).toEqual([`blog-mcp/pending/${offer.upload_id}/chart.png`]);
+  output.mockRestore();
+  expect((await blog.completeImageUpload(offer.upload_ticket)).filename).toBe('chart.webp');
+});
+it('rejects corrupt or oversized conversion responses without attaching the image', async () => {
+  for (const oversized of [false, true]) {
+    const { blog, r2, offer, post } = await draft();
+    await r2.put(offer);
+    const input = vi.spyOn(r2Env.IMAGES, 'input').mockImplementation(() => ({ output: async () => ({ response: () => new Response(
+      new Uint8Array(oversized ? MAX_IMAGE_BYTES + 1 : 32), { headers: { 'Content-Type': 'image/webp' } }) }) }));
+    await expect(blog.completeImageUpload(offer.upload_ticket)).rejects.toMatchObject({ code: 'invalid_image' });
+    expect((await blog.readPost('images', 'zh-tw')).revision).toBe(post.revision);
+    input.mockRestore();
+  }
+});
+it('preserves historical R2 manifests larger than the new upload limit', async () => {
+  const asset = await imageBytes('old.png', png);
+  expect(imageManifest([{ ...asset, storage: 'r2', size: 25 * 1024 * 1024, upload_id: 'a'.repeat(36),
+    key: `blog-mcp/images/original/${asset.sha256}/old.png`, url: 'https://images.example.com/old.png' }])).toHaveLength(1);
 });

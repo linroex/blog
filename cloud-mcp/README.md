@@ -280,7 +280,7 @@ convenience; use the automated generated-key test harness instead.
 | `create_post` | `slug`, optional `lang`, `title`, `content`, optional `tags`, `categories`, `summary`; immediately commits to a dedicated draft branch. A translation requires an original in draft or main. |
 | `update_post` | Requires `expected_revision`. Optional `expected_published_revision` plus full `content` explicitly reconciles an external edit after reading both versions. No automatic merge or overwrite. |
 | `prepare_image_upload` | `slug`, optional `lang`, `expected_revision`, `filename`, `mime_type`, `size`, optional `sha256`. Returns a five-minute R2 PUT URL, signed required headers and a 24-hour completion ticket; no Git write. |
-| `complete_image_upload` | `upload_ticket`; verifies uploaded bytes, saves an immutable public R2 image and records its metadata in the draft. Returns URL/Markdown and a new revision. Up to 25 MiB each and eight per language draft. See [image upload contract](../MCP.md#upload-article-images). |
+| `complete_image_upload` | `upload_ticket`; verifies uploaded bytes, saves an immutable public R2 image and records its metadata in the draft. Returns URL/Markdown and a new revision. Up to 15 MiB each and eight per language draft. See [image upload contract](../MCP.md#upload-article-images). |
 | `prepare_publish` | Returns `operation_id` and `candidate_commit`, starts validation. Publish the original before its translations. |
 | `get_operation_status` | `operation_id`; returns queued/validating/ready/stale/expired/validation_failed/deploying/deployed/deployment_failed. Ready includes complete preview and confirmation. May repair post-publication bookkeeping. |
 | `publish_post` | `slug`, `lang`, `confirmation`; always updates remote main after validation and explicit approval. No `push_to_remote` or local-commit mode. |
@@ -293,10 +293,20 @@ Image uploads use one client-neutral flow: prepare, raw HTTPS PUT to R2,
 complete. The connector does not automatically expose a chat attachment's bytes.
 Clients need file access and a network execution tool; platform-specific file
 parameters and widgets are not used. Actual ChatGPT/Claude/Muse attachment
-compatibility remains a client acceptance test.
+compatibility remains a client acceptance test. The owner reports Claude web
+upload success and ordinary ChatGPT shell DNS failure. The MCP connection and
+code-execution egress are independent; this is not fixed by refreshing tools,
+changing R2 CORS, or WebP conversion. Do not claim all clients can upload.
+
+Comparable projects document this limitation: [Papermark](https://docs.papermark.com/docs/mcp/clients/chatgpt-apps)
+uses server-side source URL import when presigned PUT is unavailable;
+[Publora](https://docs.publora.com/mcp/troubleshooting) uses a native ChatGPT file
+reference; [mcp-filebridge](https://github.com/teng-lin/mcp-filebridge) offers an
+MCP Apps browser uploader. These are research findings, not extra upload methods
+implemented in this server.
 
 `R2_ACCOUNT_ID`, `R2_BUCKET_NAME`, `R2_PUBLIC_BASE_URL` and `IMAGE_MAX_BYTES`
-(default 26214400; configurable from 1 to 26214400) are Wrangler variables.
+(default 15728640; configurable from 1 to 15728640) are Wrangler variables.
 The two R2 S3 keys are secrets. The public base must match Hugo `params.imageBase`.
 The Worker signs only its configured S3 endpoint and generated keys; it does not
 fetch arbitrary image URLs. Signed `Content-Length`, `Content-Type` and
@@ -304,7 +314,14 @@ fetch arbitrary image URLs. Signed `Content-Length`, `Content-Type` and
 purpose-signed with the existing confirmation key. Completion checks actual
 length/signature/hash, then creates a final content-hash key with a conditional
 PUT. It checks final metadata before recording the draft; publication checks it
-again. Signature checks do not decode/re-encode images or strip EXIF metadata.
+again. PNG/JPEG/GIF are converted with the IMAGES binding to WebP at quality 85,
+preserving transparency and animation and keeping dimensions. Existing WebP
+is preserved byte-for-byte. The final filename changes to `.webp`; its hash/size
+refer to the output, while `original` records the validated source. Both must fit
+15 MiB. Failed conversion does not change the draft or delete the pending source.
+Cloudflare Images quota errors require retry after quota/service recovery, not
+a fallback that silently stores another format. Historical R2 assets up to
+25 MiB remain readable and publishable.
 
 A failed Git write leaves the temporary object available for a completion retry.
 Only a durable Git attachment permits pending deletion; a lost response returns
@@ -325,10 +342,20 @@ Preserve the owner's Managed OAuth callback allowlist.
 
 For an opt-in real R2 integration check, supply the five `R2_*` environment values
 above and run `node scripts/check-r2.mjs` from `cloud-mcp`. Set
-`R2_CHECK_BYTES=26214400` to exercise the maximum. It tests signed PUT, duplicate
-rejection, completion in real local workerd, retry, and public content integrity.
-It deletes and verifies absence of exactly its two uniquely named test objects;
+`R2_CHECK_BYTES=15728640` to exercise the maximum. It tests signed PUT, duplicate
+rejection, WebP conversion with the local Images implementation in real workerd,
+retry, and public content integrity.
+It deletes and verifies absence of exactly its uniquely named test objects;
 it creates no article or Git branch. It never prints credentials or signed URLs.
+
+`npm run smoke` also verifies PNG transparency and JPEG conversion using local
+Images. Its low-fidelity implementation does not preserve GIF animation, so that
+check runs only against the actual Cloudflare codec. Run
+`IMAGES_REMOTE_CHECK=1 node scripts/check-webp.mjs`; it opens and disposes an
+isolated development session and does not use production MCP credentials. The
+IMAGES binding is configured in Wrangler. No Images storage or paid plan is
+purchased by deployment. Transformations use the account's existing Images plan
+and quota; check [Images pricing](https://developers.cloudflare.com/images/pricing/).
 
 The index can lag main until Pages finishes. Never use it for existence checks or
 publication decisions: the Worker reads those from GitHub. If the initial index

@@ -20,6 +20,11 @@ export interface Env {
   R2_ACCESS_KEY_ID?: string;
   R2_SECRET_ACCESS_KEY?: string;
   IMAGE_MAX_BYTES?: string;
+  IMAGES?: {
+    input(stream: ReadableStream<Uint8Array>): {
+      output(options: { format: 'image/webp'; quality: number; anim: boolean }): Promise<{ response(): Response }>;
+    };
+  };
 }
 
 export class BlogError extends Error {

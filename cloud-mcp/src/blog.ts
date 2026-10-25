@@ -1,6 +1,6 @@
 import { sha256, sign, verify } from './crypto';
 import { document, edit, newDocument, postPath, taipeiDate } from './document';
-import { imageAsset, imageManifest, imagePath, imageView, MAX_IMAGES, type ImageAsset } from './images';
+import { imageAsset, imageManifest, imagePath, imageView, MAX_IMAGES, webpFilename, type ImageAsset } from './images';
 import { R2Images, UPLOAD_SECONDS, validateUpload, type ImageStorage, type ImageUpload } from './r2-images';
 import { BlogError, type Env, type FileChange, type FileContent, type Lang, type Repository } from './types';
 
@@ -117,7 +117,7 @@ export class Blog {
     const current = await this.effective(slug, lang);
     if (current.revision !== expectedRevision) throw new BlogError('conflict', 'Article changed; read it again before uploading');
     const images = imageManifest(current.source === 'draft' ? current.draft!.meta.images : undefined);
-    if (images.some(a => a.filename === filename)) throw new BlogError('image_exists', 'This draft already has that filename; choose a new filename');
+    if (images.some(a => a.filename === webpFilename(filename))) throw new BlogError('image_exists', 'This draft already has that WebP filename; choose a new basename');
     if (images.length >= MAX_IMAGES) throw new BlogError('invalid_image', 'A draft supports at most 8 uploaded images');
     const uploadId = crypto.randomUUID();
     const upload: ImageUpload = { upload_id: uploadId, user_id: this.userId, slug, lang, expected_revision: expectedRevision,
@@ -128,7 +128,8 @@ export class Blog {
     return { upload_id: uploadId, upload_ticket: await sign(this.env.CONFIRMATION_SECRET, 'image-upload', upload),
       ...offer, method: 'PUT', expires_in_seconds: UPLOAD_SECONDS, completion_expires_at: new Date(upload.expires).toISOString(),
       max_image_bytes: this.imageStorage.maximum,
-      instructions: 'Use your file/network execution tool to PUT the raw image bytes to upload_url with every required_header before expiry. Do not put base64 in an MCP call. Then call complete_image_upload with upload_ticket. The MCP connector itself does not transfer chat attachments. Do not send OAuth or permanent storage credentials to the upload URL. Upload URLs are sensitive; do not quote them in the final answer.' };
+      output_filename: webpFilename(filename), output_mime_type: 'image/webp',
+      instructions: 'Use your file/network execution tool to PUT the raw image bytes to upload_url with every required_header before expiry. Do not put base64 in an MCP call. Then call complete_image_upload with upload_ticket; it converts PNG/JPEG/GIF to WebP and returns the final Markdown. If your execution environment cannot reach the upload host, report the network error instead of repeatedly preparing uploads. The MCP connector itself does not transfer chat attachments. Do not send OAuth or permanent storage credentials to the upload URL. Upload URLs are sensitive; do not quote them in the final answer.' };
   }
   async completeImageUpload(ticket: string) {
     const upload = await verify<ImageUpload>(this.env.CONFIRMATION_SECRET, 'image-upload', ticket);
@@ -144,7 +145,7 @@ export class Blog {
     if (upload.expires < Date.now()) throw new BlogError('expired', 'Upload completion ticket expired; prepare and upload again');
     if (current.revision !== upload.expected_revision) throw new BlogError('conflict', 'Article changed during upload; read it and prepare a new upload');
     const images = imageManifest(current.source === 'draft' ? current.draft!.meta.images : undefined);
-    if (images.length >= MAX_IMAGES || images.some(a => a.filename === upload.filename)) throw new BlogError('conflict', 'Image list changed; read the draft before uploading');
+    if (images.length >= MAX_IMAGES || images.some(a => a.filename === webpFilename(upload.filename))) throw new BlogError('conflict', 'Image list changed; read the draft before uploading');
     const asset = await this.imageStorage.complete(upload);
     const meta: DraftMeta = current.source === 'draft' ? current.draft!.meta : { slug: upload.slug, lang: upload.lang, base_post_sha: current.file.sha };
     meta.images = [...images, asset].sort((a, b) => a.filename.localeCompare(b.filename));

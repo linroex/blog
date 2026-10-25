@@ -130,6 +130,24 @@ class CloudMCPTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'exactly'):
             validate_candidate(self.root, 'mcp/candidates/123')
 
+    def test_candidate_accepts_converted_webp_and_preserves_original_identity(self):
+        original = {'filename': 'chart.png', 'sha256': 'b' * 64, 'size': 15 * 1024 * 1024, 'mime_type': 'image/png'}
+        key = 'blog-mcp/images/hello/' + 'a' * 64 + '/chart.webp'
+        asset = self.r2_asset(filename='chart.webp', mime_type='image/webp', key=key,
+                              url='https://images.example.com/' + key, original=original)
+        self.candidate(r2=asset)
+        self.assertEqual(validate_candidate(self.root, 'mcp/candidates/123')['images'][0]['original'], original)
+
+    def test_candidate_rejects_converted_webp_over_new_limit(self):
+        original = {'filename': 'chart.png', 'sha256': 'b' * 64, 'size': 15 * 1024 * 1024 + 1, 'mime_type': 'image/png'}
+        self.candidate(r2=self.r2_asset(original=original))
+        with self.assertRaisesRegex(ValueError, 'converted'):
+            validate_candidate(self.root, 'mcp/candidates/123')
+
+    def test_candidate_accepts_historical_r2_image_up_to_old_limit(self):
+        self.candidate(r2=self.r2_asset(size=25 * 1024 * 1024))
+        self.assertEqual(validate_candidate(self.root, 'mcp/candidates/123')['images'][0]['size'], 25 * 1024 * 1024)
+
     def test_candidate_rejects_wrong_hash(self):
         self.candidate(bad_hash=True)
         with self.assertRaisesRegex(ValueError, "content"):

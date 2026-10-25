@@ -24,12 +24,15 @@
     "R2_ACCOUNT_ID": "0da15629cc8401faeee452ff11dc9db9",
     "R2_BUCKET_NAME": "blog",
     "R2_PUBLIC_BASE_URL": "https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev",
-    "IMAGE_MAX_BYTES": "26214400"
+    "IMAGE_MAX_BYTES": "15728640"
   },
   "observability": {
     "enabled": true,
     "head_sampling_rate": 0.1,
     "redact_query_string": true
   },
-  "account_id": "0da15629cc8401faeee452ff11dc9db9"
+  "account_id": "0da15629cc8401faeee452ff11dc9db9",
+  "images": {
+    "binding": "IMAGES"
+  }
 }

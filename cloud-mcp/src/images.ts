@@ -3,14 +3,16 @@ import { postPath } from './document';
 import { BlogError } from './types';
 
 export const LEGACY_IMAGE_BYTES = 1024 * 1024;
-export const MAX_IMAGE_BYTES = 25 * 1024 * 1024;
-export const HARD_IMAGE_BYTES = MAX_IMAGE_BYTES;
+export const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
+// Preserve already uploaded assets and outstanding publication candidates.
+export const HARD_IMAGE_BYTES = 25 * 1024 * 1024;
 export const MAX_IMAGES = 8;
 export const MAX_IMAGE_BASE64 = 4 * Math.ceil(LEGACY_IMAGE_BYTES / 3);
 export const IMAGE_NAME = /^[a-z0-9][a-z0-9-]{0,79}\.(png|jpg|jpeg|gif|webp)$/;
 export interface ImageAsset {
   filename: string; sha256: string; size: number; mime_type: string;
   storage?: 'r2'; key?: string; url?: string; upload_id?: string;
+  original?: { filename: string; sha256: string; size: number; mime_type: string };
 }
 export const IMAGE_TYPES: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp' };
 
@@ -18,6 +20,7 @@ export function checkImageName(filename: string): string {
   if (!IMAGE_NAME.test(filename)) throw new BlogError('invalid_image', 'Use a lowercase image filename with letters, digits and hyphens, ending in png, jpg, jpeg, gif or webp');
   return IMAGE_TYPES[filename.split('.').pop()!];
 }
+export function webpFilename(filename: string) { checkImageName(filename); return filename.replace(/\.[^.]+$/, '.webp'); }
 
 export function imagePath(slug: string, filename: string): string {
   postPath(slug, 'zh-tw');
@@ -62,6 +65,14 @@ export function imageManifest(value: unknown): ImageAsset[] {
       if (typeof asset.upload_id !== 'string' || !/^[a-f0-9-]{36}$/.test(asset.upload_id) ||
           typeof asset.key !== 'string' || !/^blog-mcp\/images\/[a-z0-9-]+\/[a-f0-9]{64}\/[a-z0-9.-]+$/.test(asset.key) ||
           typeof asset.url !== 'string' || !asset.url.startsWith('https://') || asset.url.length > 2048) throw new BlogError('invalid_image', 'Invalid R2 image manifest');
+      if (asset.original !== undefined) {
+        const original = asset.original;
+        if (!original || typeof original.filename !== 'string' || !IMAGE_NAME.test(original.filename) ||
+            original.mime_type !== IMAGE_TYPES[original.filename.split('.').pop()!] ||
+            typeof original.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(original.sha256) || !Number.isInteger(original.size) ||
+            original.size < 1 || original.size > MAX_IMAGE_BYTES || asset.size > MAX_IMAGE_BYTES ||
+            asset.mime_type !== 'image/webp' || asset.filename !== webpFilename(original.filename)) throw new BlogError('invalid_image', 'Invalid converted image manifest');
+      }
     } else if (asset.storage !== undefined) throw new BlogError('invalid_image', 'Unknown image storage');
     names.add(asset.filename);
   }

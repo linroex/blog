@@ -59,7 +59,7 @@ not the new image files. The former base64 `upload_image` tool is retired.
    }
    ```
 
-   An optional `sha256` binds the upload to a known original file. The result has
+   An optional `sha256` binds the upload to a known original file, before conversion. The result has
    `upload_url`, `required_headers`, `upload_ticket` and expiry information. This
    step does not write a draft or reserve a revision.
 2. Within five minutes, use a file/network execution tool to HTTP **PUT the raw
@@ -68,8 +68,9 @@ not the new image files. The former base64 `upload_image` tool is retired.
    it, `Content-Type` and `If-None-Match: *` are signed. Do not send MCP OAuth or
    permanent storage credentials. Treat the URL as a temporary secret.
 3. Call `complete_image_upload` with `{ "upload_ticket": "<returned ticket>" }`.
-   It verifies the stored length, file signature and SHA-256, saves an immutable
-   final object, and records its metadata on the draft. It returns `url`,
+   It verifies the original length, file signature and SHA-256, converts PNG/JPEG/GIF
+   to WebP (quality 85, keeping transparency and animation), saves an immutable
+   final object, and records its metadata on the draft. Existing WebP is kept as-is. It returns `url`,
    `markdown`, `preview_url`, `sha256`, `size`, and the new `revision`.
 4. Insert that absolute R2 Markdown with `update_post`, using the returned revision.
    Continue normal prepare/preview/approval/publication. The image itself is
@@ -78,14 +79,19 @@ not the new image files. The former base64 `upload_image` tool is retired.
 Limits and recovery:
 
 - PNG, JPEG, GIF and WebP with matching file signatures; no SVG. Files are not
-  decoded, resized, stripped of metadata or virus-scanned.
-- Up to **25 MiB per image**, eight completed images per language draft.
+  resized or virus-scanned. PNG/JPEG/GIF are decoded and re-encoded by Cloudflare
+  Images; uploaded WebP bytes are preserved.
+- Up to **15 MiB per original image and final WebP**, eight completed images per language draft.
 - Lowercase letters, digits and hyphens in filenames; one supported extension;
   no directories, arbitrary source URLs or server-side local file paths.
 - The agent must have access to the **original bytes and outbound HTTPS PUT**.
   An MCP connection alone cannot read a chat attachment. ChatGPT, Claude and Muse
   use this same contract, but their attachment/network capabilities must be tested
-  separately. No client-specific file parameter or browser widget is required.
+  separately. The owner has verified Claude web upload, but ordinary ChatGPT
+  reports a DNS/network error from its code sandbox. Tool refresh and MCP OAuth
+  do not grant shell network access. Do not keep retrying signed uploads when the
+  sandbox cannot reach the host. No client-specific file parameter or upload
+  widget has been installed.
 - A pending object cannot be overwritten while it exists. A signed URL can be
   retried during its five-minute lifetime; it is not a single-use credential.
   After completion, reusing it can only recreate the temporary object, never
@@ -105,6 +111,13 @@ Final keys are `blog-mcp/images/<slug>/<sha256>/<filename>`; temporary keys are
 The server deletes the temporary object after the Git commit succeeds. Abandoned
 or rejected uploads and unreferenced final objects may remain; no bucket-wide
 lifecycle changes or automatic deletion of final images are installed.
+
+Converted names use the original basename with `.webp`. For example, `chart.png`
+and `chart.jpg` both become `chart.webp`, so a draft cannot attach both under the
+same basename. Returned `sha256` and `size` describe the final bytes; `original`
+records the source filename, type, size and SHA-256. Original and final files must
+each fit 15 MiB. Conversion failure leaves the original pending and the draft
+unchanged. Previously completed R2 assets up to 25 MiB remain valid.
 
 The signed candidate binds the R2 manifest. The Worker verifies object metadata
 before preparation, preview and publication. CI independently restricts URLs and

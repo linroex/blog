@@ -1,5 +1,5 @@
 import { AwsClient } from 'aws4fetch';
-import { checkImageName, HARD_IMAGE_BYTES, imageBytes, MAX_IMAGE_BYTES, type ImageAsset } from './images';
+import { checkImageName, imageBytes, MAX_IMAGE_BYTES, webpFilename, type ImageAsset } from './images';
 import { BlogError, type Env, type Lang } from './types';
 
 export const UPLOAD_SECONDS = 300;
@@ -18,7 +18,7 @@ export interface ImageStorage {
 
 export function imageLimit(env: Env): number {
   const maximum = env.IMAGE_MAX_BYTES === undefined ? MAX_IMAGE_BYTES : Number(env.IMAGE_MAX_BYTES);
-  if (!Number.isSafeInteger(maximum) || maximum < 1 || maximum > HARD_IMAGE_BYTES) throw new BlogError('configuration', `IMAGE_MAX_BYTES must be between 1 and ${HARD_IMAGE_BYTES}`);
+  if (!Number.isSafeInteger(maximum) || maximum < 1 || maximum > MAX_IMAGE_BYTES) throw new BlogError('configuration', `IMAGE_MAX_BYTES must be between 1 and ${MAX_IMAGE_BYTES}`);
   return maximum;
 }
 export function validateUpload(filename: string, mime: string, size: number, maximum: number) {
@@ -60,6 +60,7 @@ export class R2Images implements ImageStorage {
   }
   async offer(upload: ImageUpload) {
     validateUpload(upload.filename, upload.mime_type, upload.size, this.maximum);
+    if (upload.mime_type !== 'image/webp' && !this.env.IMAGES) throw new BlogError('images_not_configured', 'Configure the IMAGES binding before uploading PNG, JPEG or GIF for WebP conversion');
     const url = new URL(this.objectURL(upload.pending_key));
     url.searchParams.set('X-Amz-Expires', String(UPLOAD_SECONDS));
     // Bind the actual HTTP byte length and make the pending key create-once.
@@ -96,17 +97,45 @@ export class R2Images implements ImageStorage {
     let offset = 0;
     for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
     chunks.length = 0;
-    const checked = await imageBytes(upload.filename, bytes, this.maximum);
-    if (upload.expected_sha256 && checked.sha256 !== upload.expected_sha256) throw new BlogError('invalid_image', 'Uploaded image SHA-256 differs from the prepared hash');
+    const original = await imageBytes(upload.filename, bytes, this.maximum);
+    if (upload.expected_sha256 && original.sha256 !== upload.expected_sha256) throw new BlogError('invalid_image', 'Uploaded image SHA-256 differs from the prepared hash');
+    const converted = await this.webp(original, bytes);
+    const checked = converted.asset;
     const key = this.finalKey(upload.slug, checked);
     const asset: ImageAsset = { ...checked, storage: 'r2', key, upload_id: upload.upload_id,
       url: `${this.config().publicBase}/${key}` };
     const stored = await this.request(key, 'PUT', { 'Content-Type': checked.mime_type,
       'Cache-Control': 'public, max-age=31536000, immutable', 'If-None-Match': '*',
-      'x-amz-meta-sha256': checked.sha256 }, bytes);
+      'x-amz-meta-sha256': checked.sha256 }, converted.bytes);
     if (stored.status !== 412) this.check(stored);
     await this.verify(asset, upload.slug);
     return asset;
+  }
+  private async webp(original: ImageAsset, bytes: Uint8Array): Promise<{ asset: ImageAsset; bytes: Uint8Array }> {
+    if (original.mime_type === 'image/webp') return { asset: original, bytes };
+    if (!this.env.IMAGES) throw new BlogError('images_not_configured', 'WebP conversion requires the IMAGES binding');
+    let response: Response;
+    try {
+      const result = await this.env.IMAGES.input(new Response(bytes as BodyInit).body!)
+        .output({ format: 'image/webp', quality: 85, anim: true });
+      response = result.response();
+    } catch { throw new BlogError('image_conversion_failed', 'Cloudflare could not convert the image to WebP; the original remains pending and the draft has not changed. Check image validity and Images quota before retrying.'); }
+    if (!response.ok || response.headers.get('content-type')?.split(';')[0] !== 'image/webp' || !response.body) throw new BlogError('image_conversion_failed', 'Cloudflare did not return a WebP image; the draft has not changed');
+    const reader = response.body.getReader();
+    const chunks: Uint8Array[] = [];
+    let length = 0;
+    while (true) {
+      const next = await reader.read();
+      if (next.done) break;
+      length += next.value.length;
+      if (length > this.maximum) { await reader.cancel(); throw new BlogError('invalid_image', 'Converted WebP exceeds the image size limit; use a smaller image'); }
+      chunks.push(next.value);
+    }
+    const converted = new Uint8Array(length);
+    let offset = 0;
+    for (const chunk of chunks) { converted.set(chunk, offset); offset += chunk.length; }
+    const asset = await imageBytes(webpFilename(original.filename), converted, this.maximum);
+    return { asset: { ...asset, original }, bytes: converted };
   }
   async discard(upload: ImageUpload) {
     // Only after Git has durably recorded this upload. A failed cleanup is safe.
