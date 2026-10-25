@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-25T16:44:09Z",
+  "endpoint": "https://lins-blog-mcp.linroex.workers.dev/mcp",
+  "source_commit": "e1da53c828ec79d7b42bd86cf4600365dddcfa2e",
+  "server_version": "1.2.0",
+  "worker_version_id": "b2c8a08f-d753-49cb-bbce-92df38a7f0c3",
+  "flow": ["prepare_image_upload", "raw HTTPS PUT to R2", "complete_image_upload"],
+  "tool_count": 11,
+  "retired_tool": "upload_image",
+  "storage": {
+    "bucket": "blog",
+    "public_base": "https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev",
+    "pending_prefix": "blog-mcp/pending/",
+    "final_prefix": "blog-mcp/images/",
+    "new_image_bytes_in_git": false,
+    "legacy_git_drafts_supported": true,
+    "worker_secret_names_added": ["R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"],
+    "credential_source": "Existing R2 S3 credentials verified against this bucket; values not recorded",
+    "bucket_lifecycle_changed": false
+  },
+  "limits": {
+    "bytes_per_image": 26214400,
+    "completed_images_per_language_draft": 8,
+    "put_url_seconds": 300,
+    "completion_ticket_seconds": 86400,
+    "formats": ["PNG", "JPEG", "GIF", "WebP"]
+  },
+  "verification": {
+    "typescript_check": "passed",
+    "vitest_tests_passed": 63,
+    "python_tests_passed": 34,
+    "worker_dry_run_build": "passed",
+    "workerd_access_and_eleven_tools_smoke": "passed",
+    "real_r2_signed_put_2_mib": "passed",
+    "real_r2_signed_put_25_mib": "passed",
+    "real_r2_completion_in_local_workerd_25_mib": "passed",
+    "conditional_duplicate_put": "412; existing bytes preserved",
+    "completion_retry": "passed",
+    "public_download_content_hash": "passed",
+    "disposable_r2_objects_deleted_and_absence_verified": true,
+    "anonymous_production_access_and_oauth_checks": "passed",
+    "github_mcp_test": "https://github.com/linroex/blog/actions/runs/40212995014",
+    "github_mcp_test_conclusion": "success",
+    "github_pages_deploy": "https://github.com/linroex/blog/actions/runs/40212994994",
+    "github_pages_deploy_conclusion": "success",
+    "test_article_published": false
+  },
+  "client_acceptance": {
+    "status": "pending owner testing",
+    "clients": ["ChatGPT Blog MCP", "Claude web Blog", "Muse"],
+    "required_capabilities": ["read original image bytes", "outbound HTTPS PUT with required headers"],
+    "automatic_chat_attachment_transfer": false,
+    "client_specific_file_parameter_or_widget": false,
+    "production_authenticated_upload_and_maximum_size_quota_acceptance": "not exercised by this rollout",
+    "next_step": "Refresh existing HTTP clients' tool lists and test an attached image on a draft without publishing"
+  },
+  "platform_changes": {
+    "managed_oauth_callbacks_modified": false,
+    "browser_scope": "Read-only lookup of the existing R2 bucket and public base, explicitly authorized by owner",
+    "local_mcp_reintroduced": false
+  },
+  "operational_notes": [
+    "Images are public after completion, before article publication; the bucket is not private draft storage.",
+    "A signed URL can be reused until expiry. Replaying after pending cleanup cannot change a finalized image.",
+    "Some HTTP clients surface an early large-body conditional rejection as a connection error; completion can recover the original successful PUT.",
+    "Abandoned pending uploads and unreferenced final images may persist; no automatic deletion policy was added.",
+    "Signature checks do not decode images, strip metadata or scan their contents."
+  ]
+}

@@ -14,6 +14,8 @@ evidence and the seven-day legacy KV retention deadline. The current ChatGPT
 connection is **Blog MCP**; Claude web uses **Blog** at the same HTTP endpoint.
 The previous ChatGPT `blog` installation was retired. See `image-upload-rollout.json`
 for the historical Git-backed image-upload release and the owner's subsequently expanded callback list.
+See [r2-upload-rollout.json](r2-upload-rollout.json) for the R2 deployment, live
+storage verification and pending client acceptance.
 The GitHub App is `linroex-blog-mcp`, installed only on `linroex/blog`.
 GitHub App credentials and the publication confirmation key remain Worker secrets.
 Cloudflare Access owns login, client registration, access tokens and refresh grants.
