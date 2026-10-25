@@ -26,7 +26,7 @@ summary: Bear 這類只有 stdio 的本機 MCP，出門用手機或網頁版 Cla
 
 網頁版和手機就比較容易讓人誤會，畫面明明在你眼前，瀏覽器也是開在你自己的電腦或手機上，看起來好像也在你家，但其實瀏覽器只是一扇窗戶，你從窗戶看到的是畫面，真正在思考、在做事的是廠商機房裡的電腦，當 AI 需要用工具時，是機房那邊的電腦出門去找管家，不是你的瀏覽器去找，而你家的管家沒有手機，機房當然聯絡不到他。
 
-![為什麼網頁版叫不動你電腦裡的 MCP：Bear MCP 管家住在你家的 Mac 裡、沒有電話，瀏覽器只負責顯示畫面，廠商機房的 AI 找不到它](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/eaf20e24407f4214115b6bd76ace59470b4f1108a9d3f7102b65e938270e7a33/fig1-who-calls-the-butler.png)
+![為什麼網頁版叫不動你電腦裡的 MCP：Bear MCP 管家住在你家的 Mac 裡、沒有電話，瀏覽器只負責顯示畫面，廠商機房的 AI 找不到它](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/80677516f1e42843d7afea52073176f2c8ee8f66cf23a770eab6c56eb1f3fc82/fig1-who-calls-the-butler.webp)
 
 ## 兩種 MCP 的差別
 
@@ -41,7 +41,7 @@ MCP 其實有兩種連線方式：
 | 誰叫得動 | 同一台電腦上的 App | 任何連得到網址的服務 |
 | 網頁版、手機 | 不行 | 可以 |
 
-![兩種管家：本機型（stdio）管家只在你的電腦裡工作、不對外連網，網頁版和手機叫不動；網路型（HTTP）管家住在一個網址後面，機房裡的 AI 可以透過網路呼叫](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/476dcbf5273a3f4403ae0435df3b33e83d8c6021e259279c38ead2a4fe56fd3f/fig2-two-kinds-of-mcp.png)
+![兩種管家：本機型（stdio）管家只在你的電腦裡工作、不對外連網，網頁版和手機叫不動；網路型（HTTP）管家住在一個網址後面，機房裡的 AI 可以透過網路呼叫](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/7c40dfb190d87119c6bbf2d966c752184effc734923a4f339dc532095fd5d808/fig2-two-kinds-of-mcp.webp)
 
 ## 該選哪一種？
 
@@ -61,7 +61,7 @@ MCP 其實有兩種連線方式：
 
 所以如果想在網頁版用，就得自己給管家一支手機，這支手機就是這篇要裝的 FastMCP：外面打進來的電話由它接起來，轉告管家，管家做完事，再透過它回話。
 
-![轉接架構：機房裡的網頁版 AI 透過網路型（HTTP）連到你 Mac 上的手機（FastMCP），FastMCP 再用本機型（stdio）轉交給管家（Bear MCP），由管家操作 Bear](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/c67c96f2695ad4bfabb15570f26902f629ed31d851050a98f8bc7fdefe736a75/fig3-proxy-architecture.png)
+![轉接架構：機房裡的網頁版 AI 透過網路型（HTTP）連到你 Mac 上的手機（FastMCP），FastMCP 再用本機型（stdio）轉交給管家（Bear MCP），由管家操作 Bear](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/2745d2639821e44149fa3801f7635afb6704db7bd7845ad41aee1fcab820192f/fig3-proxy-architecture.webp)
 
 當然，如果你只在桌面版用，那就不需要轉，直接用本機型就好。
 
