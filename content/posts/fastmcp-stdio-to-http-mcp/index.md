@@ -67,7 +67,7 @@ MCP 其實有兩種連線方式：
 
 ## 實作：用 FastMCP 轉接 bearcli
 
-市面上有一些專門做轉接的工具，不過我本來就在用 Python，[FastMCP](https://gofastmcp.com/) 本身就有內建 proxy 功能，不用多裝一個獨立的工具，寫幾行 Python 就能搞定。
+市面上其實有專門做轉接的工具，不過我最後選擇用 [FastMCP](https://gofastmcp.com/)，原因很單純：資安。每多裝一個工具，就多一個可能被人動手腳的地方（資安上叫「攻擊面」），而 FastMCP 本來就是很多 MCP 在用的開發套件，直接用它內建的 proxy 功能做轉接，就不用再多信任一個新的工具，寫幾行 Python 就能搞定。
 
 ### 準備環境
 
