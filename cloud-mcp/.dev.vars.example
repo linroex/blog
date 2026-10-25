@@ -1,6 +1,4 @@
 # Copy to .dev.vars (ignored). Never commit real secrets.
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
 GITHUB_APP_ID=
 GITHUB_INSTALLATION_ID=
 # PKCS#8 PEM; Wrangler accepts a quoted value with escaped newlines.

@@ -1,128 +1,116 @@
 import { afterEach, expect, it, vi } from 'vitest';
+import { exportPKCS8 } from 'jose';
 import worker from '../src/index';
-import { base64url } from '../src/crypto';
-import { consentPage } from '../src/auth';
-import { env as baseEnv } from './helpers';
+import { accessHarness } from './access-helpers';
 import type { Env } from '../src/types';
 
-class MemoryKV {
-  values = new Map<string, { value: string; metadata?: unknown }>();
-  async get(key: string, options?: string | { type?: string }) {
-    const item = this.values.get(key);
-    if (!item) return null;
-    const type = typeof options === 'string' ? options : options?.type;
-    return type === 'json' ? JSON.parse(item.value) : type === 'arrayBuffer' ? new TextEncoder().encode(item.value).buffer : item.value;
-  }
-  async put(key: string, value: string, options?: { metadata?: unknown }) { this.values.set(key, { value, metadata: options?.metadata }); }
-  async delete(key: string) { this.values.delete(key); }
-  async getWithMetadata(key: string, options?: string) { return { value: await this.get(key, options), metadata: this.values.get(key)?.metadata ?? null, cacheStatus: null }; }
-  async list(options: { prefix?: string } = {}) {
-    return { keys: [...this.values].filter(([key]) => key.startsWith(options.prefix ?? '')).map(([name, item]) => ({ name, metadata: item.metadata })), list_complete: true, cacheStatus: null };
-  }
-}
-const origin = baseEnv.PUBLIC_ORIGIN;
-afterEach(() => vi.unstubAllGlobals());
-function harness() {
-  const env = { ...baseEnv, OAUTH_KV: new MemoryKV() as unknown as KVNamespace };
-  const pending: Promise<unknown>[] = [];
-  const ctx = { waitUntil(p: Promise<unknown>) { pending.push(p); }, passThroughOnException() {}, props: {} } as unknown as ExecutionContext;
-  const cookies = new Map<string, string>();
-  async function call(path: string, init: RequestInit = {}, browser = false, override?: Env) {
+afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
+async function harness() {
+  const h = await accessHarness();
+  const network = vi.fn(async (input: string | URL | Request) => {
+    expect(String(input)).toBe(`${h.issuer}/cdn-cgi/access/certs`);
+    return h.fetcher(String(input), {});
+  });
+  vi.stubGlobal('fetch', network);
+  const token = await h.sign();
+  async function call(path: string, init: RequestInit = {}, ctx = h.ctx, env: Env = h.env) {
     const headers = new Headers(init.headers);
-    headers.set('Host', new URL(origin).host);
-    if (browser) headers.set('Cookie', [...cookies.values()].join('; '));
-    const response = await worker.fetch(new Request(`${origin}${path}`, { ...init, headers }), override ?? env, ctx);
-    if (browser) for (const cookie of response.headers.getSetCookie()) {
-      const pair = cookie.split(';')[0]; cookies.set(pair.split('=')[0], pair);
-    }
-    await Promise.all(pending.splice(0));
-    return response;
+    headers.set('Host', new URL(env.PUBLIC_ORIGIN).host);
+    return worker.fetch(new Request(`${env.PUBLIC_ORIGIN}${path}`, { ...init, headers }), env, ctx);
   }
-  return { call, env };
+  const authenticated = (path: string, init: RequestInit = {}) => call(path, { ...init,
+    headers: { ...Object.fromEntries(new Headers(init.headers)), 'Cf-Access-Jwt-Assertion': token } });
+  async function rpc(method: string, params: object = {}) {
+    return authenticated('/mcp', { method: 'POST', headers: { 'Content-Type': 'application/json',
+      Accept: 'application/json, text/event-stream', 'MCP-Protocol-Version': '2025-11-25' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }) });
+  }
+  return { ...h, network, call, authenticated, rpc, token };
 }
-async function login(userId = 123) {
-  const h = harness();
-  const registered = await h.call('/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-    client_name: 'ChatGPT test', redirect_uris: ['https://chatgpt.com/connector/oauth/test'],
-    grant_types: ['authorization_code', 'refresh_token'], response_types: ['code'], token_endpoint_auth_method: 'none',
-  }) });
-  expect(registered.status).toBe(201);
-  const client = await registered.json() as { client_id: string };
-  const verifier = 'v'.repeat(64);
-  const challenge = base64url(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier))));
-  const query = new URLSearchParams({ response_type: 'code', client_id: client.client_id, redirect_uri: 'https://chatgpt.com/connector/oauth/test',
-    code_challenge: challenge, code_challenge_method: 'S256', resource: `${origin}/mcp`, scope: 'blog:manage offline_access', state: 'client-state' });
-  const consent = await h.call(`/authorize?${query}`, {}, true);
-  expect(consent.status).toBe(200);
-  expect(consent.headers.get('Referrer-Policy')).toBe('same-origin');
-  const page = await consent.text();
-  const handle = /name="handle" value="([^"]+)"/.exec(page)![1];
-  const approval = await h.call('/authorize', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', Origin: origin },
-    body: new URLSearchParams({ handle, decision: 'approve' }).toString() }, true);
-  expect(approval.status).toBe(302);
-  const upstream = new URL(approval.headers.get('Location')!);
-  expect(upstream.searchParams.has('scope')).toBe(false); // no repository authorization in the login app
-  vi.stubGlobal('fetch', vi.fn(async (input: string) => {
-    if (input === 'https://github.com/login/oauth/access_token') return Response.json({ access_token: 'upstream-identity-only' });
-    if (input === 'https://api.github.com/user') return Response.json({ id: userId });
-    throw new Error(`Unexpected network access: ${input}`);
-  }));
-  const callback = await h.call(`/callback?code=github-code&state=${upstream.searchParams.get('state')}`, {}, true);
-  if (userId !== 123) return { ...h, callback, token: '' };
-  expect(callback.status).toBe(302);
-  const redirect = new URL(callback.headers.get('Location')!);
-  expect(redirect.searchParams.get('state')).toBe('client-state');
-  const exchange = await h.call('/token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({ grant_type: 'authorization_code', code: redirect.searchParams.get('code')!, client_id: client.client_id,
-      code_verifier: verifier, redirect_uri: 'https://chatgpt.com/connector/oauth/test', resource: `${origin}/mcp` }).toString() });
-  expect(exchange.status).toBe(200);
-  const tokens = await exchange.json() as { access_token: string };
-  return { ...h, callback, token: tokens.access_token };
+function result(body: string) {
+  return JSON.parse(body.startsWith('event:') || body.startsWith('data:') ? /data: (.+)/.exec(body)![1] : body).result;
 }
 
-it('serves OAuth discovery and refuses anonymous MCP access', async () => {
-  const { call } = harness();
-  const metadata = await call('/.well-known/oauth-protected-resource/mcp');
-  expect(metadata.status).toBe(200);
-  expect(await metadata.json()).toMatchObject({ resource: `${origin}/mcp` });
-  const authorization = await call('/.well-known/oauth-authorization-server');
-  expect(await authorization.json()).toMatchObject({ code_challenge_methods_supported: ['S256'] });
-  const denied = await call('/mcp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
-  expect(denied.status).toBe(401);
-  expect(denied.headers.get('WWW-Authenticate')).toContain('resource_metadata');
-});
-
-it('completes owner OAuth and lists HTTP MCP tools without exposing GitHub credentials', async () => {
-  const { call, token } = await login();
-  const response = await call('/mcp', { method: 'POST', headers: { Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json', Accept: 'application/json, text/event-stream', 'MCP-Protocol-Version': '2025-11-25' },
-    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }) });
+it('lists ten MCP tools including image upload after both Access checks', async () => {
+  const h = await harness();
+  const response = await h.rpc('tools/list');
   expect(response.status, await response.clone().text()).toBe(200);
-  const text = await response.text();
-  expect(text).toContain('publish_post');
-  expect(text).not.toContain('upstream-identity-only');
-  expect(text).not.toContain('push_commits');
+  const tools = result(await response.text()).tools.map((tool: { name: string }) => tool.name).sort();
+  expect(tools).toEqual(['create_post', 'get_operation_status', 'get_repo_status', 'list_posts', 'prepare_publish',
+    'publish_post', 'read_config', 'read_post', 'update_post', 'upload_image']);
+  expect(h.network).toHaveBeenCalledTimes(1); // Only JWKS, no GitHub calls.
 });
 
-it('rejects a different GitHub user and a changed owner allowlist', async () => {
-  const other = await login(999);
-  expect(other.callback.status).toBe(403);
-  vi.unstubAllGlobals();
-  const { call, token, env } = await login();
-  const denied = await call('/mcp', { headers: { Authorization: `Bearer ${token}` } }, false, { ...env, ALLOWED_GITHUB_USER_ID: '999' });
-  expect(denied.status).toBe(403);
+it('reads an article through the authenticated MCP handler with repo-scoped App credentials', async () => {
+  const h = await harness();
+  Object.assign(h.env, { GITHUB_APP_ID: crypto.randomUUID(), GITHUB_INSTALLATION_ID: '123', GITHUB_APP_PRIVATE_KEY: await exportPKCS8(h.key.privateKey) });
+  h.network.mockImplementation(async (input: string | URL | Request) => {
+    const url = String(input);
+    if (url === `${h.issuer}/cdn-cgi/access/certs`) return h.fetcher(url, {});
+    if (url.endsWith('/app/installations/123/access_tokens')) return Response.json({ token: 'test-app-token', expires_at: new Date(Date.now() + 3600_000).toISOString() });
+    if (url.includes('/git/ref/heads/main')) return Response.json({ object: { sha: 'b'.repeat(40) } });
+    if (url.includes('/contents/content/posts/original/index.md')) return Response.json({ type: 'file', size: 40, sha: 'c'.repeat(40),
+      encoding: 'base64', content: Buffer.from('---\ntitle: Original\n---\n\nArticle body\n').toString('base64') });
+    throw new Error('Unexpected network call');
+  });
+  const response = await h.rpc('tools/call', { name: 'read_post', arguments: { slug: 'original', source: 'published' } });
+  expect(response.status).toBe(200);
+  const read = result(await response.text());
+  expect(read.isError).not.toBe(true);
+  expect(read.structuredContent.content).toBe('Article body\n');
 });
 
-it('rejects an OAuth callback without browser binding and cross-origin consent posts', async () => {
-  const { call } = harness();
-  expect((await call('/callback?state=stolen&code=stolen')).status).toBe(400);
-  expect((await call('/authorize', { method: 'POST', headers: { Origin: 'https://evil.example' }, body: 'handle=stolen' })).status).toBe(403);
-  expect((await call('/authorize', { method: 'POST', headers: { Origin: 'null' }, body: 'handle=stolen' })).status).toBe(403);
+it('blocks every route without a platform context even with a correctly signed assertion', async () => {
+  const h = await harness();
+  for (const path of ['/mcp', '/health', '/authorize', '/token', '/register', '/callback', '/.well-known/oauth-authorization-server']) {
+    const response = await h.call(path, { headers: { 'Cf-Access-Jwt-Assertion': h.token } }, { ...h.ctx, access: undefined } as ExecutionContext);
+    expect(response.status).toBe(403);
+  }
+  expect(h.network).not.toHaveBeenCalled();
 });
 
-it('escapes untrusted client metadata on the consent page', () => {
-  const html = consentPage({ clientName: '<script>alert(1)</script>', redirectHost: 'example.com',
-    clientId: 'client', redirectUri: 'https://example.com/callback', redirectIsLoopback: false, scope: ['blog:manage'] }, 'handle');
-  expect(html).not.toContain('<script>');
-  expect(html).toContain('&#60;script&#62;');
+it('refuses old bearer tokens, spoofed headers and all failed checks before any GitHub call', async () => {
+  const h = await harness();
+  const headers = { Authorization: 'Bearer old-self-issued-token', 'Cf-Access-Authenticated-User-Email': h.env.ALLOWED_ACCESS_EMAIL };
+  expect((await h.call('/mcp', { headers })).status).toBe(403);
+  const invalid = [await h.sign({ ...h.claims(), iss: 'https://evil.example' }),
+    await h.sign({ ...h.claims(), aud: 'wrong' }), await h.sign({ ...h.claims(), exp: 1 }),
+    await h.sign({ ...h.claims(), exp: undefined }), await h.sign({ ...h.claims(), email: 'other@example.com' }),
+    h.token.slice(0, -8) + 'forgedAA'];
+  for (const assertion of invalid) {
+    expect((await h.call('/mcp', { method: 'POST', headers: { 'Cf-Access-Jwt-Assertion': assertion,
+      'Content-Type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call',
+        params: { name: 'publish_post', arguments: { slug: 'hello', confirmation: 'old' } } }) })).status).toBe(403);
+  }
+  expect(h.network.mock.calls.every(([url]) => String(url) === `${h.issuer}/cdn-cgi/access/certs`)).toBe(true);
+});
+
+it('fails closed on identity or JWKS failure, without consuming the MCP body', async () => {
+  const h = await harness();
+  h.network.mockRejectedValue(new Error('JWKS unavailable'));
+  const response = await h.authenticated('/mcp');
+  expect(response.status).toBe(403);
+  expect(await response.text()).toBe('Access authentication required');
+  expect(response.headers.get('Cache-Control')).toBe('no-store');
+  const getIdentity = vi.fn(async () => { throw new Error('Identity unavailable'); });
+  expect((await h.call('/mcp', { headers: { 'Cf-Access-Jwt-Assertion': h.token } },
+    { ...h.ctx, access: { aud: h.env.ACCESS_AUD, getIdentity } } as unknown as ExecutionContext)).status).toBe(403);
+  expect(h.network).toHaveBeenCalledTimes(1);
+});
+
+it('retires self-hosted OAuth endpoints and keeps health private', async () => {
+  const h = await harness();
+  for (const path of ['/authorize', '/callback', '/token', '/register', '/.well-known/oauth-authorization-server', '/.well-known/oauth-protected-resource/mcp']) {
+    expect((await h.authenticated(path)).status).toBe(404);
+  }
+  expect((await h.call('/health')).status).toBe(403);
+  expect((await h.authenticated('/health')).status).toBe(200);
+});
+
+it('rejects invalid configuration, alternate hosts and oversized authenticated bodies', async () => {
+  const h = await harness();
+  expect((await h.call('/mcp', {}, h.ctx, { ...h.env, ACCESS_AUD: '' })).status).toBe(503);
+  expect((await worker.fetch(new Request('https://evil.example/mcp'), h.env, h.ctx)).status).toBe(403);
+  expect(h.network).not.toHaveBeenCalled();
+  expect((await h.authenticated('/mcp', { method: 'POST', body: 'x'.repeat(8 * 1024 * 1024 + 1) })).status).toBe(413);
 });

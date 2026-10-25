@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reject candidates that change anything except the one selected regular Markdown file.
+"""Restrict candidates to one selected article and its declared, new image files.
 
 The Worker verifies the signed metadata. CI independently checks the candidate's
 tree, parent, and content; it does not require any deployment or signing secrets.
@@ -12,7 +12,8 @@ import re
 import subprocess
 from pathlib import Path
 
-from mcp_server import _parse_frontmatter, _split_document
+from blog_content import parse_frontmatter, split_document
+from blog_images import image_asset, image_manifest, image_view
 
 
 def validate_candidate(root: Path, ref_name: str) -> dict:
@@ -36,21 +37,32 @@ def validate_candidate(root: Path, ref_name: str) -> dict:
     path = f"content/posts/{slug}/index{'' if lang == 'zh-tw' else '.' + lang}.md"
     if git("show", "-s", "--format=%P", "HEAD") != data["base_main"]:
         raise ValueError("Candidate must have exactly its recorded base parent")
-    changed = git("diff", "--name-only", "HEAD^", "HEAD", "--").splitlines()
-    if changed != [path]:
-        raise ValueError("Candidate must change exactly the selected article")
+    images = image_manifest(data.get('images', []))
+    allowed_images = {image_view(slug, asset)['path']: asset for asset in images}
+    changed = git("diff", "--name-only", "--no-renames", "HEAD^", "HEAD", "--").splitlines()
+    if not changed or not set(changed) <= {path, *allowed_images}:
+        raise ValueError("Candidate must change exactly the selected article and its declared images")
+    for image_path, asset in allowed_images.items():
+        entry = git('ls-tree', 'HEAD', '--', image_path)
+        if not entry.startswith('100644 blob '):
+            raise ValueError('Candidate image must be a regular non-executable file')
+        image_file = root / image_path
+        if image_file.stat().st_size > 1024 * 1024 or image_asset(asset['filename'], image_file.read_bytes()) != asset:
+            raise ValueError('Candidate image does not match the approved version')
+        if image_path in changed and git('ls-tree', 'HEAD^', '--', image_path):
+            raise ValueError('Candidate cannot overwrite a published image')
     entry = git("ls-tree", "HEAD", "--", path)
     if not entry.startswith("100644 blob "):
         raise ValueError("Candidate article must be a regular non-executable file")
     raw = (root / path).read_bytes()
     if len(raw) > 2 * 1024 * 1024 or hashlib.sha256(raw).hexdigest() != data["content_sha256"]:
         raise ValueError("Candidate content does not match the approved version")
-    header, _ = _split_document(raw.decode("utf-8"))
-    if _parse_frontmatter(header).get("draft") is not False:
+    header, _ = split_document(raw.decode("utf-8"))
+    if parse_frontmatter(header).get("draft") is not False:
         raise ValueError("Candidate must set draft: false")
     return data
 
 
 if __name__ == "__main__":
     validate_candidate(Path.cwd(), os.environ["GITHUB_REF_NAME"])
-    print("Candidate changes only its selected article")
+    print("Candidate changes only its selected article and declared new images")

@@ -1,6 +1,6 @@
 import { base64url, unbase64 } from './crypto';
 import { MAX_POST_BYTES } from './document';
-import { BlogError, type Commit, type Env, type FileContent, type Repository, type Run } from './types';
+import { BlogError, type BinaryContent, type Commit, type Env, type FileChange, type FileContent, type Repository, type Run } from './types';
 
 const encoder = new TextEncoder();
 let cached: { identity: string; token: string; expires: number } | undefined;
@@ -56,7 +56,7 @@ export class GitHubRepository implements Repository {
     const ref = await this.api<{ object: { sha: string } }>(`/git/ref/heads/${encodeURIComponent(branch)}`, 'GET', undefined, true);
     return ref?.object.sha ?? null;
   }
-  async file(path: string, ref: string): Promise<FileContent | null> {
+  async binary(path: string, ref: string): Promise<BinaryContent | null> {
     const data = await this.api<{ type: string; size: number; sha: string; content: string; encoding: string }>(`/contents/${path.split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(ref)}`, 'GET', undefined, true);
     if (!data) return null;
     if (data.type !== 'file' || data.size > MAX_POST_BYTES) throw new BlogError('invalid_file', 'Only regular files up to 2 MiB are supported');
@@ -66,17 +66,29 @@ export class GitHubRepository implements Repository {
       if (!blob || blob.size > MAX_POST_BYTES || blob.encoding !== 'base64') throw new BlogError('invalid_file', 'Cannot read GitHub blob');
       encoded = blob.content;
     }
-    return { text: new TextDecoder('utf-8', { fatal: true, ignoreBOM: false }).decode(unbase64(encoded.replace(/\s/g, ''))), sha: data.sha };
+    return { base64: encoded.replace(/\s/g, ''), sha: data.sha };
+  }
+  async file(path: string, ref: string): Promise<FileContent | null> {
+    const data = await this.binary(path, ref);
+    return data ? { text: new TextDecoder('utf-8', { fatal: true, ignoreBOM: false }).decode(unbase64(data.base64)), sha: data.sha } : null;
   }
   async commit(sha: string): Promise<Commit> {
     const data = await this.api<{ sha: string; message: string; parents: { sha: string }[]; tree: { sha: string } }>(`/git/commits/${sha}`);
     if (!data) throw new BlogError('missing_commit', 'Commit not found');
     return { sha: data.sha, message: data.message, parents: data.parents.map(p => p.sha), tree: data.tree.sha };
   }
-  async writeCommit(parent: string, changes: Record<string, string>, message: string): Promise<string> {
+  async writeCommit(parent: string, changes: Record<string, FileChange>, message: string): Promise<string> {
     const base = await this.commit(parent);
+    const entries = [];
+    for (const [path, value] of Object.entries(changes)) {
+      if (typeof value === 'string') entries.push({ path, mode: '100644', type: 'blob', content: value });
+      else {
+        const blob = await this.api<{ sha: string }>('/git/blobs', 'POST', { content: value.base64, encoding: 'base64' });
+        entries.push({ path, mode: '100644', type: 'blob', sha: blob!.sha });
+      }
+    }
     const tree = await this.api<{ sha: string }>('/git/trees', 'POST', {
-      base_tree: base.tree, tree: Object.entries(changes).map(([path, content]) => ({ path, mode: '100644', type: 'blob', content })),
+      base_tree: base.tree, tree: entries,
     });
     const commit = await this.api<{ sha: string }>('/git/commits', 'POST', { message, tree: tree!.sha, parents: [parent] });
     return commit!.sha;

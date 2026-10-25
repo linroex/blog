@@ -6,25 +6,13 @@ import re
 import subprocess
 from pathlib import Path
 
-from mcp_server import BlogStore
+from blog_content import article_metadata
 
 
 def export_index(root: Path, commit: str) -> dict:
     if not re.fullmatch(r"[a-f0-9]{40}", commit):
         raise ValueError("commit must be a full Git SHA")
-    store = BlogStore(root, hugo_bin="")
-    posts = []
-    offset = 0
-    while True:
-        page = store.list_posts(offset=offset, limit=200)
-        for post in page["posts"]:
-            # Checkout mtimes are not editorial modification dates.
-            post.pop("modified", None)
-            posts.append(post)
-        offset += len(page["posts"])
-        if offset >= page["total"]:
-            break
-    return {"schema_version": 1, "commit": commit, "posts": posts}
+    return {"schema_version": 1, "commit": commit, "posts": article_metadata(root)}
 
 
 def main() -> None:

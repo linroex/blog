@@ -1,116 +1,98 @@
-# Blog MCP server
+# Blog MCP
 
-For ChatGPT web without a tunnel to this computer, use the separate
-[Cloudflare HTTP MCP](cloud-mcp/README.md). It stores drafts in GitHub branches,
-validates candidates with GitHub Actions, and publishes through a repo-scoped
-GitHub App. The stdio server and workflow described below remain available.
+Blog MCP runs only on Cloudflare Workers, using remote Streamable HTTP:
 
-`scripts/mcp_server.py` lets MCP-compatible AI tools read this Hugo blog, save
-drafts, validate the site, and publish one approved post through Git. It uses
-Python's standard library only.
+`https://lins-blog-mcp.linroex.workers.dev/mcp`
 
-## Exposed surface
+Connect to this endpoint using Cloudflare Access Managed OAuth. The server uses
+GitHub App APIs and GitHub Actions; it does not depend on this computer. The
+former local Python stdio server has been removed. Do not register a local
+`blog` server or a command pointing to `scripts/mcp_server.py`.
 
-- Read-only resources: `blog://config`, `blog://posts/{slug}`, and
-  `blog://posts/{slug}?lang={lang}` for translations.
-- Draft tools: `list_posts`, `read_post`, `create_post`, and `update_post`.
-- Checks: `validate_site`, `git_status`, and `prepare_publish`.
-- Publication: `publish_post` commits only the selected post and can optionally
-  push it to `origin`.
-- Push existing commits: `push_commits` pushes the current branch to `origin`
-  without editing posts, staging files, or creating another commit.
+See [cloud architecture, configuration and recovery](cloud-mcp/README.md) for
+implementation details. Python scripts under `scripts/` only export the article
+index and validate candidate commits/SEO during site builds.
 
-The server cannot read or write arbitrary paths, delete posts, run arbitrary
-commands, or commit unrelated files. Slugs are restricted to lowercase ASCII
-words separated by hyphens. Post bodies are limited to 2 MiB.
+## Tools and authoring workflow
 
-## Connect an MCP client
+The server exposes ten tools: `list_posts`, `read_post`, `create_post`,
+`update_post`, `upload_image`, `prepare_publish`, `get_operation_status`,
+`publish_post`, `get_repo_status`, and `read_config`.
 
-Use the absolute paths for the machine on which the AI client runs. Most stdio
-MCP clients accept an entry shaped like this:
+1. List/read articles to avoid slug collisions. `read_post` prefers an active
+   draft; use `source: published` to read main explicitly.
+2. Create a draft or update it with `expected_revision` from the latest read.
+   Drafts are public GitHub branches with `draft: true`; they do not update the
+   website. Each successful update returns a new revision.
+3. Upload images with the latest revision and insert their returned Markdown.
+4. Call `prepare_publish` and poll `get_operation_status` no more often than
+   once every five seconds while GitHub Actions validates the exact candidate.
+5. Show the entire ready preview, including uploaded images, to the user. Only
+   after explicit approval of that exact version, call `publish_post` with the
+   returned confirmation. Tokens identify content; they do not prove consent.
+6. Poll status for `hosting_deployment_confirmed: true`. A Git commit is distinct
+   from a successful Pages deployment. After a lost response, retry the same
+   confirmation or poll the existing operation; do not recreate publication.
+
+## Upload article images
+
+Create or read the article first, then call `upload_image`:
 
 ```json
 {
-  "mcpServers": {
-    "lins-blog": {
-      "command": "python3",
-      "args": ["/Users/linroex/Projects/blog/scripts/mcp_server.py"],
-      "env": {
-        "BLOG_MCP_ROOT": "/Users/linroex/Projects/blog"
-      }
-    }
-  }
+  "slug": "my-post",
+  "lang": "zh-tw",
+  "expected_revision": "<full revision from the latest article read or write>",
+  "filename": "chart.png",
+  "data_base64": "<standard padded base64 of the image bytes>"
 }
 ```
 
-The server speaks newline-delimited JSON-RPC over stdio. It writes protocol
-messages only to stdout and diagnostics only to stderr.
+The result includes `path`, `relative_url`, `markdown`, `preview_url`, `mime_type`,
+`size`, `sha256`, and the new `revision`. Use that revision for the next upload
+or article edit. For example, `![](images/chart.png)` references
+`content/posts/my-post/images/chart.png`, a Hugo page resource shared by the
+article's translations. The preview URL is pinned to the draft commit.
 
-## Safe authoring workflow
+- PNG, JPEG, GIF and WebP only, with matching file signatures; no SVG.
+- At most 1 MiB decoded per image and 8 uploaded images per language draft.
+- Filenames use lowercase ASCII letters, digits and hyphens, with one supported
+  extension. No directories, URL fetching or local file paths are accepted.
+- Send standard padded base64 without a data URL prefix or whitespace.
+- Identical bytes may reuse a filename; different bytes require a new name.
+- Uploads save to a public draft branch. Insert the Markdown and follow the
+  normal preview/approval workflow to publish them to the website.
+- The signed candidate includes article and image hashes. Later uploads make an
+  earlier confirmation stale. Publication includes only the selected article
+  and its declared new images, preserving other drafts and translations.
 
-1. Use `list_posts` to avoid a slug collision.
-2. Use `create_post` or `update_post`. Both always save `draft: true` and do not
-   touch Git.
-3. Optionally run `validate_site`.
-4. Call `prepare_publish` and show its full title, metadata, and body to the user.
-5. After the user explicitly authorizes that exact version, call `publish_post`
-   with the returned `confirmation` token. The token includes a SHA-256 hash and
-   becomes invalid after any edit.
-6. Set `push_to_remote: false` for a local commit or `true` to also run
-   `git push origin HEAD`.
-
-Before committing, publication sets `draft: false` and runs Hugo when it is
-installed. It refuses to touch a post that already has staged changes and uses a
-path-limited commit, so other staged or unstaged work remains outside the commit.
-A successful push confirms only the Git push; deployment is left to the repo's
-hosting automation.
+The upload manifest lives in the draft branch's `.mcp/draft.json` and is never
+copied to main. New images use GitHub/Hugo and require no additional storage
+credentials. Existing R2 image URLs remain valid.
 
 ## Translations
 
-The site is in Traditional Chinese (`zh-tw`, the default, at `/posts/{slug}/`),
-English (`en`, at `/en/posts/{slug}/`), and Japanese (`ja`, at `/ja/posts/{slug}/`).
-The original post is `content/posts/{slug}/index.md`; translations live in the
-same folder as `index.en.md` and `index.ja.md`.
+Traditional Chinese (`zh-tw`) is the default, at `/posts/{slug}/`; English (`en`)
+is at `/en/posts/{slug}/`, and Japanese (`ja`) at `/ja/posts/{slug}/`.
+The original is `content/posts/{slug}/index.md`; translations are `index.en.md`
+and `index.ja.md` in the same page bundle. Authoring/upload/publication tools
+accept `lang`, defaulting to `zh-tw`. Publish the original before translations;
+each language has its own draft, revision and confirmation.
 
-- `read_post`, `create_post`, `update_post`, `prepare_publish`, and
-  `publish_post` accept an optional `lang` (`zh-tw`, `en`, or `ja`). It defaults
-  to `zh-tw`, so existing calls behave as before.
-- `create_post` with `lang: "en"` or `"ja"` requires the original post to exist.
-  Unless you pass them, the translation copies the original's `date`, `tags`,
-  and `categories`.
-- `list_posts` lists original posts only. Each entry has a `translations` field
-  with the languages that already exist.
-- Each language is prepared and published separately. The confirmation token
-  includes the language, so a token for one language cannot publish another.
-
-## Retry a failed push
-
-If publication created a local commit but SSH or the network prevented the push,
-use `push_commits` instead of calling `publish_post` again. The failure response
-includes `retry_tool` and `retry_arguments` for this purpose.
-
-1. Call `git_status` to get the current full `commit` hash and branch.
-2. After the user authorizes pushing those existing commits, call:
-
-   ```json
-   {
-     "expected_commit": "<full commit hash>",
-     "dry_run": false
-   }
-   ```
-
-Set `dry_run: true` to check the push without updating the remote. A changed HEAD
-is rejected so a retry cannot silently push a newer commit. The tool pushes all
-pending commits on the current branch, using a pinned commit and explicit branch
-refspec; it does not push tags, force updates, or include uncommitted changes.
-Push errors preserve the existing local commits and return Git's diagnostics.
-
-Restart the MCP server or reconnect it in Claude's MCP settings after updating
-the script so Claude discovers the new tool.
-
-## Verify locally
+## Verification and deployment
 
 ```sh
 python3 -m unittest discover -s scripts -p 'test_*.py'
-hugo --destination /tmp/blog-mcp-preview
+cd cloud-mcp
+npm ci
+npm run check
+npm test
+WRANGLER_LOG_PATH=.wrangler/logs npm run build
+npm run smoke
 ```
+
+Roll out the Python candidate checker and helpers to main before deploying the
+Worker, because candidates inherit their checks from main. Then deploy using the
+existing production configuration and secrets, run `npm run check:edge`, and
+refresh the ChatGPT Blog MCP tool list to discover `upload_image`. Authentication
+and deployment configuration are documented in [cloud-mcp/README.md](cloud-mcp/README.md).

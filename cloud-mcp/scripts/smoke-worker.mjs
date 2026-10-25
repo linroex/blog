@@ -1,33 +1,55 @@
 import assert from 'node:assert/strict';
-import { Miniflare, convertV4MiniflareOptions } from 'miniflare';
+import { Miniflare, convertV4MiniflareOptions, Response as WorkerResponse } from 'miniflare';
+import { exportJWK, generateKeyPair, SignJWT } from 'jose';
 
-// Exercise the bundled Worker in the actual workerd runtime. No external account,
-// real credentials, GitHub mutations or Cloudflare deployment are involved.
-const origin = 'https://mcp.example.com';
-const runtime = new Miniflare(convertV4MiniflareOptions({
-  modules: true,
-  scriptPath: new URL('../dist/index.js', import.meta.url).pathname,
-  compatibilityDate: '2026-10-24',
-  compatibilityFlags: ['nodejs_compat', 'global_fetch_strictly_public'],
-  kvNamespaces: ['OAUTH_KV'],
+// Real workerd, generated test keys and a local JWKS responder. This simulates
+// ctx.access; production edge authentication still requires live acceptance.
+// Miniflare dispatchFetch uses its loopback Host header inside workerd.
+const origin = 'https://127.0.0.1';
+const issuer = 'https://smoke.cloudflareaccess.com';
+const aud = 'a'.repeat(64);
+const email = 'linroex@coder.tw';
+const key = await generateKeyPair('RS256');
+const jwk = { ...await exportJWK(key.publicKey), kid: 'smoke', alg: 'RS256', use: 'sig' };
+let keyRequests = 0;
+const options = {
+  modules: true, scriptPath: new URL('../dist/index.js', import.meta.url).pathname,
+  compatibilityDate: '2026-10-24', compatibilityFlags: ['nodejs_compat', 'global_fetch_strictly_public'],
   bindings: {
-    PUBLIC_ORIGIN: origin, ALLOWED_GITHUB_USER_ID: '123', GITHUB_OWNER: 'test', GITHUB_REPO: 'blog',
-    GITHUB_BRANCH: 'main', SITE_URL: 'https://blog.example.com', VALIDATION_WORKFLOW: 'mcp-validate.yaml',
+    PUBLIC_ORIGIN: origin, ACCESS_TEAM_DOMAIN: 'smoke.cloudflareaccess.com', ACCESS_AUD: aud, ALLOWED_ACCESS_EMAIL: email,
+    ALLOWED_GITHUB_USER_ID: '123', GITHUB_OWNER: 'test', GITHUB_REPO: 'blog', GITHUB_BRANCH: 'main',
+    SITE_URL: 'https://blog.example.com', VALIDATION_WORKFLOW: 'mcp-validate.yaml',
     DEPLOY_WORKFLOW: 'hugo.yaml', CONFIRMATION_SECRET: 's'.repeat(64),
   },
-}));
+  outboundService: async request => {
+    assert.equal(request.url, `${issuer}/cdn-cgi/access/certs`);
+    keyRequests++;
+    return new WorkerResponse(JSON.stringify({ keys: [jwk] }), { headers: { 'Content-Type': 'application/json' } });
+  },
+};
+const runtime = new Miniflare(convertV4MiniflareOptions(options));
 try {
-  const call = (path, init) => runtime.dispatchFetch(`${origin}${path}`, init);
-  assert.equal((await call('/health')).status, 200);
-  const metadata = await (await call('/.well-known/oauth-protected-resource/mcp')).json();
-  assert.equal(metadata.resource, `${origin}/mcp`);
-  const authorization = await (await call('/.well-known/oauth-authorization-server')).json();
-  assert.ok(authorization.code_challenge_methods_supported.includes('S256'));
-  assert.equal(authorization.client_id_metadata_document_supported, true);
-  const denied = await call('/mcp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
-  assert.equal(denied.status, 401);
-  assert.match(denied.headers.get('www-authenticate'), /resource_metadata/);
-  console.log('workerd smoke passed: health, discovery, CIMD, PKCE and unauthenticated rejection');
-} finally {
-  await runtime.dispose();
-}
+  const token = await new SignJWT({ email, type: 'app' }).setProtectedHeader({ alg: 'RS256', kid: 'smoke' })
+    .setIssuer(issuer).setAudience(aud).setSubject('smoke-owner').setIssuedAt().setExpirationTime('15m').sign(key.privateKey);
+  const headers = { 'Cf-Access-Jwt-Assertion': token };
+  const call = (path, init = {}) => runtime.dispatchFetch(`${origin}${path}`, { ...init, headers: { ...init.headers, Host: new URL(origin).host } });
+  for (const path of ['/health', '/mcp', '/register', '/.well-known/oauth-authorization-server']) {
+    assert.equal((await call(path, { headers })).status, 403);
+  }
+  assert.equal(keyRequests, 0);
+  await runtime.setOptions(convertV4MiniflareOptions({ ...options, access: { aud, identity: { email } } }));
+  assert.equal((await call('/health')).status, 403);
+  assert.equal((await call('/health', { headers })).status, 200);
+  assert.equal((await call('/token', { headers })).status, 404);
+  const list = await call('/mcp', { method: 'POST', headers: { ...headers, 'Content-Type': 'application/json',
+    Accept: 'application/json, text/event-stream', 'MCP-Protocol-Version': '2025-11-25' },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }) });
+  assert.equal(list.status, 200, await list.clone().text());
+  const text = await list.text();
+  const payload = JSON.parse(text.startsWith('{') ? text : /data: (.+)/.exec(text)[1]);
+  assert.equal(payload.result.tools.length, 10);
+  assert.ok(payload.result.tools.some(tool => tool.name === 'upload_image'));
+  assert.ok(payload.result.tools.some(tool => tool.name === 'publish_post'));
+  assert.equal(keyRequests, 1);
+  console.log('workerd smoke passed: dual Access checks, private health, retired OAuth routes and ten tools including image upload; no GitHub access');
+} finally { await runtime.dispose(); }

@@ -1,9 +1,8 @@
-import type { OAuthHelpers } from '@cloudflare/workers-oauth-provider';
-
 export interface Env {
-  OAUTH_KV: KVNamespace;
-  OAUTH_PROVIDER: OAuthHelpers;
   PUBLIC_ORIGIN: string;
+  ACCESS_TEAM_DOMAIN: string;
+  ACCESS_AUD: string;
+  ALLOWED_ACCESS_EMAIL: string;
   GITHUB_OWNER: string;
   GITHUB_REPO: string;
   GITHUB_BRANCH: string;
@@ -11,8 +10,6 @@ export interface Env {
   SITE_URL: string;
   VALIDATION_WORKFLOW: string;
   DEPLOY_WORKFLOW: string;
-  GITHUB_CLIENT_ID: string;
-  GITHUB_CLIENT_SECRET: string;
   GITHUB_APP_ID: string;
   GITHUB_INSTALLATION_ID: string;
   GITHUB_APP_PRIVATE_KEY: string;
@@ -25,6 +22,8 @@ export class BlogError extends Error {
 
 export type Lang = 'zh-tw' | 'en' | 'ja';
 export interface FileContent { text: string; sha: string }
+export interface BinaryContent { base64: string; sha: string }
+export type FileChange = string | { base64: string };
 export interface Commit { sha: string; message: string; parents: string[]; tree: string }
 export interface Run {
   id: number;
@@ -38,8 +37,9 @@ export interface Run {
 export interface Repository {
   head(branch: string): Promise<string | null>;
   file(path: string, ref: string): Promise<FileContent | null>;
+  binary(path: string, ref: string): Promise<BinaryContent | null>;
   commit(sha: string): Promise<Commit>;
-  writeCommit(parent: string, changes: Record<string, string>, message: string): Promise<string>;
+  writeCommit(parent: string, changes: Record<string, FileChange>, message: string): Promise<string>;
   createRef(branch: string, sha: string): Promise<void>;
   advanceRef(branch: string, sha: string): Promise<void>;
   refs(prefix: string): Promise<{ branch: string; sha: string }[]>;

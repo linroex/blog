@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-25",
+  "status": "accepted",
+  "worker": {
+    "name": "lins-blog-mcp",
+    "immutable_id": "32ff612733474d7ba0d83d5f13ce1065",
+    "origin": "https://lins-blog-mcp.linroex.workers.dev",
+    "initial_access_version": "3b0d7eb4-cf5d-4951-b7bf-e821cc90bdef",
+    "preview_urls": false,
+    "additional_domains_or_routes": [],
+    "final_version": "c7cce6e2-b30c-4253-aba1-96efd29a738d"
+  },
+  "access": {
+    "application_id": "63a1288f-f931-4501-a1c6-aab442ab7e11",
+    "policy_id": "2861b026-6793-4535-afb6-0f63cea818cd",
+    "destination_type": "worker",
+    "scope": "production-and-previews",
+    "team_domain": "momokatw.cloudflareaccess.com",
+    "aud": "fd1be715bdb1c3ee1cd03e430ee6f669e38f6d89056446dbcece4dffdab72518",
+    "email": "linroex@coder.tw",
+    "identity_provider": "One-time PIN only; accept-all-providers disabled",
+    "application_session_duration": "15m",
+    "oauth_configuration": {
+      "enabled": true,
+      "dynamic_client_registration": {
+        "enabled": true,
+        "allow_any_on_localhost": false,
+        "allow_any_on_loopback": false,
+        "allowed_uris": [
+          "https://chatgpt.com/connector/oauth/m5S71mpwznhr"
+        ]
+      },
+      "grant": {
+        "access_token_lifetime": "15m",
+        "session_duration": "336h"
+      }
+    }
+  },
+  "github": {
+    "app": "linroex-blog-mcp",
+    "repository_selection": "selected",
+    "repositories": [
+      "linroex/blog"
+    ],
+    "permissions": {
+      "contents": "write",
+      "actions": "read",
+      "metadata": "read"
+    },
+    "existing_user_id": "1254953"
+  },
+  "verification": {
+    "typescript": "passed",
+    "vitest": {
+      "passed": 49
+    },
+    "python": {
+      "passed": 36
+    },
+    "build": "passed",
+    "workerd": "passed; generated test RSA keys, simulated Access context, local JWKS only",
+    "edge": "seven private paths and four callback restriction probes passed",
+    "platform_inventory": "Only this Worker Access app plus unrelated private-network application; no hostname/path override for Worker",
+    "managed_oauth_context_and_assertion": "passed; ChatGPT loaded nine tools and read a published article through the deployed verifier",
+    "chatgpt_nine_tools_and_read": {
+      "status": "passed",
+      "plugin_id": "asdk_app_6add73bc5020819189b7bf896eaace82",
+      "name": "Blog MCP",
+      "method": "read_post",
+      "slug": "openrouter-ai-model-provider-differences",
+      "lang": "zh-tw",
+      "source": "published",
+      "revision": "fac948923ed7b69f790711402fceed6e2d302426",
+      "chat_url": "https://chatgpt.com/c/6add74d8-13c0-83ec-b374-aa7165e2b37f",
+      "test_articles_published": 0
+    },
+    "post_retirement_chatgpt_read": "passed; repeated published article read after final deployment with the same revision",
+    "live_bindings": "passed; zero KV bindings and exactly the four preserved App/confirmation secrets",
+    "refresh_token_renewal": "not exercised across a token expiry; metadata advertises refresh_token and dashboard grant duration is 2 weeks"
+  },
+  "retirement": {
+    "old_oauth_secrets_removed": true,
+    "old_kv_binding_removed": true,
+    "old_kv_namespace": "98e83579992f434880d63b09150fc0b1",
+    "accepted_at": "2026-10-25T03:18:27Z",
+    "earliest_kv_cleanup_at": "2026-11-01T03:18:27Z",
+    "retention_days_after_acceptance": 7,
+    "old_chatgpt_app_uninstalled": true,
+    "old_chatgpt_app_permanently_deleted": false,
+    "legacy_namespace_cleanup": "pending until retention deadline; no automatic deletion scheduled"
+  },
+  "recovery": "Keep Access enabled; pause MCP if either platform context or JWT verification is unavailable. Never disable protection to recover service.",
+  "notes": [
+    "Existing ChatGPT app cached its old issuer/CIMD settings. New Blog MCP uses DCR and its exact callback; old app was uninstalled after acceptance.",
+    "Cloudflare API Access reads are not authorized for the existing Wrangler OAuth token; Access configuration was applied and reviewed in dashboard. No account-wide policies or unrelated applications were modified."
+  ]
+}

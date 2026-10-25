@@ -1,16 +1,18 @@
 import { sha256, sign, verify } from './crypto';
 import { document, edit, newDocument, postPath, taipeiDate } from './document';
-import { BlogError, type Env, type FileContent, type Lang, type Repository } from './types';
+import { imageAsset, imageManifest, imagePath, imageView, MAX_IMAGES, type ImageAsset } from './images';
+import { BlogError, type Env, type FileChange, type FileContent, type Lang, type Repository } from './types';
 
 const META_PATH = '.mcp/draft.json';
 const CANDIDATE_PREFIX = 'Blog MCP candidate\n\n';
 const SHA = /^[a-f0-9]{40}$/;
 export interface DraftMeta {
-  slug: string; lang: Lang; base_post_sha: string | null; published_commit?: string;
+  slug: string; lang: Lang; base_post_sha: string | null; published_commit?: string; images?: ImageAsset[];
 }
 interface Candidate {
   operation_id: string; user_id: string; slug: string; lang: Lang;
   draft_revision: string; base_main: string; content_sha256: string; expires: number;
+  images?: ImageAsset[];
 }
 interface Confirmation { operation_id: string; candidate_commit: string; user_id: string; expires: number }
 export interface PostFields {
@@ -41,6 +43,7 @@ export class Blog {
     try { meta = JSON.parse(metadata.text); } catch { throw new BlogError('invalid_draft', 'Invalid draft metadata'); }
     if (meta.slug !== slug || meta.lang !== lang || !(meta.base_post_sha === null || SHA.test(meta.base_post_sha)) ||
         (meta.published_commit && !SHA.test(meta.published_commit))) throw new BlogError('invalid_draft', 'Draft metadata does not match the article');
+    imageManifest(meta.images);
     const file = await this.repo.file(postPath(slug, lang), revision);
     if (!file) throw new BlogError('invalid_draft', 'Draft article is missing');
     return { branch, revision, meta, file };
@@ -59,9 +62,14 @@ export class Blog {
     return { slug, lang, path: postPath(slug, lang), frontmatter: doc.metadata, content: doc.content,
       sha256: await sha256(file.text), revision, source };
   }
+  private imagePreview(slug: string, asset: ImageAsset, revision: string) {
+    return { ...imageView(slug, asset), preview_url:
+      `https://raw.githubusercontent.com/${this.env.GITHUB_OWNER}/${this.env.GITHUB_REPO}/${revision}/${imagePath(slug, asset.filename)}` };
+  }
   async readPost(slug: string, lang: Lang, source: 'draft' | 'published' | 'auto' = 'auto') {
     const value = await this.effective(slug, lang, source);
-    return this.view(slug, lang, value.file, value.revision, value.source);
+    return { ...await this.view(slug, lang, value.file, value.revision, value.source),
+      uploaded_images: value.source === 'draft' ? imageManifest(value.draft?.meta.images).map(a => this.imagePreview(slug, a, value.revision)) : [] };
   }
   async createPost(slug: string, lang: Lang, fields: PostFields & { title: string; content: string }) {
     const main = await this.main();
@@ -91,7 +99,7 @@ export class Blog {
     if (expectedPublishedRevision !== undefined) {
       if (expectedPublishedRevision !== current.main || fields.content === undefined) throw new BlogError('conflict', 'To reconcile, read published and draft versions, provide merged content and the current published revision');
       const published = await this.repo.file(postPath(slug, lang), current.main);
-      meta = { slug, lang, base_post_sha: published?.sha ?? null };
+      meta = { slug, lang, base_post_sha: published?.sha ?? null, images: meta.images };
     }
     const parent = oldDraft?.revision ?? current.main;
     const revision = await this.repo.writeCommit(parent, { [postPath(slug, lang)]: raw, [META_PATH]: JSON.stringify(meta) }, `Draft: ${slug} (${lang})`);
@@ -99,6 +107,32 @@ export class Blog {
     if (oldDraft) await this.repo.advanceRef(oldDraft.branch, revision);
     else await this.repo.createRef(this.branch(slug, lang), revision);
     return this.view(slug, lang, { text: raw, sha: '' }, revision, 'draft');
+  }
+  async uploadImage(slug: string, lang: Lang, expectedRevision: string, filename: string, encoded: string) {
+    const asset = await imageAsset(filename, encoded);
+    const path = imagePath(slug, filename);
+    const current = await this.effective(slug, lang);
+    if (current.revision !== expectedRevision) throw new BlogError('conflict', 'Article changed; read it again before uploading');
+    const active = current.source === 'draft';
+    const images = imageManifest(active ? current.draft!.meta.images : undefined);
+    const previous = images.find(a => a.filename === filename);
+    if (previous && previous.sha256 !== asset.sha256) throw new BlogError('image_exists', 'Image names are immutable; choose a new filename');
+    const existing = await this.repo.binary(path, current.revision);
+    if (existing && (await imageAsset(filename, existing.base64)).sha256 !== asset.sha256) {
+      throw new BlogError('image_exists', 'Image names are immutable; choose a new filename');
+    }
+    if (previous && existing) return { ...this.imagePreview(slug, asset, current.revision), revision: current.revision, source: 'draft', uploaded: false };
+    if (!previous && images.length >= MAX_IMAGES) throw new BlogError('invalid_image', 'A draft supports at most 8 uploaded images');
+    const meta: DraftMeta = active ? current.draft!.meta : { slug, lang, base_post_sha: current.file.sha };
+    meta.images = [...images.filter(a => a.filename !== filename), asset].sort((a, b) => a.filename.localeCompare(b.filename));
+    const raw = edit(current.file.text, { draft: true });
+    const parent = current.draft?.revision ?? current.main;
+    const revision = await this.repo.writeCommit(parent, { [postPath(slug, lang)]: raw,
+      [path]: { base64: encoded }, [META_PATH]: JSON.stringify(meta) }, `Draft image: ${slug}/${filename} (${lang})`);
+    if (current.draft) await this.repo.advanceRef(current.draft.branch, revision);
+    else await this.repo.createRef(this.branch(slug, lang), revision);
+    return { ...this.imagePreview(slug, asset, revision), revision, source: 'draft', uploaded: true,
+      instructions: 'Use markdown in the article, using this new revision for update_post. Upload is saved on a public draft branch; publish the article to deploy it.' };
   }
   async preparePublish(slug: string, lang: Lang) {
     const draft = await this.draft(slug, lang);
@@ -111,11 +145,22 @@ export class Blog {
       if (!primary || document(primary.text).metadata.draft === true) throw new BlogError('original_required', 'Publish the original zh-tw article before its translation');
     }
     const raw = edit(draft.file.text, { draft: false });
-    if (raw === original?.text) throw new BlogError('no_changes', 'This draft has no changes to publish');
+    const images = imageManifest(draft.meta.images);
+    const changes: Record<string, FileChange> = { [postPath(slug, lang)]: raw };
+    for (const asset of images) {
+      const path = imagePath(slug, asset.filename);
+      const image = await this.repo.binary(path, draft.revision);
+      if (!image || (await imageAsset(asset.filename, image.base64)).sha256 !== asset.sha256) throw new BlogError('invalid_image', 'Draft image changed or is missing; upload it again');
+      const published = await this.repo.binary(path, main);
+      if (published && published.sha !== image.sha) throw new BlogError('conflict', 'A published image has this filename; choose a new filename');
+      if (!published) changes[path] = { base64: image.base64 };
+    }
+    if (raw === original?.text && Object.keys(changes).length === 1) throw new BlogError('no_changes', 'This draft has no changes to publish');
     const candidate: Candidate = { operation_id: crypto.randomUUID(), user_id: this.userId, slug, lang,
-      draft_revision: draft.revision, base_main: main, content_sha256: await sha256(raw), expires: Date.now() + 86400_000 };
+      draft_revision: draft.revision, base_main: main, content_sha256: await sha256(raw), expires: Date.now() + 86400_000,
+      ...(images.length ? { images } : {}) };
     const envelope = await sign(this.env.CONFIRMATION_SECRET, 'candidate', candidate);
-    const commit = await this.repo.writeCommit(main, { [postPath(slug, lang)]: raw }, CANDIDATE_PREFIX + envelope);
+    const commit = await this.repo.writeCommit(main, changes, CANDIDATE_PREFIX + envelope);
     await this.repo.createRef(`mcp/candidates/${candidate.operation_id}`, commit);
     return { operation_id: candidate.operation_id, candidate_commit: commit, status: 'validating', retry_after_seconds: 5,
       instructions: 'Poll get_operation_status. After validation succeeds, show the entire returned preview and ask the user to approve that exact version before publish_post.' };
@@ -132,6 +177,7 @@ export class Blog {
       throw new BlogError('invalid_operation', 'Candidate identity or base commit mismatch');
     }
     postPath(meta.slug, meta.lang);
+    imageManifest(meta.images);
     return { branch, commit, meta };
   }
   private async validation(sha: string, branch: string) {
@@ -174,7 +220,13 @@ export class Blog {
     const confirmation = await sign<Confirmation>(this.env.CONFIRMATION_SECRET, 'publish', {
       operation_id: operationId, candidate_commit: commit.sha, user_id: this.userId, expires: meta.expires,
     });
-    return { operation_id: operationId, ...validation, preview: await this.view(meta.slug, meta.lang, file, commit.sha, 'candidate'), confirmation,
+    const images = imageManifest(meta.images);
+    for (const asset of images) {
+      const image = await this.repo.binary(imagePath(meta.slug, asset.filename), commit.sha);
+      if (!image || (await imageAsset(asset.filename, image.base64)).sha256 !== asset.sha256) throw new BlogError('invalid_operation', 'Candidate image changed');
+    }
+    return { operation_id: operationId, ...validation, preview: { ...await this.view(meta.slug, meta.lang, file, commit.sha, 'candidate'),
+      uploaded_images: images.map(a => this.imagePreview(meta.slug, a, commit.sha)) }, confirmation,
       instructions: 'Show the complete preview to the user. This token identifies a version; it is not evidence of human consent. Publish only after explicit approval.' };
   }
   async publishPost(slug: string, lang: Lang, confirmation: string): Promise<Record<string, unknown>> {

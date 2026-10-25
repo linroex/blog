@@ -1,0 +1,43 @@
+{
+  "name": "Blog MCP \u2014 owner only",
+  "type": "self_hosted",
+  "destinations": [
+    {
+      "type": "worker",
+      "worker_id": "REPLACE_IMMUTABLE_WORKER_ID"
+    }
+  ],
+  "session_duration": "15m",
+  "allowed_idps": [
+    "REPLACE_EMAIL_OTP_PROVIDER_ID"
+  ],
+  "auto_redirect_to_identity": true,
+  "policies": [
+    {
+      "name": "Blog MCP owner",
+      "decision": "allow",
+      "include": [
+        {
+          "email": {
+            "email": "linroex@coder.tw"
+          }
+        }
+      ]
+    }
+  ],
+  "oauth_configuration": {
+    "enabled": true,
+    "dynamic_client_registration": {
+      "enabled": true,
+      "allow_any_on_localhost": false,
+      "allow_any_on_loopback": false,
+      "allowed_uris": [
+        "https://chatgpt.com/connector/oauth/REPLACE_CONFIRMED_CALLBACK_ID"
+      ]
+    },
+    "grant": {
+      "access_token_lifetime": "15m",
+      "session_duration": "336h"
+    }
+  }
+}

@@ -17,17 +17,15 @@
     "ALLOWED_GITHUB_USER_ID": "1254953",
     "SITE_URL": "https://coder.tw",
     "VALIDATION_WORKFLOW": "mcp-validate.yaml",
-    "DEPLOY_WORKFLOW": "hugo.yaml"
+    "DEPLOY_WORKFLOW": "hugo.yaml",
+    "ACCESS_TEAM_DOMAIN": "momokatw.cloudflareaccess.com",
+    "ACCESS_AUD": "fd1be715bdb1c3ee1cd03e430ee6f669e38f6d89056446dbcece4dffdab72518",
+    "ALLOWED_ACCESS_EMAIL": "linroex@coder.tw"
   },
-  "kv_namespaces": [
-    {
-      "binding": "OAUTH_KV",
-      "id": "98e83579992f434880d63b09150fc0b1"
-    }
-  ],
   "observability": {
     "enabled": true,
-    "head_sampling_rate": 0.1
+    "head_sampling_rate": 0.1,
+    "redact_query_string": true
   },
   "account_id": "0da15629cc8401faeee452ff11dc9db9"
 }

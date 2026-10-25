@@ -1,6 +1,5 @@
-import { OAuthProvider, insufficientScope, type OAuthResourceContext } from '@cloudflare/workers-oauth-provider';
 import { createMcpHandler } from 'agents/mcp/server';
-import { authHandler } from './auth';
+import { configured, verifyAccess } from './auth';
 import { Blog, type ArticleIndex } from './blog';
 import { GitHubRepository } from './github';
 import { createServer } from './mcp';
@@ -16,43 +15,26 @@ export async function loadIndex(env: Env): Promise<ArticleIndex> {
   return data;
 }
 
-export function provider(env: Env) {
-  return new OAuthProvider<Env>({
-    apiRoute: '/mcp', authorizeEndpoint: '/authorize', tokenEndpoint: '/token', clientRegistrationEndpoint: '/register',
-    clientIdMetadataDocumentEnabled: true, scopesSupported: ['blog:manage', 'offline_access'], requiredScopes: ['blog:manage'],
-    accessTokenTTL: 3600, refreshTokenTTL: 30 * 86400,
-    resourceMetadata: { resource: `${env.PUBLIC_ORIGIN}/mcp`, authorization_servers: [env.PUBLIC_ORIGIN] },
-    defaultHandler: { fetch: authHandler },
-    apiHandler: {
-      async fetch(request, bindings, context) {
-        const ctx = context as OAuthResourceContext<{ userId: string }>;
-        if (ctx.props?.userId !== bindings.ALLOWED_GITHUB_USER_ID) return new Response('Forbidden', { status: 403 });
-        if (!ctx.auth.scope.includes('blog:manage')) return insufficientScope(ctx.auth, ['blog:manage']);
-        const repository = new GitHubRepository(bindings);
-        const blog = new Blog(repository, bindings, ctx.props.userId, () => loadIndex(bindings));
-        const handler = createMcpHandler(() => createServer(blog), {
-          route: '/mcp', allowedHostnames: [new URL(bindings.PUBLIC_ORIGIN).hostname],
-          maxRequestBodySize: 8 * 1024 * 1024,
-          allowedOriginHostnames: [new URL(bindings.PUBLIC_ORIGIN).hostname, 'chatgpt.com'], corsOptions: false,
-        });
-        return handler(request, bindings, ctx);
-      },
-    },
-  });
-}
-
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext) {
-    if (!env.PUBLIC_ORIGIN || env.PUBLIC_ORIGIN.includes('REPLACE_') || !/^\d+$/.test(env.ALLOWED_GITHUB_USER_ID ?? '')) {
-      return new Response('Configure PUBLIC_ORIGIN and ALLOWED_GITHUB_USER_ID before serving MCP.', { status: 503 });
-    }
+    if (!configured(env)) return new Response('Access configuration required', { status: 503 });
     if (new URL(request.url).origin !== env.PUBLIC_ORIGIN) return new Response('Invalid host', { status: 403 });
+    let userId: string;
+    try { userId = await verifyAccess(request, env, ctx); }
+    catch {
+      // Access owns OAuth discovery/challenges at the edge. Never issue tokens
+      // or fall back to a bearer token or a forwarded email header.
+      return new Response('Access authentication required', { status: 403, headers: { 'Cache-Control': 'no-store' } });
+    }
+    const url = new URL(request.url);
+    if (url.pathname === '/health' && request.method === 'GET') return Response.json({ status: 'ok' }, { headers: { 'Cache-Control': 'no-store' } });
+    if (url.pathname !== '/mcp') return new Response('Not found', { status: 404 });
     // Enforce a bounded body even when Content-Length is absent.
     if (request.body) {
       const reader = request.body.getReader();
       const chunks: Uint8Array[] = [];
       let size = 0;
-      const limit = new URL(request.url).pathname === '/mcp' ? 8 * 1024 * 1024 : 64 * 1024;
+      const limit = 8 * 1024 * 1024;
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
@@ -65,7 +47,15 @@ export default {
       for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
       request = new Request(request, { body: bytes });
     }
-    try { return await provider(env).fetch(request, env, ctx); }
+    try {
+      const repository = new GitHubRepository(env);
+      const blog = new Blog(repository, env, userId, () => loadIndex(env));
+      const handler = createMcpHandler(() => createServer(blog), {
+        route: '/mcp', allowedHostnames: [url.hostname], maxRequestBodySize: 8 * 1024 * 1024,
+        allowedOriginHostnames: [url.hostname, 'chatgpt.com'], corsOptions: false,
+      });
+      return await handler(request, env, ctx);
+    }
     catch { return new Response('Service temporarily unavailable', { status: 503 }); }
   },
 } satisfies ExportedHandler<Env>;

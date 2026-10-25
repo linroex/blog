@@ -46,6 +46,29 @@ it('reads GitHub large-file blobs instead of returning the empty Contents API bo
   expect(file?.text).toBe(body);
 });
 
+it('writes binary files through base64 blobs and references their SHA in the new tree', async () => {
+  const bytes = Buffer.from([137, 80, 78, 71, 255, 0]);
+  const parent = 'a'.repeat(40), blob = 'b'.repeat(40), tree = 'c'.repeat(40), commit = 'd'.repeat(40);
+  const { repo } = setup((url, init) => {
+    const body = init.body ? JSON.parse(init.body as string) : null;
+    if (url.pathname.endsWith(`/git/commits/${parent}`)) return Response.json({ sha: parent, tree: { sha: parent }, parents: [], message: 'Base' });
+    if (url.pathname.endsWith('/git/blobs')) {
+      expect(body).toEqual({ content: bytes.toString('base64'), encoding: 'base64' });
+      return Response.json({ sha: blob });
+    }
+    if (url.pathname.endsWith('/git/trees')) {
+      expect(body).toEqual({ base_tree: parent, tree: [
+        { path: 'post.md', mode: '100644', type: 'blob', content: 'Body' },
+        { path: 'image.png', mode: '100644', type: 'blob', sha: blob },
+      ] });
+      return Response.json({ sha: tree });
+    }
+    expect(body).toEqual({ message: 'Upload', tree, parents: [parent] });
+    return Response.json({ sha: commit });
+  });
+  expect(await repo.writeCommit(parent, { 'post.md': 'Body', 'image.png': { base64: bytes.toString('base64') } }, 'Upload')).toBe(commit);
+});
+
 it('propagates conflicts and rate limits as actionable errors', async () => {
   const conflict = setup(() => new Response('{}', { status: 422 })).repo;
   await expect(conflict.advanceRef('main', 'a'.repeat(40))).rejects.toMatchObject({ code: 'conflict' });

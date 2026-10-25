@@ -1,19 +1,19 @@
 import { createHash } from 'node:crypto';
 import { Blog, type ArticleIndex } from '../src/blog';
 import { newDocument } from '../src/document';
-import { BlogError, type Commit, type Env, type FileContent, type Repository, type Run } from '../src/types';
+import { BlogError, type Commit, type Env, type FileChange, type FileContent, type Repository, type Run } from '../src/types';
 
 export const hash = (value: string) => createHash('sha1').update(value).digest('hex');
 export const env = {
   GITHUB_OWNER: 'test', GITHUB_REPO: 'blog', GITHUB_BRANCH: 'main', ALLOWED_GITHUB_USER_ID: '123',
   PUBLIC_ORIGIN: 'https://blog-mcp.example.com', SITE_URL: 'https://blog.example.com',
   VALIDATION_WORKFLOW: 'mcp-validate.yaml', DEPLOY_WORKFLOW: 'hugo.yaml', CONFIRMATION_SECRET: 's'.repeat(64),
-  GITHUB_CLIENT_ID: 'github-client', GITHUB_CLIENT_SECRET: 'secret',
+  ACCESS_TEAM_DOMAIN: 'blog-test.cloudflareaccess.com', ACCESS_AUD: 'a'.repeat(64), ALLOWED_ACCESS_EMAIL: 'linroex@coder.tw',
 } as Env;
 
 export class FakeRepo implements Repository {
   branches = new Map<string, string>();
-  commits = new Map<string, Commit & { files: Record<string, string> }>();
+  commits = new Map<string, Commit & { files: Record<string, FileChange> }>();
   workflowRuns = new Map<string, Run[]>();
   failNextMainUpdate = false;
   loseMainResponse = false;
@@ -29,10 +29,15 @@ export class FakeRepo implements Repository {
   async head(branch: string) { return this.branches.get(branch) ?? null; }
   async file(path: string, ref: string): Promise<FileContent | null> {
     const text = this.commits.get(ref)?.files[path];
-    return text === undefined ? null : { text, sha: hash(text) };
+    return text === undefined ? null : { text: typeof text === 'string' ? text : Buffer.from(text.base64, 'base64').toString('utf8'), sha: this.fileHash(text) };
+  }
+  private fileHash(value: FileChange) { return createHash('sha1').update(typeof value === 'string' ? Buffer.from(value) : Buffer.from(value.base64, 'base64')).digest('hex'); }
+  async binary(path: string, ref: string) {
+    const value = this.commits.get(ref)?.files[path];
+    return value === undefined ? null : { base64: typeof value === 'string' ? Buffer.from(value).toString('base64') : value.base64, sha: this.fileHash(value) };
   }
   async commit(sha: string) { const c = this.commits.get(sha); if (!c) throw new Error('Missing fake commit'); return c; }
-  async writeCommit(parent: string, changes: Record<string, string>, message: string) {
+  async writeCommit(parent: string, changes: Record<string, FileChange>, message: string) {
     if (this.failBookkeeping && message.startsWith('Published:')) throw new Error('Network error');
     const sha = hash(parent + JSON.stringify(changes) + message);
     this.commits.set(sha, { sha, parents: [parent], tree: sha, message, files: { ...(await this.commit(parent)).files, ...changes } });

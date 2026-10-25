@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/server';
 import { z } from 'zod';
 import { Blog } from './blog';
 import { BlogError } from './types';
+import { IMAGE_NAME, MAX_IMAGE_BASE64 } from './images';
 
 const lang = z.enum(['zh-tw', 'en', 'ja']).default('zh-tw');
 const slug = z.string().max(100).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
@@ -12,7 +13,7 @@ const list = z.array(z.string().trim().min(1).max(80)).max(30);
 const fields = { title: title.optional(), content: content.optional(), tags: list.optional(), categories: list.optional(), summary: z.string().max(500).optional() };
 
 export function createServer(blog: Blog) {
-  const server = new McpServer({ name: 'lins-hugo-blog-cloud', version: '1.0.0' }, {
+  const server = new McpServer({ name: 'lins-hugo-blog-cloud', version: '1.1.0' }, {
     instructions: 'Manage only this owner’s blog. Draft branches are public if the repository is public. Read before editing and supply the revision. Prepare publication, poll validation, show the full preview, then obtain explicit user approval before publish_post. A confirmation token is a version identifier, not human consent. Poll deployment separately. Never claim a commit means the website is live.',
   });
   function tool<S extends z.ZodRawShape>(name: string, description: string, shape: S, readOnly: boolean,
@@ -43,7 +44,11 @@ export function createServer(blog: Blog) {
   tool('update_post', 'Save draft changes with optimistic concurrency. Always sets draft true. To resolve an external publication conflict, read both versions, merge the content, and supply expected_published_revision from read_post(source=published) along with the complete merged content.', {
     slug, lang, expected_revision: sha, expected_published_revision: sha.optional(), ...fields,
   }, false, a => { const { slug: s, lang: l, expected_revision, expected_published_revision, ...updates } = a; return blog.updatePost(s, l, expected_revision, updates, expected_published_revision); });
-  tool('prepare_publish', 'Create a single-article candidate on the latest main and start Hugo/SEO validation in GitHub Actions. This writes a candidate branch but does not publish.', {
+  tool('upload_image', 'Upload PNG/JPEG/GIF/WebP as standard base64 (no data URL prefix), up to 1 MiB each and 8 images per draft. Requires an existing article and its expected_revision. Saves to a public GitHub draft branch, returning Markdown and a new revision for update_post. Image names cannot overwrite different content; use a new filename to replace an image. Publication includes these images after preview approval.', {
+    slug, lang, expected_revision: sha, filename: z.string().max(85).regex(IMAGE_NAME),
+    data_base64: z.string().min(1).max(MAX_IMAGE_BASE64),
+  }, false, a => blog.uploadImage(a.slug, a.lang, a.expected_revision, a.filename, a.data_base64));
+  tool('prepare_publish', 'Create a single-article candidate including its uploaded images on the latest main and start Hugo/SEO validation in GitHub Actions. This writes a candidate branch but does not publish.', {
     slug, lang,
   }, false, a => blog.preparePublish(a.slug, a.lang));
   tool('get_operation_status', 'Poll validation or deployment, no more often than once every 5 seconds. When ready returns the full preview and a 24-hour version-bound confirmation. After publishing also reconciles draft bookkeeping if an earlier request was interrupted.', {
