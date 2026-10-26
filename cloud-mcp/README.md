@@ -306,6 +306,8 @@ convenience; use the automated generated-key test harness instead.
 Validation is part of preparation, and reads are tools so
 clients need not support resource browsing. All tools require owner authorization.
 
+See [upload-diagnostics-rollout.json](upload-diagnostics-rollout.json) for the
+diagnostic deployment and verification record.
 Native `upload_image` calls emit structured diagnostic events after Access
 authentication, including inputs rejected by SDK schema validation. Search
 Workers Logs for `upload_image.input`, `upload_image.download` and

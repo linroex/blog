@@ -1,0 +1,68 @@
+{
+  "worker": "lins-blog-mcp",
+  "endpoint": "https://lins-blog-mcp.linroex.workers.dev/mcp",
+  "version_id": "d68cf986-cd86-4e55-97eb-9b4ad4098fec",
+  "previous_version_id": "29d0af13-b363-49f7-8ce6-fb35fc3f705e",
+  "source_commit": "5c285b1",
+  "deployed_on": "2026-10-26",
+  "scope": "Redacted diagnostics for authenticated native ChatGPT upload_image calls; file schema and download destination policy unchanged.",
+  "events": [
+    "upload_image.input",
+    "upload_image.download",
+    "upload_image.result",
+    "upload_image.response"
+  ],
+  "correlation_key": "diagnostic_id",
+  "logged": [
+    "file type",
+    "recognized field names and types",
+    "unknown field count",
+    "protocol and HTTP hostname",
+    "URL policy flags",
+    "download stage",
+    "HTTP status",
+    "downloaded byte count",
+    "safe error code"
+  ],
+  "excluded": [
+    "full URL",
+    "path",
+    "query",
+    "fragment",
+    "credentials",
+    "file_id",
+    "file_name",
+    "arbitrary input field names",
+    "raw exception messages",
+    "file bytes"
+  ],
+  "observability_head_sampling_rate": 1,
+  "validation": {
+    "typecheck": "passed",
+    "vitest": {
+      "files": 7,
+      "tests": 95
+    },
+    "workerd_smoke": "passed, including invalid file string diagnostics before SDK validation",
+    "webp_smoke": "PNG alpha and JPEG passed; no codec changes",
+    "production_schema_audit": "Downloaded previous deployed bundle replayed tools/list: file object, four fields, two required fields and openai/fileParams matched official documentation.",
+    "production": {
+      "deployed_sources_match": [
+        "src/upload-diagnostics.ts",
+        "src/index.ts",
+        "src/mcp.ts",
+        "src/chatgpt-files.ts"
+      ],
+      "log_sampling": 1,
+      "unauthenticated_mcp": {
+        "status": 401,
+        "oauth_challenge": true
+      }
+    }
+  },
+  "limitations": [
+    "Previous tool arguments were not logged and cannot be reconstructed.",
+    "A real ChatGPT retry is still needed to diagnose its file reference.",
+    "Local Images does not preserve GIF animation; this release does not change conversion."
+  ]
+}
