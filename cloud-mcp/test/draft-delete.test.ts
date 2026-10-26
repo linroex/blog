@@ -12,7 +12,9 @@ it('removes a new draft from reads and listings without changing main or erasing
   const { repo, blog, post } = await draft();
   const main = await repo.head('main');
   const deleted = await blog.deleteDraft('hello', 'zh-tw', post.revision);
-  expect(deleted).toMatchObject({ deleted: true, already_deleted: false, retained_git_history: true, retained_uploaded_images: true });
+  expect(deleted).toMatchObject({ deleted: true, already_deleted: false, retained_git_history: true, retained_uploaded_images: false });
+  expect(await repo.head('mcp/drafts/hello/zh-tw')).toBeNull();
+  expect(await repo.head((await repo.pull(post.pr_number!)).branch)).toBeNull();
   expect(await repo.head('main')).toBe(main);
   expect((await blog.listPosts('', 0, 20, 0)).drafts).toEqual([]);
   await expect(blog.readPost('hello', 'zh-tw', 'draft')).rejects.toMatchObject({ code: 'not_found' });

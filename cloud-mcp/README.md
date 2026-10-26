@@ -333,7 +333,7 @@ there is no fallback to direct main writes.
 | `read_post` | `slug`, optional `lang`, `source` = `auto` / `draft` / `published`. `auto` prefers an active draft. Returns full content, frontmatter, `revision`, and associated PR/reading links when available. |
 | `create_post` | `slug`, optional `lang`, `title`, `content`, optional `tags`, `categories`, `summary`; immediately saves a dedicated source draft and opens a Draft PR. Returns `pr_number`, `pr_url`, `pr_state`, `read_url`, opaque `operation_id`, and `pr_sync_pending`. A translation requires an original in draft or main. |
 | `update_post` | Requires `expected_revision`. Optional `expected_published_revision` plus full `content` explicitly reconciles an external edit after reading both versions. Synchronizes the same Draft PR and invalidates earlier approvals. No automatic publication or overwrite. |
-| `delete_draft` | `slug`, optional `lang`, required `expected_revision` from reading the draft. Closes its unmerged PR and removes only that language from active drafts using an atomic archive marker, leaving published articles, other languages, Git history, candidate branches and uploaded images intact. Repeating the same deleted revision is safe; stale versions conflict. |
+| `delete_draft` | `slug`, optional `lang`, required `expected_revision`. Closes its unmerged PR, directly deletes its manifest-listed R2 objects without a reference scan, then atomically deletes source/review branches with expected-SHA guards. Shared image URLs stop working wherever used. Main and other language branches are unchanged; GitHub PR/commit history remains. Partial failures retain a cleanup marker: retry the original revision; completed deletes return `not_found` on repetition. |
 | `upload_image` | ChatGPT native attachment: `slug`, optional `lang`, `expected_revision`, original-extension `filename`, and `file`. `_meta["openai/fileParams"]` injects `download_url`/`file_id` plus optional MIME/name. Server-side bounded download, WebP conversion, R2 persistence and draft attachment in one call; no shell PUT. Same file ID/article/filename retries return the existing result. |
 | `prepare_image_upload` | `slug`, optional `lang`, `expected_revision`, `filename`, `mime_type`, `size`, optional `sha256`. Returns a five-minute R2 PUT URL, signed required headers and a 24-hour completion ticket; no Git write. |
 | `complete_image_upload` | `upload_ticket`; verifies uploaded bytes, saves an immutable public R2 image and records its metadata in the draft. Returns URL/Markdown and a new revision. Up to 15 MiB each and eight per language draft. See [image upload contract](../MCP.md#upload-article-images). |
@@ -351,11 +351,15 @@ when commits differ), so large changes are not subject to the compare API's file
 limit. If verification fails, the listing returns an error rather than claiming
 freshness; `read_post` remains authoritative. No article sorting runs per request.
 
-Deleting a draft invalidates earlier publication confirmations and upload tickets.
-For an unpublished article, `create_post` can reuse the deleted slug. For a
-published article, read the published version and use `update_post` to start a
-fresh draft before editing or uploading again. Deletion does not permanently
-erase publicly accessible Git history or R2 assets.
+Deleting a draft invalidates earlier publication confirmations. It directly
+removes its manifest-listed R2 images (without checking other references), closes
+its PR and deletes its source/review branches. This may break any other use of
+the same image URLs. A temporary cleanup marker blocks new writes during partial
+failure; retry deletion with the original revision. Once cleanup completes, no
+archive branch remains. GitHub PR/commit history is not purged. For an unpublished
+article, `create_post` can reuse the slug. For a published article, read the
+published version and start a fresh draft. Old uploads cannot resume the removed
+draft; a new upload against a published revision may create a fresh draft.
 
 Validation is part of preparation, and reads are tools so
 clients need not support resource browsing. All tools require owner authorization.
@@ -441,9 +445,10 @@ Only a durable Git attachment permits pending deletion; a lost response returns
 the recorded upload ID without another commit. URLs are reusable until expiry;
 a replay after temporary cleanup cannot overwrite the finalized image. Abandoned
 pending and unreferenced final objects may persist. No lifecycle policy is changed
-and final objects are never automatically deleted, since published articles or
-translations may reference them. Monitor the `blog-mcp/pending/` prefix and audit
-references before any manual cleanup. Final images and pending random-key objects
+and no general garbage collector removes final objects. Explicit `delete_draft`
+deletes its manifest-listed final images directly, including shared URLs, without
+scanning references. Unattached pending objects are outside its manifest and may
+remain. Final images and pending random-key objects
 are in an existing public bucket, not private draft storage.
 
 Roll out `scripts/blog_images.py` and `scripts/check_mcp_candidate.py` to main

@@ -58,6 +58,7 @@ export interface Repository {
   writeCommit(parent: string, changes: Record<string, FileChange>, message: string): Promise<string>;
   createRef(branch: string, sha: string): Promise<void>;
   advanceRef(branch: string, sha: string): Promise<void>;
+  deleteDraftRefs(source: string, revision: string, review?: { branch: string; revision: string }): Promise<void>;
   refs(prefix: string): Promise<{ branch: string; sha: string }[]>;
   isAncestor(ancestor: string, descendant: string): Promise<boolean>;
   indexSourcesUnchanged(indexed: string, current: string): Promise<boolean>;

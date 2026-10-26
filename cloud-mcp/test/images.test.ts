@@ -21,17 +21,16 @@ it('does not complete a pending upload after draft deletion', async () => {
   await expect(blog.completeImageUpload(offer.upload_ticket)).rejects.toMatchObject({ code: 'not_found' });
   expect(r2.requests).toHaveLength(before);
 });
-it('retains uploaded images but does not reuse deleted draft image metadata on retry', async () => {
+it('deletes uploaded images and allows a clean draft after removal', async () => {
   const { blog, r2 } = imageSetup();
   const published = await blog.readPost('original', 'zh-tw');
   const offer = await blog.prepareImageUpload('original', 'zh-tw', published.revision, 'chart.png', 'image/png', png.length);
   await r2.put(offer);
   const image = await blog.completeImageUpload(offer.upload_ticket);
   await blog.deleteDraft('original', 'zh-tw', image.revision);
-  expect([...r2.objects.keys()]).toContain(image.key);
+  expect([...r2.objects.keys()]).not.toContain(image.key);
   expect((await blog.readPost('original', 'zh-tw')).uploaded_images).toEqual([]);
-  await expect(blog.completeImageUpload(offer.upload_ticket)).rejects.toMatchObject({ code: 'conflict' });
-  await expect(blog.prepareImageUpload('original', 'zh-tw', published.revision, 'fresh.png', 'image/png', png.length)).rejects.toMatchObject({ code: 'conflict' });
+  await expect(blog.completeImageUpload(offer.upload_ticket)).rejects.toMatchObject({ code: 'upload_required' });
   const fresh = await blog.updatePost('original', 'zh-tw', published.revision, { content: 'Fresh draft' });
   const next = await blog.prepareImageUpload('original', 'zh-tw', fresh.revision, 'fresh.png', 'image/png', png.length);
   await r2.put(next);
@@ -231,4 +230,95 @@ it('preserves historical R2 manifests larger than the new upload limit', async (
   const asset = await imageBytes('old.png', png);
   expect(imageManifest([{ ...asset, storage: 'r2', size: 25 * 1024 * 1024, upload_id: 'a'.repeat(36),
     key: `blog-mcp/images/original/${asset.sha256}/old.png`, url: 'https://images.example.com/old.png' }])).toHaveLength(1);
+});
+
+it('directly deletes only manifest objects even when another article uses the URL', async () => {
+  const { blog, repo, r2, storage } = imageSetup();
+  const post = await blog.createPost('delete-images', 'zh-tw', { title: 'Delete', content: 'Body' });
+  const offer = await blog.prepareImageUpload('delete-images', 'zh-tw', post.revision, 'chart.png', 'image/png', png.length);
+  await r2.put(offer);
+  const image = await blog.completeImageUpload(offer.upload_ticket);
+  await repo.externalEdit('content/posts/original/index.md', `---\ntitle: Shared\ndraft: false\n---\n![](${image.url})`);
+  const main = await repo.head('main');
+  const otherKey = 'blog-mcp/images/other/retained.webp';
+  r2.objects.set(otherKey, r2.objects.get(image.key!)!);
+  const remove = vi.spyOn(storage, 'remove');
+  const result = await blog.deleteDraft('delete-images', 'zh-tw', image.revision);
+  expect(result.deleted_images).toEqual([image.key]);
+  expect(remove).toHaveBeenCalledTimes(1);
+  expect(r2.objects.has(image.key!)).toBe(false);
+  expect(r2.objects.has(otherKey)).toBe(true);
+  expect(await repo.head('main')).toBe(main);
+  expect(await repo.head('mcp/drafts/delete-images/zh-tw')).toBeNull();
+  expect(await repo.head((await repo.pull(image.pr_number!)).branch)).toBeNull();
+  await expect(blog.deleteDraft('delete-images', 'zh-tw', image.revision)).rejects.toMatchObject({ code: 'not_found' });
+});
+
+it('keeps retry metadata and blocks new writes when R2 deletion fails', async () => {
+  const { blog, repo, r2 } = imageSetup();
+  const published = await blog.readPost('original', 'zh-tw');
+  const offer = await blog.prepareImageUpload('original', 'zh-tw', published.revision, 'chart.png', 'image/png', png.length);
+  await r2.put(offer);
+  const image = await blog.completeImageUpload(offer.upload_ticket);
+  r2.fail = true;
+  await expect(blog.deleteDraft('original', 'zh-tw', image.revision)).rejects.toMatchObject({ code: 'r2_error' });
+  expect((await repo.pull(image.pr_number!)).state).toBe('closed');
+  expect(await repo.head('mcp/drafts/original/zh-tw')).not.toBeNull();
+  await expect(blog.updatePost('original', 'zh-tw', published.revision, { content: 'New' })).rejects.toMatchObject({ code: 'cleanup_pending' });
+  await expect(blog.createPost('original', 'zh-tw', { title: 'New', content: 'New' })).rejects.toMatchObject({ code: 'cleanup_pending' });
+  r2.fail = false;
+  const result = await blog.deleteDraft('original', 'zh-tw', image.revision);
+  expect(result.already_deleted).toBe(true);
+  expect(r2.objects.has(image.key!)).toBe(false);
+  expect(await repo.head('mcp/drafts/original/zh-tw')).toBeNull();
+});
+
+it('retries final branch cleanup after images were deleted without recreating them', async () => {
+  const { blog, repo, r2 } = imageSetup();
+  const post = await blog.createPost('retry-delete', 'zh-tw', { title: 'Retry', content: 'Body' });
+  const offer = await blog.prepareImageUpload('retry-delete', 'zh-tw', post.revision, 'chart.png', 'image/png', png.length);
+  await r2.put(offer);
+  const image = await blog.completeImageUpload(offer.upload_ticket);
+  vi.spyOn(repo, 'deleteDraftRefs').mockRejectedValueOnce(new Error('Network failure'));
+  await expect(blog.deleteDraft('retry-delete', 'zh-tw', image.revision)).rejects.toThrow('Network failure');
+  expect(r2.objects.has(image.key!)).toBe(false);
+  expect(await repo.head('mcp/drafts/retry-delete/zh-tw')).not.toBeNull();
+  expect((await blog.deleteDraft('retry-delete', 'zh-tw', image.revision)).deleted).toBe(true);
+  expect(await repo.head('mcp/drafts/retry-delete/zh-tw')).toBeNull();
+});
+
+it('refuses to delete an R2 object from another article even if its manifest key was altered', async () => {
+  const { storage, r2 } = imageSetup();
+  const asset = await storage.store({ upload_id: 'test', user_id: '123', slug: 'owned', lang: 'zh-tw',
+    expected_revision: 'a'.repeat(40), filename: 'chart.png', mime_type: 'image/png', size: png.length,
+    pending_key: 'unused', upload_expires: Date.now(), expires: Date.now() + 60_000 }, png);
+  const before = r2.requests.length;
+  await expect(storage.remove(asset, 'other')).rejects.toMatchObject({ code: 'invalid_image' });
+  expect(r2.requests).toHaveLength(before);
+  expect(r2.objects.has(asset.key!)).toBe(true);
+  await storage.remove(asset, 'owned');
+  await storage.remove(asset, 'owned');
+  expect(r2.objects.has(asset.key!)).toBe(false);
+});
+
+it('finishes a partially deleted image list on retry', async () => {
+  const { blog, repo, r2, storage } = imageSetup();
+  let revision = (await blog.createPost('partial-delete', 'zh-tw', { title: 'Partial', content: 'Body' })).revision;
+  const keys: string[] = [];
+  for (const filename of ['first.png', 'second.png']) {
+    const offer = await blog.prepareImageUpload('partial-delete', 'zh-tw', revision, filename, 'image/png', png.length);
+    await r2.put(offer);
+    const image = await blog.completeImageUpload(offer.upload_ticket);
+    keys.push(image.key!);
+    revision = image.revision;
+  }
+  const remove = storage.remove.bind(storage);
+  vi.spyOn(storage, 'remove').mockImplementationOnce(remove).mockRejectedValueOnce(new Error('Second delete failed'));
+  await expect(blog.deleteDraft('partial-delete', 'zh-tw', revision)).rejects.toThrow('Second delete failed');
+  expect(r2.objects.has(keys[0])).toBe(false);
+  expect(r2.objects.has(keys[1])).toBe(true);
+  expect(await repo.head('mcp/drafts/partial-delete/zh-tw')).not.toBeNull();
+  await blog.deleteDraft('partial-delete', 'zh-tw', revision);
+  expect(keys.every(key => !r2.objects.has(key))).toBe(true);
+  expect(await repo.head('mcp/drafts/partial-delete/zh-tw')).toBeNull();
 });

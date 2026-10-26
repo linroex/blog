@@ -24,12 +24,16 @@ The server exposes thirteen tools: `list_posts`, `read_post`, `create_post`,
 `update_post`, `delete_draft`, `upload_image`, `prepare_image_upload`, `complete_image_upload`, `prepare_publish`, `get_operation_status`,
 `publish_post`, `get_repo_status`, and `read_config`.
 
-`delete_draft` requires the draft revision and removes only the selected language
-from active drafts and closes its unmerged PR. It uses an atomic archive marker, retaining Git history,
-candidate branches and uploaded images; published articles are unchanged. Old
-publication confirmations and upload tickets become stale. To start again, use
-`create_post` for an unpublished article or `update_post` on the published
-revision before further edits/uploads.
+`delete_draft` requires the draft revision. It closes the unmerged PR, directly
+deletes all R2 objects in that draft's image manifest, and removes its source and
+review branches. No cross-article or cross-language reference scan is performed;
+shared image URLs stop working wherever used. Main and other language branches
+are not edited. GitHub PR/commit history may remain accessible. Partial failures
+retain a cleanup marker and block new writes; retry the original
+`expected_revision` to finish. After successful removal, another delete returns
+`not_found`. Start again with `create_post` for an unpublished article or
+`update_post` on the published revision. Expired/stale tickets cannot resume the
+removed draft; uploading to a published article can start a new draft.
 
 1. List/read articles to avoid slug collisions. `read_post` prefers an active
    draft; use `source: published` to read main explicitly.
