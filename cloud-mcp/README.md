@@ -19,7 +19,10 @@ storage verification and pending client acceptance. The subsequent
 [webp-upload-rollout.json](webp-upload-rollout.json) records the 15 MiB limit,
 automatic conversion and the owner-reported ChatGPT network limitation.
 [chatgpt-file-upload-rollout.json](chatgpt-file-upload-rollout.json) records the
-subsequent native ChatGPT file tool and the remaining live-client acceptance.
+subsequent native ChatGPT file tool. Live-client acceptance is recorded in the later rollout below.
+[public-file-download-rollout.json](public-file-download-rollout.json) records
+the public HTTPS download policy, private-network isolation, Azure regression check
+and owner-reported successful ChatGPT upload on 2026-10-26 (Claude web had already succeeded).
 The GitHub App is `linroex-blog-mcp`, installed only on `linroex/blog`.
 GitHub App credentials and the publication confirmation key remain Worker secrets.
 Cloudflare Access owns login, client registration, access tokens and refresh grants.
@@ -357,6 +360,20 @@ erase publicly accessible Git history or R2 assets.
 Validation is part of preparation, and reads are tools so
 clients need not support resource browsing. All tools require owner authorization.
 
+See [upload-diagnostics-rollout.json](upload-diagnostics-rollout.json) for the
+diagnostic deployment and verification record.
+Native `upload_image` calls emit structured diagnostic events after Access
+authentication, including inputs rejected by SDK schema validation. Search
+Workers Logs for `upload_image.input`, `upload_image.download` and
+`upload_image.result`; group events by `diagnostic_id`. Inputs record only the
+file value type, recognized field names/types and an unknown-field count.
+Download events record the URL protocol/HTTP hostname, initial/redirect stage,
+HTTP status and outcome. No file IDs, filenames, full URLs, paths, queries,
+fragments, credentials, file bytes or raw exception messages are logged. Other
+MCP calls do not emit these diagnostics. Observability sampling is 100% so a
+single reproduction is retained; an HTTP 200 alone does not indicate tool success.
+Use `npx wrangler tail lins-blog-mcp --format json` for a live reproduction.
+
 Image uploads share one storage/conversion/draft pipeline, with a ChatGPT-native
 file input in addition to the established presigned transport for Claude. In
 ChatGPT, prefer `upload_image`: `openai/fileParams` supplies a temporary download
@@ -368,9 +385,16 @@ is informational; the separate `filename` selects a safe blog basename and must
 match the original MIME/signature. Never use a ChatGPT `/mnt/data` path as a remote
 file or invent file references.
 
-[src/chatgpt-files.ts](src/chatgpt-files.ts) accepts only HTTPS
-`files.oaiusercontent.com` and subdomains on port 443 without userinfo/fragments.
-It follows at most two allowlisted redirects, sends no credentials, bounds both
+[src/chatgpt-files.ts](src/chatgpt-files.ts) accepts public HTTPS hostnames on port
+443 without userinfo/fragments. There is no provider-domain allowlist: ChatGPT
+also supplies Azure Blob URLs. Local/private hostnames, single-label names and
+all IP literals (including alternate IPv4 forms and IPv6) are rejected.
+DNS resolution and connection-time private-network exclusion rely on Cloudflare
+Workers' global `fetch` with `global_fetch_strictly_public`; the application does
+not perform a separate DNS lookup that could race with the connection. Do not
+route attachment fetches through a private service/VPC binding or proxy. This
+contract is specific to the cloud Worker, not a general-purpose Node fetch client.
+It follows at most two redirects, rechecks each destination, sends no credentials, bounds both
 announced and streamed bytes, and applies a 60-second deadline. Download errors
 never echo signed URLs. The immutable upload ID derives from owner, article,
 language, chosen filename and file ID; changing a temporary URL does not create a
@@ -379,10 +403,10 @@ or signed candidates. The native path writes no pending R2 object. Concurrent
 updates still rely on non-forced Git ref updates; a failure may leave an
 unreferenced final object, as with the existing transport.
 
-The owner previously reported Claude web success and ordinary ChatGPT shell DNS
-failure. This change removes ChatGPT's shell PUT dependency; actual ChatGPT file
-injection remains a separate live acceptance test. Tests simulate the native file
-reference rather than claiming a real ChatGPT attachment was transferred. Keep
+The owner reported successful real ChatGPT image upload on 2026-10-26; Claude
+web upload had already succeeded. The native tool removes ChatGPT's shell PUT
+dependency. Automated tests simulate the native file reference; live-client
+acceptance is owner-reported. Keep
 existing Claude settings and Access callbacks. Refresh ChatGPT's tools and use a
 new conversation; cached schemas for the old base64 `upload_image` cannot be used.
 

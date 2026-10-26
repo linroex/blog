@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { Blog } from './blog';
 import { BlogError } from './types';
 import { IMAGE_NAME, MAX_IMAGE_BYTES } from './images';
+import { uploadResultDiagnostic } from './upload-diagnostics';
 
 const lang = z.enum(['zh-tw', 'en', 'ja']).default('zh-tw');
 const slug = z.string().max(100).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
@@ -23,9 +24,11 @@ export function createServer(blog: Blog) {
       annotations: { readOnlyHint: readOnly, destructiveHint: destructive, openWorldHint: true } }, async input => {
       try {
         const result = await handler(input as z.infer<z.ZodObject<S>>);
+        if (name === 'upload_image') uploadResultDiagnostic();
         return { content: [{ type: 'text' as const, text: JSON.stringify(result) }], structuredContent: result as Record<string, unknown> };
       } catch (error) {
         const known = error instanceof BlogError;
+        if (name === 'upload_image') uploadResultDiagnostic(known ? error.code : 'internal_error');
         return { isError: true, content: [{ type: 'text' as const, text: JSON.stringify({ error: known ? error.code : 'internal_error',
           message: known ? error.message : 'Operation failed. For a write, inspect repository/operation status before retrying.' }) }] };
       }

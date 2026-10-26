@@ -69,10 +69,13 @@ path, generate base64 or run `curl`. The server downloads the original and retur
 the final URL, Markdown and new revision in this one tool call. Insert the Markdown
 using `update_post`; publication still requires its normal explicit approval.
 
-Native downloads accept only HTTPS `files.oaiusercontent.com` and its subdomains,
-including up to two redirects within that allowlist. They send no MCP, GitHub or
+Native downloads accept public HTTPS hostnames on port 443, including Azure Blob
+URLs supplied by ChatGPT. There is no provider-domain allowlist. Local names and
+IP literals are rejected; Cloudflare Workers' public-network global fetch enforces
+DNS/connection-time isolation from private destinations. Every redirect is checked
+again, with at most two redirects. They send no MCP, GitHub or
 R2 credentials, have a 60-second download timeout, and enforce the 15 MiB limit
-while reading. An unsupported download hostname fails closed; report just the
+while reading. An unsafe download destination fails closed; report just the
 hostname for investigation, never the signed URL. Signed URLs and file IDs are
 not written to Git. A repeated file ID with the same owner/article/language and
 chosen filename returns the existing attachment without downloading again, even
