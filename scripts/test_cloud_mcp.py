@@ -32,7 +32,7 @@ class CloudMCPTests(unittest.TestCase):
         file.parent.mkdir(parents=True, exist_ok=True)
         file.write_text(text, encoding="utf-8")
 
-    def candidate(self, extra=False, bad_hash=False, draft=False, image=False, undeclared=False, r2=None):
+    def candidate(self, extra=False, bad_hash=False, draft=False, image=False, undeclared=False, r2=None, review=False, prepared=True):
         parent = self.git("rev-parse", "HEAD")
         text = f'---\ntitle: "Hello"\ndraft: {str(draft).lower()}\n---\n\nContent\n'
         self.write(self.path, text)
@@ -40,6 +40,8 @@ class CloudMCPTests(unittest.TestCase):
             self.write("hugo.toml", 'baseURL = "https://unexpected.example.com/"')
         data = {"operation_id": "123", "slug": "hello", "lang": "zh-tw", "base_main": parent,
                 "content_sha256": "wrong" if bad_hash else hashlib.sha256(text.encode()).hexdigest()}
+        if review:
+            data.update(review_branch='mcp/reviews/' + 'a' * 36, prepared=prepared, base_post_sha=None)
         if image:
             raw = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=')
             (self.root / 'content/posts/hello/images').mkdir(parents=True, exist_ok=True)
@@ -55,6 +57,14 @@ class CloudMCPTests(unittest.TestCase):
     def test_candidate_accepts_exact_regular_article(self):
         self.candidate()
         self.assertEqual(validate_candidate(self.root, "mcp/candidates/123")["slug"], "hello")
+
+    def test_review_candidate_accepts_only_prepared_publication(self):
+        self.candidate(review=True)
+        self.assertEqual(validate_candidate(self.root, 'mcp/reviews/' + 'a' * 36)['slug'], 'hello')
+
+    def test_saved_draft_pr_can_be_validated_for_reading_before_marked_ready(self):
+        self.candidate(review=True, prepared=False)
+        self.assertFalse(validate_candidate(self.root, 'mcp/reviews/' + 'a' * 36)['prepared'])
 
     def test_candidate_rejects_unrelated_changes(self):
         self.candidate(extra=True)

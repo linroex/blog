@@ -3,6 +3,7 @@ import { exportPKCS8 } from 'jose';
 import worker from '../src/index';
 import { accessHarness } from './access-helpers';
 import type { Env } from '../src/types';
+import { sign } from '../src/crypto';
 
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 async function harness() {
@@ -66,6 +67,32 @@ it('reads an article through the authenticated MCP handler with repo-scoped App 
   const read = result(await response.text());
   expect(read.isError).not.toBe(true);
   expect(read.structuredContent.content).toBe('Article body\n');
+});
+
+it('accepts durable PR operation IDs through the authenticated MCP schema', async () => {
+  const h = await harness();
+  Object.assign(h.env, { GITHUB_APP_ID: crypto.randomUUID(), GITHUB_INSTALLATION_ID: '123', GITHUB_APP_PRIVATE_KEY: await exportPKCS8(h.key.privateKey) });
+  const id = crypto.randomUUID(), head = 'a'.repeat(40), main = 'b'.repeat(40), revision = 'c'.repeat(40), branch = `mcp/reviews/${id}`;
+  const envelope = await sign(h.env.CONFIRMATION_SECRET, 'candidate', { operation_id: id, user_id: h.env.ALLOWED_GITHUB_USER_ID,
+    slug: 'hello', lang: 'zh-tw', draft_revision: revision, base_main: main, content_sha256: 'd'.repeat(64), expires: Date.now() + 3600_000,
+    review_branch: branch, prepared: true });
+  h.network.mockImplementation(async (input: string | URL | Request) => {
+    const url = String(input);
+    if (url === `${h.issuer}/cdn-cgi/access/certs`) return h.fetcher(url, {});
+    if (url.endsWith('/app/installations/123/access_tokens')) return Response.json({ token: 'test-app-token', expires_at: new Date(Date.now() + 3600_000).toISOString() });
+    if (url.endsWith('/pulls/7')) return Response.json({ number: 7, node_id: 'PR_7', html_url: 'https://github.com/test/blog/pull/7', state: 'open', draft: true,
+      head: { ref: branch, sha: head, repo: { full_name: `${h.env.GITHUB_OWNER}/${h.env.GITHUB_REPO}` } },
+      base: { ref: h.env.GITHUB_BRANCH, repo: { full_name: `${h.env.GITHUB_OWNER}/${h.env.GITHUB_REPO}` } } });
+    if (url.endsWith(`/git/commits/${head}`)) return Response.json({ sha: head, tree: { sha: head }, parents: [{ sha: main }], message: `Blog MCP candidate\n\n${envelope}` });
+    if (url.endsWith('/git/ref/heads/main')) return Response.json({ object: { sha: main } });
+    if (url.includes('/git/ref/heads/mcp%2Fdrafts%2Fhello%2Fzh-tw')) return Response.json({ object: { sha: revision } });
+    if (url.includes('/actions/workflows/')) return Response.json({ workflow_runs: [] });
+    throw new Error('Unexpected network request');
+  });
+  const response = await h.rpc('tools/call', { name: 'get_operation_status', arguments: { operation_id: `${id}:7:${head}` } });
+  const status = result(await response.text());
+  expect(status.isError).not.toBe(true);
+  expect(status.structuredContent).toMatchObject({ status: 'queued', pr_number: 7 });
 });
 
 it('deletes the requested language through MCP using only a non-forced draft ref update', async () => {

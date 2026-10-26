@@ -71,7 +71,7 @@ it('imports an attachment in one operation, stores only final bytes on R2 and pu
   expect(Object.keys(draft.files).some(p => p.endsWith('.webp'))).toBe(false);
   await blog.updatePost('native-file', 'zh-tw', image.revision, { content: `Body\n${image.markdown}` });
   const op = await blog.preparePublish('native-file', 'zh-tw');
-  repo.pass(op.candidate_commit, `mcp/candidates/${op.operation_id}`);
+  repo.pass(op.candidate_commit, op.validation_branch);
   const ready = await blog.operationStatus(op.operation_id);
   expect((ready.preview as any).uploaded_images[0].url).toBe(image.url);
   expect((await blog.publishPost('native-file', 'zh-tw', ready.confirmation as string)).committed).toBe(true);

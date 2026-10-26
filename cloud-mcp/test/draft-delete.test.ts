@@ -26,7 +26,7 @@ it('deletes an edit draft and falls back to the published article, allowing a fr
   const published = await blog.readPost('original', 'zh-tw', 'published');
   const edited = await blog.updatePost('original', 'zh-tw', published.revision, { content: 'Discard this' });
   await blog.deleteDraft('original', 'zh-tw', edited.revision);
-  expect(await blog.readPost('original', 'zh-tw')).toEqual(published);
+  expect(await blog.readPost('original', 'zh-tw')).toMatchObject({ content: published.content, source: 'published', revision: published.revision });
   const fresh = await blog.updatePost('original', 'zh-tw', published.revision, { content: 'Fresh edit' });
   expect((await blog.readPost('original', 'zh-tw')).content).toBe('Fresh edit\n');
   expect((await blog.listPosts('', 0, 20, 0)).drafts[0].revision).toBe(fresh.revision);
@@ -93,7 +93,7 @@ it('invalidates prepared publication and its confirmation', async () => {
   const { repo, blog, post } = await draft();
   const main = await repo.head('main');
   const operation = await blog.preparePublish('hello', 'zh-tw');
-  repo.pass(operation.candidate_commit, `mcp/candidates/${operation.operation_id}`);
+  repo.pass(operation.candidate_commit, operation.validation_branch);
   const status = await blog.operationStatus(operation.operation_id);
   await blog.deleteDraft('hello', 'zh-tw', post.revision);
   expect((await blog.operationStatus(operation.operation_id)).status).toBe('stale');
@@ -106,7 +106,7 @@ it('refuses deletion of missing drafts and published bookkeeping', async () => {
   await expect(blog.deleteDraft('missing', 'zh-tw', post.revision)).rejects.toMatchObject({ code: 'not_found' });
   await expect(blog.deleteDraft('original', 'zh-tw', post.revision)).rejects.toMatchObject({ code: 'not_found' });
   const operation = await blog.preparePublish('hello', 'zh-tw');
-  repo.pass(operation.candidate_commit, `mcp/candidates/${operation.operation_id}`);
+  repo.pass(operation.candidate_commit, operation.validation_branch);
   const status = await blog.operationStatus(operation.operation_id);
   await blog.publishPost('hello', 'zh-tw', status.confirmation as string);
   const main = await repo.head('main');

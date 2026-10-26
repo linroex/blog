@@ -59,7 +59,7 @@ it('stores images only on R2 and publishes an article-only candidate with an abs
   const commit = repo.commits.get(operation.candidate_commit)!;
   const parent = repo.commits.get(commit.parents[0])!;
   expect(Object.keys(commit.files).filter(p => JSON.stringify(commit.files[p]) !== JSON.stringify(parent.files[p]))).toEqual(['content/posts/images/index.md']);
-  repo.pass(commit.sha, `mcp/candidates/${operation.operation_id}`);
+  repo.pass(commit.sha, operation.validation_branch);
   const status = await blog.operationStatus(operation.operation_id);
   expect((status.preview as any).uploaded_images[0].preview_url).toBe(image.url);
   expect((await blog.publishPost('images', 'zh-tw', status.confirmation as string)).committed).toBe(true);
