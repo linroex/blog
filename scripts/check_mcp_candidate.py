@@ -85,5 +85,6 @@ def validate_candidate(root: Path, ref_name: str) -> dict:
 
 
 if __name__ == "__main__":
-    validate_candidate(Path.cwd(), os.environ["GITHUB_REF_NAME"])
+    # GitHub owns GITHUB_* values; PR runs use a synthetic ref such as 6/merge.
+    validate_candidate(Path.cwd(), os.environ.get("MCP_REF_NAME") or os.environ["GITHUB_REF_NAME"])
     print("Candidate changes only its selected article and declared new images")

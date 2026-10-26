@@ -1,8 +1,10 @@
 import base64
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -65,6 +67,26 @@ class CloudMCPTests(unittest.TestCase):
     def test_saved_draft_pr_can_be_validated_for_reading_before_marked_ready(self):
         self.candidate(review=True, prepared=False)
         self.assertFalse(validate_candidate(self.root, 'mcp/reviews/' + 'a' * 36)['prepared'])
+
+    def test_candidate_cli_uses_review_branch_instead_of_github_merge_ref(self):
+        self.candidate(review=True)
+        result = subprocess.run(
+            [sys.executable, str(Path(__file__).with_name('check_mcp_candidate.py').resolve())],
+            cwd=self.root,
+            env={**os.environ, 'GITHUB_REF_NAME': '6/merge',
+                 'MCP_REF_NAME': 'mcp/reviews/' + 'a' * 36},
+            capture_output=True, text=True, check=True,
+        )
+        self.assertIn('Candidate changes only its selected article', result.stdout)
+
+    def test_candidate_cli_uses_github_branch_for_push_validation(self):
+        self.candidate()
+        env = {**os.environ, 'GITHUB_REF_NAME': 'mcp/candidates/123'}
+        env.pop('MCP_REF_NAME', None)
+        subprocess.run(
+            [sys.executable, str(Path(__file__).with_name('check_mcp_candidate.py').resolve())],
+            cwd=self.root, env=env, capture_output=True, text=True, check=True,
+        )
 
     def test_candidate_rejects_unrelated_changes(self):
         self.candidate(extra=True)
