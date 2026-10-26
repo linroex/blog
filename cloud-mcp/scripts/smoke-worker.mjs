@@ -54,6 +54,16 @@ try {
   assert.deepEqual(native._meta['openai/fileParams'], ['file']);
   assert.deepEqual(native.inputSchema.properties.file.required.sort(), ['download_url', 'file_id']);
   assert.ok(payload.result.tools.some(tool => tool.name === 'publish_post'));
+  // Exercise AsyncLocalStorage diagnostics through the real workerd/SDK boundary,
+  // including a file reference that must fail before any GitHub/image request.
+  const invalid = await call('/mcp', { method: 'POST', headers: { ...headers, 'Content-Type': 'application/json',
+    Accept: 'application/json, text/event-stream', 'MCP-Protocol-Version': '2025-11-25' },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'upload_image',
+      arguments: { slug: 'test', expected_revision: 'a'.repeat(40), filename: 'image.png', file: 'chat_upload://smoke-private-reference' } } }) });
+  assert.equal(invalid.status, 200);
+  const invalidText = await invalid.text();
+  const rejected = JSON.parse(invalidText.startsWith('{') ? invalidText : /data: (.+)/.exec(invalidText)[1]);
+  assert.ok(rejected.error || rejected.result?.isError, 'Invalid file string must be rejected by SDK');
   assert.equal(keyRequests, 1);
-  console.log('workerd smoke passed: dual Access checks, private health, retired OAuth routes and twelve tools including native ChatGPT image upload; no GitHub access');
+  console.log('workerd smoke passed: dual Access checks, private health, retired OAuth routes, twelve tools and upload diagnostics before SDK validation; no GitHub access');
 } finally { await runtime.dispose(); }

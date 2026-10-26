@@ -4,6 +4,7 @@ import { Blog, type ArticleIndex } from './blog';
 import { GitHubRepository } from './github';
 import { createServer } from './mcp';
 import { BlogError, type Env } from './types';
+import { withUploadDiagnostics } from './upload-diagnostics';
 
 export async function loadIndex(env: Env): Promise<ArticleIndex> {
   const response = await fetch(`${env.SITE_URL.replace(/\/$/, '')}/mcp-index.json`, { signal: AbortSignal.timeout(15_000) });
@@ -30,6 +31,7 @@ export default {
     if (url.pathname === '/health' && request.method === 'GET') return Response.json({ status: 'ok' }, { headers: { 'Cache-Control': 'no-store' } });
     if (url.pathname !== '/mcp') return new Response('Not found', { status: 404 });
     // Enforce a bounded body even when Content-Length is absent.
+    let diagnosticBody: Uint8Array | undefined;
     if (request.body) {
       const reader = request.body.getReader();
       const chunks: Uint8Array[] = [];
@@ -46,6 +48,7 @@ export default {
       let offset = 0;
       for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
       request = new Request(request, { body: bytes });
+      diagnosticBody = bytes;
     }
     try {
       const repository = new GitHubRepository(env);
@@ -54,7 +57,7 @@ export default {
         route: '/mcp', allowedHostnames: [url.hostname], maxRequestBodySize: 8 * 1024 * 1024,
         allowedOriginHostnames: [url.hostname, 'chatgpt.com'], corsOptions: false,
       });
-      return await handler(request, env, ctx);
+      return await withUploadDiagnostics(diagnosticBody, () => handler(request, env, ctx));
     }
     catch { return new Response('Service temporarily unavailable', { status: 503 }); }
   },

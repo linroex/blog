@@ -46,6 +46,21 @@ it('lists twelve MCP tools including native ChatGPT attachment upload after both
   expect(h.network).toHaveBeenCalledTimes(1); // Only JWKS, no GitHub calls.
 });
 
+it('logs native file types before SDK rejection, without retaining private file references', async () => {
+  const h = await harness();
+  const log = vi.spyOn(console, 'log').mockImplementation(() => {});
+  await h.rpc('tools/call', { name: 'upload_image', arguments: { slug: 'original', expected_revision: 'a'.repeat(40),
+    filename: 'image.png', file: 'chat_upload://private-reference' } });
+  const events = log.mock.calls.map(([line]) => JSON.parse(line));
+  expect(events).toContainEqual(expect.objectContaining({ event: 'upload_image.input', file_type: 'string' }));
+  expect(JSON.stringify(events)).not.toContain('private-reference');
+  expect(h.network).toHaveBeenCalledTimes(1); // Auth only; no GitHub or image fetch.
+  log.mockClear();
+  await h.call('/mcp', { method: 'POST', body: JSON.stringify({ method: 'tools/call', params: {
+    name: 'upload_image', arguments: { file: 'private-reference' } } }) });
+  expect(log).not.toHaveBeenCalled(); // Never parse/log unauthenticated bodies.
+});
+
 it('reads an article through the authenticated MCP handler with repo-scoped App credentials', async () => {
   const h = await harness();
   Object.assign(h.env, { GITHUB_APP_ID: crypto.randomUUID(), GITHUB_INSTALLATION_ID: '123', GITHUB_APP_PRIVATE_KEY: await exportPKCS8(h.key.privateKey) });

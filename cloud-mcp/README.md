@@ -306,6 +306,18 @@ convenience; use the automated generated-key test harness instead.
 Validation is part of preparation, and reads are tools so
 clients need not support resource browsing. All tools require owner authorization.
 
+Native `upload_image` calls emit structured diagnostic events after Access
+authentication, including inputs rejected by SDK schema validation. Search
+Workers Logs for `upload_image.input`, `upload_image.download` and
+`upload_image.result`; group events by `diagnostic_id`. Inputs record only the
+file value type, recognized field names/types and an unknown-field count.
+Download events record the URL protocol/HTTP hostname, initial/redirect stage,
+HTTP status and outcome. No file IDs, filenames, full URLs, paths, queries,
+fragments, credentials, file bytes or raw exception messages are logged. Other
+MCP calls do not emit these diagnostics. Observability sampling is 100% so a
+single reproduction is retained; an HTTP 200 alone does not indicate tool success.
+Use `npx wrangler tail lins-blog-mcp --format json` for a live reproduction.
+
 Image uploads share one storage/conversion/draft pipeline, with a ChatGPT-native
 file input in addition to the established presigned transport for Claude. In
 ChatGPT, prefer `upload_image`: `openai/fileParams` supplies a temporary download
