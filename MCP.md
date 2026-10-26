@@ -20,9 +20,16 @@ index and validate candidate commits/SEO during site builds.
 
 ## Tools and authoring workflow
 
-The server exposes twelve tools: `list_posts`, `read_post`, `create_post`,
-`update_post`, `upload_image`, `prepare_image_upload`, `complete_image_upload`, `prepare_publish`, `get_operation_status`,
+The server exposes thirteen tools: `list_posts`, `read_post`, `create_post`,
+`update_post`, `delete_draft`, `upload_image`, `prepare_image_upload`, `complete_image_upload`, `prepare_publish`, `get_operation_status`,
 `publish_post`, `get_repo_status`, and `read_config`.
+
+`delete_draft` requires the draft revision and removes only the selected language
+from active drafts. It uses an atomic archive marker, retaining Git history,
+candidate branches and uploaded images; published articles are unchanged. Old
+publication confirmations and upload tickets become stale. To start again, use
+`create_post` for an unpublished article or `update_post` on the published
+revision before further edits/uploads.
 
 1. List/read articles to avoid slug collisions. `read_post` prefers an active
    draft; use `source: published` to read main explicitly.

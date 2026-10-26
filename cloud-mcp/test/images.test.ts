@@ -13,6 +13,30 @@ async function draft() {
   const offer = await h.blog.prepareImageUpload('images', 'zh-tw', post.revision, 'chart.png', 'image/png', png.length);
   return { ...h, post, offer };
 }
+it('does not complete a pending upload after draft deletion', async () => {
+  const { blog, r2, offer, post } = await draft();
+  await r2.put(offer);
+  await blog.deleteDraft('images', 'zh-tw', post.revision);
+  const before = r2.requests.length;
+  await expect(blog.completeImageUpload(offer.upload_ticket)).rejects.toMatchObject({ code: 'not_found' });
+  expect(r2.requests).toHaveLength(before);
+});
+it('retains uploaded images but does not reuse deleted draft image metadata on retry', async () => {
+  const { blog, r2 } = imageSetup();
+  const published = await blog.readPost('original', 'zh-tw');
+  const offer = await blog.prepareImageUpload('original', 'zh-tw', published.revision, 'chart.png', 'image/png', png.length);
+  await r2.put(offer);
+  const image = await blog.completeImageUpload(offer.upload_ticket);
+  await blog.deleteDraft('original', 'zh-tw', image.revision);
+  expect([...r2.objects.keys()]).toContain(image.key);
+  expect((await blog.readPost('original', 'zh-tw')).uploaded_images).toEqual([]);
+  await expect(blog.completeImageUpload(offer.upload_ticket)).rejects.toMatchObject({ code: 'conflict' });
+  await expect(blog.prepareImageUpload('original', 'zh-tw', published.revision, 'fresh.png', 'image/png', png.length)).rejects.toMatchObject({ code: 'conflict' });
+  const fresh = await blog.updatePost('original', 'zh-tw', published.revision, { content: 'Fresh draft' });
+  const next = await blog.prepareImageUpload('original', 'zh-tw', fresh.revision, 'fresh.png', 'image/png', png.length);
+  await r2.put(next);
+  expect((await blog.completeImageUpload(next.upload_ticket)).source).toBe('draft');
+});
 it('signs one short-lived raw PUT bound to size, type and create-once semantics without Git writes', async () => {
   const { repo, r2, offer, post } = await draft();
   expect(new URL(offer.upload_url).searchParams.get('X-Amz-Expires')).toBe('300');
