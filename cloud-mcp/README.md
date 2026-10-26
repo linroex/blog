@@ -20,6 +20,8 @@ storage verification and pending client acceptance. The subsequent
 automatic conversion and the owner-reported ChatGPT network limitation.
 [chatgpt-file-upload-rollout.json](chatgpt-file-upload-rollout.json) records the
 subsequent native ChatGPT file tool and the remaining live-client acceptance.
+[public-file-download-rollout.json](public-file-download-rollout.json) records
+the public HTTPS download policy, private-network isolation and Azure regression check.
 The GitHub App is `linroex-blog-mcp`, installed only on `linroex/blog`.
 GitHub App credentials and the publication confirmation key remain Worker secrets.
 Cloudflare Access owns login, client registration, access tokens and refresh grants.

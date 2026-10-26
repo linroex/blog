@@ -1,0 +1,66 @@
+{
+  "worker": "lins-blog-mcp",
+  "endpoint": "https://lins-blog-mcp.linroex.workers.dev/mcp",
+  "deployed_on": "2026-10-26",
+  "version_id": "764ea46b-bc6d-4e2f-953d-3d961034c42f",
+  "previous_version_id": "bd7c859c-108a-4822-af2c-418c4dc2cb90",
+  "source_commit": "2b4e32a0898156f6c41eb31edf9c22a474ce91bd",
+  "scope": "Accept native ChatGPT image downloads from public HTTPS hostnames across providers, including Azure Blob; retain redacted diagnostics and latest main features.",
+  "download_policy": {
+    "provider_domain_allowlist": false,
+    "scheme": "https",
+    "port": 443,
+    "reject": [
+      "userinfo",
+      "fragment",
+      "IP literals including normalized alternate IPv4 and IPv6",
+      "single-label hosts",
+      "malformed DNS names",
+      "local/private-name suffixes"
+    ],
+    "private_dns_and_rebinding": "Cloudflare Workers global fetch enforces public-network connections; global_fetch_strictly_public is required. No separate DNS preflight or private fetch binding.",
+    "redirects": {
+      "maximum": 2,
+      "revalidate_each_destination": true
+    },
+    "maximum_bytes": 15728640,
+    "deadline_ms": 60000,
+    "forward_service_credentials": false,
+    "image_validation_and_conversion": "Existing signature checks, MIME matching and WebP pipeline retained."
+  },
+  "validation": {
+    "typecheck": "passed",
+    "vitest": {
+      "files": 8,
+      "tests": 150
+    },
+    "workerd_smoke": "passed; 13 tools including draft deletion, native file schema and diagnostics",
+    "r2_integration": {
+      "passed": true,
+      "bytes": 15728640,
+      "presigned_ttl_seconds": 300,
+      "overwrite_rejected": true,
+      "native_file_import_verified": true,
+      "native_attachment_download_simulated": true,
+      "webp_conversion_verified": true,
+      "public_hash_verified": true,
+      "disposable_objects_removed": true
+    },
+    "r2_integration_download_host": "oaisdmntprkoreacentral.blob.core.windows.net",
+    "production": {
+      "deployed_source_files_matched": 12,
+      "public_network_fetch": true,
+      "diagnostic_log_sampling": 1,
+      "unauthenticated_mcp": {
+        "status": 401,
+        "oauth_challenge": true,
+        "edge_challenge": false
+      }
+    }
+  },
+  "client_acceptance": "Real ChatGPT retry still required. Integration download is simulated; R2 writes, reads and object cleanup are real.",
+  "references": [
+    "https://developers.cloudflare.com/workers/configuration/compatibility-flags/#global-fetch-strictly-public",
+    "https://blog.cloudflare.com/workers-environment-live-object-bindings/"
+  ]
+}
