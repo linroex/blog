@@ -65,6 +65,12 @@ export class FakeRepo implements Repository {
     return !!commit?.parents.length && this.isAncestor(ancestor, commit.parents[0]);
   }
   async runs(workflow: string, sha: string) { return this.workflowRuns.get(`${workflow}:${sha}`) ?? []; }
+  async indexSourcesUnchanged(indexed: string, current: string) {
+    const sources = (files: Record<string, FileChange>) => Object.entries(files)
+      .filter(([path]) => path.startsWith('content/posts/') || ['scripts/blog_content.py', 'scripts/export_mcp_index.py'].includes(path))
+      .sort(([a], [b]) => a.localeCompare(b));
+    return JSON.stringify(sources((await this.commit(indexed)).files)) === JSON.stringify(sources((await this.commit(current)).files));
+  }
   pass(sha: string, branch: string, workflow = 'mcp-validate.yaml', conclusion = 'success') {
     this.workflowRuns.set(`${workflow}:${sha}`, [{ id: 1, head_sha: sha, head_branch: branch, event: 'push', status: 'completed', conclusion, html_url: 'https://github.com/test/blog/actions/runs/1' }]);
   }

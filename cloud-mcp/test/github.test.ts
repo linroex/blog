@@ -88,3 +88,47 @@ it('filters workflow status by the exact commit and push event', async () => {
   });
   expect((await repo.runs('mcp-validate.yaml', sha)).map(r => r.id)).toEqual([1]);
 });
+
+it('does not fetch trees when index and main commits match', async () => {
+  const { repo, fetcher } = setup(() => { throw new Error('Unexpected request'); });
+  expect(await repo.indexSourcesUnchanged('same', 'same')).toBe(true);
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it.each([
+  { change: 'docs', unchanged: true },
+  { change: 'non-post-content', unchanged: true },
+  { change: 'unrelated-script', unchanged: true },
+  { change: 'posts', unchanged: false },
+  { change: 'removed-posts', unchanged: false },
+  { change: 'reader', unchanged: false },
+  { change: 'exporter', unchanged: false },
+])('compares immutable source trees for $change changes', async ({ change, unchanged }) => {
+  const entry = (path: string, sha: string, type = 'tree') => ({ path, sha, type });
+  const scripts = [entry('blog_content.py', 'reader', 'blob'), entry('export_mcp_index.py', 'exporter', 'blob')];
+  const trees: Record<string, ReturnType<typeof entry>[]> = {
+    'old-root': [entry('content', 'old-content'), entry('scripts', 'old-scripts'), entry('MCP.md', 'old-doc', 'blob')],
+    'new-root': [entry('content', change.includes('content') || change.includes('posts') ? 'new-content' : 'old-content'),
+      entry('scripts', ['unrelated-script', 'reader', 'exporter'].includes(change) ? 'new-scripts' : 'old-scripts'), entry('MCP.md', 'new-doc', 'blob')],
+    'old-content': [entry('posts', 'old-posts')],
+    'new-content': change === 'removed-posts' ? [] : [entry('posts', change === 'posts' ? 'new-posts' : 'old-posts'), entry('about.md', 'new-about', 'blob')],
+    'old-scripts': scripts,
+    'new-scripts': scripts.map(item => item.sha === change ? { ...item, sha: 'changed' } : item).concat(entry('test.py', 'new-test', 'blob')),
+  };
+  const { repo, fetcher } = setup(url => {
+    const name = url.pathname.split('/').at(-1)!;
+    if (url.pathname.includes('/git/commits/')) return Response.json({ sha: name, tree: { sha: `${name}-root` }, parents: [], message: '' });
+    expect(url.searchParams.has('recursive')).toBe(false);
+    expect(trees[name]).toBeDefined();
+    return Response.json({ tree: trees[name], truncated: false });
+  });
+  expect(await repo.indexSourcesUnchanged('old', 'new')).toBe(unchanged);
+  expect(fetcher.mock.calls.length).toBeLessThanOrEqual(9); // Eight API calls plus installation token.
+});
+
+it('does not report a current index when GitHub truncates the source tree', async () => {
+  const { repo } = setup(url => url.pathname.includes('/git/commits/')
+    ? Response.json({ sha: '', tree: { sha: url.pathname.split('/').at(-1) }, parents: [], message: '' })
+    : Response.json({ tree: [], truncated: true }));
+  await expect(repo.indexSourcesUnchanged('old', 'new')).rejects.toMatchObject({ code: 'index_check_unavailable' });
+});

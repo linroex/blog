@@ -93,7 +93,7 @@ Python scripts in `scripts/` are build/index/validation helpers, not MCP servers
 | --- | --- | --- |
 | HTTP entry | [src/index.ts](src/index.ts), `fetch` | Validate configuration and origin, verify Access identity, route `/health` and `/mcp`, bound the request body, construct `GitHubRepository` and `Blog`, invoke the Agents MCP handler. |
 | Owner authentication | [src/auth.ts](src/auth.ts), `verifyAccess` | Require platform `ctx.access` and a signed Access JWT; map the verified owner email to the existing numeric owner ID. |
-| MCP interface | [src/mcp.ts](src/mcp.ts), `createServer` | Register twelve tools, validate input schemas, translate tool calls to `Blog` methods and return structured results/errors. |
+| MCP interface | [src/mcp.ts](src/mcp.ts), `createServer` | Register thirteen tools, validate input schemas, translate tool calls to `Blog` methods and return structured results/errors. |
 | Authoring and publication | [src/blog.ts](src/blog.ts), `Blog` | Select draft/published revisions, enforce conflicts, create candidates, poll validation, issue confirmations, update main and recover interrupted publications. |
 | GitHub persistence | [src/github.ts](src/github.ts), `installationToken`, `GitHubRepository` | Obtain a repo-scoped App token; read/write blobs, trees, commits and refs; query Actions. Ref updates always use `force: false`. |
 | Article format and signatures | [src/document.ts](src/document.ts), [src/crypto.ts](src/crypto.ts), [src/types.ts](src/types.ts) | Restrict article paths/languages, parse and edit frontmatter, enforce file limits, hash content and sign purpose-specific candidate/confirmation envelopes. |
@@ -136,7 +136,7 @@ Durable application state is in GitHub and R2, not Worker memory or a local chec
 | Draft content and publication baseline | `mcp/drafts/<slug>/<lang>`: article file plus `.mcp/draft.json` (`base_post_sha`, optional `published_commit`) |
 | Operation snapshot and recovery identity | `mcp/candidates/<operation_id>`: candidate commit, parent SHA and signed envelope in its commit message |
 | Validation and deployment results | GitHub Actions runs, selected by workflow, commit SHA and branch |
-| Listing metadata | Pages `/mcp-index.json`, tagged with its source commit; may lag main |
+| Listing metadata | Pages `/mcp-index.json`, tagged with its source commit; newest publication date first. Staleness compares article/index-generator sources, not unrelated main commits. |
 
 The current Worker has no KV binding. Its cached App token and JWKS resolver are
 temporary caches, not publication state. Preserve candidate refs and the signing
@@ -181,7 +181,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 The smoke test runs the bundled Worker in workerd with generated RSA test keys,
 a local JWKS responder and simulated `ctx.access`. It verifies private routes,
-real signature checks, retired OAuth routes and twelve MCP tools without GitHub
+real signature checks, retired OAuth routes and thirteen MCP tools without GitHub
 access. Node integration tests also read a mocked article through HTTP MCP.
 Tests cover forged signatures, issuer/audience/expiry/user/context failures, old
 bearers, rotation, fresh/stale cache behavior and unavailable/malformed JWKS.
@@ -258,7 +258,7 @@ App `linroex-blog-mcp`, installed only on `linroex/blog`.
    Verify a real **Managed OAuth** request succeeds at `/health` (not just a
    browser cookie). Its 200 response is possible only after both `ctx.access`
    and Access JWT verification. Reconnect the existing Blog plugin in ChatGPT,
-   confirm exactly twelve tools (including native `upload_image` and both R2 upload tools), and read a published article. Test refresh-token
+   confirm exactly thirteen tools (including native `upload_image` and both R2 upload tools), and read a published article. Test refresh-token
    renewal and compare the actual access-token lifetime with 900 seconds.
    Do not publish a test article. If the JWT/context combination is unavailable,
    leave Access enabled and MCP paused while investigating.
@@ -291,10 +291,11 @@ convenience; use the automated generated-key test harness instead.
 
 | Tool | Contract |
 | --- | --- |
-| `list_posts` | `query`, `offset`, `limit` (1–50); `draft_offset`, `draft_limit` (1–10, default 5). Returns indexed `posts` and a **separate** `drafts` page, `next_draft_offset`, `indexed_commit`, `current_main_commit`, `index_stale`. Draft cursor advances through branches, including archived entries, so follow it even for an empty filtered page. |
+| `list_posts` | `query`, `offset`, `limit` (1–50); `draft_offset`, `draft_limit` (1–10, default 5). Returns indexed `posts` sorted by publication `date` descending (UTC ISO 8601; missing/invalid dates are `null` and sort last; ties by slug), and a **separate** `drafts` page, `next_draft_offset`, `indexed_commit`, `current_main_commit`, `index_stale`. Draft cursor advances through branches, including archived entries, so follow it even for an empty filtered page. |
 | `read_post` | `slug`, optional `lang`, `source` = `auto` / `draft` / `published`. `auto` prefers an active draft. Returns full content, frontmatter and `revision`. |
 | `create_post` | `slug`, optional `lang`, `title`, `content`, optional `tags`, `categories`, `summary`; immediately commits to a dedicated draft branch. A translation requires an original in draft or main. |
 | `update_post` | Requires `expected_revision`. Optional `expected_published_revision` plus full `content` explicitly reconciles an external edit after reading both versions. No automatic merge or overwrite. |
+| `delete_draft` | `slug`, optional `lang`, required `expected_revision` from reading the draft. Removes only that language from active drafts using an atomic archive marker, leaving published articles, other languages, Git history, candidate branches and uploaded images intact. Repeating the same deleted revision is safe; stale versions conflict. |
 | `upload_image` | ChatGPT native attachment: `slug`, optional `lang`, `expected_revision`, original-extension `filename`, and `file`. `_meta["openai/fileParams"]` injects `download_url`/`file_id` plus optional MIME/name. Server-side bounded download, WebP conversion, R2 persistence and draft attachment in one call; no shell PUT. Same file ID/article/filename retries return the existing result. |
 | `prepare_image_upload` | `slug`, optional `lang`, `expected_revision`, `filename`, `mime_type`, `size`, optional `sha256`. Returns a five-minute R2 PUT URL, signed required headers and a 24-hour completion ticket; no Git write. |
 | `complete_image_upload` | `upload_ticket`; verifies uploaded bytes, saves an immutable public R2 image and records its metadata in the draft. Returns URL/Markdown and a new revision. Up to 15 MiB each and eight per language draft. See [image upload contract](../MCP.md#upload-article-images). |
@@ -302,6 +303,21 @@ convenience; use the automated generated-key test harness instead.
 | `get_operation_status` | `operation_id`; returns queued/validating/ready/stale/expired/validation_failed/deploying/deployed/deployment_failed. Ready includes complete preview and confirmation. May repair post-publication bookkeeping. |
 | `publish_post` | `slug`, `lang`, `confirmation`; always updates remote main after validation and explicit approval. No `push_to_remote` or local-commit mode. |
 | `get_repo_status`, `read_config` | Read the remote repository's main revision and Hugo config. |
+
+`index_stale` compares the immutable Git objects for `content/posts`,
+`scripts/blog_content.py`, and `scripts/export_mcp_index.py` between the indexed
+commit and current main. Different commit IDs alone do not indicate stale
+articles: MCP-only or documentation commits intentionally skip Pages deployment.
+The check walks only non-recursive trees (at most eight extra GitHub API calls
+when commits differ), so large changes are not subject to the compare API's file
+limit. If verification fails, the listing returns an error rather than claiming
+freshness; `read_post` remains authoritative. No article sorting runs per request.
+
+Deleting a draft invalidates earlier publication confirmations and upload tickets.
+For an unpublished article, `create_post` can reuse the deleted slug. For a
+published article, read the published version and use `update_post` to start a
+fresh draft before editing or uploading again. Deletion does not permanently
+erase publicly accessible Git history or R2 assets.
 
 Validation is part of preparation, and reads are tools so
 clients need not support resource browsing. All tools require owner authorization.

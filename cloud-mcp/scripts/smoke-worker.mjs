@@ -51,7 +51,8 @@ try {
   assert.equal(list.status, 200, await list.clone().text());
   const text = await list.text();
   const payload = JSON.parse(text.startsWith('{') ? text : /data: (.+)/.exec(text)[1]);
-  assert.equal(payload.result.tools.length, 12);
+  assert.equal(payload.result.tools.length, 13);
+  assert.ok(payload.result.tools.some(tool => tool.name === 'delete_draft' && tool.annotations.destructiveHint));
   assert.ok(payload.result.tools.some(tool => tool.name === 'prepare_image_upload'));
   assert.ok(payload.result.tools.some(tool => tool.name === 'complete_image_upload'));
   const native = payload.result.tools.find(tool => tool.name === 'upload_image');
@@ -69,5 +70,5 @@ try {
   const rejected = JSON.parse(invalidText.startsWith('{') ? invalidText : /data: (.+)/.exec(invalidText)[1]);
   assert.ok(rejected.error || rejected.result?.isError, 'Invalid file string must be rejected by SDK');
   assert.equal(keyRequests, 1);
-  console.log('workerd smoke passed: dual Access checks, private health, retired OAuth routes, twelve tools and upload diagnostics before SDK validation; no GitHub access');
+  console.log('workerd smoke passed: dual Access checks, private health, retired OAuth routes, thirteen tools including draft deletion and upload diagnostics before SDK validation; no GitHub access');
 } finally { await runtime.dispose(); }

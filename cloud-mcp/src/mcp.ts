@@ -14,7 +14,7 @@ const list = z.array(z.string().trim().min(1).max(80)).max(30);
 const fields = { title: title.optional(), content: content.optional(), tags: list.optional(), categories: list.optional(), summary: z.string().max(500).optional() };
 
 export function createServer(blog: Blog) {
-  const server = new McpServer({ name: 'lins-hugo-blog-cloud', version: '1.4.0' }, {
+  const server = new McpServer({ name: 'lins-hugo-blog-cloud', version: '1.5.0' }, {
     instructions: 'Manage only this owner’s blog. In ChatGPT use upload_image with native file input for attachments; do not run curl. Draft branches are public if the repository is public. Read before editing and supply the revision. Prepare publication, poll validation, show the full preview, then obtain explicit user approval before publish_post. A confirmation token is a version identifier, not human consent. Poll deployment separately. Never claim a commit means the website is live.',
   });
   function tool<S extends z.ZodRawShape>(name: string, description: string, shape: S, readOnly: boolean,
@@ -34,7 +34,7 @@ export function createServer(blog: Blog) {
       }
     });
   }
-  tool('list_posts', 'List the indexed main-branch articles and a separate page of active drafts. Follow next_draft_offset until null. index_stale signals deployment lag; read_post is authoritative.', {
+  tool('list_posts', 'List indexed main-branch articles newest publication date first (unknown dates last; ties by slug), plus a separate page of active drafts. Follow next_draft_offset until null. index_stale means article or index-generator sources changed; different commit IDs alone do not mean stale content. read_post is authoritative.', {
     query: z.string().max(200).default(''), offset: z.number().int().min(0).default(0), limit: z.number().int().min(1).max(50).default(20),
     draft_offset: z.number().int().min(0).default(0),
     draft_limit: z.number().int().min(1).max(10).default(5),
@@ -48,6 +48,9 @@ export function createServer(blog: Blog) {
   tool('update_post', 'Save draft changes with optimistic concurrency. Always sets draft true. To resolve an external publication conflict, read both versions, merge the content, and supply expected_published_revision from read_post(source=published) along with the complete merged content.', {
     slug, lang, expected_revision: sha, expected_published_revision: sha.optional(), ...fields,
   }, false, a => { const { slug: s, lang: l, expected_revision, expected_published_revision, ...updates } = a; return blog.updatePost(s, l, expected_revision, updates, expected_published_revision); });
+  tool('delete_draft', 'Delete only the specified language draft after reading it and supplying expected_revision. Removes it from active drafts and invalidates pending publication confirmations; never changes the published article or other languages. Uses a version-checked archive marker: Git history, candidate branches and uploaded images remain accessible, so this is not permanent content erasure. Retrying the same deleted revision is safe. A new article can be created again with create_post; use update_post on a published article to start a fresh draft.', {
+    slug, lang, expected_revision: sha,
+  }, false, a => blog.deleteDraft(a.slug, a.lang, a.expected_revision));
   tool('upload_image', 'ChatGPT attachment upload: use this tool when the image is attached or generated in ChatGPT. Pass its native file reference; ChatGPT supplies the download_url and file_id automatically. The server downloads the original, validates at most 15 MiB, converts PNG/JPEG/GIF to WebP (preserving transparency and animation), stores it on R2 and attaches metadata to the draft. Existing WebP bytes are preserved. Returns final Markdown and a new revision for update_post. Do not run curl, prepare_image_upload or complete_image_upload for this path. Choose a lowercase filename with the original image extension. Never invent file references or pass local paths/base64; if ChatGPT cannot supply the reference, report that it is unavailable. Retrying the same file_id, article and filename is safe. Does not publish the article.', {
     slug, lang, expected_revision: sha, filename: z.string().max(85).regex(IMAGE_NAME),
     file: z.object({

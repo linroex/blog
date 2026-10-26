@@ -190,6 +190,29 @@ class CloudMCPTests(unittest.TestCase):
         posts = export_index(self.root, self.git('rev-parse', 'HEAD'))['posts']
         self.assertEqual([post['slug'] for post in posts], ['legacy_lc_all'])
 
+    def test_index_orders_publication_dates_with_timezones_ties_and_unknown_dates(self):
+        dates = {
+            'a-earlier-offset': '2026-01-02T00:00:00+08:00',
+            'z-newest': '2026-01-01T20:00:00Z',
+            'b-same-instant': '2026-01-01T16:00:00Z',
+            'date-only': '2026-01-01',
+            'old-naive': '2025-12-31T23:59:59',
+            'unknown-a': 'not-a-date',
+            'unknown-b': None,
+        }
+        for slug, date in dates.items():
+            field = f'date: "{date}"\n' if date is not None else ''
+            self.write(f'content/posts/{slug}/index.md', f'---\ntitle: "Post"\n{field}---\nbody\n')
+        posts = export_index(self.root, self.git('rev-parse', 'HEAD'))['posts']
+        self.assertEqual([post['slug'] for post in posts], [
+            'z-newest', 'a-earlier-offset', 'b-same-instant', 'date-only',
+            'old-naive', 'unknown-a', 'unknown-b',
+        ])
+        self.assertEqual(posts[1]['date'], '2026-01-01T16:00:00+00:00')
+        self.assertEqual(posts[3]['date'], '2026-01-01T00:00:00+00:00')
+        self.assertIsNone(posts[-1]['date'])
+        self.assertIsNone(posts[-2]['date'])
+
 
 if __name__ == "__main__":
     unittest.main()

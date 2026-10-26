@@ -4,6 +4,7 @@ import { BlogError, type BinaryContent, type Commit, type Env, type FileChange, 
 
 const encoder = new TextEncoder();
 let cached: { identity: string; token: string; expires: number } | undefined;
+interface TreeEntry { path: string; sha: string; type: string }
 
 export async function installationToken(env: Env, fetcher: typeof fetch = fetch): Promise<string> {
   const identity = `${env.GITHUB_OWNER}/${env.GITHUB_REPO}/${env.GITHUB_APP_ID}/${env.GITHUB_INSTALLATION_ID}/${env.GITHUB_APP_PRIVATE_KEY}`;
@@ -103,6 +104,33 @@ export class GitHubRepository implements Repository {
     if (ancestor === descendant) return true;
     const result = await this.api<{ status: string }>(`/compare/${ancestor}...${descendant}`);
     return result?.status === 'ahead' || result?.status === 'identical';
+  }
+  private async tree(sha: string): Promise<TreeEntry[]> {
+    const data = await this.api<{ tree: TreeEntry[]; truncated: boolean }>(`/git/trees/${sha}`);
+    if (!data || data.truncated) throw new BlogError('index_check_unavailable', 'Cannot verify article index sources; retry or read_post for current content');
+    return data.tree;
+  }
+  async indexSourcesUnchanged(indexed: string, current: string): Promise<boolean> {
+    if (indexed === current) return true;
+    const before = await this.commit(indexed);
+    const after = await this.commit(current);
+    // Walk only the needed non-recursive trees, avoiding compare's 300-file
+    // limit and recursive tree truncation. At most eight GitHub requests.
+    const samePaths = async (left: string, right: string, paths: string[][]): Promise<boolean> => {
+      if (left === right) return true;
+      const a = await this.tree(left), b = await this.tree(right);
+      for (const name of new Set(paths.map(path => path[0]))) {
+        const x = a.find(entry => entry.path === name), y = b.find(entry => entry.path === name);
+        if (x?.sha === y?.sha && x?.type === y?.type) continue;
+        const children = paths.filter(path => path[0] === name).map(path => path.slice(1));
+        if (children.some(path => !path.length) || x?.type !== 'tree' || y?.type !== 'tree' ||
+            !await samePaths(x.sha, y.sha, children)) return false;
+      }
+      return true;
+    };
+    return samePaths(before.tree, after.tree, [
+      ['content', 'posts'], ['scripts', 'blog_content.py'], ['scripts', 'export_mcp_index.py'],
+    ]);
   }
   async runs(workflow: string, sha: string): Promise<Run[]> {
     const data = await this.api<{ workflow_runs: Run[] }>(`/actions/workflows/${encodeURIComponent(workflow)}/runs?head_sha=${sha}&event=push&per_page=20`);

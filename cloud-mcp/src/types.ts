@@ -55,5 +55,6 @@ export interface Repository {
   advanceRef(branch: string, sha: string): Promise<void>;
   refs(prefix: string): Promise<{ branch: string; sha: string }[]>;
   isAncestor(ancestor: string, descendant: string): Promise<boolean>;
+  indexSourcesUnchanged(indexed: string, current: string): Promise<boolean>;
   runs(workflow: string, sha: string): Promise<Run[]>;
 }

@@ -31,18 +31,21 @@ function result(body: string) {
   return JSON.parse(body.startsWith('event:') || body.startsWith('data:') ? /data: (.+)/.exec(body)![1] : body).result;
 }
 
-it('lists twelve MCP tools including native ChatGPT attachment upload after both Access checks', async () => {
+it('lists thirteen MCP tools including draft deletion after both Access checks', async () => {
   const h = await harness();
   const response = await h.rpc('tools/list');
   expect(response.status, await response.clone().text()).toBe(200);
   const tools = result(await response.text()).tools.map((tool: { name: string }) => tool.name).sort();
-  expect(tools).toEqual(['complete_image_upload', 'create_post', 'get_operation_status', 'get_repo_status', 'list_posts', 'prepare_image_upload', 'prepare_publish',
+  expect(tools).toEqual(['complete_image_upload', 'create_post', 'delete_draft', 'get_operation_status', 'get_repo_status', 'list_posts', 'prepare_image_upload', 'prepare_publish',
     'publish_post', 'read_config', 'read_post', 'update_post', 'upload_image']);
   const schemaResponse = await h.rpc('tools/list');
   const native = result(await schemaResponse.text()).tools.find((tool: { name: string }) => tool.name === 'upload_image');
   expect(native._meta['openai/fileParams']).toEqual(['file']);
   expect(native.inputSchema.properties.file.required.sort()).toEqual(['download_url', 'file_id']);
   expect(Object.keys(native.inputSchema.properties.file.properties).sort()).toEqual(['download_url', 'file_id', 'file_name', 'mime_type']);
+  const deletion = result(await (await h.rpc('tools/list')).text()).tools.find((tool: { name: string }) => tool.name === 'delete_draft');
+  expect(deletion.inputSchema.required.sort()).toEqual(['expected_revision', 'slug']);
+  expect(deletion.annotations).toMatchObject({ readOnlyHint: false, destructiveHint: true });
   expect(h.network).toHaveBeenCalledTimes(1); // Only JWKS, no GitHub calls.
 });
 
@@ -78,6 +81,40 @@ it('reads an article through the authenticated MCP handler with repo-scoped App 
   const read = result(await response.text());
   expect(read.isError).not.toBe(true);
   expect(read.structuredContent.content).toBe('Article body\n');
+});
+
+it('deletes the requested language through MCP using only a non-forced draft ref update', async () => {
+  const h = await harness();
+  Object.assign(h.env, { GITHUB_APP_ID: crypto.randomUUID(), GITHUB_INSTALLATION_ID: '123', GITHUB_APP_PRIVATE_KEY: await exportPKCS8(h.key.privateKey) });
+  const before = 'b'.repeat(40), after = 'c'.repeat(40), tree = 'd'.repeat(40);
+  h.network.mockImplementation(async (input: string | URL | Request, init: RequestInit = {}) => {
+    const url = String(input);
+    if (url === `${h.issuer}/cdn-cgi/access/certs`) return h.fetcher(url, {});
+    if (url.endsWith('/app/installations/123/access_tokens')) return Response.json({ token: 'test-app-token', expires_at: new Date(Date.now() + 3600_000).toISOString() });
+    if (url.includes('/git/ref/heads/mcp%2Fdrafts%2Fhello%2Fen')) return Response.json({ object: { sha: before } });
+    if (url.includes('/contents/')) {
+      const text = url.includes('/.mcp/draft.json') ? JSON.stringify({ slug: 'hello', lang: 'en', base_post_sha: null }) : '---\ntitle: Hello\ndraft: true\n---\nDraft\n';
+      expect(url.includes('/.mcp/draft.json') || url.includes('/content/posts/hello/index.en.md')).toBe(true);
+      return Response.json({ type: 'file', size: text.length, sha: before, encoding: 'base64', content: Buffer.from(text).toString('base64') });
+    }
+    if (url.endsWith(`/git/commits/${before}`)) return Response.json({ sha: before, message: '', parents: [], tree: { sha: tree } });
+    const body = JSON.parse(init.body as string);
+    if (url.endsWith('/git/trees')) {
+      expect(body.tree).toHaveLength(1);
+      expect(body.tree[0].path).toBe('.mcp/draft.json');
+      expect(JSON.parse(body.tree[0].content).deleted_revision).toBe(before);
+      return Response.json({ sha: tree });
+    }
+    if (url.endsWith('/git/commits')) return Response.json({ sha: after });
+    expect(url.endsWith('/git/refs/heads/mcp%2Fdrafts%2Fhello%2Fen')).toBe(true);
+    expect(init.method).toBe('PATCH');
+    expect(body).toEqual({ sha: after, force: false });
+    return Response.json({});
+  });
+  const response = await h.rpc('tools/call', { name: 'delete_draft', arguments: { slug: 'hello', lang: 'en', expected_revision: before } });
+  const deleted = result(await response.text());
+  expect(deleted.isError).not.toBe(true);
+  expect(deleted.structuredContent).toMatchObject({ slug: 'hello', lang: 'en', deleted: true, revision: after });
 });
 
 it('blocks every route without a platform context even with a correctly signed assertion', async () => {

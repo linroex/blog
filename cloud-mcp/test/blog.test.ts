@@ -163,10 +163,35 @@ describe('publication and recovery', () => {
 it('lists stale indexed articles and separate drafts with a bounded cursor', async () => {
   const { repo, blog } = setup();
   for (let i = 0; i < 11; i++) await blog.createPost(`draft-${i}`, 'zh-tw', { title: 'Draft', content: 'body' });
-  await repo.externalEdit('other.txt', 'new main');
+  await repo.externalEdit('content/posts/original/index.md', 'new main article');
   const page = await blog.listPosts('', 0, 20, 0, 10);
   expect(page.index_stale).toBe(true);
   expect(page.drafts).toHaveLength(10);
   expect(page.next_draft_offset).toBe(10);
   expect((await blog.listPosts('', 0, 20, 10)).drafts).toHaveLength(1);
+});
+
+it.each(['MCP.md', 'cloud-mcp/src/mcp.ts', 'other.txt'])('does not mark the index stale after editing %s', async path => {
+  const { repo, blog, index } = setup();
+  await repo.externalEdit(path, 'Unrelated change');
+  const page = await blog.listPosts('', 0, 20, 0);
+  expect(page.current_main_commit).not.toBe(index.commit);
+  expect(page.indexed_commit).toBe(index.commit);
+  expect(page.index_stale).toBe(false);
+});
+
+it.each(['content/posts/new/index.md', 'content/posts/original/index.ja.md', 'scripts/blog_content.py', 'scripts/export_mcp_index.py'])(
+  'marks the index stale after editing %s', async path => {
+    const { repo, blog } = setup();
+    await repo.externalEdit(path, 'New index source');
+    expect((await blog.listPosts('', 0, 20, 0)).index_stale).toBe(true);
+  });
+
+it('preserves the date ordering of the index when filtering and paginating', async () => {
+  const { blog, index } = setup();
+  index.posts = ['z-newest', 'm-middle', 'a-oldest'].map(slug => ({ slug, title: 'Match', summary: '', draft: false, translations: [] }));
+  const page = await blog.listPosts('Match', 1, 1, 0);
+  expect(page.posts.map(post => post.slug)).toEqual(['m-middle']);
+  expect(page.total).toBe(3);
+  expect(page.index_stale).toBe(false);
 });

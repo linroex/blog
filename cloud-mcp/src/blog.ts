@@ -9,7 +9,7 @@ const META_PATH = '.mcp/draft.json';
 const CANDIDATE_PREFIX = 'Blog MCP candidate\n\n';
 const SHA = /^[a-f0-9]{40}$/;
 export interface DraftMeta {
-  slug: string; lang: Lang; base_post_sha: string | null; published_commit?: string; images?: ImageAsset[];
+  slug: string; lang: Lang; base_post_sha: string | null; published_commit?: string; deleted_revision?: string; images?: ImageAsset[];
 }
 interface Candidate {
   operation_id: string; user_id: string; slug: string; lang: Lang;
@@ -45,7 +45,8 @@ export class Blog {
     let meta: DraftMeta;
     try { meta = JSON.parse(metadata.text); } catch { throw new BlogError('invalid_draft', 'Invalid draft metadata'); }
     if (meta.slug !== slug || meta.lang !== lang || !(meta.base_post_sha === null || SHA.test(meta.base_post_sha)) ||
-        (meta.published_commit && !SHA.test(meta.published_commit))) throw new BlogError('invalid_draft', 'Draft metadata does not match the article');
+        (meta.published_commit && !SHA.test(meta.published_commit)) ||
+        (meta.deleted_revision !== undefined && !SHA.test(meta.deleted_revision))) throw new BlogError('invalid_draft', 'Draft metadata does not match the article');
     imageManifest(meta.images);
     const file = await this.repo.file(postPath(slug, lang), revision);
     if (!file) throw new BlogError('invalid_draft', 'Draft article is missing');
@@ -54,7 +55,7 @@ export class Blog {
   private async effective(slug: string, lang: Lang, source: 'draft' | 'published' | 'auto' = 'auto') {
     const main = await this.main();
     const draft = source === 'published' ? null : await this.draft(slug, lang);
-    if (draft && !draft.meta.published_commit) return { file: draft.file, revision: draft.revision, source: 'draft', main, draft };
+    if (draft && !draft.meta.published_commit && !draft.meta.deleted_revision) return { file: draft.file, revision: draft.revision, source: 'draft', main, draft };
     if (source === 'draft') throw new BlogError('not_found', 'No active draft for this article');
     const file = await this.repo.file(postPath(slug, lang), main);
     if (!file) throw new BlogError('not_found', 'Article not found');
@@ -77,7 +78,8 @@ export class Blog {
   }
   async createPost(slug: string, lang: Lang, fields: PostFields & { title: string; content: string }) {
     const main = await this.main();
-    if (await this.repo.head(this.branch(slug, lang)) || await this.repo.file(postPath(slug, lang), main)) {
+    const previous = await this.draft(slug, lang);
+    if ((previous && !previous.meta.deleted_revision) || await this.repo.file(postPath(slug, lang), main)) {
       throw new BlogError('already_exists', 'Article or draft already exists; read and update it instead');
     }
     let inherited: Record<string, unknown> = {};
@@ -89,8 +91,9 @@ export class Blog {
       tags: fields.tags ?? inherited.tags ?? [], categories: fields.categories ?? inherited.categories ?? [],
       summary: fields.summary ?? '', draft: true }, fields.content);
     const meta: DraftMeta = { slug, lang, base_post_sha: null };
-    const revision = await this.repo.writeCommit(main, { [postPath(slug, lang)]: raw, [META_PATH]: JSON.stringify(meta) }, `Draft: ${slug} (${lang})`);
-    await this.repo.createRef(this.branch(slug, lang), revision);
+    const revision = await this.repo.writeCommit(previous?.revision ?? main, { [postPath(slug, lang)]: raw, [META_PATH]: JSON.stringify(meta) }, `Draft: ${slug} (${lang})`);
+    if (previous) await this.repo.advanceRef(previous.branch, revision);
+    else await this.repo.createRef(this.branch(slug, lang), revision);
     return this.view(slug, lang, { text: raw, sha: '' }, revision, 'draft');
   }
   async updatePost(slug: string, lang: Lang, expectedRevision: string, fields: PostFields, expectedPublishedRevision?: string) {
@@ -112,12 +115,31 @@ export class Blog {
     else await this.repo.createRef(this.branch(slug, lang), revision);
     return this.view(slug, lang, { text: raw, sha: '' }, revision, 'draft');
   }
+  async deleteDraft(slug: string, lang: Lang, expectedRevision: string) {
+    const draft = await this.draft(slug, lang);
+    if (!draft || draft.meta.published_commit) throw new BlogError('not_found', 'No active draft for this article');
+    const alreadyDeleted = draft.meta.deleted_revision === expectedRevision;
+    if (!alreadyDeleted && (draft.meta.deleted_revision || draft.revision !== expectedRevision)) {
+      throw new BlogError('conflict', 'Draft changed; read it again before deleting');
+    }
+    let revision = draft.revision;
+    if (!alreadyDeleted) {
+      // A non-forced ref update atomically competes with concurrent writers.
+      // GitHub's delete-ref API has no expected-SHA guard, so retain a tombstone.
+      revision = await this.repo.writeCommit(draft.revision,
+        { [META_PATH]: JSON.stringify({ ...draft.meta, deleted_revision: draft.revision }) }, `Delete draft: ${slug} (${lang})`);
+      await this.repo.advanceRef(draft.branch, revision);
+    }
+    return { slug, lang, deleted: true, already_deleted: alreadyDeleted, revision,
+      deleted_revision: expectedRevision, retained_git_history: true, retained_uploaded_images: true };
+  }
   async prepareImageUpload(slug: string, lang: Lang, expectedRevision: string, filename: string,
     mimeType: string, size: number, expectedHash?: string) {
     validateUpload(filename, mimeType, size, this.imageStorage.maximum);
     if (expectedHash !== undefined && !/^[a-f0-9]{64}$/.test(expectedHash)) throw new BlogError('invalid_image', 'sha256 must be a lowercase SHA-256 hex digest');
     const current = await this.effective(slug, lang);
     if (current.revision !== expectedRevision) throw new BlogError('conflict', 'Article changed; read it again before uploading');
+    if (current.draft?.meta.deleted_revision) throw new BlogError('conflict', 'Draft was deleted; use update_post to start a fresh draft before uploading');
     const images = imageManifest(current.source === 'draft' ? current.draft!.meta.images : undefined);
     if (images.some(a => a.filename === webpFilename(filename))) throw new BlogError('image_exists', 'This draft already has that WebP filename; choose a new basename');
     if (images.length >= MAX_IMAGES) throw new BlogError('invalid_image', 'A draft supports at most 8 uploaded images');
@@ -155,6 +177,7 @@ export class Blog {
   private async attachImage(upload: ImageUpload, load: () => Promise<ImageAsset>, discard?: () => Promise<void>) {
     postPath(upload.slug, upload.lang);
     const current = await this.effective(upload.slug, upload.lang);
+    if (current.draft?.meta.deleted_revision) throw new BlogError('conflict', 'Draft was deleted; use update_post to start a fresh draft before uploading');
     const previous = imageManifest(current.draft?.meta.images).find(a => a.storage === 'r2' && a.upload_id === upload.upload_id);
     if (previous) {
       await discard?.();
@@ -180,7 +203,7 @@ export class Blog {
   }
   async preparePublish(slug: string, lang: Lang) {
     const draft = await this.draft(slug, lang);
-    if (!draft || draft.meta.published_commit) throw new BlogError('not_found', 'Create or update a draft before preparing publication');
+    if (!draft || draft.meta.published_commit || draft.meta.deleted_revision) throw new BlogError('not_found', 'Create or update a draft before preparing publication');
     const main = await this.main();
     const original = await this.repo.file(postPath(slug, lang), main);
     if ((original?.sha ?? null) !== draft.meta.base_post_sha) throw new BlogError('conflict', 'Published article changed since this draft began; reconcile the draft before publishing');
@@ -313,13 +336,14 @@ export class Blog {
       const [, , slug, language, extra] = ref.branch.split('/');
       if (extra || !['zh-tw', 'en', 'ja'].includes(language)) continue;
       const draft = await this.draft(slug, language as Lang);
-      if (!draft || draft.meta.published_commit) continue;
+      if (!draft || draft.meta.published_commit || draft.meta.deleted_revision) continue;
       const metadata = document(draft.file.text).metadata;
       if (!`${slug} ${metadata.title ?? ''} ${metadata.summary ?? ''}`.toLocaleLowerCase().includes(needle)) continue;
       drafts.push({ slug, lang: language, title: metadata.title, summary: metadata.summary, revision: draft.revision, draft: true });
     }
     return { posts: posts.slice(offset, offset + limit), total: posts.length, offset, limit,
       drafts, next_draft_offset: draftOffset + page.length < refs.length ? draftOffset + page.length : null,
-      indexed_commit: index.commit, current_main_commit: main, index_stale: index.commit !== main };
+      indexed_commit: index.commit, current_main_commit: main,
+      index_stale: !await this.repo.indexSourcesUnchanged(index.commit, main) };
   }
 }
