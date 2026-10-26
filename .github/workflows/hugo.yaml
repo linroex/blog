@@ -56,7 +56,7 @@ jobs:
       - name: Validate the single-article snapshot for MCP review PRs
         if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'mcp/reviews/')
         env:
-          GITHUB_REF_NAME: ${{ github.head_ref }}
+          MCP_REF_NAME: ${{ github.head_ref }}
         run: python3 scripts/check_mcp_candidate.py
       - name: Build with Hugo
         env:
