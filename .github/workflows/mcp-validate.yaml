@@ -2,7 +2,7 @@ name: Validate MCP publication
 
 on:
   push:
-    branches: ["mcp/candidates/**"]
+    branches: ["mcp/candidates/**", "mcp/reviews/**"]
 
 permissions:
   contents: read

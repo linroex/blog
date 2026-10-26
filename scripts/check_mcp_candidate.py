@@ -30,7 +30,10 @@ def validate_candidate(root: Path, ref_name: str) -> dict:
         raise ValueError("Invalid candidate envelope")
     encoded = envelope[0]
     data = json.loads(base64.urlsafe_b64decode(encoded + "=" * (-len(encoded) % 4)))
-    if ref_name != f"mcp/candidates/{data['operation_id']}":
+    review = data.get('review_branch')
+    if review is not None and not re.fullmatch(r'mcp/reviews/[a-f0-9-]{36}', review):
+        raise ValueError('Invalid review branch')
+    if ref_name != (review or f"mcp/candidates/{data['operation_id']}"):
         raise ValueError("Candidate branch does not match operation")
     slug, lang = data["slug"], data["lang"]
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug) or len(slug) > 100 or lang not in ("zh-tw", "en", "ja"):
@@ -38,6 +41,11 @@ def validate_candidate(root: Path, ref_name: str) -> dict:
     path = f"content/posts/{slug}/index{'' if lang == 'zh-tw' else '.' + lang}.md"
     if git("show", "-s", "--format=%P", "HEAD") != data["base_main"]:
         raise ValueError("Candidate must have exactly its recorded base parent")
+    if review:
+        original = git('ls-tree', data['base_main'], '--', path)
+        original_sha = original.split()[2] if original else None
+        if original_sha != data.get('base_post_sha'):
+            raise ValueError('Published article changed since the draft began')
     images = image_manifest(data.get('images', []))
     allowed_images = {image_view(slug, asset)['path']: asset for asset in images if asset.get('storage') != 'r2'}
     # R2 bytes never enter Git. Check identity against the trusted base config,

@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { Blog, type ArticleIndex } from '../src/blog';
 import { newDocument } from '../src/document';
 import type { ImageStorage } from '../src/r2-images';
-import { BlogError, type Commit, type Env, type FileChange, type FileContent, type Repository, type Run } from '../src/types';
+import { BlogError, type Commit, type Env, type FileChange, type FileContent, type Repository, type Run, type Pull, type Job } from '../src/types';
 
 export const hash = (value: string) => createHash('sha1').update(value).digest('hex');
 export const env = {
@@ -16,6 +16,9 @@ export class FakeRepo implements Repository {
   branches = new Map<string, string>();
   commits = new Map<string, Commit & { files: Record<string, FileChange> }>();
   workflowRuns = new Map<string, Run[]>();
+  pullRequests = new Map<number, Pull>();
+  jobRuns = new Map<number, Job[]>();
+  failPR = false;
   failNextMainUpdate = false;
   loseMainResponse = false;
   failBookkeeping = false;
@@ -62,9 +65,53 @@ export class FakeRepo implements Repository {
   async isAncestor(ancestor: string, descendant: string): Promise<boolean> {
     if (ancestor === descendant) return true;
     const commit = this.commits.get(descendant);
-    return !!commit?.parents.length && this.isAncestor(ancestor, commit.parents[0]);
+    for (const parent of commit?.parents ?? []) if (await this.isAncestor(ancestor, parent)) return true;
+    return false;
   }
   async runs(workflow: string, sha: string) { return this.workflowRuns.get(`${workflow}:${sha}`) ?? []; }
+  async pulls(branches: string[]) {
+    if (this.failPR) throw new BlogError('github_error', 'PR permission missing');
+    return Object.fromEntries(branches.map(branch => [branch, [...this.pullRequests.values()].filter(p => p.branch === branch).at(-1) ?? null]));
+  }
+  async pull(number: number) {
+    const pull = this.pullRequests.get(number);
+    if (!pull) throw new BlogError('not_found', 'PR missing');
+    return { ...pull };
+  }
+  async createPull(branch: string, _title: string, _body: string) {
+    if (this.failPR) throw new BlogError('github_error', 'PR permission missing');
+    const number = this.pullRequests.size + 1;
+    const pull: Pull = { number, node_id: `PR_${number}`, url: `https://github.com/test/blog/pull/${number}`, branch,
+      head: this.branches.get(branch)!, state: 'open', draft: true, merged: false, merge_commit: null, message: this.commits.get(this.branches.get(branch)!)?.message };
+    this.pullRequests.set(number, pull);
+    return { ...pull };
+  }
+  async updatePull(number: number, _title: string, _body: string, state?: 'open' | 'closed') {
+    const pull = this.pullRequests.get(number)!;
+    if (state) pull.state = state;
+    return { ...pull };
+  }
+  async setPullDraft(pull: Pull, draft: boolean) { this.pullRequests.get(pull.number)!.draft = draft; }
+  async mergePull(number: number, expected: string) {
+    const pull = this.pullRequests.get(number)!;
+    if (this.failNextMainUpdate) { this.failNextMainUpdate = false; await this.externalEdit('other.txt', 'Concurrent change'); throw new BlogError('conflict', 'Base changed'); }
+    if (pull.head !== expected || pull.draft || pull.state !== 'open') throw new BlogError('conflict', 'PR changed');
+    const main = this.branches.get('main')!;
+    const candidate = await this.commit(expected);
+    if (candidate.parents[0] !== main) throw new BlogError('conflict', 'Base is not up to date');
+    const sha = hash(`merge:${main}:${expected}`);
+    this.commits.set(sha, { sha, tree: sha, message: `Merge pull request #${number}`, parents: [main, expected], files: { ...candidate.files } });
+    this.branches.set('main', sha);
+    Object.assign(pull, { merged: true, state: 'closed', merge_commit: sha });
+    if (this.loseMainResponse) { this.loseMainResponse = false; throw new Error('Connection lost after merge'); }
+    return sha;
+  }
+  async syncReviewRef(branch: string, before: string | null, after: string, source: string, revision: string, main: string) {
+    if ((this.branches.get(branch) ?? null) !== before || this.branches.get(source) !== revision || this.branches.get('main') !== main) throw new BlogError('conflict', 'Snapshot changed');
+    this.branches.set(branch, after);
+    for (const pull of this.pullRequests.values()) if (pull.branch === branch) { pull.head = after; pull.message = this.commits.get(after)?.message; }
+  }
+  async jobs(run: number) { return this.jobRuns.get(run) ?? []; }
   async indexSourcesUnchanged(indexed: string, current: string) {
     const sources = (files: Record<string, FileChange>) => Object.entries(files)
       .filter(([path]) => path.startsWith('content/posts/') || ['scripts/blog_content.py', 'scripts/export_mcp_index.py'].includes(path))
