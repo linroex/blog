@@ -47,10 +47,13 @@ try {
   assert.equal(list.status, 200, await list.clone().text());
   const text = await list.text();
   const payload = JSON.parse(text.startsWith('{') ? text : /data: (.+)/.exec(text)[1]);
-  assert.equal(payload.result.tools.length, 11);
+  assert.equal(payload.result.tools.length, 12);
   assert.ok(payload.result.tools.some(tool => tool.name === 'prepare_image_upload'));
   assert.ok(payload.result.tools.some(tool => tool.name === 'complete_image_upload'));
+  const native = payload.result.tools.find(tool => tool.name === 'upload_image');
+  assert.deepEqual(native._meta['openai/fileParams'], ['file']);
+  assert.deepEqual(native.inputSchema.properties.file.required.sort(), ['download_url', 'file_id']);
   assert.ok(payload.result.tools.some(tool => tool.name === 'publish_post'));
   assert.equal(keyRequests, 1);
-  console.log('workerd smoke passed: dual Access checks, private health, retired OAuth routes and eleven tools including image upload; no GitHub access');
+  console.log('workerd smoke passed: dual Access checks, private health, retired OAuth routes and twelve tools including native ChatGPT image upload; no GitHub access');
 } finally { await runtime.dispose(); }

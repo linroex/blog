@@ -50,19 +50,40 @@ function put(offer) {
 let phase = 'prepare';
 let passed = false;
 let runtime;
+let nativeDownloads = 0;
 try {
   const worker = await build({ stdin: { contents: `import { R2Images } from './src/r2-images';
+    import { Blog } from './src/blog';
+    import { FakeRepo, env as testEnv } from './test/helpers';
     export default { async fetch(request, env) {
-      try { return Response.json(await new R2Images(env).complete(await request.json())); }
+      try {
+        const input = await request.json();
+        if (new URL(request.url).pathname === '/native') {
+          const repo = new FakeRepo();
+          const blog = new Blog(repo, { ...testEnv, ...env }, '123', async () => ({}));
+          const post = await blog.createPost('mcp-upload-check', 'zh-tw', { title: 'Disposable', content: 'Body' });
+          const first = await blog.uploadChatGPTImage('mcp-upload-check', 'zh-tw', post.revision, input.filename, input.file);
+          const retry = await blog.uploadChatGPTImage('mcp-upload-check', 'zh-tw', post.revision, input.filename, input.file);
+          if (!retry.already_completed || first.revision !== retry.revision) throw new Error('Native upload retry failed');
+          return Response.json(retry);
+        }
+        return Response.json(await new R2Images(env).complete(input));
+      }
       catch (error) { return Response.json({ error: error.code || 'runtime_error', type: error.name,
         message: String(error.message).replace(/https?:[^\\s]+/g, '[URL]').replace(/[A-Za-z0-9_+\\/=.-]{32,}/g, '[redacted]').slice(0, 200) }, { status: 500 }); }
     } };`, resolveDir: process.cwd(), sourcefile: 'r2-check-worker.ts' },
-    bundle: true, platform: 'browser', format: 'esm', write: false });
+    bundle: true, platform: 'browser', format: 'esm', external: ['node:crypto'], write: false });
   runtime = new Miniflare(convertV4MiniflareOptions({ modules: true, script: worker.outputFiles[0].text,
     compatibilityDate: '2026-10-24', compatibilityFlags: ['nodejs_compat', 'global_fetch_strictly_public'], bindings: env,
     images: { binding: 'IMAGES' },
     outboundService: async request => {
       const url = new URL(request.url);
+      if (url.hostname === 'files.oaiusercontent.com') {
+        assert.equal(request.method, 'GET');
+        assert.equal(request.headers.get('authorization'), null);
+        nativeDownloads++;
+        return new WorkerResponse(bytes, { headers: { 'Content-Length': String(bytes.length) } });
+      }
       assert.equal(url.hostname, `${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`);
       const key = url.pathname.slice(env.R2_BUCKET_NAME.length + 2);
       if (request.method === 'PUT' && key.startsWith(`blog-mcp/images/${upload.slug}/`) && key.endsWith('/' + filename.replace('.png', '.webp'))) cleanupKeys.add(key);
@@ -90,6 +111,16 @@ try {
   cleanupKeys.add(asset.key);
   // The retained pending object lets completion retry if the Git commit fails.
   assert.equal((await storage.complete(upload)).key, asset.key);
+  phase = 'native ChatGPT reference import';
+  const native = await runtime.dispatchFetch('http://localhost/native', { method: 'POST', body: JSON.stringify({ filename,
+    file: { download_url: 'https://files.oaiusercontent.com/file-integration?sig=simulated', file_id: `file-${uploadId}`, mime_type: 'image/png' } }) });
+  if (native.status !== 200) console.error('Native import:', await native.text());
+  assert.equal(native.status, 200);
+  const nativeAsset = await native.json();
+  assert.equal(nativeAsset.already_completed, true);
+  assert.equal(nativeAsset.sha256, asset.sha256);
+  assert.equal(nativeDownloads, 1);
+  cleanupKeys.add(nativeAsset.key);
   phase = 'public read';
   const publicRead = await fetch(asset.url, { redirect: 'error' });
   assert.equal(publicRead.status, 200);
@@ -111,5 +142,5 @@ try {
   }
   if (!cleaned) { console.error('R2 integration object cleanup needs attention'); process.exitCode = 1; }
   console.log(JSON.stringify({ passed, bytes: size, presigned_ttl_seconds: 300, overwrite_rejected: passed,
-    webp_conversion_verified: passed, public_hash_verified: passed, disposable_objects_removed: cleaned }));
+    native_file_import_verified: passed, native_attachment_download_simulated: true, webp_conversion_verified: passed, public_hash_verified: passed, disposable_objects_removed: cleaned }));
 }

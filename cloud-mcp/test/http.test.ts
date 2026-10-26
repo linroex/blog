@@ -31,13 +31,18 @@ function result(body: string) {
   return JSON.parse(body.startsWith('event:') || body.startsWith('data:') ? /data: (.+)/.exec(body)![1] : body).result;
 }
 
-it('lists eleven MCP tools including R2 upload preparation and completion after both Access checks', async () => {
+it('lists twelve MCP tools including native ChatGPT attachment upload after both Access checks', async () => {
   const h = await harness();
   const response = await h.rpc('tools/list');
   expect(response.status, await response.clone().text()).toBe(200);
   const tools = result(await response.text()).tools.map((tool: { name: string }) => tool.name).sort();
   expect(tools).toEqual(['complete_image_upload', 'create_post', 'get_operation_status', 'get_repo_status', 'list_posts', 'prepare_image_upload', 'prepare_publish',
-    'publish_post', 'read_config', 'read_post', 'update_post']);
+    'publish_post', 'read_config', 'read_post', 'update_post', 'upload_image']);
+  const schemaResponse = await h.rpc('tools/list');
+  const native = result(await schemaResponse.text()).tools.find((tool: { name: string }) => tool.name === 'upload_image');
+  expect(native._meta['openai/fileParams']).toEqual(['file']);
+  expect(native.inputSchema.properties.file.required.sort()).toEqual(['download_url', 'file_id']);
+  expect(Object.keys(native.inputSchema.properties.file.properties).sort()).toEqual(['download_url', 'file_id', 'file_name', 'mime_type']);
   expect(h.network).toHaveBeenCalledTimes(1); // Only JWKS, no GitHub calls.
 });
 

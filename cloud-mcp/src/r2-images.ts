@@ -12,6 +12,7 @@ export interface ImageStorage {
   maximum: number;
   offer(upload: ImageUpload): Promise<{ upload_url: string; required_headers: Record<string, string> }>;
   complete(upload: ImageUpload): Promise<ImageAsset>;
+  store(upload: ImageUpload, bytes: Uint8Array): Promise<ImageAsset>;
   verify(asset: ImageAsset, slug: string): Promise<void>;
   discard(upload: ImageUpload): Promise<void>;
 }
@@ -97,6 +98,11 @@ export class R2Images implements ImageStorage {
     let offset = 0;
     for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
     chunks.length = 0;
+    return this.store(upload, bytes);
+  }
+  async store(upload: ImageUpload, bytes: Uint8Array): Promise<ImageAsset> {
+    validateUpload(upload.filename, upload.mime_type, upload.size, this.maximum);
+    if (bytes.length !== upload.size) throw new BlogError('invalid_image', 'Image size differs from the original size');
     const original = await imageBytes(upload.filename, bytes, this.maximum);
     if (upload.expected_sha256 && original.sha256 !== upload.expected_sha256) throw new BlogError('invalid_image', 'Uploaded image SHA-256 differs from the prepared hash');
     const converted = await this.webp(original, bytes);
@@ -119,7 +125,7 @@ export class R2Images implements ImageStorage {
       const result = await this.env.IMAGES.input(new Response(bytes as BodyInit).body!)
         .output({ format: 'image/webp', quality: 85, anim: true });
       response = result.response();
-    } catch { throw new BlogError('image_conversion_failed', 'Cloudflare could not convert the image to WebP; the original remains pending and the draft has not changed. Check image validity and Images quota before retrying.'); }
+    } catch { throw new BlogError('image_conversion_failed', 'Cloudflare could not convert the image to WebP; the draft has not changed. Check image validity and Images quota before retrying.'); }
     if (!response.ok || response.headers.get('content-type')?.split(';')[0] !== 'image/webp' || !response.body) throw new BlogError('image_conversion_failed', 'Cloudflare did not return a WebP image; the draft has not changed');
     const reader = response.body.getReader();
     const chunks: Uint8Array[] = [];

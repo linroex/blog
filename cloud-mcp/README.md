@@ -91,7 +91,7 @@ Python scripts in `scripts/` are build/index/validation helpers, not MCP servers
 | --- | --- | --- |
 | HTTP entry | [src/index.ts](src/index.ts), `fetch` | Validate configuration and origin, verify Access identity, route `/health` and `/mcp`, bound the request body, construct `GitHubRepository` and `Blog`, invoke the Agents MCP handler. |
 | Owner authentication | [src/auth.ts](src/auth.ts), `verifyAccess` | Require platform `ctx.access` and a signed Access JWT; map the verified owner email to the existing numeric owner ID. |
-| MCP interface | [src/mcp.ts](src/mcp.ts), `createServer` | Register eleven tools, validate input schemas, translate tool calls to `Blog` methods and return structured results/errors. |
+| MCP interface | [src/mcp.ts](src/mcp.ts), `createServer` | Register twelve tools, validate input schemas, translate tool calls to `Blog` methods and return structured results/errors. |
 | Authoring and publication | [src/blog.ts](src/blog.ts), `Blog` | Select draft/published revisions, enforce conflicts, create candidates, poll validation, issue confirmations, update main and recover interrupted publications. |
 | GitHub persistence | [src/github.ts](src/github.ts), `installationToken`, `GitHubRepository` | Obtain a repo-scoped App token; read/write blobs, trees, commits and refs; query Actions. Ref updates always use `force: false`. |
 | Article format and signatures | [src/document.ts](src/document.ts), [src/crypto.ts](src/crypto.ts), [src/types.ts](src/types.ts) | Restrict article paths/languages, parse and edit frontmatter, enforce file limits, hash content and sign purpose-specific candidate/confirmation envelopes. |
@@ -179,7 +179,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 
 The smoke test runs the bundled Worker in workerd with generated RSA test keys,
 a local JWKS responder and simulated `ctx.access`. It verifies private routes,
-real signature checks, retired OAuth routes and eleven MCP tools without GitHub
+real signature checks, retired OAuth routes and twelve MCP tools without GitHub
 access. Node integration tests also read a mocked article through HTTP MCP.
 Tests cover forged signatures, issuer/audience/expiry/user/context failures, old
 bearers, rotation, fresh/stale cache behavior and unavailable/malformed JWKS.
@@ -244,7 +244,7 @@ App `linroex-blog-mcp`, installed only on `linroex/blog`.
    Verify a real **Managed OAuth** request succeeds at `/health` (not just a
    browser cookie). Its 200 response is possible only after both `ctx.access`
    and Access JWT verification. Reconnect the existing Blog plugin in ChatGPT,
-   confirm exactly eleven tools (including both R2 upload tools), and read a published article. Test refresh-token
+   confirm exactly twelve tools (including native `upload_image` and both R2 upload tools), and read a published article. Test refresh-token
    renewal and compare the actual access-token lifetime with 900 seconds.
    Do not publish a test article. If the JWT/context combination is unavailable,
    leave Access enabled and MCP paused while investigating.
@@ -281,6 +281,7 @@ convenience; use the automated generated-key test harness instead.
 | `read_post` | `slug`, optional `lang`, `source` = `auto` / `draft` / `published`. `auto` prefers an active draft. Returns full content, frontmatter and `revision`. |
 | `create_post` | `slug`, optional `lang`, `title`, `content`, optional `tags`, `categories`, `summary`; immediately commits to a dedicated draft branch. A translation requires an original in draft or main. |
 | `update_post` | Requires `expected_revision`. Optional `expected_published_revision` plus full `content` explicitly reconciles an external edit after reading both versions. No automatic merge or overwrite. |
+| `upload_image` | ChatGPT native attachment: `slug`, optional `lang`, `expected_revision`, original-extension `filename`, and `file`. `_meta["openai/fileParams"]` injects `download_url`/`file_id` plus optional MIME/name. Server-side bounded download, WebP conversion, R2 persistence and draft attachment in one call; no shell PUT. Same file ID/article/filename retries return the existing result. |
 | `prepare_image_upload` | `slug`, optional `lang`, `expected_revision`, `filename`, `mime_type`, `size`, optional `sha256`. Returns a five-minute R2 PUT URL, signed required headers and a 24-hour completion ticket; no Git write. |
 | `complete_image_upload` | `upload_ticket`; verifies uploaded bytes, saves an immutable public R2 image and records its metadata in the draft. Returns URL/Markdown and a new revision. Up to 15 MiB each and eight per language draft. See [image upload contract](../MCP.md#upload-article-images). |
 | `prepare_publish` | Returns `operation_id` and `candidate_commit`, starts validation. Publish the original before its translations. |
@@ -291,21 +292,42 @@ convenience; use the automated generated-key test harness instead.
 Validation is part of preparation, and reads are tools so
 clients need not support resource browsing. All tools require owner authorization.
 
-Image uploads use one client-neutral flow: prepare, raw HTTPS PUT to R2,
-complete. The connector does not automatically expose a chat attachment's bytes.
-Clients need file access and a network execution tool; platform-specific file
-parameters and widgets are not used. Actual ChatGPT/Claude/Muse attachment
-compatibility remains a client acceptance test. The owner reports Claude web
-upload success and ordinary ChatGPT shell DNS failure. The MCP connection and
-code-execution egress are independent; this is not fixed by refreshing tools,
-changing R2 CORS, or WebP conversion. Do not claim all clients can upload.
+Image uploads share one storage/conversion/draft pipeline, with a ChatGPT-native
+file input in addition to the established presigned transport for Claude. In
+ChatGPT, prefer `upload_image`: `openai/fileParams` supplies a temporary download
+URL and file ID, and the Worker downloads the bytes directly without any client
+shell request. The four declared file fields follow the
+[official OpenAI contract](https://developers.openai.com/plugins/reference#define-file-inputs).
+Only `download_url` and `file_id` are required within the file object. `file_name`
+is informational; the separate `filename` selects a safe blog basename and must
+match the original MIME/signature. Never use a ChatGPT `/mnt/data` path as a remote
+file or invent file references.
+
+[src/chatgpt-files.ts](src/chatgpt-files.ts) accepts only HTTPS
+`files.oaiusercontent.com` and subdomains on port 443 without userinfo/fragments.
+It follows at most two allowlisted redirects, sends no credentials, bounds both
+announced and streamed bytes, and applies a 60-second deadline. Download errors
+never echo signed URLs. The immutable upload ID derives from owner, article,
+language, chosen filename and file ID; changing a temporary URL does not create a
+second attachment. Download URLs and file IDs are not persisted in draft metadata
+or signed candidates. The native path writes no pending R2 object. Concurrent
+updates still rely on non-forced Git ref updates; a failure may leave an
+unreferenced final object, as with the existing transport.
+
+The owner previously reported Claude web success and ordinary ChatGPT shell DNS
+failure. This change removes ChatGPT's shell PUT dependency; actual ChatGPT file
+injection remains a separate live acceptance test. Tests simulate the native file
+reference rather than claiming a real ChatGPT attachment was transferred. Keep
+existing Claude settings and Access callbacks. Refresh ChatGPT's tools and use a
+new conversation; cached schemas for the old base64 `upload_image` cannot be used.
 
 Comparable projects document this limitation: [Papermark](https://docs.papermark.com/docs/mcp/clients/chatgpt-apps)
 uses server-side source URL import when presigned PUT is unavailable;
 [Publora](https://docs.publora.com/mcp/troubleshooting) uses a native ChatGPT file
 reference; [mcp-filebridge](https://github.com/teng-lin/mcp-filebridge) offers an
-MCP Apps browser uploader. These are research findings, not extra upload methods
-implemented in this server.
+MCP Apps browser uploader. These are research references. This server implements the native ChatGPT file
+input and existing presigned transport; no arbitrary source-URL import or widget
+uploader is added.
 
 `R2_ACCOUNT_ID`, `R2_BUCKET_NAME`, `R2_PUBLIC_BASE_URL` and `IMAGE_MAX_BYTES`
 (default 15728640; configurable from 1 to 15728640) are Wrangler variables.
@@ -338,15 +360,18 @@ are in an existing public bucket, not private draft storage.
 Roll out `scripts/blog_images.py` and `scripts/check_mcp_candidate.py` to main
 before deploying the Worker. CI checks the R2 manifest against the trusted parent
 Hugo config and permits no new Git image bytes for those entries. Existing
-Git-backed drafts/candidates remain supported, but `upload_image` is removed.
-After deployment, refresh existing clients' tool lists for the two upload tools.
+Git-backed drafts/candidates remain supported. The old base64 `upload_image`
+schema remains retired; its name is reused for ChatGPT native file input.
+After deployment, refresh existing clients' tool lists.
 Preserve the owner's Managed OAuth callback allowlist.
 
 For an opt-in real R2 integration check, supply the five `R2_*` environment values
 above and run `node scripts/check-r2.mjs` from `cloud-mcp`. Set
 `R2_CHECK_BYTES=15728640` to exercise the maximum. It tests signed PUT, duplicate
 rejection, WebP conversion with the local Images implementation in real workerd,
-retry, and public content integrity.
+retry, native attachment import with a simulated OpenAI download, and public
+content integrity. The native check uses an in-memory test repository, not a real
+GitHub draft.
 It deletes and verifies absence of exactly its uniquely named test objects;
 it creates no article or Git branch. It never prints credentials or signed URLs.
 

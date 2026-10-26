@@ -20,8 +20,8 @@ index and validate candidate commits/SEO during site builds.
 
 ## Tools and authoring workflow
 
-The server exposes eleven tools: `list_posts`, `read_post`, `create_post`,
-`update_post`, `prepare_image_upload`, `complete_image_upload`, `prepare_publish`, `get_operation_status`,
+The server exposes twelve tools: `list_posts`, `read_post`, `create_post`,
+`update_post`, `upload_image`, `prepare_image_upload`, `complete_image_upload`, `prepare_publish`, `get_operation_status`,
 `publish_post`, `get_repo_status`, and `read_config`.
 
 1. List/read articles to avoid slug collisions. `read_post` prefers an active
@@ -41,9 +41,35 @@ The server exposes eleven tools: `list_posts`, `read_post`, `create_post`,
 
 ## Upload article images
 
-All clients use one flow: **prepare → HTTP PUT to R2 → complete**. Image bytes
-go to the existing `blog` R2 bucket. GitHub stores Markdown and the image manifest,
-not the new image files. The former base64 `upload_image` tool is retired.
+Both transports share the same validation, WebP conversion, immutable R2 storage
+and draft/publication pipeline. GitHub stores Markdown and the image manifest,
+not the new image files. The former base64 input is retired.
+
+**In ChatGPT, use `upload_image` with a native attachment.** Read/create the article
+first, then call it with `slug`, optional `lang`, `expected_revision`, a lowercase
+`filename` using the original file's extension, and `file`. The tool declares
+`_meta["openai/fileParams"]: ["file"]`; ChatGPT supplies `download_url` and `file_id`
+and may supply `mime_type`/`file_name`. Do not invent those values, pass a sandbox
+path, generate base64 or run `curl`. The server downloads the original and returns
+the final URL, Markdown and new revision in this one tool call. Insert the Markdown
+using `update_post`; publication still requires its normal explicit approval.
+
+Native downloads accept only HTTPS `files.oaiusercontent.com` and its subdomains,
+including up to two redirects within that allowlist. They send no MCP, GitHub or
+R2 credentials, have a 60-second download timeout, and enforce the 15 MiB limit
+while reading. An unsupported download hostname fails closed; report just the
+hostname for investigation, never the signed URL. Signed URLs and file IDs are
+not written to Git. A repeated file ID with the same owner/article/language and
+chosen filename returns the existing attachment without downloading again, even
+when the signed URL has changed. For an expired reference, select the attachment
+again; do not fall back to `curl`.
+
+This is an OpenAI extension, not a universal MCP file transfer primitive. Refresh
+the ChatGPT Blog MCP tool list and start a new conversation before testing.
+The `upload_image` name now has a different schema from the retired base64 tool.
+
+**For Claude and other clients with file and network execution**, retain the
+working flow **prepare → HTTP PUT to R2 → complete**:
 
 1. Create/read the article, obtain the original image's byte length and MIME type,
    and call `prepare_image_upload`:
@@ -84,14 +110,10 @@ Limits and recovery:
 - Up to **15 MiB per original image and final WebP**, eight completed images per language draft.
 - Lowercase letters, digits and hyphens in filenames; one supported extension;
   no directories, arbitrary source URLs or server-side local file paths.
-- The agent must have access to the **original bytes and outbound HTTPS PUT**.
-  An MCP connection alone cannot read a chat attachment. ChatGPT, Claude and Muse
-  use this same contract, but their attachment/network capabilities must be tested
-  separately. The owner has verified Claude web upload, but ordinary ChatGPT
-  reports a DNS/network error from its code sandbox. Tool refresh and MCP OAuth
-  do not grant shell network access. Do not keep retrying signed uploads when the
-  sandbox cannot reach the host. No client-specific file parameter or upload
-  widget has been installed.
+- The presigned flow requires original bytes and outbound HTTPS PUT. The owner
+  has verified Claude web upload. Ordinary ChatGPT reported shell DNS failure;
+  its new native file tool avoids that shell network path. Actual ChatGPT host
+  injection of attachments still needs owner testing; no browser widget is used.
 - A pending object cannot be overwritten while it exists. A signed URL can be
   retried during its five-minute lifetime; it is not a single-use credential.
   After completion, reusing it can only recreate the temporary object, never

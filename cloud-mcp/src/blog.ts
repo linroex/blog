@@ -1,6 +1,7 @@
 import { sha256, sign, verify } from './crypto';
+import { downloadChatGPTFile, type ChatGPTFile } from './chatgpt-files';
 import { document, edit, newDocument, postPath, taipeiDate } from './document';
-import { imageAsset, imageManifest, imagePath, imageView, MAX_IMAGES, webpFilename, type ImageAsset } from './images';
+import { checkImageName, imageAsset, imageManifest, imagePath, imageView, MAX_IMAGES, webpFilename, type ImageAsset } from './images';
 import { R2Images, UPLOAD_SECONDS, validateUpload, type ImageStorage, type ImageUpload } from './r2-images';
 import { BlogError, type Env, type FileChange, type FileContent, type Lang, type Repository } from './types';
 
@@ -26,7 +27,8 @@ export interface ArticleIndex {
 
 export class Blog {
   constructor(private repo: Repository, private env: Env, private userId: string,
-    private loadIndex: () => Promise<ArticleIndex>, private imageStorage: ImageStorage = new R2Images(env)) {}
+    private loadIndex: () => Promise<ArticleIndex>, private imageStorage: ImageStorage = new R2Images(env),
+    private loadChatGPTFile: (file: ChatGPTFile, maximum: number) => Promise<Uint8Array> = downloadChatGPTFile) {}
 
   private branch(slug: string, lang: Lang) { postPath(slug, lang); return `mcp/drafts/${slug}/${lang}`; }
   private async main() {
@@ -134,11 +136,28 @@ export class Blog {
   async completeImageUpload(ticket: string) {
     const upload = await verify<ImageUpload>(this.env.CONFIRMATION_SECRET, 'image-upload', ticket);
     if (upload.user_id !== this.userId) throw new BlogError('forbidden', 'Upload belongs to another user');
+    return this.attachImage(upload, () => this.imageStorage.complete(upload), () => this.imageStorage.discard(upload));
+  }
+  async uploadChatGPTImage(slug: string, lang: Lang, expectedRevision: string, filename: string, file: ChatGPTFile) {
+    const mime = checkImageName(filename);
+    if (file.mime_type !== undefined && file.mime_type !== mime) throw new BlogError('invalid_image', 'Choose a filename extension matching the ChatGPT attachment MIME type');
+    // A refreshed download URL for the same attachment is still the same upload.
+    const identity = await sha256(JSON.stringify(['chatgpt-file', this.userId, slug, lang, filename, file.file_id]));
+    const uploadId = `${identity.slice(0, 8)}-${identity.slice(8, 12)}-${identity.slice(12, 16)}-${identity.slice(16, 20)}-${identity.slice(20, 32)}`;
+    const upload: ImageUpload = { upload_id: uploadId, user_id: this.userId, slug, lang, expected_revision: expectedRevision,
+      filename, mime_type: mime, size: 0, pending_key: `blog-mcp/pending/${uploadId}/${filename}`,
+      upload_expires: Date.now(), expires: Date.now() + 86400_000 };
+    return this.attachImage(upload, async () => {
+      const bytes = await this.loadChatGPTFile(file, this.imageStorage.maximum);
+      return this.imageStorage.store({ ...upload, size: bytes.length }, bytes);
+    });
+  }
+  private async attachImage(upload: ImageUpload, load: () => Promise<ImageAsset>, discard?: () => Promise<void>) {
     postPath(upload.slug, upload.lang);
     const current = await this.effective(upload.slug, upload.lang);
     const previous = imageManifest(current.draft?.meta.images).find(a => a.storage === 'r2' && a.upload_id === upload.upload_id);
     if (previous) {
-      await this.imageStorage.discard(upload);
+      await discard?.();
       return { ...this.imagePreview(upload.slug, previous, current.revision), revision: current.revision,
         source: current.source, already_completed: true };
     }
@@ -146,7 +165,7 @@ export class Blog {
     if (current.revision !== upload.expected_revision) throw new BlogError('conflict', 'Article changed during upload; read it and prepare a new upload');
     const images = imageManifest(current.source === 'draft' ? current.draft!.meta.images : undefined);
     if (images.length >= MAX_IMAGES || images.some(a => a.filename === webpFilename(upload.filename))) throw new BlogError('conflict', 'Image list changed; read the draft before uploading');
-    const asset = await this.imageStorage.complete(upload);
+    const asset = await load();
     const meta: DraftMeta = current.source === 'draft' ? current.draft!.meta : { slug: upload.slug, lang: upload.lang, base_post_sha: current.file.sha };
     meta.images = [...images, asset].sort((a, b) => a.filename.localeCompare(b.filename));
     const raw = edit(current.file.text, { draft: true });
@@ -155,7 +174,7 @@ export class Blog {
       [META_PATH]: JSON.stringify(meta) }, `Draft image: ${upload.slug}/${upload.filename} (${upload.lang})`);
     if (current.draft) await this.repo.advanceRef(current.draft.branch, revision);
     else await this.repo.createRef(this.branch(upload.slug, upload.lang), revision);
-    await this.imageStorage.discard(upload);
+    await discard?.();
     return { ...this.imagePreview(upload.slug, asset, revision), revision, source: 'draft', already_completed: false,
       instructions: 'Image bytes are on R2 and publicly accessible. Insert markdown with update_post using this new revision, then prepare and approve the article normally.' };
   }

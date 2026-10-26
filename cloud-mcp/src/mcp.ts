@@ -13,12 +13,13 @@ const list = z.array(z.string().trim().min(1).max(80)).max(30);
 const fields = { title: title.optional(), content: content.optional(), tags: list.optional(), categories: list.optional(), summary: z.string().max(500).optional() };
 
 export function createServer(blog: Blog) {
-  const server = new McpServer({ name: 'lins-hugo-blog-cloud', version: '1.3.0' }, {
-    instructions: 'Manage only this owner’s blog. Draft branches are public if the repository is public. Read before editing and supply the revision. Prepare publication, poll validation, show the full preview, then obtain explicit user approval before publish_post. A confirmation token is a version identifier, not human consent. Poll deployment separately. Never claim a commit means the website is live.',
+  const server = new McpServer({ name: 'lins-hugo-blog-cloud', version: '1.4.0' }, {
+    instructions: 'Manage only this owner’s blog. In ChatGPT use upload_image with native file input for attachments; do not run curl. Draft branches are public if the repository is public. Read before editing and supply the revision. Prepare publication, poll validation, show the full preview, then obtain explicit user approval before publish_post. A confirmation token is a version identifier, not human consent. Poll deployment separately. Never claim a commit means the website is live.',
   });
   function tool<S extends z.ZodRawShape>(name: string, description: string, shape: S, readOnly: boolean,
-    handler: (input: z.infer<z.ZodObject<S>>) => Promise<unknown>) {
+    handler: (input: z.infer<z.ZodObject<S>>) => Promise<unknown>, meta?: Record<string, unknown>) {
     server.registerTool(name, { description, inputSchema: z.object(shape).strict(),
+      ...(meta ? { _meta: meta } : {}),
       annotations: { readOnlyHint: readOnly, destructiveHint: !readOnly, openWorldHint: true } }, async input => {
       try {
         const result = await handler(input as z.infer<z.ZodObject<S>>);
@@ -44,7 +45,14 @@ export function createServer(blog: Blog) {
   tool('update_post', 'Save draft changes with optimistic concurrency. Always sets draft true. To resolve an external publication conflict, read both versions, merge the content, and supply expected_published_revision from read_post(source=published) along with the complete merged content.', {
     slug, lang, expected_revision: sha, expected_published_revision: sha.optional(), ...fields,
   }, false, a => { const { slug: s, lang: l, expected_revision, expected_published_revision, ...updates } = a; return blog.updatePost(s, l, expected_revision, updates, expected_published_revision); });
-  tool('prepare_image_upload', 'Prepare a 5-minute R2 PUT URL for PNG/JPEG/GIF/WebP, up to 15 MiB each and 8 images per language draft. Requires an existing article and expected_revision. This tool sends no image bytes and does not change the article. Completion converts PNG/JPEG/GIF to WebP; existing WebP stays unchanged. Supply the original file metadata and use the final returned Markdown. Use a file/network execution tool to PUT raw bytes with all returned headers, then complete_image_upload. Requires access to the original file and outbound HTTPS; do not assume a chat attachment is automatically accessible. All clients use this same flow.', {
+  tool('upload_image', 'ChatGPT attachment upload: use this tool when the image is attached or generated in ChatGPT. Pass its native file reference; ChatGPT supplies the download_url and file_id automatically. The server downloads the original, validates at most 15 MiB, converts PNG/JPEG/GIF to WebP (preserving transparency and animation), stores it on R2 and attaches metadata to the draft. Existing WebP bytes are preserved. Returns final Markdown and a new revision for update_post. Do not run curl, prepare_image_upload or complete_image_upload for this path. Choose a lowercase filename with the original image extension. Never invent file references or pass local paths/base64; if ChatGPT cannot supply the reference, report that it is unavailable. Retrying the same file_id, article and filename is safe. Does not publish the article.', {
+    slug, lang, expected_revision: sha, filename: z.string().max(85).regex(IMAGE_NAME),
+    file: z.object({
+      download_url: z.string().min(1).max(8192), file_id: z.string().min(1).max(256),
+      mime_type: z.string().max(200).optional(), file_name: z.string().max(1024).optional(),
+    }).strict(),
+  }, false, a => blog.uploadChatGPTImage(a.slug, a.lang, a.expected_revision, a.filename, a.file), { 'openai/fileParams': ['file'] });
+  tool('prepare_image_upload', 'For clients with original file access and outbound HTTPS PUT (such as Claude): prepare a 5-minute R2 PUT URL for PNG/JPEG/GIF/WebP, up to 15 MiB each and 8 images per language draft. In ChatGPT use upload_image with native attachments instead. Requires an existing article and expected_revision. This tool sends no image bytes and does not change the article. Completion converts PNG/JPEG/GIF to WebP; existing WebP stays unchanged. Supply the original file metadata and use the final returned Markdown. Use a file/network execution tool to PUT raw bytes with all returned headers, then complete_image_upload. Requires access to the original file and outbound HTTPS; do not assume a chat attachment is automatically accessible.', {
     slug, lang, expected_revision: sha, filename: z.string().max(85).regex(IMAGE_NAME),
     mime_type: z.enum(['image/png', 'image/jpeg', 'image/gif', 'image/webp']), size: z.number().int().min(1).max(MAX_IMAGE_BYTES),
     sha256: z.string().regex(/^[a-f0-9]{64}$/).optional(),
