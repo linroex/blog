@@ -33,7 +33,7 @@ ChatGPT / Claude web → Managed OAuth → Worker-level Access → ctx.access + 
                                                  ↓
                                            GitHub App → linroex/blog
                                              ├─ mcp/drafts/<slug>/<lang>
-                                             ├─ mcp/candidates/<operation UUID> → Hugo + SEO checks
+                                             ├─ mcp/reviews/<generation UUID> → Draft PR → Hugo + SEO checks
                                              └─ main → existing Pages workflow → coder.tw
 ```
 
@@ -41,8 +41,8 @@ ChatGPT / Claude web → Managed OAuth → Worker-level Access → ctx.access + 
   hostname. Access authenticates before the Worker executes. Preview URLs stay
   disabled; do not add hostname/path rules or Bypass policies that override it.
 - Only `linroex@coder.tw` may sign in, using Email one-time PIN. Managed OAuth
-  access tokens last 15 minutes; refresh grants last 14 days. Localhost and
-  loopback registration are disabled. The owner maintains callback patterns for
+  token/grant durations and callback settings are owner-managed. Localhost
+  registration is enabled for local CLI clients; preserve it. Callback patterns cover
   ChatGPT, Claude, Grok, Meta Agent and Muse; the current observed list is in
   `access-application.example.json` and `image-upload-rollout.json`. Preserve these
   owner-added clients when deploying; callback changes are separate platform work.
@@ -61,29 +61,32 @@ ChatGPT / Claude web → Managed OAuth → Worker-level Access → ctx.access + 
 - The verified email maps to the existing numeric `ALLOWED_GITHUB_USER_ID`
   (`1254953` in production), preserving draft, candidate and confirmation
   ownership. The separate repository-scoped GitHub App installation token
-  supplies Contents read/write and Actions/Metadata read-only access.
+  supplies Contents and Pull requests read/write, plus Actions/Metadata read-only access.
 - Drafts are Git commits with `draft: true`. **Branches in a public repository
   are public, including their history**, even though the draft is absent from
   the live site. No private draft storage is promised.
-- A draft's `.mcp/draft.json` records its language and original published blob
-  SHA. This file stays on the draft branch. Candidates are fresh commits on main
-  with **only the selected Markdown file changed** for R2 uploads; draft branch
-  history is not merged. Compatibility code still permits declared legacy Git
-  images. R2 images are public before article publication.
-- Candidates set `draft: false` and trigger `mcp-validate.yaml`. The Worker checks
-  the exact candidate SHA, workflow and branch, then issues a signed confirmation
-  valid for 24 hours. The client must show the entire preview and get explicit
-  approval. A token identifies content; it cannot prove a human approved it.
-- Publishing uses a non-forced ref update. Changed main/draft revisions invalidate
-  the operation. Concurrent main writes cannot be overwritten. If a draft edit
-  arrives after the final version check, the already-approved snapshot may be
-  published, but that newer draft is preserved and is never silently published.
-- A retry recognizes the candidate in main's ancestry, including after the token
-  expires. `get_operation_status` repairs interrupted draft bookkeeping and checks
-  the Pages workflow. A commit and a successful deployment are separate states.
-- Draft/candidate branches are retained as recovery history. They can be removed
-  manually after publication; deleting candidate refs removes status/retry lookup
-  for those operation IDs. Do not remove them while a publication is pending.
+- A draft's `.mcp/draft.json` records its language, published baseline and unique
+  `review_branch`. It stays on `mcp/drafts/<slug>/<lang>`. Every save synchronizes
+  a Draft PR from a clean snapshot on main containing only that article and its
+  declared new legacy images. Raw draft history/metadata is never merged.
+- Review snapshots use `draft: false` for Hugo validation and reading; the PR
+  remains a **Draft PR**, so saving does not publish. An article update first
+  converts an existing ready PR back to draft. R2 images are public before merge.
+- `prepare_publish` refreshes the same PR on current main. Status polling checks
+  its exact source revision, SHA, branch, Hugo/SEO run and images, marks it ready,
+  and returns the complete preview plus a version-bound 24-hour confirmation.
+  A token identifies a version and cannot prove human approval.
+- `publish_post` merges that exact PR head through GitHub, using merge commits.
+  It never directly advances main. The owner may also mark a validated Draft PR
+  ready and merge in GitHub; configure required checks as described below.
+- PR number and immutable snapshot SHA in the opaque `operation_id` allow
+  status queries and lost-response retries after source branch deletion. Legacy
+  operations still report earlier publications; unmerged legacy confirmations
+  must be replaced by a newly prepared PR.
+- Pages deploys the merge commit, then its `cleanup` job removes the managed
+  review branch and unchanged source draft using explicit Git SHA leases.
+  Newer drafts are preserved. Cleanup failure is reported separately from
+  website success. Images and retained Git history are not erased.
 
 ## Following a request through the code
 
@@ -97,7 +100,7 @@ Python scripts in `scripts/` are build/index/validation helpers, not MCP servers
 | Owner authentication | [src/auth.ts](src/auth.ts), `verifyAccess` | Require platform `ctx.access` and a signed Access JWT; map the verified owner email to the existing numeric owner ID. |
 | MCP interface | [src/mcp.ts](src/mcp.ts), `createServer` | Register thirteen tools, validate input schemas, translate tool calls to `Blog` methods and return structured results/errors. |
 | Authoring and publication | [src/blog.ts](src/blog.ts), `Blog` | Select draft/published revisions, enforce conflicts, create candidates, poll validation, issue confirmations, update main and recover interrupted publications. |
-| GitHub persistence | [src/github.ts](src/github.ts), `installationToken`, `GitHubRepository` | Obtain a repo-scoped App token; read/write blobs, trees, commits and refs; query Actions. Ref updates always use `force: false`. |
+| GitHub persistence | [src/github.ts](src/github.ts), `installationToken`, `GitHubRepository` | Obtain a repo-scoped App token; read/write blobs, trees, commits and refs; query Actions. Source updates use `force: false`; managed review snapshots use atomic expected-SHA transactions. Main changes only through PR merge. |
 | Article format and signatures | [src/document.ts](src/document.ts), [src/crypto.ts](src/crypto.ts), [src/types.ts](src/types.ts) | Restrict article paths/languages, parse and edit frontmatter, enforce file limits, hash content and sign purpose-specific candidate/confirmation envelopes. |
 | Uploaded images | [src/r2-images.ts](src/r2-images.ts), [src/images.ts](src/images.ts), [src/chatgpt-files.ts](src/chatgpt-files.ts), `Blog.uploadChatGPTImage` / `prepareImageUpload` / `completeImageUpload` | Sign a five-minute raw PUT to R2, verify bytes, finalize a content-addressed public image and commit only its manifest to the draft. |
 | Candidate checks | [mcp-validate.yaml](../.github/workflows/mcp-validate.yaml), [check_mcp_candidate.py](../scripts/check_mcp_candidate.py) | On candidate pushes, check the recorded parent, selected file and content hash, then build Hugo and validate SEO. The Worker verifies the signed envelope and exact workflow result before publication. |
@@ -107,27 +110,29 @@ One publication crosses these layers in this order:
 
 1. Access authenticates the client before Worker execution. `index.ts` calls
    `verifyAccess`, then `createServer` routes the validated tool input to `Blog`.
-2. `createPost` / `updatePost` write an article with `draft: true` plus
-   `.mcp/draft.json` on its draft branch. Updates require `expected_revision`.
-   `readPost` defaults to the active draft; `source: published` reads main.
-3. `preparePublish` checks the original article's blob SHA and translation
-   prerequisites and R2 object metadata, then creates an article-only candidate
-   on current main. The signed envelope includes the R2 image manifest. Legacy
-   Git draft images are still verified and copied without overwriting main.
-   Its commit message stores a signed operation envelope; creating the candidate
-   ref triggers `mcp-validate.yaml`. This does not update main.
-4. `operationStatus` reconstructs the operation from the candidate ref and commit
-   message, checks expiry and main/draft revisions, then checks Actions for that
-   exact candidate. When ready, it returns the full preview and confirmation.
-   The expiry is fixed at preparation time, 24 hours after `preparePublish`.
-5. After the user approves that preview, `publishPost` verifies the confirmation,
-   rechecks revisions and validation, then advances main to the candidate without
-   force. It checks whether the candidate is already in main's ancestry before
-   checking expiry, so a lost publication response can be retried safely.
-6. `publishedResult` / `finishDraft` mark the matching draft as published and
-   query `hugo.yaml` for the candidate SHA on main. Status polling can retry draft
-   bookkeeping; newer draft edits are preserved. Only a successful deployment
-   workflow produces `hosting_deployment_confirmed: true`.
+2. `createPost` / `updatePost` save the version-checked source draft and call
+   `syncReview`. It builds an article-only snapshot, atomically checks source/main/
+   previous review head with GraphQL `updateRefs`, then creates or updates the
+   same Draft PR. Only the managed review ref may be rewritten; main and the
+   source draft are guarded with no-op expected-SHA checks. If PR synchronization
+   fails after a save, `pr_sync_pending: true` preserves the saved content and
+   directs the client to read/retry `update_post`, not duplicate `create_post`.
+3. `preparePublish` checks the published baseline and translation prerequisites,
+   refreshes the same PR with a signed candidate snapshot on main, and returns
+   PR/reading links and an opaque operation ID. Existing legacy drafts acquire
+   their review branch on update or preparation. This does not publish.
+4. `operationStatus` verifies that snapshot and its exact Actions result and
+   source revision. Once validation succeeds, it marks the PR ready and returns
+   the complete preview and fixed-expiry confirmation. Updates invalidate old
+   approvals. The owner can review via GitHub instead of reading raw tool JSON.
+5. `publishPost` merges the exact approved PR head, preserving checks for changed
+   main, source, images and validation. The returned publication SHA is the merge
+   commit, not the candidate SHA. Already-merged PRs are recognized before expiry
+   checks, so lost responses can safely be retried.
+6. `publishedResult` tracks Pages jobs for the merge SHA, including manual GitHub
+   merges. `hosting_deployment_confirmed` comes from the deploy job, while
+   `cleanup_status` reports waiting/pending/completed/failed independently. A newer
+   source saved during merge stays visible and can begin its next PR generation.
 
 Durable application state is in GitHub and R2, not Worker memory or a local checkout:
 
@@ -135,14 +140,14 @@ Durable application state is in GitHub and R2, not Worker memory or a local chec
 | --- | --- |
 | Uploaded image bytes | R2 `blog`: `blog-mcp/images/<slug>/<sha256>/<filename>`; temporary uploads under `blog-mcp/pending/` |
 | Published articles | `main:content/posts/<slug>/index.md`, `index.en.md`, `index.ja.md` |
-| Draft content and publication baseline | `mcp/drafts/<slug>/<lang>`: article file plus `.mcp/draft.json` (`base_post_sha`, optional `published_commit`) |
-| Operation snapshot and recovery identity | `mcp/candidates/<operation_id>`: candidate commit, parent SHA and signed envelope in its commit message |
+| Draft content and publication baseline | `mcp/drafts/<slug>/<lang>`: article file plus `.mcp/draft.json` (`base_post_sha`, `review_branch`, optional legacy `published_commit` or `deleted_revision`) |
+| Review and recovery identity | `mcp/reviews/<generation UUID>` plus its PR, immutable snapshot SHA and signed commit envelope; operation IDs remain valid after cleanup. Legacy candidates retain their old refs. |
 | Validation and deployment results | GitHub Actions runs, selected by workflow, commit SHA and branch |
 | Listing metadata | Pages `/mcp-index.json`, tagged with its source commit; newest publication date first. Staleness compares article/index-generator sources, not unrelated main commits. |
 
 The current Worker has no KV binding. Its cached App token and JWKS resolver are
-temporary caches, not publication state. Preserve candidate refs and the signing
-secret when recovering pending operations.
+temporary caches, not publication state. Preserve the signing secret when
+recovering operations; do not manually delete legacy candidate refs while pending.
 
 ## Deployment configuration outside the code
 
@@ -218,7 +223,7 @@ URL. Do not add a tunnel, container or another Worker. Use the existing GitHub
 App `linroex-blog-mcp`, installed only on `linroex/blog`.
 
 1. Complete the local checks above. Verify the existing GitHub App still has only
-   Contents read/write, Actions read and Metadata read permissions. Keep its
+   Contents and Pull requests read/write, Actions read and Metadata read permissions. Keep its
    secrets and `CONFIRMATION_SECRET` unchanged.
 2. In Cloudflare Zero Trust, create an Allow policy with **one email include**:
    `linroex@coder.tw`. Restrict this application's login to the Email one-time PIN
@@ -289,21 +294,51 @@ Wrangler `access.dev` block may simulate platform identity, but a matching signe
 assertion is still required. Do not weaken the production validator for local
 convenience; use the automated generated-key test harness instead.
 
+## PR publication rollout
+
+Before deploying v1.6.0:
+
+1. Grant the existing selected-repository GitHub App **Pull requests: read and
+   write**, alongside its existing Contents write and Actions/Metadata read.
+   Accept any installation-permission update before deploying; token minting
+   explicitly requests this permission. Keep existing secrets and Access settings.
+2. Protect `main` with required **build** status and **require branches to be up
+   to date**. The Hugo PR build also checks managed review snapshots, so manual
+   GitHub merges enforce the same single-article/baseline validation. Other code
+   PRs still run the ordinary build. Do not configure a required MCP-only status
+   that unrelated PR branches never produce. Do not enable global auto-delete;
+   cleanup is scoped to managed review/draft refs after successful deployment.
+3. Merge the workflow/scripts before deploying the Worker. The Pages cleanup
+   job has only Contents write and Pull requests read; it uses the ephemeral
+   workflow token, and cannot delete main or unrelated refs. Both direct PR merge
+   and manually selected squash/rebase merges are identified through GitHub's
+   merged PR record and actual deployment SHA.
+4. Deploy the Worker and refresh tools. Existing draft content remains intact;
+   a subsequent save or `prepare_publish` migrates it to a Draft PR. Thirteen
+   tools remain available. No extra storage, Worker or OAuth changes are needed.
+
+Save-time PR snapshots are validated for reading while still Draft PRs; saving
+never merges. `prepare_publish` plus successful polling marks them ready, or the
+owner may explicitly mark ready/merge in GitHub after required checks pass.
+If PR sync fails after saving, read the returned revision and repair/retry
+`update_post`. A missing App permission must be fixed before Worker rollout;
+there is no fallback to direct main writes.
+
 ## Tools
 
 | Tool | Contract |
 | --- | --- |
 | `list_posts` | `query`, `offset`, `limit` (1–50); `draft_offset`, `draft_limit` (1–10, default 5). Returns indexed `posts` sorted by publication `date` descending (UTC ISO 8601; missing/invalid dates are `null` and sort last; ties by slug), and a **separate** `drafts` page, `next_draft_offset`, `indexed_commit`, `current_main_commit`, `index_stale`. Draft cursor advances through branches, including archived entries, so follow it even for an empty filtered page. |
-| `read_post` | `slug`, optional `lang`, `source` = `auto` / `draft` / `published`. `auto` prefers an active draft. Returns full content, frontmatter and `revision`. |
-| `create_post` | `slug`, optional `lang`, `title`, `content`, optional `tags`, `categories`, `summary`; immediately commits to a dedicated draft branch. A translation requires an original in draft or main. |
-| `update_post` | Requires `expected_revision`. Optional `expected_published_revision` plus full `content` explicitly reconciles an external edit after reading both versions. No automatic merge or overwrite. |
-| `delete_draft` | `slug`, optional `lang`, required `expected_revision` from reading the draft. Removes only that language from active drafts using an atomic archive marker, leaving published articles, other languages, Git history, candidate branches and uploaded images intact. Repeating the same deleted revision is safe; stale versions conflict. |
+| `read_post` | `slug`, optional `lang`, `source` = `auto` / `draft` / `published`. `auto` prefers an active draft. Returns full content, frontmatter, `revision`, and associated PR/reading links when available. |
+| `create_post` | `slug`, optional `lang`, `title`, `content`, optional `tags`, `categories`, `summary`; immediately saves a dedicated source draft and opens a Draft PR. Returns `pr_number`, `pr_url`, `pr_state`, `read_url`, opaque `operation_id`, and `pr_sync_pending`. A translation requires an original in draft or main. |
+| `update_post` | Requires `expected_revision`. Optional `expected_published_revision` plus full `content` explicitly reconciles an external edit after reading both versions. Synchronizes the same Draft PR and invalidates earlier approvals. No automatic publication or overwrite. |
+| `delete_draft` | `slug`, optional `lang`, required `expected_revision` from reading the draft. Closes its unmerged PR and removes only that language from active drafts using an atomic archive marker, leaving published articles, other languages, Git history, candidate branches and uploaded images intact. Repeating the same deleted revision is safe; stale versions conflict. |
 | `upload_image` | ChatGPT native attachment: `slug`, optional `lang`, `expected_revision`, original-extension `filename`, and `file`. `_meta["openai/fileParams"]` injects `download_url`/`file_id` plus optional MIME/name. Server-side bounded download, WebP conversion, R2 persistence and draft attachment in one call; no shell PUT. Same file ID/article/filename retries return the existing result. |
 | `prepare_image_upload` | `slug`, optional `lang`, `expected_revision`, `filename`, `mime_type`, `size`, optional `sha256`. Returns a five-minute R2 PUT URL, signed required headers and a 24-hour completion ticket; no Git write. |
 | `complete_image_upload` | `upload_ticket`; verifies uploaded bytes, saves an immutable public R2 image and records its metadata in the draft. Returns URL/Markdown and a new revision. Up to 15 MiB each and eight per language draft. See [image upload contract](../MCP.md#upload-article-images). |
-| `prepare_publish` | Returns `operation_id` and `candidate_commit`, starts validation. Publish the original before its translations. |
-| `get_operation_status` | `operation_id`; returns queued/validating/ready/stale/expired/validation_failed/deploying/deployed/deployment_failed. Ready includes complete preview and confirmation. May repair post-publication bookkeeping. |
-| `publish_post` | `slug`, `lang`, `confirmation`; always updates remote main after validation and explicit approval. No `push_to_remote` or local-commit mode. |
+| `prepare_publish` | Refreshes the same PR, returns opaque `operation_id`, `candidate_commit`, `validation_branch` and PR/reading links, and starts validation. Publish the original before its translations. |
+| `get_operation_status` | `operation_id`; returns queued/validating/ready/stale/expired/validation_failed/deploying/deployed/deployment_failed. Ready includes complete preview, confirmation and PR links; polling may mark a validated PR ready (non-destructive write). Reports `cleanup_status` independently and survives branch deletion. Old UUID-only operations remain readable. |
+| `publish_post` | `slug`, `lang`, `confirmation`; merges the exact approved PR head after validation and explicit approval. Never directly updates main. Reports the actual merge commit. |
 | `get_repo_status`, `read_config` | Read the remote repository's main revision and Hugo config. |
 
 `index_stale` compares the immutable Git objects for `content/posts`,

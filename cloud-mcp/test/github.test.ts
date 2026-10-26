@@ -14,7 +14,7 @@ function setup(handler: (url: URL, init: RequestInit) => Response) {
     expect(this).toBeUndefined();
     const url = new URL(String(input));
     if (url.pathname === '/app/installations/123/access_tokens') {
-      expect(JSON.parse(init.body as string)).toEqual({ repositories: ['blog'], permissions: { contents: 'write', actions: 'read' } });
+      expect(JSON.parse(init.body as string)).toEqual({ repositories: ['blog'], permissions: { contents: 'write', actions: 'read', pull_requests: 'write' } });
       expect(new Headers(init.headers).get('Authorization')).toMatch(/^Bearer ey/);
       return Response.json({ token: 'scoped-app-token', expires_at: new Date(Date.now() + 3600_000).toISOString() });
     }
@@ -131,4 +131,56 @@ it('does not report a current index when GitHub truncates the source tree', asyn
     ? Response.json({ sha: '', tree: { sha: url.pathname.split('/').at(-1) }, parents: [], message: '' })
     : Response.json({ tree: [], truncated: true }));
   await expect(repo.indexSourcesUnchanged('old', 'new')).rejects.toMatchObject({ code: 'index_check_unavailable' });
+});
+
+it('batches draft PR lookups including merged and closed PRs', async () => {
+  const branch = `mcp/reviews/${'a'.repeat(36)}`;
+  const { repo, fetcher } = setup((url, init) => {
+    expect(url.pathname).toBe('/graphql');
+    const body = JSON.parse(init.body as string);
+    expect(body.query).toContain('states: [OPEN, CLOSED, MERGED]');
+    expect(body.variables).toEqual({ owner: 'test', name: 'blog' });
+    return Response.json({ data: { repository: { id: 'repo-id', p0: { nodes: [{ number: 7, id: 'PR_7', url: 'https://github.com/test/blog/pull/7',
+      state: 'MERGED', isDraft: false, merged: true, headRefName: branch, headRefOid: 'a'.repeat(40), baseRefName: 'main',
+      headRepository: { nameWithOwner: 'test/blog' }, mergeCommit: { oid: 'b'.repeat(40) } }] } } } });
+  });
+  expect((await repo.pulls([branch]))[branch]).toMatchObject({ number: 7, merged: true, state: 'closed', merge_commit: 'b'.repeat(40) });
+  expect(fetcher).toHaveBeenCalledTimes(2);
+});
+
+it('atomically guards source, main and previous review head when replacing a clean snapshot', async () => {
+  const branch = `mcp/reviews/${'a'.repeat(36)}`;
+  const source = 'mcp/drafts/hello/en', revision = 'a'.repeat(40), main = 'b'.repeat(40), next = 'c'.repeat(40);
+  const { repo } = setup((url, init) => {
+    expect(url.pathname).toBe('/graphql');
+    const body = JSON.parse(init.body as string);
+    if (body.query.startsWith('query')) return Response.json({ data: { repository: { id: 'repo-id', p0: { nodes: [] } } } });
+    expect(body.variables.input).toEqual({ repositoryId: 'repo-id', refUpdates: [
+      { name: `refs/heads/${source}`, beforeOid: revision, afterOid: revision, force: false },
+      { name: 'refs/heads/main', beforeOid: main, afterOid: main, force: false },
+      { name: `refs/heads/${branch}`, beforeOid: '0'.repeat(40), afterOid: next, force: true },
+    ] });
+    return Response.json({ data: { updateRefs: { clientMutationId: null } } });
+  });
+  await repo.syncReviewRef(branch, null, next, source, revision, main);
+  await expect(repo.syncReviewRef('main', null, next, source, revision, main)).rejects.toMatchObject({ code: 'invalid_operation' });
+});
+
+it('merges through the PR API using an expected head, and never falls back to a main ref write', async () => {
+  const head = 'a'.repeat(40), merged = 'b'.repeat(40);
+  const { repo } = setup((url, init) => {
+    expect(url.pathname).toBe('/repos/test/blog/pulls/7/merge');
+    expect(init.method).toBe('PUT');
+    expect(JSON.parse(init.body as string)).toEqual({ sha: head, merge_method: 'merge' });
+    return Response.json({ merged: true, sha: merged });
+  });
+  expect(await repo.mergePull(7, head)).toBe(merged);
+});
+
+it('fails a review update on GraphQL ref conflicts without modifying any other ref', async () => {
+  const branch = `mcp/reviews/${'a'.repeat(36)}`;
+  const { repo } = setup((_url, init) => JSON.parse(init.body as string).query.startsWith('query')
+    ? Response.json({ data: { repository: { id: 'repo-id', p0: { nodes: [] } } } })
+    : Response.json({ data: null, errors: [{ message: 'Reference does not point at the expected object' }] }));
+  await expect(repo.syncReviewRef(branch, null, 'a'.repeat(40), 'mcp/drafts/hello/en', 'b'.repeat(40), 'c'.repeat(40))).rejects.toMatchObject({ code: 'conflict' });
 });

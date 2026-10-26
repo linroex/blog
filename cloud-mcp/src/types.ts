@@ -45,6 +45,11 @@ export interface Run {
   conclusion: string | null;
   html_url: string;
 }
+export interface Pull {
+  number: number; node_id: string; url: string; branch: string; head: string;
+  state: 'open' | 'closed'; draft: boolean; merged: boolean; merge_commit: string | null; message?: string;
+}
+export interface Job { name: string; status: string; conclusion: string | null }
 export interface Repository {
   head(branch: string): Promise<string | null>;
   file(path: string, ref: string): Promise<FileContent | null>;
@@ -57,4 +62,12 @@ export interface Repository {
   isAncestor(ancestor: string, descendant: string): Promise<boolean>;
   indexSourcesUnchanged(indexed: string, current: string): Promise<boolean>;
   runs(workflow: string, sha: string): Promise<Run[]>;
+  pulls(branches: string[]): Promise<Record<string, Pull | null>>;
+  pull(number: number): Promise<Pull>;
+  createPull(branch: string, title: string, body: string): Promise<Pull>;
+  updatePull(number: number, title: string, body: string, state?: 'open' | 'closed'): Promise<Pull>;
+  setPullDraft(pull: Pull, draft: boolean): Promise<void>;
+  mergePull(number: number, expectedHead: string): Promise<string>;
+  syncReviewRef(branch: string, before: string | null, after: string, source: string, revision: string, main: string): Promise<void>;
+  jobs(run: number): Promise<Job[]>;
 }

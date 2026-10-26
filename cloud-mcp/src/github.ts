@@ -1,6 +1,6 @@
 import { base64url, unbase64 } from './crypto';
 import { MAX_POST_BYTES } from './document';
-import { BlogError, type BinaryContent, type Commit, type Env, type FileChange, type FileContent, type Repository, type Run } from './types';
+import { BlogError, type BinaryContent, type Commit, type Env, type FileChange, type FileContent, type Repository, type Run, type Pull, type Job } from './types';
 
 const encoder = new TextEncoder();
 let cached: { identity: string; token: string; expires: number } | undefined;
@@ -17,7 +17,7 @@ export async function installationToken(env: Env, fetcher: typeof fetch = fetch)
   const jwt = `${unsigned}.${base64url(new Uint8Array(await crypto.subtle.sign('RSASSA-PKCS1-v1_5', key, encoder.encode(unsigned))))}`;
   const response = await fetcher(`https://api.github.com/app/installations/${env.GITHUB_INSTALLATION_ID}/access_tokens`, {
     method: 'POST', headers: headers(jwt),
-    body: JSON.stringify({ repositories: [env.GITHUB_REPO], permissions: { contents: 'write', actions: 'read' } }),
+    body: JSON.stringify({ repositories: [env.GITHUB_REPO], permissions: { contents: 'write', actions: 'read', pull_requests: 'write' } }),
     signal: AbortSignal.timeout(15_000),
   });
   if (!response.ok) throw new BlogError('github_auth', `GitHub App authentication failed (${response.status})`);
@@ -31,18 +31,19 @@ function headers(token: string): Record<string, string> {
 export class GitHubRepository implements Repository {
   private calls = 0;
   private base: string;
+  private repositoryId?: string;
   constructor(private env: Env, private fetcher: typeof fetch = fetch) {
     if (![env.GITHUB_OWNER, env.GITHUB_REPO].every(x => /^[\w.-]+$/.test(x))) throw new BlogError('configuration', 'Invalid configured repository');
     this.base = `/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}`;
   }
   private async api<T>(path: string, method = 'GET', body?: unknown, missing = false): Promise<T | null> {
-    if (++this.calls > 40) throw new BlogError('request_budget', 'Too many GitHub operations; use a smaller page or retry the operation');
+    if (++this.calls > 44) throw new BlogError('request_budget', 'Too many GitHub operations; use a smaller page or retry the operation');
     const token = await installationToken(this.env, this.fetcher);
     // Workerd's global fetch rejects an unrelated receiver (this repository).
     const fetcher = this.fetcher;
     let response: Response;
     try {
-      response = await fetcher(`https://api.github.com${this.base}${path}`, {
+      response = await fetcher(`https://api.github.com${path === '/graphql' ? path : this.base + path}`, {
         method, headers: headers(token), body: body === undefined ? undefined : JSON.stringify(body), signal: AbortSignal.timeout(15_000),
       });
     } catch { throw new BlogError('github_unavailable', 'GitHub request timed out or disconnected; check operation status before retrying a write'); }
@@ -135,5 +136,72 @@ export class GitHubRepository implements Repository {
   async runs(workflow: string, sha: string): Promise<Run[]> {
     const data = await this.api<{ workflow_runs: Run[] }>(`/actions/workflows/${encodeURIComponent(workflow)}/runs?head_sha=${sha}&event=push&per_page=20`);
     return data?.workflow_runs.filter(r => r.head_sha === sha && r.event === 'push') ?? [];
+  }
+  private async graphql<T>(query: string, variables: Record<string, unknown>): Promise<T> {
+    const response = await this.api<{ data?: T; errors?: { message: string; type?: string }[] }>('/graphql', 'POST', { query, variables });
+    if (!response?.data || response.errors?.length) {
+      const conflict = response?.errors?.some(e => /expected|beforeOid|match|changed|reference update/i.test(e.message));
+      throw new BlogError(conflict ? 'conflict' : 'github_error', conflict ? 'Version changed; reread before retrying' : 'GitHub GraphQL operation failed; verify App Pull requests read/write permissions');
+    }
+    return response.data;
+  }
+  async pulls(branches: string[]): Promise<Record<string, Pull | null>> {
+    if (!branches.length) return {};
+    const unique = [...new Set(branches)];
+    if (unique.length > 10) throw new BlogError('request_budget', 'At most ten draft PRs per page');
+    const fields = unique.map((branch, i) => `p${i}: pullRequests(headRefName: ${JSON.stringify(branch)}, first: 1, states: [OPEN, CLOSED, MERGED], orderBy: {field: CREATED_AT, direction: DESC}) { nodes { number id url state isDraft merged headRefName headRefOid baseRefName headRepository { nameWithOwner } mergeCommit { oid } commits(last: 1) { nodes { commit { message } } } } }`).join('\n');
+    const data = await this.graphql<{ repository: { id: string; [key: string]: unknown } }>(
+      `query($owner: String!, $name: String!) { repository(owner: $owner, name: $name) { id ${fields} } }`, { owner: this.env.GITHUB_OWNER, name: this.env.GITHUB_REPO });
+    this.repositoryId = data.repository.id;
+    return Object.fromEntries(unique.map((branch, i) => {
+      const p = (data.repository[`p${i}`] as { nodes: any[] }).nodes[0];
+      if (p && (p.baseRefName !== this.env.GITHUB_BRANCH || p.headRepository?.nameWithOwner !== `${this.env.GITHUB_OWNER}/${this.env.GITHUB_REPO}`)) {
+        throw new BlogError('invalid_operation', 'PR repository or base mismatch');
+      }
+      return [branch, p ? { number: p.number, node_id: p.id, url: p.url, branch: p.headRefName, head: p.headRefOid,
+        state: p.state === 'OPEN' ? 'open' : 'closed', draft: p.isDraft, merged: p.merged, merge_commit: p.mergeCommit?.oid ?? null, message: p.commits?.nodes[0]?.commit.message } : null];
+    }));
+  }
+  private fromPull(p: any): Pull {
+    const repository = `${this.env.GITHUB_OWNER}/${this.env.GITHUB_REPO}`;
+    if (!p || p.head.repo?.full_name !== repository || p.base.repo?.full_name !== repository || p.base.ref !== this.env.GITHUB_BRANCH) {
+      throw new BlogError('invalid_operation', 'PR repository or base mismatch');
+    }
+    return { number: p.number, node_id: p.node_id, url: p.html_url, branch: p.head.ref, head: p.head.sha,
+      state: p.state, draft: p.draft, merged: !!p.merged, merge_commit: p.merge_commit_sha ?? null };
+  }
+  async pull(number: number) { return this.fromPull(await this.api(`/pulls/${number}`)); }
+  async createPull(branch: string, title: string, body: string) {
+    return this.fromPull(await this.api('/pulls', 'POST', { head: branch, base: this.env.GITHUB_BRANCH, title, body, draft: true, maintainer_can_modify: false }));
+  }
+  async updatePull(number: number, title: string, body: string, state?: 'open' | 'closed') {
+    return this.fromPull(await this.api(`/pulls/${number}`, 'PATCH', { title, body, ...(state ? { state } : {}) }));
+  }
+  async setPullDraft(pull: Pull, draft: boolean) {
+    if (pull.draft === draft) return;
+    const operation = draft ? 'convertPullRequestToDraft' : 'markPullRequestReadyForReview';
+    await this.graphql(`mutation($id: ID!) { ${operation}(input: {pullRequestId: $id}) { pullRequest { id } } }`, { id: pull.node_id });
+  }
+  async mergePull(number: number, expectedHead: string) {
+    const data = await this.api<{ merged: boolean; sha: string }>(`/pulls/${number}/merge`, 'PUT', { sha: expectedHead, merge_method: 'merge' });
+    if (!data?.merged || !/^[a-f0-9]{40}$/.test(data.sha)) throw new BlogError('conflict', 'PR was not merged; inspect its status');
+    return data.sha;
+  }
+  async syncReviewRef(branch: string, before: string | null, after: string, source: string, revision: string, main: string) {
+    if (!/^mcp\/reviews\/[a-f0-9-]{36}$/.test(branch) || !/^mcp\/drafts\/[a-z0-9]+(?:-[a-z0-9]+)*\/(zh-tw|en|ja)$/.test(source)) throw new BlogError('invalid_operation', 'Invalid managed review branch');
+    if (!this.repositoryId) await this.pulls([branch]);
+    // The clean snapshot may rewrite only this managed review ref. Guard the
+    // source draft and base in the same atomic transaction; never force main.
+    await this.graphql('mutation($input: UpdateRefsInput!) { updateRefs(input: $input) { clientMutationId } }', { input: {
+      repositoryId: this.repositoryId, refUpdates: [
+        { name: `refs/heads/${source}`, beforeOid: revision, afterOid: revision, force: false },
+        { name: `refs/heads/${this.env.GITHUB_BRANCH}`, beforeOid: main, afterOid: main, force: false },
+        { name: `refs/heads/${branch}`, beforeOid: before ?? '0'.repeat(40), afterOid: after, force: true },
+      ],
+    } });
+  }
+  async jobs(run: number): Promise<Job[]> {
+    const data = await this.api<{ jobs: Job[] }>(`/actions/runs/${run}/jobs?per_page=100`);
+    return data?.jobs ?? [];
   }
 }

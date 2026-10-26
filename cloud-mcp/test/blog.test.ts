@@ -8,7 +8,7 @@ async function prepared() {
   const result = setup();
   const draft = await result.blog.createPost('hello', 'zh-tw', { title: 'Hello', content: 'Draft body' });
   const operation = await result.blog.preparePublish('hello', 'zh-tw');
-  result.repo.pass(operation.candidate_commit, `mcp/candidates/${operation.operation_id}`);
+  result.repo.pass(operation.candidate_commit, operation.validation_branch);
   const status = await result.blog.operationStatus(operation.operation_id);
   return { ...result, draft, operation, confirmation: status.confirmation as string };
 }
@@ -85,7 +85,8 @@ describe('publication and recovery', () => {
     expect(result.status).toBe('deploying');
     expect(result.hosting_deployment_confirmed).toBe(false);
     const main = (await repo.head('main'))!;
-    expect(main).toBe(operation.candidate_commit);
+    expect(main).toBe(result.commit);
+    expect(await repo.isAncestor(operation.candidate_commit, main)).toBe(true);
     expect(await repo.file('content/posts/unrelated/index.md', main)).toBeNull();
     expect(await repo.file('.mcp/draft.json', main)).toBeNull();
     expect((await blog.readPost('hello', 'zh-tw')).frontmatter.draft).toBe(false);
@@ -102,7 +103,7 @@ describe('publication and recovery', () => {
   });
   it('does not offer confirmation before success, and fails closed if validation later fails', async () => {
     const { blog, repo, confirmation, operation } = await prepared();
-    repo.pass(operation.candidate_commit, `mcp/candidates/${operation.operation_id}`, env.VALIDATION_WORKFLOW, 'failure');
+    repo.pass(operation.candidate_commit, operation.validation_branch, env.VALIDATION_WORKFLOW, 'failure');
     expect((await blog.operationStatus(operation.operation_id)).confirmation).toBeUndefined();
     await expect(blog.publishPost('hello', 'zh-tw', confirmation)).rejects.toMatchObject({ code: 'validation_required' });
   });
@@ -138,14 +139,12 @@ describe('publication and recovery', () => {
     repo.loseMainResponse = true;
     await expect(blog.publishPost('hello', 'zh-tw', confirmation)).rejects.toThrow();
     const result = await blog.publishPost('hello', 'zh-tw', confirmation);
-    expect(result.commit).toBe(operation.candidate_commit);
-    expect(await repo.head('main')).toBe(operation.candidate_commit);
+    expect(result.commit).toBe(await repo.head('main'));
+    expect(await repo.isAncestor(operation.candidate_commit, result.commit as string)).toBe(true);
   });
-  it('repairs bookkeeping after interruption without discarding newer drafts', async () => {
+  it('keeps newer drafts when polling an earlier merged PR', async () => {
     const { repo, blog, confirmation, operation } = await prepared();
-    repo.failBookkeeping = true;
-    expect((await blog.publishPost('hello', 'zh-tw', confirmation)).draft_cleanup_pending).toBe(true);
-    repo.failBookkeeping = false;
+    expect((await blog.publishPost('hello', 'zh-tw', confirmation)).cleanup_status).toBe('waiting_for_deployment');
     await blog.operationStatus(operation.operation_id);
     const current = await blog.readPost('hello', 'zh-tw');
     const changed = await blog.updatePost('hello', 'zh-tw', current.revision, { content: 'Next edition' });
@@ -155,7 +154,7 @@ describe('publication and recovery', () => {
   it('reports deployment failure independently of successful publication', async () => {
     const { repo, blog, confirmation, operation } = await prepared();
     await blog.publishPost('hello', 'zh-tw', confirmation);
-    repo.pass(operation.candidate_commit, 'main', 'hugo.yaml', 'failure');
+    repo.pass((await repo.head('main'))!, 'main', 'hugo.yaml', 'failure');
     expect((await blog.operationStatus(operation.operation_id)).status).toBe('deployment_failed');
   });
 });

@@ -15,8 +15,8 @@ there is no need to replace their HTTP connections or change the owner's
 Cloudflare callback allowlist.
 
 See [cloud architecture, configuration and recovery](cloud-mcp/README.md) for
-implementation details. Python scripts under `scripts/` only export the article
-index and validate candidate commits/SEO during site builds.
+implementation details. Python scripts under `scripts/` export the article index, validate candidate commits/SEO, and clean unchanged
+MCP branches after successful site deployment.
 
 ## Tools and authoring workflow
 
@@ -25,7 +25,7 @@ The server exposes thirteen tools: `list_posts`, `read_post`, `create_post`,
 `publish_post`, `get_repo_status`, and `read_config`.
 
 `delete_draft` requires the draft revision and removes only the selected language
-from active drafts. It uses an atomic archive marker, retaining Git history,
+from active drafts and closes its unmerged PR. It uses an atomic archive marker, retaining Git history,
 candidate branches and uploaded images; published articles are unchanged. Old
 publication confirmations and upload tickets become stale. To start again, use
 `create_post` for an unpublished article or `update_post` on the published
@@ -35,16 +35,24 @@ revision before further edits/uploads.
    draft; use `source: published` to read main explicitly.
 2. Create a draft or update it with `expected_revision` from the latest read.
    Drafts are public GitHub branches with `draft: true`; they do not update the
-   website. Each successful update returns a new revision.
+   website. Saving immediately opens or updates a Draft PR and returns
+   `pr_url`, a fixed-version `read_url`, and a new revision. If `pr_sync_pending`
+   is true, content was saved: repair permissions/connection, then read and retry
+   `update_post` rather than creating a duplicate article.
 3. Upload images with the latest revision and insert their returned Markdown.
 4. Call `prepare_publish` and poll `get_operation_status` no more often than
-   once every five seconds while GitHub Actions validates the exact candidate.
+   once every five seconds while GitHub Actions validates the same PR's exact
+   candidate. On success it becomes ready for review.
 5. Show the entire ready preview, including uploaded images, to the user. Only
    after explicit approval of that exact version, call `publish_post` with the
-   returned confirmation. Tokens identify content; they do not prove consent.
+   returned confirmation to merge that PR. Tokens identify content; they do not
+   prove consent. The owner may instead review and merge in GitHub after checks.
 6. Poll status for `hosting_deployment_confirmed: true`. A Git commit is distinct
    from a successful Pages deployment. After a lost response, retry the same
    confirmation or poll the existing operation; do not recreate publication.
+7. Deployment includes cleanup of the review branch and unchanged source draft.
+   Newer changes are preserved. `cleanup_status` is separate from site deployment,
+   and status/retries continue to work after branch deletion.
 
 ## Upload article images
 
@@ -183,3 +191,5 @@ Worker, because candidates inherit their checks from main. Then deploy using the
 existing production configuration and secrets, run `npm run check:edge`, and
 refresh existing clients to discover `prepare_image_upload` and
 `complete_image_upload`. Authentication and deployment configuration are documented in [cloud-mcp/README.md](cloud-mcp/README.md).
+
+For the App permission and required-check rollout, see [PR publication rollout](cloud-mcp/README.md#pr-publication-rollout).
