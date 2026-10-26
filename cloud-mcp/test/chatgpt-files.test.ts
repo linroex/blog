@@ -121,15 +121,14 @@ it('rejects stale revisions, MIME mismatches and full drafts before downloading'
   await expect(blog.uploadChatGPTImage('original', 'zh-tw', revision, 'extra.png', { ...file, file_id: 'file-extra' })).rejects.toMatchObject({ code: 'conflict' });
   expect(fetcher).toHaveBeenCalledTimes(8);
 });
-it('requires a fresh draft before native uploads after deletion', async () => {
+it('starts a new draft when uploading again after complete deletion', async () => {
   const { blog, fetcher } = harness();
   const published = await blog.readPost('original', 'zh-tw');
   const image = await blog.uploadChatGPTImage('original', 'zh-tw', published.revision, 'chart.png', file);
   await blog.deleteDraft('original', 'zh-tw', image.revision);
-  await expect(blog.uploadChatGPTImage('original', 'zh-tw', published.revision, 'chart.png', file)).rejects.toMatchObject({ code: 'conflict' });
-  expect(fetcher).toHaveBeenCalledTimes(1);
-  const fresh = await blog.updatePost('original', 'zh-tw', published.revision, { content: 'Fresh draft' });
-  expect((await blog.uploadChatGPTImage('original', 'zh-tw', fresh.revision, 'chart.png', file)).source).toBe('draft');
+  const fresh = await blog.uploadChatGPTImage('original', 'zh-tw', published.revision, 'chart.png', file);
+  expect(fresh.source).toBe('draft');
+  expect(fresh.pr_number).not.toBe(image.pr_number);
   expect(fetcher).toHaveBeenCalledTimes(2);
 });
 it('keeps the draft unchanged on expired, oversized or invalid original data', async () => {

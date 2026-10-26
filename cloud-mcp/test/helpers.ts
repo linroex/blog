@@ -62,6 +62,11 @@ export class FakeRepo implements Repository {
     if (branch === 'main' && this.loseMainResponse) { this.loseMainResponse = false; throw new Error('Connection lost after write'); }
   }
   async refs(prefix: string) { return [...this.branches].filter(([b]) => b.startsWith(prefix)).map(([branch, sha]) => ({ branch, sha })); }
+  async deleteDraftRefs(source: string, revision: string, review?: { branch: string; revision: string }) {
+    const refs = [{ branch: source, revision }, ...(review ? [review] : [])];
+    if (refs.some(ref => this.branches.get(ref.branch) !== ref.revision)) throw new BlogError('conflict', 'Branch changed');
+    for (const ref of refs) this.branches.delete(ref.branch);
+  }
   async isAncestor(ancestor: string, descendant: string): Promise<boolean> {
     if (ancestor === descendant) return true;
     const commit = this.commits.get(descendant);

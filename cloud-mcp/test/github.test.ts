@@ -184,3 +184,33 @@ it('fails a review update on GraphQL ref conflicts without modifying any other r
     : Response.json({ data: null, errors: [{ message: 'Reference does not point at the expected object' }] }));
   await expect(repo.syncReviewRef(branch, null, 'a'.repeat(40), 'mcp/drafts/hello/en', 'b'.repeat(40), 'c'.repeat(40))).rejects.toMatchObject({ code: 'conflict' });
 });
+
+it('deletes only managed draft/review refs atomically with expected SHA guards', async () => {
+  const source = 'mcp/drafts/hello/en', review = `mcp/reviews/${'a'.repeat(36)}`;
+  const { repo, fetcher } = setup((url, init) => {
+    expect(url.pathname).toBe('/graphql');
+    const body = JSON.parse(init.body as string);
+    if (body.query.startsWith('query')) return Response.json({ data: { repository: { id: 'repo-id' } } });
+    expect(body.variables.input.refUpdates).toEqual([
+      { name: `refs/heads/${source}`, beforeOid: 'b'.repeat(40), afterOid: '0'.repeat(40), force: false },
+      { name: `refs/heads/${review}`, beforeOid: 'c'.repeat(40), afterOid: '0'.repeat(40), force: false },
+    ]);
+    return Response.json({ data: { updateRefs: { clientMutationId: null } } });
+  });
+  await repo.deleteDraftRefs(source, 'b'.repeat(40), { branch: review, revision: 'c'.repeat(40) });
+  const calls = fetcher.mock.calls.length;
+  for (const [branch, sha, other] of [
+    ['main', 'b'.repeat(40), undefined],
+    [source, 'invalid', undefined],
+    [source, 'b'.repeat(40), { branch: 'main', revision: 'c'.repeat(40) }],
+  ] as const) await expect(repo.deleteDraftRefs(branch, sha, other)).rejects.toMatchObject({ code: 'invalid_operation' });
+  expect(fetcher.mock.calls).toHaveLength(calls);
+});
+
+it('surfaces a branch deletion conflict without an unguarded REST fallback', async () => {
+  const { repo, fetcher } = setup((_url, init) => JSON.parse(init.body as string).query.startsWith('query')
+    ? Response.json({ data: { repository: { id: 'repo-id' } } })
+    : Response.json({ data: null, errors: [{ message: 'Reference does not point at the expected object' }] }));
+  await expect(repo.deleteDraftRefs('mcp/drafts/hello/en', 'a'.repeat(40))).rejects.toMatchObject({ code: 'conflict' });
+  expect(fetcher.mock.calls.every(([url]) => !String(url).includes('/git/refs/'))).toBe(true);
+});

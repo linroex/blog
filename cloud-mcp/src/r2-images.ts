@@ -15,6 +15,7 @@ export interface ImageStorage {
   store(upload: ImageUpload, bytes: Uint8Array): Promise<ImageAsset>;
   verify(asset: ImageAsset, slug: string): Promise<void>;
   discard(upload: ImageUpload): Promise<void>;
+  remove(asset: ImageAsset, slug: string): Promise<void>;
 }
 
 export function imageLimit(env: Env): number {
@@ -146,6 +147,12 @@ export class R2Images implements ImageStorage {
   async discard(upload: ImageUpload) {
     // Only after Git has durably recorded this upload. A failed cleanup is safe.
     try { await this.request(upload.pending_key, 'DELETE'); } catch { /* Pending-object audit can retry. */ }
+  }
+  async remove(asset: ImageAsset, slug: string): Promise<void> {
+    // Only the exact manifest object; never delete an article/bucket prefix.
+    if (asset.storage !== 'r2' || asset.key !== this.finalKey(slug, asset) || asset.url !== `${this.config().publicBase}/${asset.key}`) throw new BlogError('invalid_image', 'R2 image identity or public URL changed');
+    const response = await this.request(asset.key, 'DELETE');
+    if (response.status !== 404) this.check(response);
   }
   async verify(asset: ImageAsset, slug: string): Promise<void> {
     if (asset.storage !== 'r2' || asset.key !== this.finalKey(slug, asset) || asset.url !== `${this.config().publicBase}/${asset.key}`) throw new BlogError('invalid_image', 'R2 image identity or public URL changed');

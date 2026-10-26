@@ -9,7 +9,7 @@ const META_PATH = '.mcp/draft.json';
 const CANDIDATE_PREFIX = 'Blog MCP candidate\n\n';
 const SHA = /^[a-f0-9]{40}$/;
 export interface DraftMeta {
-  slug: string; lang: Lang; base_post_sha: string | null; published_commit?: string; deleted_revision?: string; review_branch?: string; images?: ImageAsset[];
+  slug: string; lang: Lang; base_post_sha: string | null; published_commit?: string; deleted_revision?: string; cleanup_pending?: boolean; review_branch?: string; images?: ImageAsset[];
 }
 interface Candidate {
   operation_id: string; user_id: string; slug: string; lang: Lang;
@@ -47,6 +47,7 @@ export class Blog {
     if (meta.slug !== slug || meta.lang !== lang || !(meta.base_post_sha === null || SHA.test(meta.base_post_sha)) ||
         (meta.published_commit && !SHA.test(meta.published_commit)) ||
         (meta.deleted_revision !== undefined && !SHA.test(meta.deleted_revision)) ||
+        (meta.cleanup_pending !== undefined && (typeof meta.cleanup_pending !== 'boolean' || !meta.deleted_revision)) ||
         (meta.review_branch !== undefined && !/^mcp\/reviews\/[a-f0-9-]{36}$/.test(meta.review_branch))) throw new BlogError('invalid_draft', 'Draft metadata does not match the article');
     imageManifest(meta.images);
     const file = await this.repo.file(postPath(slug, lang), revision);
@@ -92,6 +93,7 @@ export class Blog {
   async createPost(slug: string, lang: Lang, fields: PostFields & { title: string; content: string }) {
     const main = await this.main();
     const previous = await this.draft(slug, lang);
+    if (previous?.meta.cleanup_pending) throw new BlogError('cleanup_pending', 'Draft cleanup is incomplete; retry delete_draft with its original expected_revision');
     if ((previous && !previous.meta.deleted_revision) || await this.repo.file(postPath(slug, lang), main)) {
       throw new BlogError('already_exists', 'Article or draft already exists; read and update it instead');
     }
@@ -111,6 +113,7 @@ export class Blog {
   }
   async updatePost(slug: string, lang: Lang, expectedRevision: string, fields: PostFields, expectedPublishedRevision?: string, syncPR = true) {
     const current = await this.effective(slug, lang);
+    if (current.draft?.meta.cleanup_pending) throw new BlogError('cleanup_pending', 'Draft cleanup is incomplete; retry delete_draft with its original expected_revision');
     if (current.revision !== expectedRevision) throw new BlogError('conflict', 'Article changed; read it again before updating');
     await this.invalidateReview(current.draft?.meta);
     const changes = Object.fromEntries(Object.entries(fields).filter(([key, value]) => key !== 'content' && value !== undefined));
@@ -138,23 +141,31 @@ export class Blog {
   async deleteDraft(slug: string, lang: Lang, expectedRevision: string) {
     const draft = await this.draft(slug, lang);
     if (!draft || draft.meta.published_commit) throw new BlogError('not_found', 'No active draft for this article');
-    let pull = await this.invalidateReview(draft.meta);
-    if (await this.mergedDraft(pull, draft.revision, draft.meta.review_branch)) throw new BlogError('not_found', 'No active draft for this article');
     const alreadyDeleted = draft.meta.deleted_revision === expectedRevision;
     if (!alreadyDeleted && (draft.meta.deleted_revision || draft.revision !== expectedRevision)) {
       throw new BlogError('conflict', 'Draft changed; read it again before deleting');
     }
+    let pull = await this.invalidateReview(draft.meta);
+    if (await this.mergedDraft(pull, draft.revision, draft.meta.review_branch)) throw new BlogError('not_found', 'No active draft for this article');
     let revision = draft.revision;
-    if (!alreadyDeleted) {
-      // A non-forced ref update atomically competes with concurrent writers.
-      // GitHub's delete-ref API has no expected-SHA guard, so retain a tombstone.
+    if (!alreadyDeleted || !draft.meta.cleanup_pending) {
+      // Retain the manifest until cleanup succeeds so partial failures can
+      // resume. New MCP writes are blocked during this short phase.
       revision = await this.repo.writeCommit(draft.revision,
-        { [META_PATH]: JSON.stringify({ ...draft.meta, deleted_revision: draft.revision }) }, `Delete draft: ${slug} (${lang})`);
+        { [META_PATH]: JSON.stringify({ ...draft.meta, deleted_revision: expectedRevision, cleanup_pending: true }) }, `Delete draft: ${slug} (${lang})`);
       await this.repo.advanceRef(draft.branch, revision);
     }
     if (pull?.state === 'open') pull = await this.repo.updatePull(pull.number, `Discarded: ${slug} (${lang})`, 'This draft was discarded.', 'closed');
+    if (pull?.merged) throw new BlogError('conflict', 'PR was merged while deleting; inspect the article before retrying');
+    const review = draft.meta.review_branch;
+    const reviewRevision = review ? await this.repo.head(review) : null;
+    if (pull && reviewRevision && reviewRevision !== pull.head) throw new BlogError('conflict', 'Review branch changed during deletion; inspect it before retrying');
+    const images = imageManifest(draft.meta.images).filter(asset => asset.storage === 'r2');
+    for (const asset of images) await this.imageStorage.remove(asset, slug);
+    await this.repo.deleteDraftRefs(draft.branch, revision, review && reviewRevision ? { branch: review, revision: reviewRevision } : undefined);
     return { slug, lang, deleted: true, already_deleted: alreadyDeleted, revision, ...this.prView(pull, slug, lang, revision),
-      deleted_revision: expectedRevision, retained_git_history: true, retained_uploaded_images: true };
+      deleted_revision: expectedRevision, deleted_images: images.map(asset => asset.key!),
+      deleted_branches: [draft.branch, ...(reviewRevision && review ? [review] : [])], retained_git_history: true, retained_uploaded_images: false };
   }
   async prepareImageUpload(slug: string, lang: Lang, expectedRevision: string, filename: string,
     mimeType: string, size: number, expectedHash?: string) {

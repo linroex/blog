@@ -200,6 +200,20 @@ export class GitHubRepository implements Repository {
       ],
     } });
   }
+  async deleteDraftRefs(source: string, revision: string, review?: { branch: string; revision: string }) {
+    if (!/^mcp\/drafts\/[a-z0-9]+(?:-[a-z0-9]+)*\/(zh-tw|en|ja)$/.test(source) || !/^[a-f0-9]{40}$/.test(revision) ||
+        (review && (!/^mcp\/reviews\/[a-f0-9-]{36}$/.test(review.branch) || !/^[a-f0-9]{40}$/.test(review.revision)))) throw new BlogError('invalid_operation', 'Invalid managed draft branch');
+    if (!this.repositoryId) {
+      const data = await this.graphql<{ repository: { id: string } }>('query($owner: String!, $name: String!) { repository(owner: $owner, name: $name) { id } }', { owner: this.env.GITHUB_OWNER, name: this.env.GITHUB_REPO });
+      this.repositoryId = data.repository.id;
+    }
+    await this.graphql('mutation($input: UpdateRefsInput!) { updateRefs(input: $input) { clientMutationId } }', { input: {
+      repositoryId: this.repositoryId,
+      refUpdates: [{ branch: source, revision }, ...(review ? [review] : [])].map(ref => ({
+        name: `refs/heads/${ref.branch}`, beforeOid: ref.revision, afterOid: '0'.repeat(40), force: false,
+      })),
+    } });
+  }
   async jobs(run: number): Promise<Job[]> {
     const data = await this.api<{ jobs: Job[] }>(`/actions/runs/${run}/jobs?per_page=100`);
     return data?.jobs ?? [];

@@ -110,7 +110,7 @@ it('accepts durable PR operation IDs through the authenticated MCP schema', asyn
   expect(status.structuredContent).toMatchObject({ status: 'queued', pr_number: 7 });
 });
 
-it('deletes the requested language through MCP using only a non-forced draft ref update', async () => {
+it('deletes the requested language through MCP with an expected-SHA ref deletion', async () => {
   const h = await harness();
   Object.assign(h.env, { GITHUB_APP_ID: crypto.randomUUID(), GITHUB_INSTALLATION_ID: '123', GITHUB_APP_PRIVATE_KEY: await exportPKCS8(h.key.privateKey) });
   const before = 'b'.repeat(40), after = 'c'.repeat(40), tree = 'd'.repeat(40);
@@ -126,6 +126,13 @@ it('deletes the requested language through MCP using only a non-forced draft ref
     }
     if (url.endsWith(`/git/commits/${before}`)) return Response.json({ sha: before, message: '', parents: [], tree: { sha: tree } });
     const body = JSON.parse(init.body as string);
+    if (url.endsWith('/graphql')) {
+      if (body.query.startsWith('query')) return Response.json({ data: { repository: { id: 'repo-id' } } });
+      expect(body.variables.input.refUpdates).toEqual([
+        { name: 'refs/heads/mcp/drafts/hello/en', beforeOid: after, afterOid: '0'.repeat(40), force: false },
+      ]);
+      return Response.json({ data: { updateRefs: { clientMutationId: null } } });
+    }
     if (url.endsWith('/git/trees')) {
       expect(body.tree).toHaveLength(1);
       expect(body.tree[0].path).toBe('.mcp/draft.json');
