@@ -320,6 +320,7 @@ export class Blog {
     }
     return { posts: posts.slice(offset, offset + limit), total: posts.length, offset, limit,
       drafts, next_draft_offset: draftOffset + page.length < refs.length ? draftOffset + page.length : null,
-      indexed_commit: index.commit, current_main_commit: main, index_stale: index.commit !== main };
+      indexed_commit: index.commit, current_main_commit: main,
+      index_stale: !await this.repo.indexSourcesUnchanged(index.commit, main) };
   }
 }

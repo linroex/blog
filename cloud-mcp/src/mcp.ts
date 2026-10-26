@@ -31,7 +31,7 @@ export function createServer(blog: Blog) {
       }
     });
   }
-  tool('list_posts', 'List the indexed main-branch articles and a separate page of active drafts. Follow next_draft_offset until null. index_stale signals deployment lag; read_post is authoritative.', {
+  tool('list_posts', 'List indexed main-branch articles newest publication date first (unknown dates last; ties by slug), plus a separate page of active drafts. Follow next_draft_offset until null. index_stale means article or index-generator sources changed; different commit IDs alone do not mean stale content. read_post is authoritative.', {
     query: z.string().max(200).default(''), offset: z.number().int().min(0).default(0), limit: z.number().int().min(1).max(50).default(20),
     draft_offset: z.number().int().min(0).default(0),
     draft_limit: z.number().int().min(1).max(10).default(5),
