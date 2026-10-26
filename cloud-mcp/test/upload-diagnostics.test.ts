@@ -33,11 +33,11 @@ it('identifies a rejected redirect rather than blaming the original trusted URL'
   const file = { file_id: 'private-id', download_url: 'https://files.oaiusercontent.com/private-original?sig=original-secret' };
   await withUploadDiagnostics(body(file), async () => {
     try { await downloadChatGPTFile(file, 1000, async () => new Response(null, { status: 302,
-      headers: { Location: 'https://redirect.example/private-target?sig=redirect-secret' } })); }
+      headers: { Location: 'https://metadata.google.internal/private-target?sig=redirect-secret' } })); }
     catch { uploadResultDiagnostic('invalid_file'); }
     return new Response();
   });
-  expect(events()).toContainEqual(expect.objectContaining({ stage: 'redirect', hostname: 'redirect.example', reason: 'policy' }));
+  expect(events()).toContainEqual(expect.objectContaining({ stage: 'redirect', hostname: 'metadata.google.internal', reason: 'policy' }));
   expect(events()).toContainEqual(expect.objectContaining({ event: 'upload_image.result', success: false, error_code: 'invalid_file' }));
   expect(new Set(events().map(event => event.diagnostic_id)).size).toBe(1);
   expect(JSON.stringify(log.mock.calls)).not.toMatch(/private-|secret|sig=/);

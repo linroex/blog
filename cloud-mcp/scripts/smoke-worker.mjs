@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import { Miniflare, convertV4MiniflareOptions, Response as WorkerResponse } from 'miniflare';
 import { exportJWK, generateKeyPair, SignJWT } from 'jose';
+import { readFileSync } from 'node:fs';
+
+const config = JSON.parse(readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8'));
+assert.ok(config.compatibility_flags.includes('global_fetch_strictly_public'), 'Attachment downloads require public-network global fetch');
 
 // Real workerd, generated test keys and a local JWKS responder. This simulates
 // ctx.access; production edge authentication still requires live acceptance.
@@ -14,7 +18,7 @@ const jwk = { ...await exportJWK(key.publicKey), kid: 'smoke', alg: 'RS256', use
 let keyRequests = 0;
 const options = {
   modules: true, scriptPath: new URL('../dist/index.js', import.meta.url).pathname,
-  compatibilityDate: '2026-10-24', compatibilityFlags: ['nodejs_compat', 'global_fetch_strictly_public'],
+  compatibilityDate: config.compatibility_date, compatibilityFlags: config.compatibility_flags,
   bindings: {
     PUBLIC_ORIGIN: origin, ACCESS_TEAM_DOMAIN: 'smoke.cloudflareaccess.com', ACCESS_AUD: aud, ALLOWED_ACCESS_EMAIL: email,
     ALLOWED_GITHUB_USER_ID: '123', GITHUB_OWNER: 'test', GITHUB_REPO: 'blog', GITHUB_BRANCH: 'main',

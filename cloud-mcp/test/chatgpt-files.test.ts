@@ -20,19 +20,38 @@ describe('ChatGPT attachment downloads', () => {
     expect(new Headers(init?.headers).get('authorization')).toBeNull();
     expect(new Headers(init?.headers).get('cookie')).toBeNull();
   });
-  it.each(['http://files.oaiusercontent.com/file', 'https://files.oaiusercontent.com.evil.example/file',
-    'https://evil.example/file', 'https://127.0.0.1/file', 'https://169.254.169.254/file',
-    'https://user:pass@files.oaiusercontent.com/file', 'https://files.oaiusercontent.com:8443/file', '/mnt/data/image.png'])('rejects unsafe download destination %s', async url => {
+  it.each(['https://oaisdmntprkoreacentral.blob.core.windows.net/input?sig=private-example',
+    'https://images.example.com/input', 'https://files.oaiusercontent.com.evil.example/input'])('accepts public HTTPS hosts without a provider allowlist: %s', async url => {
+    const fetcher = vi.fn<typeof fetch>(async () => new Response(png));
+    expect(await downloadChatGPTFile({ ...file, download_url: url }, 1000, fetcher)).toEqual(png);
+    expect(String(fetcher.mock.calls[0][0])).toBe(url);
+  });
+  it.each(['http://files.oaiusercontent.com/file', 'file:///etc/passwd', 'ftp://example.com/file',
+    'https://127.0.0.1/file', 'https://169.254.169.254/file', 'https://10.0.0.1/file',
+    'https://172.16.0.1/file', 'https://192.168.0.1/file', 'https://100.100.100.200/file',
+    'https://0.0.0.0/file', 'https://2130706433/file', 'https://0x7f000001/file', 'https://0177.0.0.1/file',
+    'https://[::1]/file', 'https://[::ffff:127.0.0.1]/file', 'https://[fd00::1]/file', 'https://[fe80::1]/file',
+    'https://localhost/file', 'https://localhost./file', 'https://x.localhost./file', 'https://printer.local/file',
+    'https://metadata.google.internal/file', 'https://nas.home.arpa/file', 'https://router.lan/file',
+    'https://intranet/file', 'https://bad_label.example.com/file',
+    'https://user:pass@files.oaiusercontent.com/file', 'https://files.oaiusercontent.com:8443/file',
+    'https://files.oaiusercontent.com/file#fragment', '/mnt/data/image.png'])('rejects unsafe download destination %s', async url => {
     const fetcher = vi.fn<typeof fetch>();
     await expect(downloadChatGPTFile({ ...file, download_url: url }, 1000, fetcher)).rejects.toMatchObject({ code: 'invalid_file' });
     expect(fetcher).not.toHaveBeenCalled();
   });
-  it('follows bounded trusted redirects and refuses a redirect to an unrelated host', async () => {
-    const good = vi.fn<typeof fetch>().mockResolvedValueOnce(new Response(null, { status: 302, headers: { Location: '/file-next' } })).mockResolvedValueOnce(new Response(png));
+  it('follows bounded relative and cross-provider public redirects, and rechecks private destinations', async () => {
+    const good = vi.fn<typeof fetch>().mockResolvedValueOnce(new Response(null, { status: 302, headers: { Location: '/file-next' } }))
+      .mockResolvedValueOnce(new Response(null, { status: 302, headers: { Location: 'https://oaisdmntprkoreacentral.blob.core.windows.net/file-final' } }))
+      .mockResolvedValueOnce(new Response(png));
     expect(await downloadChatGPTFile(file, 1000, good)).toEqual(png);
-    const bad = vi.fn<typeof fetch>(async () => new Response(null, { status: 302, headers: { Location: 'https://evil.example/file' } }));
-    await expect(downloadChatGPTFile(file, 1000, bad)).rejects.toMatchObject({ code: 'invalid_file' });
-    expect(bad).toHaveBeenCalledTimes(1);
+    expect(good).toHaveBeenCalledTimes(3);
+    for (const location of ['https://127.0.0.1/file', 'https://[::1]/file', 'https://metadata.google.internal/file',
+      'https://printer.local./file', 'http://public.example.com/file', 'https://user:pass@public.example.com/file']) {
+      const bad = vi.fn<typeof fetch>(async () => new Response(null, { status: 302, headers: { Location: location } }));
+      await expect(downloadChatGPTFile(file, 1000, bad)).rejects.toMatchObject({ code: 'invalid_file' });
+      expect(bad).toHaveBeenCalledTimes(1);
+    }
     const loop = vi.fn<typeof fetch>(async () => new Response(null, { status: 302, headers: { Location: '/again' } }));
     await expect(downloadChatGPTFile(file, 1000, loop)).rejects.toMatchObject({ code: 'file_download_failed' });
     expect(loop).toHaveBeenCalledTimes(3);
@@ -59,7 +78,9 @@ describe('ChatGPT attachment downloads', () => {
 it('imports an attachment in one operation, stores only final bytes on R2 and publishes through the normal preview', async () => {
   const { blog, repo, r2, fetcher } = harness();
   const post = await blog.createPost('native-file', 'zh-tw', { title: 'Native', content: 'Body' });
-  const image = await blog.uploadChatGPTImage('native-file', 'zh-tw', post.revision, 'chart.png', file);
+  const image = await blog.uploadChatGPTImage('native-file', 'zh-tw', post.revision, 'chart.png', {
+    ...file, download_url: 'https://oaisdmntprkoreacentral.blob.core.windows.net/input?sig=private-example',
+  });
   expect(image.filename).toBe('chart.webp');
   expect(image.original?.size).toBe(png.length);
   expect(fetcher).toHaveBeenCalledTimes(1);

@@ -72,13 +72,13 @@ try {
       catch (error) { return Response.json({ error: error.code || 'runtime_error', type: error.name,
         message: String(error.message).replace(/https?:[^\\s]+/g, '[URL]').replace(/[A-Za-z0-9_+\\/=.-]{32,}/g, '[redacted]').slice(0, 200) }, { status: 500 }); }
     } };`, resolveDir: process.cwd(), sourcefile: 'r2-check-worker.ts' },
-    bundle: true, platform: 'browser', format: 'esm', external: ['node:crypto'], write: false });
+    bundle: true, platform: 'browser', format: 'esm', external: ['node:*'], write: false });
   runtime = new Miniflare(convertV4MiniflareOptions({ modules: true, script: worker.outputFiles[0].text,
     compatibilityDate: '2026-10-24', compatibilityFlags: ['nodejs_compat', 'global_fetch_strictly_public'], bindings: env,
     images: { binding: 'IMAGES' },
     outboundService: async request => {
       const url = new URL(request.url);
-      if (url.hostname === 'files.oaiusercontent.com') {
+      if (url.hostname === 'oaisdmntprkoreacentral.blob.core.windows.net') {
         assert.equal(request.method, 'GET');
         assert.equal(request.headers.get('authorization'), null);
         nativeDownloads++;
@@ -113,7 +113,7 @@ try {
   assert.equal((await storage.complete(upload)).key, asset.key);
   phase = 'native ChatGPT reference import';
   const native = await runtime.dispatchFetch('http://localhost/native', { method: 'POST', body: JSON.stringify({ filename,
-    file: { download_url: 'https://files.oaiusercontent.com/file-integration?sig=simulated', file_id: `file-${uploadId}`, mime_type: 'image/png' } }) });
+    file: { download_url: 'https://oaisdmntprkoreacentral.blob.core.windows.net/file-integration?sig=simulated', file_id: `file-${uploadId}`, mime_type: 'image/png' } }) });
   if (native.status !== 200) console.error('Native import:', await native.text());
   assert.equal(native.status, 200);
   const nativeAsset = await native.json();

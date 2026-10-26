@@ -331,9 +331,16 @@ is informational; the separate `filename` selects a safe blog basename and must
 match the original MIME/signature. Never use a ChatGPT `/mnt/data` path as a remote
 file or invent file references.
 
-[src/chatgpt-files.ts](src/chatgpt-files.ts) accepts only HTTPS
-`files.oaiusercontent.com` and subdomains on port 443 without userinfo/fragments.
-It follows at most two allowlisted redirects, sends no credentials, bounds both
+[src/chatgpt-files.ts](src/chatgpt-files.ts) accepts public HTTPS hostnames on port
+443 without userinfo/fragments. There is no provider-domain allowlist: ChatGPT
+also supplies Azure Blob URLs. Local/private hostnames, single-label names and
+all IP literals (including alternate IPv4 forms and IPv6) are rejected.
+DNS resolution and connection-time private-network exclusion rely on Cloudflare
+Workers' global `fetch` with `global_fetch_strictly_public`; the application does
+not perform a separate DNS lookup that could race with the connection. Do not
+route attachment fetches through a private service/VPC binding or proxy. This
+contract is specific to the cloud Worker, not a general-purpose Node fetch client.
+It follows at most two redirects, rechecks each destination, sends no credentials, bounds both
 announced and streamed bytes, and applies a 60-second deadline. Download errors
 never echo signed URLs. The immutable upload ID derives from owner, article,
 language, chosen filename and file ID; changing a temporary URL does not create a

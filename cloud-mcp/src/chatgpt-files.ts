@@ -1,8 +1,18 @@
 import { BlogError } from './types';
 import { uploadDownloadDiagnostic } from './upload-diagnostics';
+import { isIP } from 'node:net';
 
 export interface ChatGPTFile {
   download_url: string; file_id: string; mime_type?: string; file_name?: string;
+}
+function publicHostname(hostname: string): boolean {
+  const host = hostname.replace(/\.$/, '').toLowerCase();
+  // URL canonicalization expands numeric/hex/octal IPv4 spellings. Reject all
+  // literal IPs (Workers fetch requires hostnames), including bracketed IPv6.
+  if (isIP(host.replace(/^\[|\]$/g, '')) || host.length > 253 || !host.includes('.')) return false;
+  if (!host.split('.').every(label => /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(label))) return false;
+  return !['localhost', 'local', 'internal', 'lan', 'home', 'corp', 'home.arpa', 'onion']
+    .some(suffix => host === suffix || host.endsWith(`.${suffix}`));
 }
 function downloadURL(value: string, stage: 'initial' | 'redirect'): URL {
   let url: URL;
@@ -11,14 +21,20 @@ function downloadURL(value: string, stage: 'initial' | 'redirect'): URL {
     throw new BlogError('invalid_file', 'ChatGPT must supply a downloadable HTTPS file reference');
   }
   if (url.protocol !== 'https:' || url.username || url.password || url.hash || (url.port && url.port !== '443') ||
-      !(url.hostname === 'files.oaiusercontent.com' || url.hostname.endsWith('.files.oaiusercontent.com'))) {
+      !publicHostname(url.hostname)) {
     uploadDownloadDiagnostic(stage, value, { reason: 'policy' });
-    throw new BlogError('invalid_file', 'Only ChatGPT file downloads on files.oaiusercontent.com are accepted; select the attachment again to obtain a supported file reference');
+    throw new BlogError('invalid_file', 'File downloads require a public HTTPS hostname on port 443 without credentials or fragments; local names and IP literals are not accepted');
   }
   uploadDownloadDiagnostic(stage, value);
   return url;
 }
-/** Never forward MCP, GitHub or R2 credentials to an attachment download. */
+/**
+ * Never forward MCP, GitHub or R2 credentials to an attachment download.
+ * Host syntax checks alone cannot validate DNS or prevent rebinding. Production
+ * must use Workers global fetch with global_fetch_strictly_public, not a private
+ * service/VPC binding or proxy. The runtime enforces public-network access when
+ * it resolves/connects, including hosts whose DNS points to private addresses.
+ */
 export async function downloadChatGPTFile(file: ChatGPTFile, maximum: number, fetcher: typeof fetch = fetch): Promise<Uint8Array> {
   let url = downloadURL(file.download_url, 'initial');
   const signal = AbortSignal.timeout(60_000);
