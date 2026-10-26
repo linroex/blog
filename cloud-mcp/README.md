@@ -18,6 +18,8 @@ See [r2-upload-rollout.json](r2-upload-rollout.json) for the R2 deployment, live
 storage verification and pending client acceptance. The subsequent
 [webp-upload-rollout.json](webp-upload-rollout.json) records the 15 MiB limit,
 automatic conversion and the owner-reported ChatGPT network limitation.
+[chatgpt-file-upload-rollout.json](chatgpt-file-upload-rollout.json) records the
+subsequent native ChatGPT file tool and the remaining live-client acceptance.
 The GitHub App is `linroex-blog-mcp`, installed only on `linroex/blog`.
 GitHub App credentials and the publication confirmation key remain Worker secrets.
 Cloudflare Access owns login, client registration, access tokens and refresh grants.
@@ -95,7 +97,7 @@ Python scripts in `scripts/` are build/index/validation helpers, not MCP servers
 | Authoring and publication | [src/blog.ts](src/blog.ts), `Blog` | Select draft/published revisions, enforce conflicts, create candidates, poll validation, issue confirmations, update main and recover interrupted publications. |
 | GitHub persistence | [src/github.ts](src/github.ts), `installationToken`, `GitHubRepository` | Obtain a repo-scoped App token; read/write blobs, trees, commits and refs; query Actions. Ref updates always use `force: false`. |
 | Article format and signatures | [src/document.ts](src/document.ts), [src/crypto.ts](src/crypto.ts), [src/types.ts](src/types.ts) | Restrict article paths/languages, parse and edit frontmatter, enforce file limits, hash content and sign purpose-specific candidate/confirmation envelopes. |
-| Uploaded images | [src/r2-images.ts](src/r2-images.ts), [src/images.ts](src/images.ts), `Blog.prepareImageUpload` / `completeImageUpload` | Sign a five-minute raw PUT to R2, verify bytes, finalize a content-addressed public image and commit only its manifest to the draft. |
+| Uploaded images | [src/r2-images.ts](src/r2-images.ts), [src/images.ts](src/images.ts), [src/chatgpt-files.ts](src/chatgpt-files.ts), `Blog.uploadChatGPTImage` / `prepareImageUpload` / `completeImageUpload` | Sign a five-minute raw PUT to R2, verify bytes, finalize a content-addressed public image and commit only its manifest to the draft. |
 | Candidate checks | [mcp-validate.yaml](../.github/workflows/mcp-validate.yaml), [check_mcp_candidate.py](../scripts/check_mcp_candidate.py) | On candidate pushes, check the recorded parent, selected file and content hash, then build Hugo and validate SEO. The Worker verifies the signed envelope and exact workflow result before publication. |
 | Website and search index | [hugo.yaml](../.github/workflows/hugo.yaml), [export_mcp_index.py](../scripts/export_mcp_index.py) | Build/deploy main to Pages and export `/mcp-index.json`; `index.ts:loadIndex` uses that metadata for listing. Article reads and publication decisions use GitHub directly. |
 
@@ -196,6 +198,18 @@ localhost, loopback and unapproved redirect registrations. It does not prove a
 successful owner sign-in or replace review of the platform policy inventory.
 
 ## Access setup and cutover
+
+The owner requested a temporary **48-hour OAuth grant expiry test** on
+2026-10-26, keeping access tokens at 15 minutes. Its setup and observations are
+tracked in [grant-expiry-test.json](grant-expiry-test.json). The experiment is
+pending the platform change; the 14-day values below describe the previous
+documented configuration. This file and Wrangler deployment do not apply Access
+settings. Change only **Managed OAuth > Grant session duration** to `48h`, then
+complete a fresh Claude OAuth authorization and record its time as T0. Test a
+published-article read before 48 hours and again after 48 hours 20 minutes,
+without manually reauthorizing in between. Record any error and the available
+reauthorization controls before reconnecting. The duration setting also applies
+to new grants for other clients of this Access application.
 
 These are sequential steps of one migration. Keep the same Worker and `/mcp`
 URL. Do not add a tunnel, container or another Worker. Use the existing GitHub

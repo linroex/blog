@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-26T01:48:55Z",
+  "source_commit": "0952618031f66b2a0f2cdc81351f780ff290ebaf",
+  "endpoint": "https://lins-blog-mcp.linroex.workers.dev/mcp",
+  "server_version": "1.4.0",
+  "worker_version_id": "29d0af13-b363-49f7-8ce6-fb35fc3f705e",
+  "tool_count": 12,
+  "native_tool": {
+    "name": "upload_image",
+    "metadata": {
+      "openai/fileParams": [
+        "file"
+      ]
+    },
+    "required_file_fields": [
+      "download_url",
+      "file_id"
+    ],
+    "optional_file_fields": [
+      "mime_type",
+      "file_name"
+    ],
+    "max_original_and_output_bytes": 15728640,
+    "images_per_language_draft": 8,
+    "conversion": "shared Cloudflare Images WebP quality 85; existing WebP unchanged",
+    "storage": "shared immutable R2 final image and GitHub draft manifest; native path writes no pending object",
+    "deduplication": "stable identity from owner/article/language/chosen filename/file_id; temporary URL changes do not create another attachment"
+  },
+  "download_policy": {
+    "https_hosts": [
+      "files.oaiusercontent.com",
+      "*.files.oaiusercontent.com"
+    ],
+    "port": 443,
+    "max_allowlisted_redirects": 2,
+    "timeout_seconds": 60,
+    "credentials_forwarded": false,
+    "signed_urls_or_file_ids_persisted_in_git": false
+  },
+  "verification": {
+    "typescript": "passed",
+    "vitest_passed": 89,
+    "python_passed": 37,
+    "build": "passed",
+    "workerd_http_schema": "passed; 12 tools and exact native file metadata/required fields",
+    "real_r2_and_local_workerd_15_mib": "passed; both presigned transport and native attachment import",
+    "openai_attachment_download_in_integration": "simulated bytes, not a real ChatGPT-issued reference",
+    "native_idempotence": "passed; one download and no duplicate draft commit",
+    "public_webp_hash": "passed",
+    "disposable_test_objects_deleted_and_absence_verified": true,
+    "github_mcp_ci": "https://github.com/linroex/blog/actions/runs/40255996608",
+    "github_mcp_ci_conclusion": "success",
+    "production_test_article_published": false,
+    "production_access_oauth_edge": "passed"
+  },
+  "client_acceptance": {
+    "status": "pending owner test with actual ChatGPT attachment",
+    "instructions": "Refresh Blog MCP tools, start a new conversation, attach an image and ask upload_image to add it to a draft without publishing",
+    "known_host_runtime_limit": "Server tests cannot prove actual ChatGPT file reference injection. Unsupported download hosts fail closed and should be investigated without sharing signed URLs."
+  },
+  "preserved": {
+    "claude_presigned_upload": true,
+    "http_endpoint": true,
+    "managed_oauth_callbacks": true,
+    "github_app_and_confirmation_secrets": true,
+    "published_articles": true,
+    "no_local_mcp_reintroduced": true,
+    "no_browser_automation_used": true
+  },
+  "official_contract": "https://developers.openai.com/plugins/reference#define-file-inputs"
+}
