@@ -136,7 +136,7 @@ Durable application state is in GitHub and R2, not Worker memory or a local chec
 | Draft content and publication baseline | `mcp/drafts/<slug>/<lang>`: article file plus `.mcp/draft.json` (`base_post_sha`, optional `published_commit`) |
 | Operation snapshot and recovery identity | `mcp/candidates/<operation_id>`: candidate commit, parent SHA and signed envelope in its commit message |
 | Validation and deployment results | GitHub Actions runs, selected by workflow, commit SHA and branch |
-| Listing metadata | Pages `/mcp-index.json`, tagged with its source commit; may lag main |
+| Listing metadata | Pages `/mcp-index.json`, tagged with its source commit; newest publication date first. Staleness compares article/index-generator sources, not unrelated main commits. |
 
 The current Worker has no KV binding. Its cached App token and JWKS resolver are
 temporary caches, not publication state. Preserve candidate refs and the signing
@@ -291,7 +291,16 @@ convenience; use the automated generated-key test harness instead.
 
 | Tool | Contract |
 | --- | --- |
-| `list_posts` | `query`, `offset`, `limit` (1–50); `draft_offset`, `draft_limit` (1–10, default 5). Returns indexed `posts` and a **separate** `drafts` page, `next_draft_offset`, `indexed_commit`, `current_main_commit`, `index_stale`. Draft cursor advances through branches, including archived entries, so follow it even for an empty filtered page. |
+| `list_posts` | `query`, `offset`, `limit` (1–50); `draft_offset`, `draft_limit` (1–10, default 5). Returns indexed `posts` sorted by publication `date` descending (UTC ISO 8601; missing/invalid dates are `null` and sort last; ties by slug), and a **separate** `drafts` page, `next_draft_offset`, `indexed_commit`, `current_main_commit`, `index_stale`. Draft cursor advances through branches, including archived entries, so follow it even for an empty filtered page. |
+
+`index_stale` compares the immutable Git objects for `content/posts`,
+`scripts/blog_content.py`, and `scripts/export_mcp_index.py` between the indexed
+commit and current main. Different commit IDs alone do not indicate stale
+articles: MCP-only or documentation commits intentionally skip Pages deployment.
+The check walks only non-recursive trees (at most eight extra GitHub API calls
+when commits differ), so large changes are not subject to the compare API's file
+limit. If verification fails, the listing returns an error rather than claiming
+freshness; `read_post` remains authoritative. No article sorting runs per request.
 | `read_post` | `slug`, optional `lang`, `source` = `auto` / `draft` / `published`. `auto` prefers an active draft. Returns full content, frontmatter and `revision`. |
 | `create_post` | `slug`, optional `lang`, `title`, `content`, optional `tags`, `categories`, `summary`; immediately commits to a dedicated draft branch. A translation requires an original in draft or main. |
 | `update_post` | Requires `expected_revision`. Optional `expected_published_revision` plus full `content` explicitly reconciles an external edit after reading both versions. No automatic merge or overwrite. |

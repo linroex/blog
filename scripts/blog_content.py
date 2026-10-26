@@ -5,6 +5,7 @@ frontmatter reader so index output does not depend on optional Python packages.
 """
 import json
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -62,8 +63,15 @@ def article_metadata(root: Path) -> list[dict[str, Any]]:
         except (OSError, UnicodeError, ValueError):
             continue
         slug = path.parent.name
+        try:
+            date = datetime.fromisoformat(str(metadata.get('date', '')).replace('Z', '+00:00'))
+            # Match Hugo's default UTC for dates without an explicit time zone.
+            date = date.replace(tzinfo=date.tzinfo or timezone.utc).astimezone(timezone.utc).isoformat()
+        except (ValueError, OverflowError):
+            date = None
         posts.append({
             'slug': slug,
+            'date': date,
             'title': str(metadata.get('title') or slug),
             'summary': metadata.get('summary', ''),
             'draft': bool(metadata.get('draft', False)),
@@ -71,4 +79,7 @@ def article_metadata(root: Path) -> list[dict[str, Any]]:
             'categories': metadata.get('categories', []),
             'translations': [lang for lang in LANGS[1:] if (path.parent / f'index.{lang}.md').is_file()],
         })
+    # The path ordering above provides the stable slug tie-breaker. Unknown
+    # dates sort last; normalized UTC dates can be compared as ISO strings.
+    posts.sort(key=lambda post: post['date'] or '', reverse=True)
     return posts
