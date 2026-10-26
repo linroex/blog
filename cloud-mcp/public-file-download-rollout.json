@@ -58,9 +58,32 @@
       }
     }
   },
-  "client_acceptance": "Real ChatGPT retry still required. Integration download is simulated; R2 writes, reads and object cleanup are real.",
+  "client_acceptance": {
+    "status": "passed",
+    "reported_on": "2026-10-26",
+    "evidence": "Owner reported that the real ChatGPT image upload succeeded after testing. Claude web upload had already succeeded.",
+    "verification_scope": "Live-client acceptance is owner-reported; integration download remains simulated, while R2 writes, reads and cleanup are real."
+  },
   "references": [
     "https://developers.cloudflare.com/workers/configuration/compatibility-flags/#global-fetch-strictly-public",
     "https://blog.cloudflare.com/workers-environment-live-object-bindings/"
-  ]
+  ],
+  "release_preparation": {
+    "date": "2026-10-26",
+    "main_commit": "a8b2bd6",
+    "merged_main_into_feature_branch": true,
+    "typecheck": "passed",
+    "vitest": {
+      "files": 9,
+      "tests": 167
+    },
+    "python_unittest": {
+      "tests": 48,
+      "status": "passed"
+    },
+    "worker_bundle": "passed",
+    "workerd_smoke": "passed; 13 tools and native file schema/diagnostics",
+    "local_images_smoke": "passed; PNG transparency and JPEG to WebP",
+    "deployment_note": "This records PR integration checks, not a new Worker deployment. The version_id above remains the historical public-download rollout."
+  }
 }

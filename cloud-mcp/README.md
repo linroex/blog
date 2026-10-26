@@ -19,9 +19,10 @@ storage verification and pending client acceptance. The subsequent
 [webp-upload-rollout.json](webp-upload-rollout.json) records the 15 MiB limit,
 automatic conversion and the owner-reported ChatGPT network limitation.
 [chatgpt-file-upload-rollout.json](chatgpt-file-upload-rollout.json) records the
-subsequent native ChatGPT file tool and the remaining live-client acceptance.
+subsequent native ChatGPT file tool. Live-client acceptance is recorded in the later rollout below.
 [public-file-download-rollout.json](public-file-download-rollout.json) records
-the public HTTPS download policy, private-network isolation and Azure regression check.
+the public HTTPS download policy, private-network isolation, Azure regression check
+and owner-reported successful ChatGPT upload on 2026-10-26 (Claude web had already succeeded).
 The GitHub App is `linroex-blog-mcp`, installed only on `linroex/blog`.
 GitHub App credentials and the publication confirmation key remain Worker secrets.
 Cloudflare Access owns login, client registration, access tokens and refresh grants.
@@ -402,10 +403,10 @@ or signed candidates. The native path writes no pending R2 object. Concurrent
 updates still rely on non-forced Git ref updates; a failure may leave an
 unreferenced final object, as with the existing transport.
 
-The owner previously reported Claude web success and ordinary ChatGPT shell DNS
-failure. This change removes ChatGPT's shell PUT dependency; actual ChatGPT file
-injection remains a separate live acceptance test. Tests simulate the native file
-reference rather than claiming a real ChatGPT attachment was transferred. Keep
+The owner reported successful real ChatGPT image upload on 2026-10-26; Claude
+web upload had already succeeded. The native tool removes ChatGPT's shell PUT
+dependency. Automated tests simulate the native file reference; live-client
+acceptance is owner-reported. Keep
 existing Claude settings and Access callbacks. Refresh ChatGPT's tools and use a
 new conversation; cached schemas for the old base64 `upload_image` cannot be used.
 
