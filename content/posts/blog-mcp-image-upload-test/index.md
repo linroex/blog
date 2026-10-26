@@ -21,6 +21,6 @@ summary: 測試 Blog MCP 建立草稿與圖片上傳功能的草稿文章。
 
 ## 測試圖片
 
-（圖片會在上傳完成後插入此處）
+![Blog MCP 測試圖片](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/blog-mcp-image-upload-test/429b3d44f0a13c89a0d8b58fc47ed7af9ca2e2d60300af40d10076b14130ecff/blog-mcp-test.webp)
 
 測試日期：2026-10-26
