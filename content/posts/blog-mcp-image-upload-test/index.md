@@ -23,4 +23,8 @@ summary: 測試 Blog MCP 建立草稿與圖片上傳功能的草稿文章。
 
 ![Blog MCP 測試圖片](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/blog-mcp-image-upload-test/429b3d44f0a13c89a0d8b58fc47ed7af9ca2e2d60300af40d10076b14130ecff/blog-mcp-test.webp)
 
+## GFDI 訊息除錯截圖
+
+![GFDI protocol debug screenshot](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/blog-mcp-image-upload-test/51dedef122b736bcbbfc0b11689b3d6a72907060f1dfdfc87f1197ccd5f419d6/gfdi-protocol-debug.webp)
+
 測試日期：2026-10-26
