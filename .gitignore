@@ -9,3 +9,4 @@ cloud-mcp/.dev.vars*
 !cloud-mcp/.dev.vars.example
 cloud-mcp/.env*
 cloud-mcp/wrangler.local.jsonc
+.wrangler/
