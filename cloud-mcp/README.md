@@ -163,6 +163,7 @@ before this code runs.
 | [access-application.example.json](access-application.example.json) | Example API shape for the platform configuration; not an automatically applied deployment manifest. |
 | [access-rollout.json](access-rollout.json) | Dated acceptance evidence, deployed IDs and legacy cleanup deadline. This is a rollout record, not a live platform inventory. |
 | [image-upload-rollout.json](image-upload-rollout.json) | Image-upload deployment, removal of the local server, ChatGPT/Claude tool refresh and the later owner-added callback patterns. |
+| [mcp-test.yaml](../.github/workflows/mcp-test.yaml) | Pushes to `main` that touch `cloud-mcp/**`, `scripts/**` or the MCP workflows run the tests, then its `deploy` job runs `npm run deploy`. Pull requests never deploy. It uses the GitHub Actions secret `CLOUDFLARE_API_TOKEN` (Workers Scripts edit only). Worker secrets and Access settings are not changed by it. |
 | GitHub App installation | Selected repository and permissions; App credentials and `CONFIRMATION_SECRET` live in Worker secrets. |
 
 When changing authentication or deployment, update this contract and the relevant
