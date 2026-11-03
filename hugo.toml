@@ -12,7 +12,7 @@ pagerSize = 10
   disableThemeToggle = true
 
   disableSpecial1stPost = true
-  imageBase = "https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev"
+  imageBase = "https://images.coder.tw"
   ShowReadingTime = true
   ShowShareButtons = false
   ShowPostNavLinks = true

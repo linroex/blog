@@ -10,7 +10,7 @@
   "retired_tool": "upload_image",
   "storage": {
     "bucket": "blog",
-    "public_base": "https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev",
+    "public_base": "https://images.coder.tw",
     "pending_prefix": "blog-mcp/pending/",
     "final_prefix": "blog-mcp/images/",
     "new_image_bytes_in_git": false,

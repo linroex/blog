@@ -26,7 +26,7 @@ summary: Bear のように stdio にしか対応していないローカル MCP 
 
 誤解しやすいのが Web 版とスマホです。画面は目の前にあり、ブラウザも自分のパソコンやスマホで開いているので、家の中にいるように見えます。でも実際には、ブラウザはただの窓にすぎません。窓から見えているのは画面で、本当に考えたり作業したりしているのはサービス提供元のデータセンターにあるコンピューターです。AI がツールを使うとき、執事を探しに行くのはデータセンター側のコンピューターであって、あなたのブラウザではありません。そしてあなたの家の執事は電話を持っていないので、データセンターから連絡がつかないのは当然です。
 
-![Web 版からパソコンの中の MCP を呼べない理由：Bear MCP の執事はあなたの家の Mac の中に住んでいて電話を持っておらず、ブラウザは画面を表示するだけなので、データセンターの AI は彼を見つけられない](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/80677516f1e42843d7afea52073176f2c8ee8f66cf23a770eab6c56eb1f3fc82/fig1-who-calls-the-butler.webp)
+![Web 版からパソコンの中の MCP を呼べない理由：Bear MCP の執事はあなたの家の Mac の中に住んでいて電話を持っておらず、ブラウザは画面を表示するだけなので、データセンターの AI は彼を見つけられない](https://images.coder.tw/blog-mcp/images/fastmcp-stdio-to-http-mcp/80677516f1e42843d7afea52073176f2c8ee8f66cf23a770eab6c56eb1f3fc82/fig1-who-calls-the-butler.webp)
 
 ## 2 種類の MCP の違い
 
@@ -41,7 +41,7 @@ MCP には実は 2 つの接続方式があります。
 | 誰が呼べるか | 同じパソコン上のアプリ | URL にアクセスできるすべてのサービス |
 | Web 版・スマホ | 不可 | 可 |
 
-![2 種類の執事：ローカル型（stdio）の執事はパソコンの中だけで働き、外部と接続しないので Web 版やスマホからは呼べない。ネットワーク型（HTTP）の執事は URL の向こう側に住んでいて、データセンターの AI がネットワーク経由で呼び出せる](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/7c40dfb190d87119c6bbf2d966c752184effc734923a4f339dc532095fd5d808/fig2-two-kinds-of-mcp.webp)
+![2 種類の執事：ローカル型（stdio）の執事はパソコンの中だけで働き、外部と接続しないので Web 版やスマホからは呼べない。ネットワーク型（HTTP）の執事は URL の向こう側に住んでいて、データセンターの AI がネットワーク経由で呼び出せる](https://images.coder.tw/blog-mcp/images/fastmcp-stdio-to-http-mcp/7c40dfb190d87119c6bbf2d966c752184effc734923a4f339dc532095fd5d808/fig2-two-kinds-of-mcp.webp)
 
 ## どちらを選ぶべきか？
 
@@ -61,7 +61,7 @@ MCP には実は 2 つの接続方式があります。
 
 なので Web 版から使いたい場合は、自分で執事に電話を持たせる必要があります。その電話が、この記事でセットアップする FastMCP です。外からかかってきた電話を受けて執事に伝え、執事が作業を終えたら、また電話を通して返事をします。
 
-![中継の構成：データセンターにある Web 版の AI がネットワーク型（HTTP）で Mac 上の電話（FastMCP）に接続し、FastMCP がローカル型（stdio）で執事（Bear MCP）に取り次ぎ、執事が Bear を操作する](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/2745d2639821e44149fa3801f7635afb6704db7bd7845ad41aee1fcab820192f/fig3-proxy-architecture.webp)
+![中継の構成：データセンターにある Web 版の AI がネットワーク型（HTTP）で Mac 上の電話（FastMCP）に接続し、FastMCP がローカル型（stdio）で執事（Bear MCP）に取り次ぎ、執事が Bear を操作する](https://images.coder.tw/blog-mcp/images/fastmcp-stdio-to-http-mcp/2745d2639821e44149fa3801f7635afb6704db7bd7845ad41aee1fcab820192f/fig3-proxy-architecture.webp)
 
 もちろん、デスクトップ版しか使わないなら中継は不要で、ローカル型をそのまま使えば大丈夫です。
 
