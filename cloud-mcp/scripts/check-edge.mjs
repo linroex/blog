@@ -33,8 +33,8 @@ for (const field of ['authorization_endpoint', 'token_endpoint', 'registration_e
 const resource = await (await request(origin + '/.well-known/oauth-protected-resource/mcp')).json();
 assert.equal(resource.resource, origin + '/mcp');
 assert.deepEqual(resource.authorization_servers, [issuer]);
-for (const uri of ['http://localhost:8787/callback', 'http://127.0.0.1:8787/callback',
-  'https://evil.example/callback', 'https://chatgpt.com.evil.example/connector/oauth/callback']) {
+// localhost and loopback registrations are intentionally allowed by the owner, so only remote look-alikes are probed.
+for (const uri of ['https://evil.example/callback', 'https://chatgpt.com.evil.example/connector/oauth/callback']) {
   const r = await request(metadata.registration_endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ client_name: 'Rejected callback verification', redirect_uris: [uri],
       response_types: ['code'], grant_types: ['authorization_code', 'refresh_token'], token_endpoint_auth_method: 'none',
@@ -45,5 +45,5 @@ for (const uri of ['http://localhost:8787/callback', 'http://127.0.0.1:8787/call
   assert.match(data.error_description, /redirect_uri.*not allowed/i);
   assert.ok(!data.client_id);
 }
-console.log('Live edge checks passed: seven private paths, rejected bearer/spoofed identity, managed discovery, PKCE, refresh support and four denied callback registrations.');
+console.log('Live edge checks passed: seven private paths, rejected bearer/spoofed identity, managed discovery, PKCE, refresh support and two denied remote callback registrations.');
 console.log('Still verify the Access app/policy inventory, identity provider, token lifetimes, and real ChatGPT tools/read flow separately.');
