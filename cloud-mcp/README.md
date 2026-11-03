@@ -203,7 +203,8 @@ removed. Local smoke tests prove runtime compatibility, not the production edge.
 
 `npm run check:edge` explicitly probes the deployed endpoint without credentials.
 It checks seven private paths, discovery/PKCE/refresh support and denial of
-localhost, loopback and unapproved redirect registrations. It does not prove a
+unapproved remote redirect registrations. Localhost and loopback clients are
+intentionally allowed (see the Access setup below), so they are not probed. It does not prove a
 successful owner sign-in or replace review of the platform policy inventory.
 
 ## Access setup and cutover
@@ -238,7 +239,9 @@ App `linroex-blog-mcp`, installed only on `linroex/blog`.
    Worker routes/Custom Domains for hostname/path policies that take precedence;
    remove only conflicting rules for this Worker. Preserve unrelated apps.
 4. Edit that Access application's Advanced settings: enable Managed OAuth and
-   dynamic registration and disable localhost and loopback clients. Preserve the
+   dynamic registration and allow localhost and loopback clients (the owner
+   enabled both on 2026-11-03 for local MCP clients; earlier rollout records
+   that say `false` are historical). Preserve the
    owner's approved callback patterns from `access-application.example.json`;
    the earlier single-ChatGPT callback in `access-rollout.json` is historical.
    Set access token lifetime to `15m` and grant duration to `336h` (14 days).
