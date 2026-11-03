@@ -28,7 +28,7 @@ The desktop version of Claude is also installed on your computer. It lives under
 
 The web and mobile versions are where it gets confusing. The screen is right in front of you, and the browser is running on your own computer or phone, so it looks like it's in your house too. But the browser is really just a window. What you see through it is the screen; the thinking and the work happen on computers in the vendor's data center. When the AI needs a tool, it's the data center computer that goes out looking for the butler, not your browser. And the butler in your house has no phone, so of course the data center can't reach him.
 
-![Why the web version can't reach the MCP on your computer: the Bear MCP butler lives inside the Mac in your house and has no phone, the browser only displays the screen, and the AI in the vendor's data center can't find him](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/80677516f1e42843d7afea52073176f2c8ee8f66cf23a770eab6c56eb1f3fc82/fig1-who-calls-the-butler.webp)
+![Why the web version can't reach the MCP on your computer: the Bear MCP butler lives inside the Mac in your house and has no phone, the browser only displays the screen, and the AI in the vendor's data center can't find him](https://images.coder.tw/blog-mcp/images/fastmcp-stdio-to-http-mcp/80677516f1e42843d7afea52073176f2c8ee8f66cf23a770eab6c56eb1f3fc82/fig1-who-calls-the-butler.webp)
 
 ## The two kinds of MCP
 
@@ -43,7 +43,7 @@ MCP actually has two ways to connect:
 | Who can call it | Apps on the same computer | Any service that can reach the URL |
 | Web and mobile | No | Yes |
 
-![Two kinds of butlers: the local (stdio) butler only works inside your computer and has no outside connection, so web and mobile can't reach him; the network (HTTP) butler lives behind a URL, and the AI in the data center can call him over the network](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/7c40dfb190d87119c6bbf2d966c752184effc734923a4f339dc532095fd5d808/fig2-two-kinds-of-mcp.webp)
+![Two kinds of butlers: the local (stdio) butler only works inside your computer and has no outside connection, so web and mobile can't reach him; the network (HTTP) butler lives behind a URL, and the AI in the data center can call him over the network](https://images.coder.tw/blog-mcp/images/fastmcp-stdio-to-http-mcp/7c40dfb190d87119c6bbf2d966c752184effc734923a4f339dc532095fd5d808/fig2-two-kinds-of-mcp.webp)
 
 ## Which one should you choose?
 
@@ -63,7 +63,7 @@ Shipping only the local kind actually makes a lot of sense. These apps' data is 
 
 So if you want to use it from the web, you have to give the butler a phone yourself. That phone is the FastMCP we're setting up in this post: it answers calls coming in from outside, passes them on to the butler, and once the butler is done, replies through it.
 
-![The bridge architecture: the web AI in the data center connects over the network (HTTP) to the phone (FastMCP) on your Mac, FastMCP passes the request over local (stdio) to the butler (Bear MCP), and the butler works with Bear](https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev/blog-mcp/images/fastmcp-stdio-to-http-mcp/2745d2639821e44149fa3801f7635afb6704db7bd7845ad41aee1fcab820192f/fig3-proxy-architecture.webp)
+![The bridge architecture: the web AI in the data center connects over the network (HTTP) to the phone (FastMCP) on your Mac, FastMCP passes the request over local (stdio) to the butler (Bear MCP), and the butler works with Bear](https://images.coder.tw/blog-mcp/images/fastmcp-stdio-to-http-mcp/2745d2639821e44149fa3801f7635afb6704db7bd7845ad41aee1fcab820192f/fig3-proxy-architecture.webp)
 
 Of course, if you only use the desktop app, there's no need to bridge anything. Just use the local kind.
 

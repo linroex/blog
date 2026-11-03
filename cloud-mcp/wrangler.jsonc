@@ -23,7 +23,7 @@
     "ALLOWED_ACCESS_EMAIL": "linroex@coder.tw",
     "R2_ACCOUNT_ID": "0da15629cc8401faeee452ff11dc9db9",
     "R2_BUCKET_NAME": "blog",
-    "R2_PUBLIC_BASE_URL": "https://pub-6c026d2742d14927bfa2d850c31eac91.r2.dev",
+    "R2_PUBLIC_BASE_URL": "https://images.coder.tw",
     "IMAGE_MAX_BYTES": "15728640"
   },
   "observability": {
